@@ -1,0 +1,105 @@
+/* Cores */
+/* Rosa normal: #D9006B */
+
+html {
+	background-color: #67058D;
+}
+
+.bg-rosa-padrao {
+	background-color: #D9006B;
+}
+
+.img_fitw {
+	width: 100%;
+	height: auto;
+}
+
+#img_cabecalho {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	z-index: 9;
+}
+
+#topo_cabecalho {
+	height: 100px;
+	width: 100%;
+	line-height: 100px;
+}
+
+#topo_cabecalho > * > * {
+	vertical-align: middle;
+}
+
+#topo_cabecalho #menu_topo {
+	font-family: "Futura HV BT";
+	display: inline-block;
+	max-height: 100px;
+}
+
+#topo_cabecalho #menu_topo li {
+	display: inline-block;
+	font-size: 22pt;
+	color: #fff;
+	padding: 0px 20px;
+	max-height: 100px;
+}
+
+#topo_cabecalho #logo_topo {
+	display: inline-block;
+	width: 160px;
+	height: auto;
+	margin-left: 30px;
+}
+
+#topo_cabecalho #logo_container
+, #topo_cabecalho #menu_container {
+	height: 100px;
+	display: inline-block;
+	position: relative;
+	float: left;
+}
+
+#topo_cabecalho #logo_container {
+	width: 20%;
+}
+
+#topo_cabecalho #menu_container {
+	width: 80%;
+	text-align: center;
+}
+
+.site_section {
+	width: 100%;
+	height: 560px;
+	position: relative;
+}
+
+.section_1 {
+	background: linear-gradient(to bottom, #FF4858, 42%, #D9006E);
+}
+
+.section_1 #texto_sec1 {
+	font-family: "Futura HV BT";
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 8;
+}
+
+.section_1 #predios_sec1 {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 7;
+}
+
+.section_2 {
+	background: linear-gradient(to bottom, #FE5430, 42%, #FFB738);
+}

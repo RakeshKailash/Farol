@@ -1,0 +1,46 @@
+#alunos_visualizar_table {
+	font-family: Roboto;
+	text-align: left;
+}
+
+#alunos_visualizar_table thead {
+	background-color: #222;
+	color: #fff;
+}
+
+#alunos_visualizar_table td,
+#alunos_visualizar_table th {
+	padding: 10px 12px;
+}
+
+#alunos_visualizar_table tbody tr {
+	transition: all linear 0.2s;
+	cursor: pointer;
+}
+
+#alunos_visualizar_table tbody tr:nth-child(odd) {
+	background-color: #eee;
+}
+
+#alunos_visualizar_table tbody tr:nth-child(even) {
+	background-color: #ddd;
+}
+
+#alunos_visualizar_table tbody tr:hover {
+	background-color: #ccc;
+}
+
+.btn {
+	display: inline-block;
+	padding: 10px 12px;
+	background-color: #444;
+	color: #fff;
+	font-family: Roboto;
+	border-radius: 5px;
+	margin: 5px;
+	text-decoration: none;
+}
+
+.form_group {
+	
+}
