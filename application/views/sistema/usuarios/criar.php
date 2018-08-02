@@ -1,7 +1,7 @@
 <?php 
-	$userdata = isset($this->session->formdata) ? $this->session->formdata : array();
-	$errors = isset($this->session->errors) ? $this->session->errors : null;
- ?>
+$userdata = isset($this->session->formdata) ? $this->session->formdata : array();
+$errors = isset($this->session->errors) ? $this->session->errors : null;
+?>
 
 <p class="page_title"><i class="material-icons">person_add</i>Novo usuário</p>
 <?php if ($errors): ?>
@@ -85,6 +85,17 @@
 			<label>WhatsApp</label>
 			<div class="input-field">
 				<input type="text" placeholder="(00)0000-00000" class="phone_mask" name="whatsapp" value="<?=isset($userdata['whatsapp']) ? $userdata['whatsapp'] : ''?>">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group col s3">
+			<label>Status:</label>
+			<div class="input-field">
+				<select name="status">
+					<option <?=isset($userdata['status']) && $userdata['status'] == 1 ? "selected" : ''?> value="1">Ativo</option>
+					<option <?=isset($userdata['status']) && $userdata['status'] == 0 ? "selected" : ''?> value="0">Inativo</option>
+				</select>
 			</div>
 		</div>
 	</div>

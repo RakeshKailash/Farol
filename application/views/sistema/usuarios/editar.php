@@ -91,9 +91,6 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<div class="row">
 		<div class="form_group col s3">
 			<label>Status:</label>
-			<!-- <div class="input-field">
-				<input type="text" disabled value="<?=!!$userdata->status ? "Ativo" : "Inativo";?>">
-			</div> -->
 			<div class="input-field">
 				<select name="status">
 					<option <?=$userdata->status== 1 ? "selected" : ''?> value="1">Ativo</option>
