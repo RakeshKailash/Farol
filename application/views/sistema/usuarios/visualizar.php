@@ -1,4 +1,5 @@
-<a href="<?=base_url('usuarios/novo')?>" class="btn">Novo</a>
+<p class="page_title"><i class="material-icons">person</i>Usuários</p>
+<a href="<?=base_url('sistema/Usuarios/novo')?>" class="btn btn_table_action">Novo</a>
 <table id="alunos_visualizar_table">
 	<thead>
 		<th>ID</th>

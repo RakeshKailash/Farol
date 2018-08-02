@@ -35,12 +35,12 @@ class Alunos extends CI_Controller {
 	function inserir() {
 		$data = $_POST;
 		$this->m_alunos->insertAluno($data);
-		return redirect("Alunos");
+		return redirect("sistema/Alunos");
 	}
 
 	function editar($id=null) {
 		if (!$id) {
-			return redirect("Alunos");
+			return redirect("sistema/Alunos");
 		}
 
 		$loads = $this->m_config->getLoads(2);
@@ -59,12 +59,12 @@ class Alunos extends CI_Controller {
 		$data = $_POST;
 		unset($data['idref']);
 		$this->m_alunos->updateAluno($idaluno, $data);
-		return redirect("Alunos");
+		return redirect("sistema/Alunos");
 	}
 
 	function ativar($id=null) {
 		if (!$id) {
-			return redirect("Alunos");
+			return redirect("sistema/Alunos");
 		}
 
 		$data = array(
@@ -72,24 +72,24 @@ class Alunos extends CI_Controller {
 		);
 
 		$this->m_alunos->updateAluno($id, $data);
-		return redirect("Alunos");
+		return redirect("sistema/Alunos");
 	}
 
 	function desativar($id=null) {
 		if (!$id) {
-			return redirect("Alunos");
+			return redirect("sistema/Alunos");
 		}
 
 		$this->m_alunos->deleteAluno($id);
-		return redirect("Alunos");
+		return redirect("sistema/Alunos");
 	}
 
 	function excluir($id=null) {
 		if (!$id) {
-			return redirect("Alunos");
+			return redirect("sistema/Alunos");
 		}
 
 		$this->m_alunos->deleteAluno($id, 1);
-		return redirect("Alunos");
+		return redirect("sistema/Alunos");
 	}
 }

@@ -10,14 +10,34 @@ class M_usuarios extends CI_Model {
 	{
 		$query = array();
 		$query[] = "SELECT * FROM usuarios_farol";
+		$where = null;
+		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$query[] = "WHERE idusuario IN (".implode(",", $opts['id']).")";
+				$cond = "idusuario IN (".implode(",", $opts['id']).")";
 			} else {
-				$query[] = "WHERE idusuario = {$opts['id']}";
+				$cond = "idusuario = {$opts['id']}";
 			}
+			$where = "WHERE ".$cond;
 		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "idusuario NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "idusuario != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
 
 		if (isset($opts['groupby'])) {
 			$query[] = "GROUP BY {$opts['groupby']}";
@@ -47,6 +67,8 @@ class M_usuarios extends CI_Model {
 			return false;
 		}
 
+		$data['senha'] = $this->hash_password($data['senha']);
+
 		$query = $this->db->insert("usuarios_farol", $data);
 
 		if (!$query) {
@@ -60,6 +82,10 @@ class M_usuarios extends CI_Model {
 	{
 		if (!isset($idusuario) || !isset($data) || gettype($data) != "array") {
 			return false;
+		}
+
+		if (isset($data['senha'])) {
+			$data['senha'] = $this->hash_password($data['senha']);
 		}
 
 		$this->db->where('idusuario', $idusuario);
@@ -87,5 +113,34 @@ class M_usuarios extends CI_Model {
 		}
 
 		return !!$query;
+	}
+
+	public function createUser ($userData=null)
+	{
+		if (! $userData) {
+			return false;
+		}
+
+		if (! $userData['senha']) {
+			return false;
+		}
+
+		$userData['senha'] = $this->hash_password($userData['senha']);
+
+		if (!$this->db->insert('usuarios', $userData)) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
+
+	private function hash_password ($password)
+	{
+		if (! $password) {
+			return false;
+		}
+
+		$hashed_pass = password_hash($password, PASSWORD_BCRYPT);
+		return $hashed_pass;
 	}
 }
