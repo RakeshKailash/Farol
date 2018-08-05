@@ -15,7 +15,12 @@ $config = array(
                 array(
                         'field' => 'email',
                         'label' => 'E-mail',
-                        'rules' => 'required|valid_email|is_unique[usuarios_farol.email]'
+                        'rules' => 'required|valid_email|is_unique[usuarios.email]'
+                ),
+                array(
+                        'field' => 'login',
+                        'label' => 'Login',
+                        'rules' => 'required|is_unique[usuarios.login]'
                 ),
                 array(
                         'field' => 'senha',
@@ -76,5 +81,49 @@ $config = array(
                         'label' => 'Repita a senha',
                         'rules' => 'required'
                 ),
-        )
+        ),
+        'cadastro_professores' => array(
+                array(
+                        'field' => 'nome',
+                        'label' => 'Nome',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'sobrenome',
+                        'label' => 'Sobrenome',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'atividade',
+                        'label' => 'Atividade',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'email',
+                        'label' => 'E-mail',
+                        'rules' => 'required|valid_email|is_unique[professores.email]'
+                )
+        ),
+        'atualizacao_professores' => array(
+                array(
+                        'field' => 'nome',
+                        'label' => 'Nome',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'sobrenome',
+                        'label' => 'Sobrenome',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'atividade',
+                        'label' => 'Atividade',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'email',
+                        'label' => 'E-mail',
+                        'rules' => 'required|valid_email'
+                )
+        ),
 );

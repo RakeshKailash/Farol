@@ -5,8 +5,8 @@
 		<th>ID</th>
 		<th>Nome</th>
 		<th>E-mail</th>
-		<th>Função</th>
-		<th>Telefone</th>
+		<th>Login</th>
+		<th>Tipo</th>
 		<th>Status</th>
 	</thead>
 	<tbody>
@@ -16,8 +16,8 @@
 			<td><?=$usuario->idusuario?></td>
 			<td><?=$usuario->nome." ".$usuario->sobrenome?></td>
 			<td><?=$usuario->email?></td>
+			<td><?=$usuario->login?></td>
 			<td><?=$this->parserlib->usrAccessParse($usuario->acesso);?></td>
-			<td><?=$usuario->fone_1?></td>
 			<td><?=!!$usuario->status ? "Ativo" : "Inativo" ?></td>
 		</tr>
 	<?php endforeach ?>

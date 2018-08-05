@@ -13,10 +13,6 @@
 	<div class="row cabecalho">
 		<div class="col s1">
 			<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="icone_menu_cabecalho material-icons">menu</i></a>
-			<!-- <i class="icone_menu_cabecalho material-icons">menu</i> -->
-		</div>
-		<div class="col s1">
-			<img id="logo_cabecalho" src="<?=RAIZ.'img/logo.png'?>">
 		</div>
 		<div class="col s10"></div>
 	</div>
@@ -28,11 +24,11 @@
 					<img src="<?=RAIZ.'img/bgmenu.jpg'?>">
 				</div>
 				<a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-				<a href="#name"><span class="white-text name">Marcelo Silveira</span></a>
-				<a href="#email"><span class="white-text email">marcelo.boemeke@gmail.com</span></a>
+				<a href="#name"><span class="white-text name">Olá, <?=$_SESSION['nome']?>!</span></a>
+				<a href="#email"><span class="white-text email"><?=$_SESSION['email']?></span></a>
 			</div>
 		<li>
-			<a href="<?=base_url('sistema/Painel')?>"><i class="material-icons">home</i>Início</a>
+			<a href="<?=base_url('sistema')?>"><i class="material-icons">home</i>Início</a>
 		</li>
 		<li>
 			<a href="<?=base_url('sistema/Usuarios')?>"><i class="material-icons">person</i>Usuários</a>
@@ -51,10 +47,7 @@
 			<a href="#!"><i class="material-icons">account_circle</i>Minha Conta</a>
 		</li>
 		<li>
-			<a href="#!"><i class="material-icons">power_settings_new</i>Sair</a>
-		</li>
-		<li>
-			<a class="waves-effect" href="#!">Third Link With Waves</a>
+			<a href="<?=base_url('sistema/Logout')?>"><i class="material-icons">power_settings_new</i>Sair</a>
 		</li>
 	</ul>
 	<div class="container main_system_container">

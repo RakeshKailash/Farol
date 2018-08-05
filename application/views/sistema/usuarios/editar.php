@@ -3,7 +3,7 @@
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">person</i>Editar usuário</p>
+<p class="page_title"><i class="material-icons">person</i>Editar usuário</p><a href="<?=base_url('sistema/Usuarios')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>
@@ -11,16 +11,22 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 <?php endif ?>
 <form method="post" action="<?=RAIZ.'sistema/usuarios/atualizar'?>">
 	<div class="row">
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>Nome</label>
 			<div class="input-field">
 				<input type="text" name="nome" value="<?=$userdata->nome?>">
 			</div>
 		</div>
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>Sobrenome</label>
 			<div class="input-field">
 				<input type="text" name="sobrenome" value="<?=$userdata->sobrenome?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Login</label>
+			<div class="input-field">
+				<input type="text" name="login" value="<?=$userdata->login?>">
 			</div>
 		</div>
 	</div>
@@ -56,9 +62,75 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<div class="input-field">
 				<select name="acesso">
 					<option <?=$userdata->acesso== 1 ? "selected" : ''?> value="1">Usuário</option>
-					<option <?=$userdata->acesso== 2 ? "selected" : ''?> value="2">Administrador</option>
-					<option <?=$userdata->acesso== 3 ? "selected" : ''?> value="3">Desenvolvedor</option>
+					<option <?=$userdata->acesso== 2 ? "selected" : ''?> value="2">Aluno</option>
+					<option <?=$userdata->acesso== 3 ? "selected" : ''?> value="3">Funcionário</option>
+					<option <?=$userdata->acesso== 4 ? "selected" : ''?> value="4">Administrador</option>
+					<option <?=$userdata->acesso== 5 ? "selected" : ''?> value="5">Desenvolvedor</option>
 				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group col s4">
+			<label>CPF</label>
+			<div class="input-field">
+				<input type="text" placeholder="000.000.000-00" class="cpf_mask" name="cpf" value="<?=$userdata->cpf?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>RG</label>
+			<div class="input-field">
+				<input type="text" placeholder="0000000000" name="rg" value="<?=$userdata->rg?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Ocupação</label>
+			<div class="input-field">
+				<input type="text" name="ocupacao" value="<?=$userdata->ocupacao?>">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group col s4">
+			<label>CEP</label>
+			<div class="input-field">
+				<input type="text" placeholder="00000-000" class="cep_mask" name="cep" value="<?=$userdata->cep?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Estado</label>
+			<div class="input-field">
+				<select name="uf">
+					<?php foreach ($estados as $estado): ?>
+						<option <?=isset($userdata->uf) && $userdata->uf == $estado['sigla'] ? "selected" : ''?> value="<?=$estado['sigla']?>"><?=$estado['nome']?></option>
+					<?php endforeach ?>
+				</select>
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Cidade</label>
+			<div class="input-field">
+				<input type="text" name="cidade" value="<?=isset($userdata->cidade) ? $userdata->cidade : ''?>">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group col s4">
+			<label>Bairro</label>
+			<div class="input-field">
+				<input type="text" name="bairro" value="<?=isset($userdata->bairro) ? $userdata->bairro : ''?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Rua</label>
+			<div class="input-field">
+				<input type="text" name="rua" value="<?=isset($userdata->rua) ? $userdata->rua : ''?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Número</label>
+			<div class="input-field">
+				<input type="text" name="numero" value="<?=isset($userdata->numero) ? $userdata->numero : ''?>">
 			</div>
 		</div>
 	</div>
@@ -90,7 +162,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	</div>
 	<div class="row">
 		<div class="form_group col s3">
-			<label>Status:</label>
+			<label>Status</label>
 			<div class="input-field">
 				<select name="status">
 					<option <?=$userdata->status== 1 ? "selected" : ''?> value="1">Ativo</option>

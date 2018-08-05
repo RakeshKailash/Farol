@@ -8,6 +8,9 @@ class Alunos extends CI_Controller {
 		$this->load->model("m_alunos");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
+		if (!$this->m_usuarios->isLogged()) {
+			return redirect("sistema/login");
+		}
 	}
 
 

@@ -5,8 +5,5 @@
  */
 class Authhandler
 {
-	function isLogged()
-	{
-		return (isset($_SESSION['username']) && $_SESSION['username'] != "" && isset($_SESSION['cod']) && $_SESSION['cod'] != "");
-	}
+	
 }

@@ -9,7 +9,7 @@ class M_usuarios extends CI_Model {
 	function getUsuario($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT * FROM usuarios_farol";
+		$query[] = "SELECT * FROM usuarios";
 		$where = null;
 		$cond = null;
 
@@ -69,7 +69,7 @@ class M_usuarios extends CI_Model {
 
 		$data['senha'] = $this->hash_password($data['senha']);
 
-		$query = $this->db->insert("usuarios_farol", $data);
+		$query = $this->db->insert("usuarios", $data);
 
 		if (!$query) {
 			return false;
@@ -89,7 +89,7 @@ class M_usuarios extends CI_Model {
 		}
 
 		$this->db->where('idusuario', $idusuario);
-		$query = $this->db->update('usuarios_farol', $data);
+		$query = $this->db->update('usuarios', $data);
 
 		if (!$query) {
 			return false;
@@ -107,12 +107,86 @@ class M_usuarios extends CI_Model {
 		$this->db->where('idusuario', $idusuario);
 
 		if (!$completeremove) {
-			$query = $this->db->update("usuarios_farol", array('status' => 0));
+			$query = $this->db->update("usuarios", array('status' => 0));
 		} else {
-			$query = $this->db->delete("usuarios_farol");
+			$query = $this->db->delete("usuarios");
 		}
 
 		return !!$query;
+	}
+
+	function isLogged()
+	{
+		$user_logged = $this->session->userdata();
+		if (isset($user_logged['login']) && $user_logged['login'] != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	function logUser($login=null, $password=null)
+	{
+		if (!$password || !$login) {
+			return false;
+		}
+
+		$userauth = $this->authUser($login, $password);
+
+		if ($userauth == false) {
+			return false;
+		}
+
+		$userdata = array(
+			'idusuario' => $userauth->idusuario,
+			'nome' => $userauth->nome,
+			'sobrenome' => $userauth->sobrenome,
+			'data_nascimento' => $userauth->data_nascimento,
+			'login' => $userauth->login,
+			'email' => $userauth->email
+		);
+
+		$this->session->set_userdata($userdata);
+		return true;
+	}
+
+	function logout()
+	{
+		session_destroy();
+	}
+
+	private function authUser ($email, $password)
+	{
+		if (! $email || !$password)
+		{
+			return 0;
+		}
+
+
+		$query_options = array(
+			'cwhere' => "(email = '{$email}' OR login = '{$email}') AND acesso > 2"
+		);
+
+		$query = $this->getUsuario($query_options);
+
+		if (!$query) {
+			return false;
+		}
+
+		$user_info =  isset($query[0]->login) || isset($query[0]->email) ? $query[0] : null;
+
+		if (! $user_info)
+		{
+			return false;
+		}
+
+		$verify = password_verify($password, $user_info->senha);
+
+		if (!$verify) {
+			return false;
+		}
+
+		return $user_info;
 	}
 
 	public function createUser ($userData=null)
