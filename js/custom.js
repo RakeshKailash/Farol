@@ -11,4 +11,5 @@ function initMasks()
 	$(".date_mask").mask("00/00/0000");
 	$(".cpf_mask").mask("000.000.000-00");
 	$(".cep_mask").mask("00000-000");
+	$(".money_mask").mask('#.##0,00', {reverse: true});
 }

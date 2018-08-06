@@ -1,5 +1,5 @@
 <p class="page_title"><i class="material-icons">face</i>Professores</p>
-<a href="<?=base_url('sistema/Professores/novo')?>" class="btn btn_table_action">Novo</a>
+<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a><a href="<?=base_url('sistema/Professores/novo')?>" class="btn btn_table_action">Novo</a>
 <table id="alunos_visualizar_table">
 	<thead>
 		<th>ID</th>

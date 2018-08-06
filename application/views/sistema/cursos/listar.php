@@ -1,5 +1,5 @@
 <p class="page_title"><i class="material-icons">school</i>Cursos</p>
-<a href="<?=base_url('sistema/Cursos/novo')?>" class="btn btn_table_action">Novo</a>
+<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a><a href="<?=base_url('sistema/Cursos/novo')?>" class="btn btn_table_action">Novo</a>
 <table id="alunos_visualizar_table">
 	<thead>
 		<th>ID</th>
@@ -14,7 +14,7 @@
 			<td><?=$curso->idcurso?></td>
 			<td><?=$curso->nome?></td>
 			<td><?=substr($curso->descricao, 0, 50)?></td>
-			<td></td>
+			<td><a href="<?=base_url('sistema/Turmas/'.$curso->idturma)?>"><?=$curso->ultima_turma?></a></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>

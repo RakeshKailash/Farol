@@ -22,7 +22,7 @@ class Alunos extends CI_Controller {
 		$infoB['alunos'] = isset($id) && $id != null ? $this->m_alunos->getAluno($id) : $this->m_alunos->getAluno();
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
-		$this->load->view("sistema/alunos/visualizar.php", $infoB);
+		$this->load->view("sistema/alunos/listar.php", $infoB);
 		$this->load->view("sistema/common/fim.php");
 	}
 

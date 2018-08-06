@@ -1,32 +1,32 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_cursos extends CI_Model {
+class M_turmas extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 
-	function getCurso($opts=array())
+	function getTurma($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT * FROM cursos";
+		$query[] = "SELECT * FROM turmas";
 		$where = null;
 		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$cond = "idcurso IN (".implode(",", $opts['id']).")";
+				$cond = "idturma IN (".implode(",", $opts['id']).")";
 			} else {
-				$cond = "idcurso = {$opts['id']}";
+				$cond = "idturma = {$opts['id']}";
 			}
 			$where = "WHERE ".$cond;
 		}
 
 		if (isset($opts['!id'])) {
 			if (gettype($opts['!id']) == "array") {
-				$cond = "idcurso NOT IN (".implode(",", $opts['!id']).")";
+				$cond = "idturma NOT IN (".implode(",", $opts['!id']).")";
 			} else {
-				$cond = "idcurso != {$opts['!id']}";
+				$cond = "idturma != {$opts['!id']}";
 			}
 
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
@@ -61,13 +61,13 @@ class M_cursos extends CI_Model {
 		return $result->result();
 	}
 
-	function insertCurso($data)
+	function insertTurma($data)
 	{
 		if (!isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$query = $this->db->insert("cursos", $data);
+		$query = $this->db->insert("turmas", $data);
 
 		if (!$query) {
 			return false;
@@ -76,34 +76,34 @@ class M_cursos extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	function updateCurso($idcurso, $data)
+	function updateTurma($idturma, $data)
 	{
-		if (!isset($idcurso) || !isset($data) || gettype($data) != "array") {
+		if (!isset($idturma) || !isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$this->db->where('idcurso', $idcurso);
-		$query = $this->db->update('cursos', $data);
+		$this->db->where('idturma', $idturma);
+		$query = $this->db->update('turmas', $data);
 
 		if (!$query) {
 			return false;
 		}
 
-		return $this->getCurso(array('id' => $idcurso));
+		return $this->getTurmas(array('id' => $idturma));
 	}
 
-	function deleteCurso($idcurso, $completeremove=0)
+	function deleteTurma($idturma, $completeremove=0)
 	{
-		if (!isset($idcurso)) {
+		if (!isset($idturma)) {
 			return false;
 		}
 
-		$this->db->where('idcurso', $idcurso);
+		$this->db->where('idturma', $idturma);
 
 		if (!$completeremove) {
-			$query = $this->db->update("cursos", array('status' => 0));
+			$query = $this->db->update("turmas", array('status' => 0));
 		} else {
-			$query = $this->db->delete("cursos");
+			$query = $this->db->delete("turmas");
 		}
 
 		return !!$query;

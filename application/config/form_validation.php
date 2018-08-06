@@ -126,4 +126,28 @@ $config = array(
                         'rules' => 'required|valid_email'
                 )
         ),
+        'cadastro_cursos' => array(
+                array(
+                        'field' => 'nome',
+                        'label' => 'Nome',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'descricao',
+                        'label' => 'Descrição',
+                        'rules' => 'required'
+                )
+        ),
+        'cadastro_turmas' => array(
+                array(
+                        'field' => 'identificacao',
+                        'label' => 'Turma',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'idcurso',
+                        'label' => 'Curso',
+                        'rules' => 'required'
+                )
+        )
 );

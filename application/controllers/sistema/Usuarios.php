@@ -25,7 +25,7 @@ class Usuarios extends CI_Controller {
 		$infoB['usuarios'] = $users;
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
-		$this->load->view("sistema/usuarios/visualizar.php", $infoB);
+		$this->load->view("sistema/usuarios/listar.php", $infoB);
 		$this->load->view("sistema/common/fim.php");
 	}
 

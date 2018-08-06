@@ -59,5 +59,7 @@ $route['sistema/Cursos'] = "sistema/Cursos/visualizar";
 $route['sistema/Cursos/(:num)'] = "sistema/Cursos/editar/$1";
 $route['sistema/Professores'] = "sistema/Professores/visualizar";
 $route['sistema/Professores/(:num)'] = "sistema/Professores/editar/$1";
+$route['sistema/Turmas'] = "sistema/Turmas/visualizar";
+$route['sistema/Turmas/(:num)'] = "sistema/Turmas/editar/$1";
 
 $route['sistema/Logout'] = "sistema/Login/logout";

@@ -26,7 +26,7 @@ class Professores extends CI_Controller {
 		$infoB['professores'] = $users;
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
-		$this->load->view("sistema/professores/visualizar.php", $infoB);
+		$this->load->view("sistema/professores/listar.php", $infoB);
 		$this->load->view("sistema/common/fim.php");
 	}
 

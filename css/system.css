@@ -48,6 +48,7 @@ body {
 .btn.btn_table_action {
 	margin: 0;
 	margin-bottom: 10px;
+	margin-right: 10px;
 }
 
 .btn.btn_table_action i {
@@ -63,7 +64,7 @@ label {
 	font-size: 1rem !important;
 }
 
-input {
+input, textarea {
 	color: #5C478C;
 }
 
@@ -149,4 +150,37 @@ input {
 
 .form_group {
 
+}
+
+.linha_pagamento_turma {
+	padding: 15px 0 !important;
+    border-radius: 5px;
+    background-color: #7e57c2;
+    margin-bottom: 10px;
+    position: relative;
+}
+.linha_pagamento_turma label,
+.linha_pagamento_turma input,
+.linha_pagamento_turma select {
+	color: #fff !important;
+}
+
+.linha_pagamento_turma i {
+	display: inline-block;
+    padding: 5px 10px;
+    /*background: #5C478C;*/
+    position: absolute;
+    right: 0;
+    color: #fff;
+    cursor: pointer;
+    transition: all linear 0.1s;
+}
+
+.linha_pagamento_turma i:hover {
+	background: #B39DDB;
+}
+
+.linha_pagamento_turma i.exclui_forma_pagamento {
+	top: 0;
+	border-radius: 0 5px 0 0;
 }
