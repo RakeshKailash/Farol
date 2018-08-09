@@ -8,6 +8,8 @@ class Turmas extends CI_Controller {
 		$this->load->model("m_usuarios");
 		$this->load->model("m_turmas");
 		$this->load->model("m_cursos");
+		$this->load->model("m_aulas");
+		$this->load->model("m_investimentos");
 		if (!$this->m_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
@@ -48,13 +50,68 @@ class Turmas extends CI_Controller {
 
 	function inserir() {
 		$data = $_POST;
+		$turma = array(
+			'idcurso' => $data['idcurso'], 
+			'identificacao' => $data['identificacao'],
+			'vagas' => $data['vagas'],
+			'taxa_inscricao' => $data['taxa_inscricao'],
+			'data_limite_inscricao' => $this->parserlib->unformatDate($data['data_limite_inscricao'])
+		);
+		$investimento = array();
+
+
 		if ($this->form_validation->run('cadastro_turmas') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
-			$this->session->set_flashdata('formdata', $data);
+			$this->session->set_flashdata('formdata', $turma);
 			return redirect("sistema/Turmas/novo");
 		}
 		
-		$this->m_turmas->insertTurma($data);
+		$idturma = $this->m_turmas->insertTurma($turma);
+
+		if (isset($data['forma'])) {
+			for ($i=0;$i<count($data['forma']);$i++) {
+				if ($data['forma'][$i] == 1) {	
+					$investimento = array(
+						'forma' => $data['forma'][$i], 
+						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
+						'data_vencimento' => $this->parserlib->unformatDate($data['data_vencimento'][$i]), 
+						'idturma' => $idturma
+					);
+				}
+
+				if ($data['forma'][$i] == 2) {	
+					$investimento = array(
+						'forma' => $data['forma'][$i], 
+						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
+						'parcelas' => $data['parcelas'][$i], 
+						'valor_parcela' => $this->parserlib->unformatMoney($data['valor_parcela'][$i]), 
+						'dia_vencimento' => $data['dia_vencimento'][$i], 
+						'idturma' => $idturma
+					);
+				}
+
+				if ($data['forma'][$i] == 3) {	
+					$investimento = array(
+						'forma' => $data['forma'][$i], 
+						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
+						'idturma' => $idturma
+					);
+				}
+
+				if ($this->form_validation->run('investimento_'.$data['forma'][$i]) == FALSE) {
+					$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
+					$this->session->set_flashdata('formdata', $turma);
+					return redirect("sistema/Turmas/novo");
+				}
+
+				if (!$this->m_investimentos->insertInvestimento($investimento)) {
+					$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar as formas de investimento.</p>");
+					$this->session->set_flashdata('formdata', $turma);
+					return redirect("sistema/Turmas/novo");
+				}
+			}
+		}
+
 		return redirect("sistema/Turmas");
 	}
 
@@ -66,10 +123,18 @@ class Turmas extends CI_Controller {
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
+		$infoB['cursos'] = $this->m_cursos->getCurso();
+
+		$opts_query = array('cwhere' => "forma_investimento.`idturma` = {$id}");
+		$infoB['investimentos'] = $this->m_investimentos->getInvestimento($opts_query);
+
+		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "aulas.`idturma` = {$id}"));
 
 		$userdata = $this->m_turmas->getTurma(array('id' => $id))[0];
 
 		$infoB['userdata'] = $userdata;
+
+		$userdata->data_limite_inscricao = $this->parserlib->formatDate($userdata->data_limite_inscricao);
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/turmas/editar.php", $infoB);

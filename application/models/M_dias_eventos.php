@@ -1,32 +1,32 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_turmas extends CI_Model {
+class M_dias_eventos extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 
-	function getTurma($opts=array())
+	function getDiasEventos($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT * FROM turmas";
+		$query[] = "SELECT * FROM dias_eventos";
 		$where = null;
 		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$cond = "turmas.`idturma` IN (".implode(",", $opts['id']).")";
+				$cond = "id IN (".implode(",", $opts['id']).")";
 			} else {
-				$cond = "turmas.`idturma` = {$opts['id']}";
+				$cond = "id = {$opts['id']}";
 			}
 			$where = "WHERE ".$cond;
 		}
 
 		if (isset($opts['!id'])) {
 			if (gettype($opts['!id']) == "array") {
-				$cond = "turmas.`idturma` NOT IN (".implode(",", $opts['!id']).")";
+				$cond = "id NOT IN (".implode(",", $opts['!id']).")";
 			} else {
-				$cond = "turmas.`idturma` != {$opts['!id']}";
+				$cond = "id != {$opts['!id']}";
 			}
 
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
@@ -61,13 +61,13 @@ class M_turmas extends CI_Model {
 		return $result->result();
 	}
 
-	function insertTurma($data)
+	function insertEvento($data)
 	{
 		if (!isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$query = $this->db->insert("turmas", $data);
+		$query = $this->db->insert("dias_eventos", $data);
 
 		if (!$query) {
 			return false;
@@ -76,34 +76,34 @@ class M_turmas extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	function updateTurma($idturma, $data)
+	function updateEvento($id, $data)
 	{
-		if (!isset($idturma) || !isset($data) || gettype($data) != "array") {
+		if (!isset($id) || !isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$this->db->where('idturma', $idturma);
-		$query = $this->db->update('turmas', $data);
+		$this->db->where('id', $id);
+		$query = $this->db->update('dias_eventos', $data);
 
 		if (!$query) {
 			return false;
 		}
 
-		return $this->getTurmas(array('id' => $idturma));
+		return $this->getDiasEventos(array('id' => $id));
 	}
 
-	function deleteTurma($idturma, $completeremove=0)
+	function deleteEvento($id, $completeremove=0)
 	{
-		if (!isset($idturma)) {
+		if (!isset($id)) {
 			return false;
 		}
 
-		$this->db->where('idturma', $idturma);
+		$this->db->where('id', $iddiaevento);
 
 		if (!$completeremove) {
-			$query = $this->db->update("turmas", array('status' => 0));
+			$query = $this->db->update("dias_eventos", array('status' => 0));
 		} else {
-			$query = $this->db->delete("turmas");
+			$query = $this->db->delete("dias_eventos");
 		}
 
 		return !!$query;

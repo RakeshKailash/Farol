@@ -1,32 +1,32 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_turmas extends CI_Model {
+class M_investimentos extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}
 
-	function getTurma($opts=array())
+	function getInvestimento($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT * FROM turmas";
+		$query[] = "SELECT * FROM forma_investimento";
 		$where = null;
 		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$cond = "turmas.`idturma` IN (".implode(",", $opts['id']).")";
+				$cond = "idinvestimento IN (".implode(",", $opts['id']).")";
 			} else {
-				$cond = "turmas.`idturma` = {$opts['id']}";
+				$cond = "idinvestimento = {$opts['id']}";
 			}
 			$where = "WHERE ".$cond;
 		}
 
 		if (isset($opts['!id'])) {
 			if (gettype($opts['!id']) == "array") {
-				$cond = "turmas.`idturma` NOT IN (".implode(",", $opts['!id']).")";
+				$cond = "idinvestimento NOT IN (".implode(",", $opts['!id']).")";
 			} else {
-				$cond = "turmas.`idturma` != {$opts['!id']}";
+				$cond = "idinvestimento != {$opts['!id']}";
 			}
 
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
@@ -61,13 +61,13 @@ class M_turmas extends CI_Model {
 		return $result->result();
 	}
 
-	function insertTurma($data)
+	function insertInvestimento($data)
 	{
 		if (!isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$query = $this->db->insert("turmas", $data);
+		$query = $this->db->insert("forma_investimento", $data);
 
 		if (!$query) {
 			return false;
@@ -76,34 +76,34 @@ class M_turmas extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	function updateTurma($idturma, $data)
+	function updateInvestimento($idinvestimento, $data)
 	{
-		if (!isset($idturma) || !isset($data) || gettype($data) != "array") {
+		if (!isset($idinvestimento) || !isset($data) || gettype($data) != "array") {
 			return false;
 		}
 
-		$this->db->where('idturma', $idturma);
-		$query = $this->db->update('turmas', $data);
+		$this->db->where('idinvestimento', $idinvestimento);
+		$query = $this->db->update('investimentos', $data);
 
 		if (!$query) {
 			return false;
 		}
 
-		return $this->getTurmas(array('id' => $idturma));
+		return $this->getInvestimentos(array('id' => $idinvestimento));
 	}
 
-	function deleteTurma($idturma, $completeremove=0)
+	function deleteInvestimento($idinvestimento, $completeremove=0)
 	{
-		if (!isset($idturma)) {
+		if (!isset($idinvestimento)) {
 			return false;
 		}
 
-		$this->db->where('idturma', $idturma);
+		$this->db->where('idinvestimento', $idinvestimento);
 
 		if (!$completeremove) {
-			$query = $this->db->update("turmas", array('status' => 0));
+			$query = $this->db->update("forma_investimento", array('status' => 0));
 		} else {
-			$query = $this->db->delete("turmas");
+			$query = $this->db->delete("forma_investimento");
 		}
 
 		return !!$query;

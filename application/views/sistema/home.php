@@ -14,6 +14,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<a href="<?=base_url('sistema/Professores')?>" class="btn btn_table_action btn_painel"><i class="material-icons">face</i>Professores</a>
 		<a href="<?=base_url('sistema/Cursos')?>" class="btn btn_table_action btn_painel"><i class="material-icons">school</i>Cursos</a>
 		<a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action btn_painel"><i class="material-icons">school</i>Turmas</a>
+		<a href="<?=base_url('sistema/Aulas')?>" class="btn btn_table_action btn_painel"><i class="material-icons">calendar_today</i>Aulas</a>
 		<a href="<?=base_url('sistema/Financeiro')?>" class="btn btn_table_action btn_painel"><i class="material-icons">attach_money</i>Financeiro</a>
 		<a href="<?=base_url('sistema/Ecommerce')?>" class="btn btn_table_action btn_painel"><i class="material-icons">store</i>E-commerce</a>
 	</div>
