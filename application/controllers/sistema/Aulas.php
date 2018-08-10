@@ -77,11 +77,15 @@ class Aulas extends CI_Controller {
 		if (isset($data['data_inicio'])) {
 			for ($i=0;$i<count($data['data_inicio']);$i++) {
 				$inicio = $data['data_inicio'][$i].", ".$data['hora_inicio'][$i]."h";
-				$fim = $data['data_fim'][$i].", ".$data['hora_fim'][$i]."h";
+				$fim = $data['data_inicio'][$i].", ".$data['hora_fim'][$i]."h";
+				$almoco_inicio = $data['data_inicio'][$i].", ".$data['almoco_inicio'][$i]."h";
+				$almoco_fim = $data['data_inicio'][$i].", ".$data['almoco_fim'][$i]."h";
 				$diasAulas = array(
 					'idaula' => $idaula,
 					'inicio' => $this->parserlib->unformatDatetime($inicio),
-					'fim' => $this->parserlib->unformatDatetime($fim)
+					'fim' => $this->parserlib->unformatDatetime($fim),
+					'almoco_inicio' => $data['almoco_inicio'][$i] != "" ? $this->parserlib->unformatDatetime($almoco_inicio) : null,
+					'almoco_fim' => $data['almoco_inicio'][$i] != "" ? $this->parserlib->unformatDatetime($almoco_fim) : null
 				);
 
 				$this->form_validation->reset_validation();

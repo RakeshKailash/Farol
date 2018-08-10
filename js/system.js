@@ -43,9 +43,9 @@ $("#btn_excluir_cadastro").click(function () {
 $(".btn_novo_investimento").click(function () {
 	var pagamento_html = "<div class='form_group col s12 linha_pagamento_turma'>";
 	pagamento_html += "<div class='col s3 col_tipo'>";
-	pagamento_html += "<label>Tipo</label>";
+	pagamento_html += "<label>Forma</label>";
 	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<select name='tipo[]' class='select_tipo_investimento'>";
+	pagamento_html += "<select name='forma[]' class='select_tipo_investimento'>";
 	pagamento_html += "<option value='1'>À vista</option>";
 	pagamento_html += "<option value='2'>À prazo</option>";
 	pagamento_html += "<option value='3'>Cartão</option>";
@@ -94,7 +94,7 @@ $(".btn_novo_investimento").click(function () {
 $(".btn_novo_dia_evento").click(function () {
 	var dia_html = "<div class='row dias_aulas_linha'>";
 	dia_html += "<div class='form_group col s12'>";
-	dia_html += "<div class='col s6'>";
+	dia_html += "<div class='col s5'>";
 	dia_html += "<p>Início</p>";
 	dia_html += "<div class='col s6'>";
 	dia_html += "<label>Dia</label>";
@@ -109,14 +109,23 @@ $(".btn_novo_dia_evento").click(function () {
 	dia_html += "</div>";
 	dia_html += "</div>";
 	dia_html += "</div>";
+	dia_html += "<div class='col s4'>";
+	dia_html += "<p>Pausa</p>";
 	dia_html += "<div class='col s6'>";
-	dia_html += "<p>Fim</p>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Dia</label>";
+	dia_html += "<label>Das</label>";
 	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='data_fim[]' class='datepicker'>";
+	dia_html += "<input type='text' name='almoco_inicio[]' class='timepicker'>";
 	dia_html += "</div>";
 	dia_html += "</div>";
+	dia_html += "<div class='col s6'>";
+	dia_html += "<label>Até as</label>";
+	dia_html += "<div class='input-field'>";
+	dia_html += "<input type='text' name='almoco_fim[]' class='timepicker'>";
+	dia_html += "</div>";
+	dia_html += "</div>";
+	dia_html += "</div>";
+	dia_html += "<div class='col s3'>";
+	dia_html += "<p>Fim</p>";
 	dia_html += "<div class='col s6'>";
 	dia_html += "<label>Hora</label>";
 	dia_html += "<div class='input-field'>";

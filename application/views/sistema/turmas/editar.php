@@ -92,7 +92,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 					<div class="col s4 col_vencimento">
 						<label>Vencimento</label>
 						<div class="input-field">
-							<input type="text" placeholder="00/00/0000" class="date_mask" name="data_vencimento[]" value="<?=$investimento->data_vencimento?>">
+							<input type="text" placeholder="00/00/0000" class="date_mask" name="data_vencimento[]" value="<?=$this->parserlib->formatDate($investimento->data_vencimento)?>">
 						</div>
 					</div>
 				</div>

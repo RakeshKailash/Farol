@@ -241,7 +241,7 @@ $config = array(
                 ),
                 array(
                         'field' => 'fim',
-                        'label' => 'Data/Hora do fim',
+                        'label' => 'Hora do fim',
                         'rules' => 'required'
                 ),
         )

@@ -68,7 +68,7 @@ function initPickers()
 		'format' : 'dd/mm/yyyy',
 		'i18n' : datepickeri
 	});
-	$('.timepicker').timepicker({'twelveHour' : false, 'i18n' : timepickeri});
+	$('.timepicker').timepicker({'twelveHour' : false, 'i18n' : timepickeri, 'showClearBtn' : true});
 }
 
 function initMasks()

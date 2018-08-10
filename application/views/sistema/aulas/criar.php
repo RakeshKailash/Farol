@@ -46,7 +46,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<div class="row dias_aula">
 		<div class="row dias_aulas_linha">
 			<div class="form_group col s12">
-				<div class="col s6">
+				<div class="col s5">
 					<p>Início</p>
 					<div class="col s6">
 						<label>Dia</label>
@@ -61,14 +61,23 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						</div>
 					</div>
 				</div>
-				<div class="col s6">
-					<p>Fim</p>
+				<div class="col s4">
+					<p>Pausa</p>
 					<div class="col s6">
-						<label>Dia</label>
+						<label>Das</label>
 						<div class="input-field">
-							<input type="text" name="data_fim[]" class="datepicker">
+							<input type="text" name="almoco_inicio[]" class="timepicker">
 						</div>
 					</div>
+					<div class="col s6">
+						<label>Até as</label>
+						<div class="input-field">
+							<input type="text" name="almoco_fim[]" class="timepicker">
+						</div>
+					</div>
+				</div>
+				<div class="col s3">
+					<p>Fim</p>
 					<div class="col s6">
 						<label>Hora</label>
 						<div class="input-field">
