@@ -25,6 +25,10 @@ class Test extends CI_Controller {
 		// 	$dia->fim = $this->parserlib->formatDatetime($dia->fim);
 		// }
 		$test = $this->m_eventos->getEventos();
+
+		foreach ($test as &$rec) {
+			$rec->dias = $this->m_dias_eventos->getDiasEventos
+		}
 		echo "<pre>";
 		var_dump($test);
 		echo "</pre>";

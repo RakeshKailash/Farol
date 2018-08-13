@@ -226,6 +226,11 @@ $(".investimentos_turma").on("click", ".exclui_item_linha", function (e) {
 	initMasks();
 });
 
+$(".dias_aula").on("click", ".exclui_item_linha", function (e) {
+	$(e.target).parents(".dias_aulas_linha").first().remove();
+	initMasks();
+});
+
 $(document).ready(function () {
 	$.each($('.select_tipo_investimento'), function () {
 		console.log("rolou");

@@ -118,7 +118,7 @@ class M_usuarios extends CI_Model {
 	function isLogged()
 	{
 		$user_logged = $this->session->userdata();
-		if (isset($user_logged['login']) && $user_logged['login'] != null) {
+		if ((isset($user_logged['login']) && $user_logged['login'] != null) || (isset($user_logged['email']) && $user_logged['email'] != null) ) {
 			return true;
 		}
 

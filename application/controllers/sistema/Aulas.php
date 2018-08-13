@@ -19,8 +19,15 @@ class Aulas extends CI_Controller {
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
+		$opts_aula = array(
+			'orderby' => "idevento ASC"
+		);
 
-		$aulas = isset($id) && $id != null ? $this->m_aulas->getAulas($id) : $this->m_aulas->getAulas();
+		if (isset($id) && $id != null) {
+			$opts_aula['id'] = $id;
+		}
+
+		$aulas = $this->m_aulas->getAulas($opts_aula);
 
 		// foreach ($users as &$value) {
 		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
