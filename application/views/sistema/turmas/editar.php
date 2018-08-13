@@ -113,21 +113,21 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<table id="alunos_visualizar_table">
 			<thead>
 				<th>ID</th>
-				<th>Descrição</th>
+				<th>Título</th>
 				<th>Professor</th>
 				<th>Data</th>
-				<th></th>
+				<th>Status</th>
 			</thead>
 			<tbody>
 				<?php foreach ($aulas as $aula) : ?>
 					<tr class="linha_cadastro_visualizar">
-						<input type="hidden" class="id_hidden" name="idaula" value="<?=$aula->idaula?>">
-						<td><?=$aula->idaula?></td>
-						<td><?=$aula->descricao?></td>
+						<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
+						<td><?=$aula->idevento?></td>
+						<td><?=$aula->nome?></td>
 						<td><?=$aula->nome_professor." ".$aula->sobrenome_professor?></td>
 						<td>
 							<?php foreach ($aula->dias as $dia): ?>
-								<p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?> <?=!empty($dia->obs) ? "<p>(".$dia->obs.")</p>" : ""?></p>
+								<p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?></p>
 							<?php endforeach ?>
 						</td>
 						<td><?=$this->parserlib->aulaStatusParse($aula->status);?></td>

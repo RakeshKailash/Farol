@@ -11,8 +11,14 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 <?php endif ?>
 <form method="post" action="<?=RAIZ.'sistema/aulas/inserir'?>"><a href="<?=base_url('sistema/Aulas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
 	<div class="row">
-		<div class="form_group col s12">
-			<label>Descrição (título da aula)</label>
+		<div class="form_group col s6">
+			<label>Título</label>
+			<div class="input-field">
+				<input type="text" name="nome" value="<?=isset($userdata['nome']) ? $userdata['nome'] : ''?>">
+			</div>
+		</div>
+		<div class="form_group col s6">
+			<label>Descrição</label>
 			<div class="input-field">
 				<input type="text" name="descricao" value="<?=isset($userdata['descricao']) ? $userdata['descricao'] : ''?>">
 			</div>
@@ -23,6 +29,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<label>Turma</label>
 			<div class="input-field">
 				<select name="idturma">
+					<option disabled <?=!isset($userdata['idturma']) ? "selected" : ""?>>Selecione uma turma</option>
 					<?php foreach ($turmas as $turma): ?>
 						<option <?=isset($userdata['idturma']) && $userdata['idturma'] == $turma->idturma ? "selected" : ''?> value="<?=$turma->idturma?>"><?=$turma->identificacao." (".$this->parserlib->resume($turma->nome_curso, 0, 50).")"?></option>
 					<?php endforeach ?>
@@ -32,7 +39,8 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<div class="form_group col s6">
 			<label>Professor</label>
 			<div class="input-field">
-				<select name="idprofessor">
+				<select name="idprofessor" placeholder="Selecione um professor">
+					<option disabled <?=!isset($userdata['idprofessor']) ? "selected" : ""?>>Selecione um professor</option>
 					<?php foreach ($professores as $professor): ?>
 						<option <?=isset($userdata['idprofessor']) && $userdata['idprofessor'] == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome." ".$professor->sobrenome?></option>
 					<?php endforeach ?>
@@ -62,7 +70,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 					</div>
 				</div>
 				<div class="col s4">
-					<p>Pausa</p>
+					<p>Pausa (opcional)</p>
 					<div class="col s6">
 						<label>Das</label>
 						<div class="input-field">

@@ -9,24 +9,24 @@ class M_aulas extends CI_Model {
 	function getAulas($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT aulas.`idaula`, aulas.`idturma`, aulas.`idprofessor`, aulas.`descricao`, aulas.`status`, professores.`nome` AS nome_professor, professores.`sobrenome` AS sobrenome_professor, turmas.`identificacao` AS nome_turma FROM aulas JOIN professores ON professores.`idprofessor` = aulas.`idprofessor` JOIN turmas ON turmas.`idturma` = aulas.`idturma`";
+		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, professores.`nome` AS nome_professor, professores.`sobrenome` AS sobrenome_professor, turmas.`identificacao` AS nome_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
 		$where = null;
 		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$cond = "aulas.`idaula` IN (".implode(",", $opts['id']).")";
+				$cond = "eventos.`idevento` IN (".implode(",", $opts['id']).")";
 			} else {
-				$cond = "aulas.`idaula` = {$opts['id']}";
+				$cond = "eventos.`idevento` = {$opts['id']}";
 			}
 			$where = "WHERE ".$cond;
 		}
 
 		if (isset($opts['!id'])) {
 			if (gettype($opts['!id']) == "array") {
-				$cond = "aulas.`idaula` NOT IN (".implode(",", $opts['!id']).")";
+				$cond = "eventos.`idevento` NOT IN (".implode(",", $opts['!id']).")";
 			} else {
-				$cond = "aulas.`idaula` != {$opts['!id']}";
+				$cond = "eventos.`idevento` != {$opts['!id']}";
 			}
 
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
@@ -36,6 +36,8 @@ class M_aulas extends CI_Model {
 			$cond = $opts['cwhere'];
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
 		}
+
+		$where = empty($where) ? "WHERE tipo = 1" : $where." AND tipo = 1";
 
 		$query[] = $where;
 
@@ -62,7 +64,7 @@ class M_aulas extends CI_Model {
 
 		foreach ($aulas as &$aula) {
 			$opts_query = array(
-				'cwhere' => "dias_eventos.`idaula` = {$aula->idaula}",
+				'cwhere' => "dias_eventos.`idevento` = {$aula->idevento}",
 				'orderby' => "inicio ASC"
 			);
 			$query = $this->getDiasEventos($opts_query);
@@ -176,7 +178,7 @@ class M_aulas extends CI_Model {
 			return false;
 		}
 
-		$query = $this->db->insert("aulas", $data);
+		$query = $this->db->insert("eventos", $data);
 
 		if (!$query) {
 			return false;
@@ -191,8 +193,8 @@ class M_aulas extends CI_Model {
 			return false;
 		}
 
-		$this->db->where('aulas.`idaula`', $idaula);
-		$query = $this->db->update('aulas', $data);
+		$this->db->where('eventos.`idevento`', $idaula);
+		$query = $this->db->update('eventos', $data);
 
 		if (!$query) {
 			return false;
@@ -207,12 +209,12 @@ class M_aulas extends CI_Model {
 			return false;
 		}
 
-		$this->db->where('aulas.`idaula`', $idaula);
+		$this->db->where('eventos.`idevento`', $idaula);
 
 		if (!$completeremove) {
-			$query = $this->db->update("aulas", array('status' => 0));
+			$query = $this->db->update("eventos", array('status' => 0));
 		} else {
-			$query = $this->db->delete("aulas");
+			$query = $this->db->delete("eventos");
 		}
 
 		return !!$query;

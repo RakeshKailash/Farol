@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>[Sistema] Farol Espaço Terapêutico</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript">
 		var RAIZ = "<?=RAIZ?>";
 	</script>
@@ -23,7 +24,7 @@
 				<div class="background">
 					<img src="<?=RAIZ.'img/bgmenu.jpg'?>">
 				</div>
-				<a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+				<a href="#user"><img class="circle" src="#"></a>
 				<a href="#name"><span class="white-text name">Olá, <?=$_SESSION['nome']?>!</span></a>
 				<a href="#email"><span class="white-text email"><?=$_SESSION['email']?></span></a>
 			</div>

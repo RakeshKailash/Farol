@@ -59,8 +59,10 @@ class Aulas extends CI_Controller {
 	function inserir() {
 		$data = $_POST;
 		$aula = array(
-			'idturma' => $data['idturma'], 
 			'idprofessor' => $data['idprofessor'], 
+			'idturma' => $data['idturma'], 
+			'tipo' => '1',
+			'nome' => $data['nome'],
 			'descricao' => $data['descricao']
 		);
 		$diasAulas = array();
@@ -81,7 +83,7 @@ class Aulas extends CI_Controller {
 				$almoco_inicio = $data['data_inicio'][$i].", ".$data['almoco_inicio'][$i]."h";
 				$almoco_fim = $data['data_inicio'][$i].", ".$data['almoco_fim'][$i]."h";
 				$diasAulas = array(
-					'idaula' => $idaula,
+					'idevento' => $idaula,
 					'inicio' => $this->parserlib->unformatDatetime($inicio),
 					'fim' => $this->parserlib->unformatDatetime($fim),
 					'almoco_inicio' => $data['almoco_inicio'][$i] != "" ? $this->parserlib->unformatDatetime($almoco_inicio) : null,
@@ -122,7 +124,7 @@ class Aulas extends CI_Controller {
 		$infoB['userdata'] = $userdata;
 		$infoB['professores'] = $this->m_professores->getProfessores();
 		$opts_turmas = array('cwhere' => "turmas.status != 3");
-		$infoB['dias_aulas'] = $this->m_aulas->getAulas($opts_turmas);
+		// $infoB['dias_aulas'] = $this->m_aulas->getAulas($opts_turmas);
 		$infoB['turmas'] = $this->m_turmas->getTurma($opts_turmas);
 
 		foreach ($infoB['turmas'] as &$turma) {

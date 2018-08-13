@@ -128,7 +128,7 @@ class Turmas extends CI_Controller {
 		$opts_query = array('cwhere' => "forma_investimento.`idturma` = {$id}");
 		$infoB['investimentos'] = $this->m_investimentos->getInvestimento($opts_query);
 
-		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "aulas.`idturma` = {$id}"));
+		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "eventos.`idturma` = {$id}"));
 
 		$userdata = $this->m_turmas->getTurma(array('id' => $id))[0];
 

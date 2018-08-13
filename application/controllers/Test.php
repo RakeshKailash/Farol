@@ -7,6 +7,7 @@ class Test extends CI_Controller {
 		$this->load->model("m_dias_eventos");
 		$this->load->model("m_aulas");
 		$this->load->model("m_turmas");
+		$this->load->model("m_eventos");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
@@ -23,10 +24,25 @@ class Test extends CI_Controller {
 		// 	$dia->inicio = $this->parserlib->formatDatetime($dia->inicio);
 		// 	$dia->fim = $this->parserlib->formatDatetime($dia->fim);
 		// }
-		$test = $this->parserlib->dtExtractDate("2018-08-08 10:00:00", true);
+		$test = $this->m_eventos->getEventos();
 		echo "<pre>";
 		var_dump($test);
 		echo "</pre>";
 		
+	}
+
+	function orderResults($results=array())
+	{
+		uksort($final_array, function($a, $b) use ($final_array) {
+            if ($final_array[$a]['descricao'] > $final_array[$b]['descricao']) {
+                return 1;
+            }
+            if ($final_array[$a]['descricao'] < $final_array[$b]['descricao']) {
+                return -1;
+            }
+            if ($final_array[$a]['descricao'] == $final_array[$b]['descricao']) {
+                return 0;
+            }
+        });
 	}
 }

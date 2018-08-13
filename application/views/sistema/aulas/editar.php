@@ -11,8 +11,14 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 <?php endif ?>
 <form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/aulas/atualizar'?>">
 	<div class="row">
-		<div class="form_group col s12">
-			<label>Descrição (título da aula)</label>
+		<div class="form_group col s6">
+			<label>Título</label>
+			<div class="input-field">
+				<input type="text" name="nome" value="<?=isset($userdata->nome) ? $userdata->nome : ''?>">
+			</div>
+		</div>
+		<div class="form_group col s6">
+			<label>Descrição</label>
 			<div class="input-field">
 				<input type="text" name="descricao" value="<?=isset($userdata->descricao) ? $userdata->descricao : ''?>">
 			</div>
@@ -47,7 +53,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<div class="row dias_aula">
 			<?php foreach ($userdata->dias as $dia): ?>
 				
-			<div class="row dias_aulas_linha">
+			<!-- <div class="row dias_aulas_linha">
 				<div class="form_group col s12">
 					<div class="col s6">
 						<p>Início</p>
@@ -83,7 +89,53 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						<i class="material-icons exclui_item_linha">close</i>
 					</div>
 				</div>
+			</div> -->
+			<div class="row dias_aulas_linha">
+			<div class="form_group col s12">
+				<div class="col s5">
+					<p>Início</p>
+					<div class="col s6">
+						<label>Dia</label>
+						<div class="input-field">
+							<input type="text" name="data_inicio[]" value="<?=$this->parserlib->dtExtractDate($dia->inicio, false, true)?>" class="datepicker">
+						</div>
+					</div>
+					<div class="col s6">
+						<label>Hora</label>
+						<div class="input-field">
+							<input type="text" name="hora_inicio[]" value="<?=$this->parserlib->dtExtractTime($dia->inicio, false, true)?>" class="timepicker">
+						</div>
+					</div>
+				</div>
+				<div class="col s4">
+					<p>Pausa</p>
+					<div class="col s6">
+						<label>Das</label>
+						<div class="input-field">
+							<input type="text" name="almoco_inicio[]" value="<?=$this->parserlib->dtExtractTime($dia->almoco_inicio, false, true)?>" class="timepicker">
+						</div>
+					</div>
+					<div class="col s6">
+						<label>Até as</label>
+						<div class="input-field">
+							<input type="text" name="almoco_fim[]" value="<?=$this->parserlib->dtExtractTime($dia->almoco_fim, false, true)?>" class="timepicker">
+						</div>
+					</div>
+				</div>
+				<div class="col s3">
+					<p>Fim</p>
+					<div class="col s6">
+						<label>Hora</label>
+						<div class="input-field">
+							<input type="text" name="hora_fim[]" value="<?=$this->parserlib->dtExtractTime($dia->fim, false, true)?>" class="timepicker">
+						</div>
+					</div>
+				</div>
+				<div class="col s1">
+					<i class="material-icons exclui_item_linha">close</i>
+				</div>
 			</div>
+		</div>
 			<?php endforeach ?>
 		</div>
 	<?php endif ?>

@@ -110,7 +110,7 @@ $(".btn_novo_dia_evento").click(function () {
 	dia_html += "</div>";
 	dia_html += "</div>";
 	dia_html += "<div class='col s4'>";
-	dia_html += "<p>Pausa</p>";
+	dia_html += "<p>Pausa (opcional)</p>";
 	dia_html += "<div class='col s6'>";
 	dia_html += "<label>Das</label>";
 	dia_html += "<div class='input-field'>";

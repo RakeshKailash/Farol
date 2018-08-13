@@ -218,8 +218,8 @@ $config = array(
         ),
         'cadastro_aulas' => array(
                 array(
-                        'field' => 'descricao',
-                        'label' => 'Descrição',
+                        'field' => 'nome',
+                        'label' => 'Título',
                         'rules' => 'required'
                 ),
                 array(

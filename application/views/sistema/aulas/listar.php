@@ -4,7 +4,7 @@
 	<thead>
 		<th>ID</th>
 		<th>Turma</th>
-		<th>Descrição</th>
+		<th>Título</th>
 		<th>Professor</th>
 		<th>Data</th>
 		<th>Status</th>
@@ -12,10 +12,10 @@
 	<tbody>
 		<?php foreach ($aulas as $aula) : ?>
 			<tr class="linha_cadastro_visualizar">
-				<input type="hidden" class="id_hidden" name="idaula" value="<?=$aula->idaula?>">
-				<td><?=$aula->idaula?></td>
-				<td><?=$aula->nome_turma?></td>
-				<td><?=$aula->descricao?></td>
+				<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
+				<td><?=$aula->idevento?></td>
+				<td><a href="<?=base_url('sistema/Turmas/'.$aula->idturma)?>"><?=$aula->nome_turma?></a></td>
+				<td><?=$aula->nome?></td>
 				<td><?=$aula->nome_professor." ".$aula->sobrenome_professor?></td>
 				<td>
 					<?php if (isset($aula->dias)): ?>
