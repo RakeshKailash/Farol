@@ -293,10 +293,10 @@ class Parserlib
 			return null;
 		}
 
-		return mb_strtoupper(mb_substr($str, 0, 1)) . mb_strtolower(mb_substr($str, 1));
+		return mb_strtoupper(mb_substr($str, 0, 1)) . mb_substr($str, 1);
 	}
 
-	function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), $exceptions = array("de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
+	function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), $exceptions = array("e", "de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
 	{
 		$string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
 		foreach ($delimiters as $dlnr => $delimiter) {

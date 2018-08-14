@@ -74,13 +74,13 @@ class Aulas extends CI_Controller {
 		);
 		$diasAulas = array();
 
-
 		if ($this->form_validation->run('cadastro_aulas') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
 			$this->session->set_flashdata('formdata', $aula);
 			return redirect("sistema/Aulas/novo");
 		}
 		
+		$aula = $this->prepareData($aula);
 		$idaula = $this->m_aulas->insertAula($aula);
 
 		if (isset($data['data_inicio'])) {
@@ -172,6 +172,7 @@ class Aulas extends CI_Controller {
 		}
 
 		unset($data['idref']);
+		$data = $this->prepareData($data);
 		$this->m_aulas->updateAula($idaula, $data);
 		return redirect("sistema/Aulas");
 	}
@@ -181,6 +182,17 @@ class Aulas extends CI_Controller {
 		$datas = $this->m_aulas->getDatas();
 		echo json_encode($datas);
 		return;
+	}
+
+	function prepareData($data=null)
+	{
+		if (!$data) {
+			return null;
+		}
+
+		$data['nome'] = $this->parserlib->titleCase($data['nome']);
+		$data['descricao'] = $this->parserlib->mb_ucfirst($data['descricao']);
+		return $data;
 	}
 
 }

@@ -55,10 +55,9 @@ class Turmas extends CI_Controller {
 			'identificacao' => $data['identificacao'],
 			'vagas' => $data['vagas'],
 			'taxa_inscricao' => $data['taxa_inscricao'],
-			'data_limite_inscricao' => $this->parserlib->unformatDate($data['data_limite_inscricao'])
+			'data_limite_inscricao' => $data['data_limite_inscricao']
 		);
 		$investimento = array();
-
 
 		if ($this->form_validation->run('cadastro_turmas') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
@@ -66,6 +65,7 @@ class Turmas extends CI_Controller {
 			return redirect("sistema/Turmas/novo");
 		}
 		
+		$turma = $this->prepareData($turma);
 		$idturma = $this->m_turmas->insertTurma($turma);
 
 		if (isset($data['forma'])) {
@@ -157,8 +157,20 @@ class Turmas extends CI_Controller {
 		}
 
 		unset($data['idref']);
+		$data = $this->prepareData($data);
 		$this->m_turmas->updateTurma($idturma, $data);
 		return redirect("sistema/Turmas");
+	}
+
+	function prepareData($data=null)
+	{
+		if (!$data) {
+			return null;
+		}
+
+		$data['identificacao'] = $this->parserlib->mb_ucfirst($data['identificacao']);
+		$data['data_limite_inscricao'] = $this->parserlib->unformatDate($data['data_limite_inscricao']);
+		return $data;
 	}
 
 }

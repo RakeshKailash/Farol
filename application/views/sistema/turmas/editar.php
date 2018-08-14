@@ -124,7 +124,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
 						<td><?=$aula->idevento?></td>
 						<td><?=$aula->nome?></td>
-						<td><?=$aula->nome_professor." ".$aula->sobrenome_professor?></td>
+						<td><?=$aula->nome_professor?></td>
 						<td>
 							<?php foreach ($aula->dias as $dia): ?>
 								<p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?></p>

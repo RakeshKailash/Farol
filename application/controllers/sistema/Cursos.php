@@ -53,6 +53,7 @@ class Cursos extends CI_Controller {
 			return redirect("sistema/Cursos/novo");
 		}
 		
+		$data = $this->prepareData($data);
 		$this->m_cursos->insertCurso($data);
 		return redirect("sistema/Cursos");
 	}
@@ -91,8 +92,20 @@ class Cursos extends CI_Controller {
 		}
 
 		unset($data['idref']);
+		$data = $this->prepareData($data);
 		$this->m_cursos->updateCurso($idcurso, $data);
 		return redirect("sistema/Cursos");
+	}
+
+	function prepareData($data=null)
+	{
+		if (!$data) {
+			return null;
+		}
+
+		$data['nome'] = $this->parserlib->titleCase($data['nome']);
+		$data['descricao'] = $this->parserlib->mb_ucfirst($data['descricao']);
+		return $data;
 	}
 
 }

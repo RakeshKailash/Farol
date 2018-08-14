@@ -103,7 +103,7 @@ class Professores extends CI_Controller {
 		return redirect("sistema/Professores");
 	}
 
-		function prepareData($data=null)
+	function prepareData($data=null)
 	{
 		if (!$data) {
 			return null;
