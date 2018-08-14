@@ -12,7 +12,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<form method="post" action="<?=RAIZ.'sistema/login/login'?>">
 		<div class="row">
 			<div class="form_group col s12">
-				<label>Login</label>
+				<label>CPF ou E-mail</label>
 				<div class="input-field">
 					<input type="text" name="login">
 				</div>

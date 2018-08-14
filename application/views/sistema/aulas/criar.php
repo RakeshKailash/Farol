@@ -42,7 +42,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 				<select name="idprofessor" placeholder="Selecione um professor">
 					<option disabled <?=!isset($userdata['idprofessor']) ? "selected" : ""?>>Selecione um professor</option>
 					<?php foreach ($professores as $professor): ?>
-						<option <?=isset($userdata['idprofessor']) && $userdata['idprofessor'] == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome." ".$professor->sobrenome?></option>
+						<option <?=isset($userdata['idprofessor']) && $userdata['idprofessor'] == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome?></option>
 					<?php endforeach ?>
 				</select>
 			</div>

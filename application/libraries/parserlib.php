@@ -28,23 +28,23 @@ class Parserlib
 		
 		switch ($accessCode) {
 			case 1:
-				return "Usuário";
-				break;
+			return "Usuário";
+			break;
 			case 2:
-				return "Aluno";
-				break;
+			return "Aluno";
+			break;
 			case 3:
-				return "Funcionário";
-				break;
+			return "Equipe";
+			break;
 			case 4:
-				return "Administrador";
-				break;
+			return "Administrador";
+			break;
 			case 5:
-				return "Desenvolvedor";
-				break;
+			return "Desenvolvedor";
+			break;
 			default:
-				return null;
-				break;
+			return null;
+			break;
 		}
 	}
 
@@ -56,14 +56,14 @@ class Parserlib
 		
 		switch ($status) {
 			case 0:
-				return "Cancelada";
-				break;
+			return "Cancelada";
+			break;
 			case 1:
-				return "Agendada";
-				break;
+			return "Agendada";
+			break;
 			default:
-				return null;
-				break;
+			return null;
+			break;
 		}
 	}
 
@@ -222,6 +222,16 @@ class Parserlib
 		return $date_1.", ".$time_1."h - ".$date_2.", ".$time_2."h";
 	}
 
+	public function removeNumMasks($val=null)
+	{
+		if (!$val) {
+			return null;
+		}
+
+		$clear = preg_replace("~[^\d]~", "", $val);
+		return $clear;
+	}
+
 	public function dtExtractDate($data=null, $formatted=true, $format=false)
 	{
 		if (!$data) {
@@ -274,6 +284,39 @@ class Parserlib
 			return null;
 		}
 
-			return ($end - $start) >= strlen($text) ? substr($text, $start, $end) : substr($text, $start, $end)."...";
+		return ($end - $start) >= strlen($text) ? substr($text, $start, $end) : substr($text, $start, $end)."...";
 	}
+
+	function mb_ucfirst($str=null)
+	{
+		if (!$str) {
+			return null;
+		}
+
+		return mb_strtoupper(mb_substr($str, 0, 1)) . mb_strtolower(mb_substr($str, 1));
+	}
+
+	function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), $exceptions = array("de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
+	{
+		$string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
+		foreach ($delimiters as $dlnr => $delimiter) {
+			$words = explode($delimiter, $string);
+			$newwords = array();
+			foreach ($words as $wordnr => $word) {
+				if (in_array(mb_strtoupper($word, "UTF-8"), $exceptions)) {
+                    // check exceptions list for any words that should be in upper case
+					$word = mb_strtoupper($word, "UTF-8");
+				} elseif (in_array(mb_strtolower($word, "UTF-8"), $exceptions)) {
+                    // check exceptions list for any words that should be in upper case
+					$word = mb_strtolower($word, "UTF-8");
+				} elseif (!in_array($word, $exceptions)) {
+                    // convert to uppercase (non-utf8 only)
+					$word = ucfirst($word);
+				}
+				array_push($newwords, $word);
+			}
+			$string = join($delimiter, $newwords);
+       }//foreach
+       return $string;
+   }
 }

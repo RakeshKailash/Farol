@@ -8,19 +8,9 @@ $config = array(
                         'rules' => 'required'
                 ),
                 array(
-                        'field' => 'sobrenome',
-                        'label' => 'Sobrenome',
-                        'rules' => 'required'
-                ),
-                array(
                         'field' => 'email',
                         'label' => 'E-mail',
                         'rules' => 'required|valid_email|is_unique[usuarios.email]'
-                ),
-                array(
-                        'field' => 'login',
-                        'label' => 'Login',
-                        'rules' => 'required|is_unique[usuarios.login]'
                 ),
                 array(
                         'field' => 'senha',
@@ -47,11 +37,6 @@ $config = array(
                 array(
                         'field' => 'nome',
                         'label' => 'Nome',
-                        'rules' => 'required'
-                ),
-                array(
-                        'field' => 'sobrenome',
-                        'label' => 'Sobrenome',
                         'rules' => 'required'
                 ),
                 array(
@@ -89,19 +74,14 @@ $config = array(
                         'rules' => 'required'
                 ),
                 array(
-                        'field' => 'sobrenome',
-                        'label' => 'Sobrenome',
-                        'rules' => 'required'
-                ),
-                array(
-                        'field' => 'atividade',
-                        'label' => 'Atividade',
-                        'rules' => 'required'
-                ),
-                array(
                         'field' => 'email',
                         'label' => 'E-mail',
                         'rules' => 'required|valid_email|is_unique[professores.email]'
+                ),
+                array(
+                        'field' => 'fone_1',
+                        'label' => 'Telefone 1',
+                        'rules' => 'required'
                 )
         ),
         'atualizacao_professores' => array(
@@ -111,19 +91,14 @@ $config = array(
                         'rules' => 'required'
                 ),
                 array(
-                        'field' => 'sobrenome',
-                        'label' => 'Sobrenome',
-                        'rules' => 'required'
-                ),
-                array(
-                        'field' => 'atividade',
-                        'label' => 'Atividade',
-                        'rules' => 'required'
-                ),
-                array(
                         'field' => 'email',
                         'label' => 'E-mail',
                         'rules' => 'required|valid_email'
+                ),
+                array(
+                        'field' => 'fone_1',
+                        'label' => 'Telefone 1',
+                        'rules' => 'required'
                 )
         ),
         'cadastro_cursos' => array(

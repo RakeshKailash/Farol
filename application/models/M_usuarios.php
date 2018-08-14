@@ -118,7 +118,7 @@ class M_usuarios extends CI_Model {
 	function isLogged()
 	{
 		$user_logged = $this->session->userdata();
-		if ((isset($user_logged['login']) && $user_logged['login'] != null) || (isset($user_logged['email']) && $user_logged['email'] != null) ) {
+		if ((isset($user_logged['cpf']) && $user_logged['cpf'] != null) || (isset($user_logged['email']) && $user_logged['email'] != null) ) {
 			return true;
 		}
 
@@ -140,10 +140,9 @@ class M_usuarios extends CI_Model {
 		$userdata = array(
 			'idusuario' => $userauth->idusuario,
 			'nome' => $userauth->nome,
-			'sobrenome' => $userauth->sobrenome,
 			'data_nascimento' => $userauth->data_nascimento,
-			'login' => $userauth->login,
-			'email' => $userauth->email
+			'email' => $userauth->email,
+			'cpf' => $userauth->cpf
 		);
 
 		$this->session->set_userdata($userdata);
@@ -155,16 +154,16 @@ class M_usuarios extends CI_Model {
 		session_destroy();
 	}
 
-	private function authUser ($email, $password)
+	private function authUser ($login, $password)
 	{
-		if (! $email || !$password)
+		if (! $login || !$password)
 		{
 			return 0;
 		}
 
 
 		$query_options = array(
-			'cwhere' => "(email = '{$email}' OR login = '{$email}') AND acesso > 2"
+			'cwhere' => "(cpf = '{$login}' OR email = '{$login}') AND acesso > 2"
 		);
 
 		$query = $this->getUsuario($query_options);

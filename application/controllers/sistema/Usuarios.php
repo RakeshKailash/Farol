@@ -49,7 +49,9 @@ class Usuarios extends CI_Controller {
 		}
 		
 		unset($data['confirma_senha']);
-		$data['data_nascimento'] = $this->parserlib->unformatDate($data['data_nascimento']);
+
+		$data = $this->prepareUserdata($data);
+		
 		$this->m_usuarios->insertUsuario($data);
 		return redirect("sistema/Usuarios");
 	}
@@ -96,13 +98,13 @@ class Usuarios extends CI_Controller {
 
 		$query_options = array(
 			'!id' => $idusuario,
-			'cwhere' => "login = '{$data['login']}'"
+			'cwhere' => "cpf = '{$data['cpf']}'"
 		);
 
-		$login_result = $this->m_usuarios->getUsuario($query_options);
+		$cpf_result = $this->m_usuarios->getUsuario($query_options);
 
-		if (sizeof($login_result) > 0) {
-			$errors .= "<p class='error'>O campo Login já existe, ele deve ser único.</p>";
+		if (sizeof($cpf_result) > 0) {
+			$errors .= "<p class='error'>O campo CPF já existe, ele deve ser único.</p>";
 		}
 
 		if (isset($data['senha']) && $data['senha'] != "") {
@@ -121,7 +123,7 @@ class Usuarios extends CI_Controller {
 
 		unset($data['idref']);
 		unset($data['confirma_senha']);
-		$data['data_nascimento'] = $this->parserlib->unformatDate($data['data_nascimento']);
+		$data = $this->prepareUserdata($data);
 		$this->m_usuarios->updateUsuario($idusuario, $data);
 		return redirect("sistema/Usuarios");
 	}
@@ -155,5 +157,29 @@ class Usuarios extends CI_Controller {
 
 		$this->m_usuarios->deleteUsuario($id, 1);
 		return redirect("sistema/Usuarios");
+	}
+
+	function prepareUserdata($data=null)
+	{
+		if (!$data) {
+			return null;
+		}
+
+		$data['data_nascimento'] = $this->parserlib->unformatDate($data['data_nascimento']);
+		$data['nome'] = $this->parserlib->titleCase($data['nome']);
+		$data['email'] = $this->parserlib->titleCase($data['email']);
+		$data['cidade'] = $this->parserlib->titleCase($data['cidade']);
+		$data['bairro'] = $this->parserlib->titleCase($data['bairro']);
+		$data['rua'] = $this->parserlib->titleCase($data['rua']);
+		$data['complemento'] = $this->parserlib->mb_ucfirst($data['complemento']);
+		$data['email'] = mb_strtolower($data['email']);
+		$data['atividade'] = $this->parserlib->titleCase($data['atividade']);
+		$data['cpf'] = $this->parserlib->removeNumMasks($data['cpf']);
+		$data['cep'] = $this->parserlib->removeNumMasks($data['cep']);
+		$data['whatsapp'] = $this->parserlib->removeNumMasks($data['whatsapp']);
+		$data['fone_1'] = $this->parserlib->removeNumMasks($data['fone_1']);
+		$data['fone_2'] = $this->parserlib->removeNumMasks($data['fone_2']);
+		$data['fone_3'] = $this->parserlib->removeNumMasks($data['fone_3']);
+		return $data;
 	}
 }

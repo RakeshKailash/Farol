@@ -3,10 +3,10 @@
 <table id="alunos_visualizar_table">
 	<thead>
 		<th>ID</th>
+		<th>Data</th>
 		<th>Turma</th>
 		<th>Título</th>
 		<th>Professor</th>
-		<th>Data</th>
 		<th>Status</th>
 	</thead>
 	<tbody>
@@ -14,9 +14,6 @@
 			<tr class="linha_cadastro_visualizar">
 				<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
 				<td><?=$aula->idevento?></td>
-				<td><a href="<?=base_url('sistema/Turmas/'.$aula->idturma)?>"><?=$aula->nome_turma?></a></td>
-				<td><?=$aula->nome?></td>
-				<td><?=$aula->nome_professor." ".$aula->sobrenome_professor?></td>
 				<td>
 					<?php if (isset($aula->dias)): ?>
 						<?php foreach ($aula->dias as $dia): ?>
@@ -24,6 +21,9 @@
 						<?php endforeach ?>
 					<?php endif ?>
 				</td>
+				<td><a href="<?=base_url('sistema/Turmas/'.$aula->idturma)?>"><?=$aula->nome_turma?></a></td>
+				<td><?=$aula->nome?></td>
+				<td><?=$aula->nome_professor?></td>
 				<td><?=$this->parserlib->aulaStatusParse($aula->status);?></td>
 			</tr>
 		<?php endforeach ?>

@@ -5,7 +5,7 @@
 		<th>ID</th>
 		<th>Curso</th>
 		<th>Descrição</th>
-		<th>Última turma</th>
+		<th>Turma mais recente</th>
 	</thead>
 	<tbody>
 	<?php foreach ($cursos as $curso) : ?>
@@ -14,7 +14,7 @@
 			<td><?=$curso->idcurso?></td>
 			<td><?=$curso->nome?></td>
 			<td><?=substr($curso->descricao, 0, 50)?></td>
-			<td><a href="<?=base_url('sistema/Turmas/'.$curso->idturma)?>"><?=$curso->ultima_turma?></a></td>
+			<td><a href="<?=base_url('sistema/Turmas/'.$curso->idturma)?>"><?=$curso->turma_recente?></a></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>

@@ -4,17 +4,19 @@
 	<thead>
 		<th>ID</th>
 		<th>Nome</th>
-		<th>Atividade</th>
 		<th>E-mail</th>
+		<th>WhatsApp</th>
+		<th>Telefone</th>
 	</thead>
 	<tbody>
 	<?php foreach ($professores as $professor) : ?>
 		<tr class="linha_cadastro_visualizar">
 			<input type="hidden" class="id_hidden" name="idprofessores" value="<?=$professor->idprofessor?>">
 			<td><?=$professor->idprofessor?></td>
-			<td><?=$professor->nome." ".$professor->sobrenome?></td>
-			<td><?=$professor->atividade?></td>
+			<td><?=$professor->nome?></td>
 			<td><?=$professor->email?></td>
+			<td><?=$professor->whatsapp?></td>
+			<td><?=$professor->fone_1?></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>

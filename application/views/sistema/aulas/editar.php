@@ -40,7 +40,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<div class="input-field">
 				<select name="idprofessor">
 					<?php foreach ($professores as $professor): ?>
-						<option <?=isset($userdata->idprofessor) && $userdata->idprofessor == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome." ".$professor->sobrenome?></option>
+						<option <?=isset($userdata->idprofessor) && $userdata->idprofessor == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome?></option>
 					<?php endforeach ?>
 				</select>
 			</div>

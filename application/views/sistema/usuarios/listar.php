@@ -5,8 +5,8 @@
 		<th>ID</th>
 		<th>Nome</th>
 		<th>E-mail</th>
-		<th>Login</th>
-		<th>Tipo</th>
+		<th>CPF</th>
+		<th>Nível</th>
 		<th>Status</th>
 	</thead>
 	<tbody>
@@ -14,9 +14,9 @@
 		<tr class="linha_cadastro_visualizar">
 			<input type="hidden" class="id_hidden" name="idusuarios" value="<?=$usuario->idusuario?>">
 			<td><?=$usuario->idusuario?></td>
-			<td><?=$usuario->nome." ".$usuario->sobrenome?></td>
+			<td><?=$usuario->nome?></td>
 			<td><?=$usuario->email?></td>
-			<td><?=$usuario->login?></td>
+			<td><?=$usuario->cpf?></td>
 			<td><?=$this->parserlib->usrAccessParse($usuario->acesso);?></td>
 			<td><?=!!$usuario->status ? "Ativo" : "Inativo" ?></td>
 		</tr>

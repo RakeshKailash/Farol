@@ -30,12 +30,12 @@ class Login extends CI_Controller {
 		}
 
 		if (!isset($_POST['login']) || !isset($_POST['senha'])) {
-			$this->session->set_flashdata("errors", "<p class='error'>Preencha Login e Senha para acessar o sistema.</p>");
+			$this->session->set_flashdata("errors", "<p class='error'>Preencha CPF/E-mail e Senha para acessar o sistema.</p>");
 			return redirect("sistema/login");
 		}
 
 		if (!$this->m_usuarios->logUser($_POST['login'], $_POST['senha'])) {
-			$this->session->set_flashdata("errors", "<p class='error'>Login ou Senha incorretos.</p>");
+			$this->session->set_flashdata("errors", "<p class='error'>E-mail/CPF ou Senha incorretos.</p>");
 			return redirect("sistema/login");
 		}
 

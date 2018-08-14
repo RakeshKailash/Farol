@@ -24,7 +24,7 @@ class Cursos extends CI_Controller {
 			$turmas_opts = array('cwhere' => "idcurso = {$curso->idcurso}", 'orderby' => 'idturma DESC');
 			$turma = $this->m_turmas->getTurma($turmas_opts);
 
-			$curso->ultima_turma = $turma != null ? $turma[0]->identificacao : "";
+			$curso->turma_recente = $turma != null ? $turma[0]->identificacao : "";
 			$curso->idturma = $turma != null ? $turma[0]->idturma : "";
 		}
 
