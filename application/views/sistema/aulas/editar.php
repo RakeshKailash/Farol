@@ -63,7 +63,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 								</div>
 							</div>
 							<div class="col s6 l6">
-								<label>Hora</label>
+								<label>Início</label>
 								<div class="input-field">
 									<input type="text" name="hora_inicio[]" value="<?=$this->parserlib->dtExtractTime($dia->inicio, false, true)?>" class="timepicker">
 								</div>
@@ -85,7 +85,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 							</div>
 						</div>
 						<div class="col s12 l3">
-							<p>Fim</p>
+							<p>Término</p>
 							<div class="col s6 l6">
 								<label>Hora</label>
 								<div class="input-field">

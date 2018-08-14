@@ -103,7 +103,7 @@ $(".btn_novo_dia_evento").click(function () {
 	dia_html += "</div>";
 	dia_html += "</div>";
 	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Hora</label>";
+	dia_html += "<label>Início</label>";
 	dia_html += "<div class='input-field'>";
 	dia_html += "<input type='text' name='hora_inicio[]' class='timepicker'>";
 	dia_html += "</div>";
@@ -125,7 +125,7 @@ $(".btn_novo_dia_evento").click(function () {
 	dia_html += "</div>";
 	dia_html += "</div>";
 	dia_html += "<div class='col s3'>";
-	dia_html += "<p>Fim</p>";
+	dia_html += "<p>Término</p>";
 	dia_html += "<div class='col s6'>";
 	dia_html += "<label>Hora</label>";
 	dia_html += "<div class='input-field'>";
