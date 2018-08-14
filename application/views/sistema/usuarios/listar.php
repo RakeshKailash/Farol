@@ -16,7 +16,7 @@
 			<td><?=$usuario->idusuario?></td>
 			<td><?=$usuario->nome?></td>
 			<td><?=$usuario->email?></td>
-			<td><?=$usuario->cpf?></td>
+			<td class="cpf_mask"><?=$usuario->cpf?></td>
 			<td><?=$this->parserlib->usrAccessParse($usuario->acesso);?></td>
 			<td><?=!!$usuario->status ? "Ativo" : "Inativo" ?></td>
 		</tr>

@@ -167,7 +167,6 @@ class Usuarios extends CI_Controller {
 
 		$data['data_nascimento'] = $this->parserlib->unformatDate($data['data_nascimento']);
 		$data['nome'] = $this->parserlib->titleCase($data['nome']);
-		$data['email'] = $this->parserlib->titleCase($data['email']);
 		$data['cidade'] = $this->parserlib->titleCase($data['cidade']);
 		$data['bairro'] = $this->parserlib->titleCase($data['bairro']);
 		$data['rua'] = $this->parserlib->titleCase($data['rua']);

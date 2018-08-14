@@ -15,8 +15,8 @@
 			<td><?=$professor->idprofessor?></td>
 			<td><?=$professor->nome?></td>
 			<td><?=$professor->email?></td>
-			<td><?=$professor->whatsapp?></td>
-			<td><?=$professor->fone_1?></td>
+			<td class="phone_mask"><?=$professor->whatsapp?></td>
+			<td class="phone_mask"><?=$professor->fone_1?></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>

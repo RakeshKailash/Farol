@@ -48,6 +48,7 @@ class Professores extends CI_Controller {
 			return redirect("sistema/Professores/novo");
 		}
 		
+		$data = $this->prepareData($data);
 		$this->m_professores->insertProfessor($data);
 		return redirect("sistema/Professores");
 	}
@@ -97,8 +98,24 @@ class Professores extends CI_Controller {
 		}
 
 		unset($data['idref']);
+		$data = $this->prepareData($data);
 		$this->m_professores->updateProfessor($idprofessor, $data);
 		return redirect("sistema/Professores");
+	}
+
+		function prepareData($data=null)
+	{
+		if (!$data) {
+			return null;
+		}
+
+		$data['nome'] = $this->parserlib->titleCase($data['nome']);
+		$data['email'] = mb_strtolower($data['email']);
+		$data['whatsapp'] = $this->parserlib->removeNumMasks($data['whatsapp']);
+		$data['fone_1'] = $this->parserlib->removeNumMasks($data['fone_1']);
+		$data['fone_2'] = $this->parserlib->removeNumMasks($data['fone_2']);
+		$data['fone_3'] = $this->parserlib->removeNumMasks($data['fone_3']);
+		return $data;
 	}
 
 }
