@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `aulas`
+--
+
+DROP TABLE IF EXISTS `aulas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aulas` (
+  `idaula` int(11) NOT NULL AUTO_INCREMENT,
+  `idturma` int(11) NOT NULL,
+  `idprofessor` int(11) NOT NULL,
+  `descricao` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelada; 1 = Ativa;',
+  PRIMARY KEY (`idaula`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aulas`
+--
+
+LOCK TABLES `aulas` WRITE;
+/*!40000 ALTER TABLE `aulas` DISABLE KEYS */;
+INSERT INTO `aulas` VALUES (1,8,1,'Aula de teste',1),(2,8,2,'Aula de reforço',1),(3,4,2,'Aula de Revisão T2',1),(4,3,2,'Aula de Avaliação',1),(5,7,1,'Teste',1),(6,7,1,'Teste',1),(7,6,1,'Teste 2',1),(8,12,1,'Teste Testoso',1),(9,14,3,'Aula 1/1',1),(10,12,3,'Teste de Agulhas',1),(11,1,3,'Reiki I e II',1),(12,1,3,'Reiki I e II (Segunda chamada)',1),(13,1,3,'Reiki I e II (Terceira chamada)',1),(14,1,3,'Reiki I e II (Quarta chamada)',1);
+/*!40000 ALTER TABLE `aulas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cursos`
 --
 
@@ -37,7 +64,7 @@ CREATE TABLE `cursos` (
 
 LOCK TABLES `cursos` WRITE;
 /*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
-INSERT INTO `cursos` VALUES (1,'Reiki I e II Intensivo','Aqui vai a descrição do curso, muitas palavras.',1),(2,'Terapeuta Holístico','Abraçando a saúde, de ponta a ponta',1),(3,'Mesa Radiônica Quântica Rosa','Lorem ipsum dolor sit amet',1),(4,'Acupuntura','Atividade remunerada de furar todo mundo',1);
+INSERT INTO `cursos` VALUES (1,'Reiki I e II Intensivo','Aqui vai a descrição do curso, muitas palavras.',1),(2,'Terapeuta Holístico','Abraçando a saúde, de ponta a ponta',1),(3,'Mesa Radiônica Quântica Rosa','Lorem ipsum dolor sit amet',1),(4,'Acupuntura','Prática milenar da MTC',1);
 /*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,9 +105,10 @@ CREATE TABLE `dias_eventos` (
   `idevento` int(11) NOT NULL,
   `inicio` datetime NOT NULL,
   `fim` datetime NOT NULL,
-  `obs` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `almoco_inicio` datetime DEFAULT NULL,
+  `almoco_fim` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +117,7 @@ CREATE TABLE `dias_eventos` (
 
 LOCK TABLES `dias_eventos` WRITE;
 /*!40000 ALTER TABLE `dias_eventos` DISABLE KEYS */;
+INSERT INTO `dias_eventos` VALUES (22,5,'2018-08-19 09:00:00','2018-08-19 18:30:00','2018-08-19 12:30:00','2018-08-19 14:00:00'),(23,6,'2018-08-26 09:00:00','2018-08-26 18:30:00','2018-08-26 12:30:00','2018-08-26 14:00:00');
 /*!40000 ALTER TABLE `dias_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,8 +137,9 @@ CREATE TABLE `eventos` (
   `descricao` text COLLATE utf8_unicode_ci,
   `taxa` decimal(10,2) NOT NULL DEFAULT '0.00',
   `prazo_inscricao` datetime DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelado; 1 = Agendado;',
   PRIMARY KEY (`idevento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,6 +148,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
+INSERT INTO `eventos` VALUES (5,3,2,1,'Revisão','Revisar todo o conteúdo ministrado ao longo das aulas anteriores',0.00,NULL,1),(6,2,4,1,'Teste aleatório','Testando',0.00,NULL,1);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,14 +162,15 @@ DROP TABLE IF EXISTS `forma_investimento`;
 CREATE TABLE `forma_investimento` (
   `idinvestimento` int(11) NOT NULL AUTO_INCREMENT,
   `idturma` int(11) NOT NULL,
-  `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = À vista; 2 = Parcelado Farol; 3 = Cartão;',
+  `forma` int(11) NOT NULL DEFAULT '1' COMMENT '1 = À vista; 2 = Parcelado Farol; 3 = Cartão;',
   `parcelas` int(11) DEFAULT '1',
-  `valor_parcela` decimal(13,2) NOT NULL,
+  `valor_parcela` decimal(13,2) DEFAULT NULL,
   `total` decimal(13,2) NOT NULL,
   `dia_vencimento` int(11) DEFAULT NULL,
   `data_vencimento` date DEFAULT NULL,
+  `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Matrícula; 2 = Mensalidade;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +179,7 @@ CREATE TABLE `forma_investimento` (
 
 LOCK TABLES `forma_investimento` WRITE;
 /*!40000 ALTER TABLE `forma_investimento` DISABLE KEYS */;
+INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,2,2,100.00,200.00,10,NULL,1),(3,11,2,20,330.00,6600.00,2,NULL,1),(4,12,2,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,2,3,70.00,210.00,7,NULL,1);
 /*!40000 ALTER TABLE `forma_investimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,11 +244,13 @@ DROP TABLE IF EXISTS `professores`;
 CREATE TABLE `professores` (
   `idprofessor` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `sobrenome` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `atividade` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fone_1` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `fone_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idprofessor`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +259,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (1,'Beltrano','das Plantas','Frentista de Tesla','fulano@ervateiro.com.br'),(2,'Fulano','de Teste','Testador','fulano@tester.com.br');
+INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','fulano@ervateiro.com.br','',NULL,NULL,NULL),(2,'Fulano de Teste','fulano@tester.com.br','',NULL,NULL,NULL),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','',NULL,NULL,NULL),(4,'Professor de Alunos','professor@dealunos.com.br','',NULL,NULL,NULL),(5,'Outro Professor de Testes','outro@teste.com.br','(53)9843-82243','','','(53)9911-71142');
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,9 +297,12 @@ CREATE TABLE `turmas` (
   `idturma` int(11) NOT NULL AUTO_INCREMENT,
   `idcurso` int(11) NOT NULL,
   `identificacao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `vagas` int(11) NOT NULL,
+  `taxa_inscricao` decimal(13,2) NOT NULL DEFAULT '0.00',
+  `data_limite_inscricao` date NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Andamento; 3 = Encerrada;',
   PRIMARY KEY (`idturma`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +311,7 @@ CREATE TABLE `turmas` (
 
 LOCK TABLES `turmas` WRITE;
 /*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
-INSERT INTO `turmas` VALUES (1,1,'Turma 1',1),(2,2,'Turma 133',1),(3,4,'Turma 1',1);
+INSERT INTO `turmas` VALUES (1,1,'Turma 1',25,0.00,'0000-00-00',1),(2,2,'TER03',20,0.00,'0000-00-00',1),(3,4,'Turma 1',10,0.00,'0000-00-00',1),(4,1,'Turma 2',10,0.00,'0000-00-00',1),(5,1,'Turma 2',30,0.00,'0000-00-00',1),(6,1,'Turma 3',20,0.00,'0000-00-00',1),(7,1,'Turma 4',20,0.00,'0000-00-00',1),(8,3,'Turma 1',10,0.00,'0000-00-00',1),(9,4,'Turma A1',30,150.00,'0000-00-00',1),(10,4,'Turma A2',28,120.00,'2018-09-10',1),(11,1,'Turma A3',30,130.00,'2018-09-10',1),(12,4,'Turma B1',30,120.00,'2018-08-10',1),(13,3,'Turma 10',10,0.00,'2018-09-07',1),(14,3,'Turma 10',10,0.00,'2018-09-10',1);
 /*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,28 +325,27 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `idusuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `sobrenome` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `login` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = Inativo; 1 = Ativo',
   `senha` varchar(70) COLLATE utf8_unicode_ci NOT NULL,
   `cpf` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rg` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `ocupacao` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `atividade` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cep` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uf` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `cidade` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `bairro` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rua` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone_1` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `fone_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `acesso` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Usuário; 2 = Aluno; 3 = Funcionário; 4 = Administrador; 5 = Desenvolvedor;',
+  `acesso` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Usuário; 2 = Aluno; 3 = Equipe; 4 = Administrador; 5 = Desenvolvedor;',
   PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +354,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Marcelo','Boemeke da Silveira','dev','marcelo.boemeke@hotmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','040.592.420-80','1123434531','1998-10-03','Desenvolvedor Web','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9911-71142','(53)9844-81526','(53)3271-5749','(53)9911-71142',5),(3,'Marcelo','Boemeke da Silveira','','marcelo.boemeke@gmail.com',1,'','04059242080','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,'53991171142','53984382243','5332715749','',1),(4,'Isamar','Boemeke da Silveira','minhamae','isamar@gmail.com',1,'$2y$10$F3GtMkpfDq3yjpmlbp/7w.3RDUCkhzmtHZ05nJ.r8wx1DATjJDkvm','','','1957-08-24','Dona de casa','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9844-81526','(53)3271-5749','','',1),(5,'Fulano','dos Testes','fulano','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','000.000.000-00','0000000000','1998-10-03','Desocupado','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9911-71142','','','',2);
+INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'(53)9911-71142','(53)9844-81526','(53)3271-5749','(53)9911-71142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','040.592.420-80','1123434531','0000-00-00','Desenvolvedor','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'(53)9911-71142','(53)9843-82243','(53)3271-5749','',3),(4,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$F3GtMkpfDq3yjpmlbp/7w.3RDUCkhzmtHZ05nJ.r8wx1DATjJDkvm','','','1957-08-24','Dona de casa','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'(53)9844-81526','(53)3271-5749','','',1),(5,'Fulano dos Testes','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','000.000.000-00','0000000000','1998-10-03','Desocupado','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'(53)9911-71142','','','',2),(6,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','040.592.420-80','1123434531','1957-08-24','Tester','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'(53)9911-71142','','','(53)9911-71142',2),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','000.000.000-00','0000000000','2010-10-10','Dona Proprietária','96090-000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'(53)3200-0000','','','(53)9910-00000',4),(8,'João da Silva','joaodasilva@gmail.com',1,'$2y$10$9p8aPIDQnIkkD9jMstHu4u/VRfaLzXUR0LavphmvGDMbJ.VwsRunK','00011122233','1123434532','1998-10-03','Frentista','00112233','AC','Do Porto','Bairro','Rua Avenida',18,'Kakkakakamamaamalalal teste, testando o','53991171142',NULL,NULL,'53991171142',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-06 13:16:57
+-- Dump completed on 2018-08-14 18:14:46
