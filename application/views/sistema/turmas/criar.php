@@ -52,51 +52,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<div class="col s12"><p class="page_minor_title">Investimento</p></div>
 	</div>
 	<div class="row investimentos_turma">
-		<div class="form_group col s12 linha_pagamento_turma">
-			<div class="col s3 col_tipo">
-				<label>Forma</label>
-				<div class="input-field">
-					<select name="forma[]" class="select_tipo_investimento">
-						<option value="1">À vista</option>
-						<option value="2">À prazo</option>
-						<option value="3">Cartão</option>
-					</select>
-				</div>
-			</div>
-			<div class="col s4 col_total">
-				<label>Total</label>
-				<div class="input-field">
-					<input type="text" class="money_mask" name="total[]">
-				</div>
-			</div>
-			<div class="col s1 col_parcelas hide">
-				<label>Parcelas</label>
-				<div class="input-field">
-					<input type="text" name="parcelas[]">
-				</div>
-			</div>
-			<div class="col s2 col_val_parcelas hide">
-				<label>Valor das parcelas</label>
-				<div class="input-field">
-					<input type="text" class="money_mask" name="valor_parcela[]">
-				</div>
-			</div>
-			<div class="col s2 col_dia_vencimento hide">
-				<label>Dia de vencimento</label>
-				<div class="input-field">
-					<input type="text" name="dia_vencimento[]">
-				</div>
-			</div>
-			<div class="col s4 col_vencimento">
-				<label>Vencimento</label>
-				<div class="input-field">
-					<input type="text" placeholder="00/00/0000" class="date_mask" name="data_vencimento[]">
-				</div>
-			</div>
-			<div class="col s1">
-				<i class="material-icons exclui_item_linha">close</i>
-			</div>
-		</div>
+		
 	</div>
 	<div class="row"><a href="javascript:void(0)" class="btn btn_table_action btn_novo_investimento"><i class="material-icons">add</i>Forma de investimento</a></div>
 	<div class="row">
