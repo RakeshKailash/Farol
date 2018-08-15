@@ -26,6 +26,9 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<a href="<?=base_url('sistema/Turmas/novo?preid='.$userdata->idcurso)?>" class="btn btn_table_action btn_nova_turma"><i class="material-icons">add</i>Nova turma</a>
+	</div>
 	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idcurso?>">
 	<input type="hidden" class="cad_hidden" value="Cursos">
 	<input type="submit" class="btn" value="Salvar">

@@ -233,3 +233,18 @@ i.exclui_item_linha {
 	display: inline-block;
 	margin-bottom: 3px;
 }
+
+.check_title_container label {
+	display: inline-block;
+	vertical-align: sub;
+}
+
+.check_title_container label span {
+	text-align: center;
+    padding-left: 18px !important;
+    margin-right: 10px;
+}
+
+.check_title_container .page_minor_title {
+	display: inline-block;
+}

@@ -193,11 +193,6 @@ $config = array(
         ),
         'cadastro_aulas' => array(
                 array(
-                        'field' => 'nome',
-                        'label' => 'Título',
-                        'rules' => 'required'
-                ),
-                array(
                         'field' => 'idturma',
                         'label' => 'Turma',
                         'rules' => 'required'

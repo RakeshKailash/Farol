@@ -246,6 +246,10 @@ $(".investimentos_turma").on("change", ".select_tipo_investimento", function (e)
 	handleFormaPagamento($(e.target));
 });
 
+$(".check_aula_unica").change(function () {
+	$(".container_aula_unica").toggleClass("hide");
+})
+
 function handleFormaPagamento(e)
 {
 	var select_tipo = $(e);

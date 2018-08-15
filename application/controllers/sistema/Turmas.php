@@ -7,6 +7,7 @@ class Turmas extends CI_Controller {
 		$this->load->model("m_config");
 		$this->load->model("m_usuarios");
 		$this->load->model("m_turmas");
+		$this->load->model("m_professores");
 		$this->load->model("m_cursos");
 		$this->load->model("m_aulas");
 		$this->load->model("m_investimentos");
@@ -41,7 +42,12 @@ class Turmas extends CI_Controller {
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
+		$infoB['professores'] = $this->m_professores->getProfessores();
 		$infoB['cursos'] = $this->m_cursos->getCurso();
+		if (isset($_GET['preid'])) {
+			$preiddata = array('idcurso' => $_GET['preid']);
+			$this->session->set_flashdata('formdata', $preiddata);
+		}
 
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/turmas/criar.php", $infoB);
@@ -59,9 +65,10 @@ class Turmas extends CI_Controller {
 		);
 		$investimento = array();
 
+		$this->form_validation->set_data($turma);
 		if ($this->form_validation->run('cadastro_turmas') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
-			$this->session->set_flashdata('formdata', $turma);
+			$this->session->set_flashdata('formdata', $data);
 			return redirect("sistema/Turmas/novo");
 		}
 		
@@ -98,16 +105,72 @@ class Turmas extends CI_Controller {
 					);
 				}
 
+				$this->form_validation->reset_validation();
+				$this->form_validation->set_data($investimento);
 				if ($this->form_validation->run('investimento_'.$data['forma'][$i]) == FALSE) {
 					$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
-					$this->session->set_flashdata('formdata', $turma);
+					$this->session->set_flashdata('formdata', $data);
 					return redirect("sistema/Turmas/novo");
 				}
 
 				if (!$this->m_investimentos->insertInvestimento($investimento)) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar as formas de investimento.</p>");
-					$this->session->set_flashdata('formdata', $turma);
+					$this->session->set_flashdata('formdata', $data);
 					return redirect("sistema/Turmas/novo");
+				}
+			}
+		}
+
+		if (isset($data['aula_unica']) && !!$data['aula_unica']) {
+			$data_aula = array(
+				'idprofessor' => $data['idprofessor'], 
+				'idturma' => $idturma, 
+				'tipo' => '1',
+				'nome' => $data['nome'],
+				'descricao' => null
+			);
+			$diasAulas = array();
+
+			$this->form_validation->reset_validation();
+			$this->form_validation->set_data($data_aula);
+
+			if ($this->form_validation->run('cadastro_aulas') == FALSE) {
+				$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
+				$this->session->set_flashdata('formdata', $data);
+				return redirect("sistema/Turmas/novo");
+			}
+
+			$data_aula['nome'] = $this->parserlib->titleCase($data_aula['nome']);
+			$idaula = $this->m_aulas->insertAula($data_aula);
+
+			if (isset($data['data_inicio'])) {
+				for ($i=0;$i<count($data['data_inicio']);$i++) {
+					$inicio = $data['data_inicio'][$i].", ".$data['hora_inicio'][$i]."h";
+					$fim = $data['data_inicio'][$i].", ".$data['hora_fim'][$i]."h";
+					$almoco_inicio = $data['data_inicio'][$i].", ".$data['almoco_inicio'][$i]."h";
+					$almoco_fim = $data['data_inicio'][$i].", ".$data['almoco_fim'][$i]."h";
+					$diasAulas = array(
+						'idevento' => $idaula,
+						'inicio' => $this->parserlib->unformatDatetime($inicio),
+						'fim' => $this->parserlib->unformatDatetime($fim),
+						'almoco_inicio' => $data['almoco_inicio'][$i] != "" ? $this->parserlib->unformatDatetime($almoco_inicio) : null,
+						'almoco_fim' => $data['almoco_inicio'][$i] != "" ? $this->parserlib->unformatDatetime($almoco_fim) : null
+					);
+
+					$this->form_validation->reset_validation();
+					$this->form_validation->set_data($diasAulas);
+
+					if ($this->form_validation->run('dias_aulas') == FALSE) {
+						$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
+						$this->session->set_flashdata('formdata', $data);
+						return redirect("sistema/Turmas/novo");
+					}
+
+					if (!$this->m_aulas->insertDiasAulas($diasAulas)) {
+						$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar os dias da aula.</p>");
+						$this->session->set_flashdata('formdata', $data);
+						return redirect("sistema/Turmas/novo");
+					}
 				}
 			}
 		}
