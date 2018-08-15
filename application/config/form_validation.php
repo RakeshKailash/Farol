@@ -172,6 +172,28 @@ $config = array(
                         'field' => 'valor_parcela',
                         'label' => 'Valor das Parcelas',
                         'rules' => 'required'
+                )
+        ),
+        'investimento_3' => array(
+                array(
+                        'field' => 'forma',
+                        'label' => 'Forma',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'total',
+                        'label' => 'Total',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'parcelas',
+                        'label' => 'Parcelas',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'valor_parcela',
+                        'label' => 'Valor das Parcelas',
+                        'rules' => 'required'
                 ),
                 array(
                         'field' => 'dia_vencimento',
@@ -179,7 +201,7 @@ $config = array(
                         'rules' => 'required'
                 )
         ),
-        'investimento_3' => array(
+        'investimento_4' => array(
                 array(
                         'field' => 'forma',
                         'label' => 'Forma',

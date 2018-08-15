@@ -47,8 +47,9 @@ $(".btn_novo_investimento").click(function () {
 	pagamento_html += "<div class='input-field'>";
 	pagamento_html += "<select name='forma[]' class='select_tipo_investimento'>";
 	pagamento_html += "<option value='1'>À vista</option>";
-	pagamento_html += "<option value='2'>À prazo</option>";
-	pagamento_html += "<option value='3'>Cartão</option>";
+	pagamento_html += "<option value='2'>Parcelas</option>";
+	pagamento_html += "<option value='3'>Mensalidade</option>";
+	pagamento_html += "<option value='4'>Cartão</option>";
 	pagamento_html += "</select>";
 	pagamento_html += "</div>";
 	pagamento_html += "</div>";
@@ -259,9 +260,12 @@ function handleFormaPagamento(e)
 		investimentoVista(linha);
 		break;
 		case "2":
-		investimentoPrazo(linha);
+		investimentoParcelas(linha);
 		break;
 		case "3":
+		investimentoMensalidade(linha);
+		break;
+		case "4":
 		investimentoCartao(linha);
 		break;
 	}
@@ -278,7 +282,18 @@ function investimentoVista(linha)
 	$(linha).find(".col_dia_vencimento").removeClass().addClass("col_dia_vencimento hide");
 }
 
-function investimentoPrazo(linha)
+function investimentoParcelas(linha)
+{
+	$(linha).find(".col_tipo").removeClass().addClass("col_tipo col s4");
+	$(linha).find(".col_total").removeClass().addClass("col_total col s3");
+	$(linha).find(".col_parcelas").removeClass().addClass("col_parcelas col s2");
+	$(linha).find(".col_val_parcelas").removeClass().addClass("col_val_parcelas col s2");
+	
+	$(linha).find(".col_dia_vencimento").removeClass().addClass("col_dia_vencimento hide");
+	$(linha).find(".col_vencimento").removeClass().addClass("col_vencimento hide");
+}
+
+function investimentoMensalidade(linha)
 {
 	$(linha).find(".col_tipo").removeClass().addClass("col_tipo col s3");
 	$(linha).find(".col_total").removeClass().addClass("col_total col s3");

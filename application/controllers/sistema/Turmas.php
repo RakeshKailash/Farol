@@ -91,13 +91,23 @@ class Turmas extends CI_Controller {
 						'forma' => $data['forma'][$i], 
 						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
 						'parcelas' => $data['parcelas'][$i], 
+						'valor_parcela' => $this->parserlib->unformatMoney($data['valor_parcela'][$i]),
+						'idturma' => $idturma
+					);
+				}
+
+				if ($data['forma'][$i] == 3) {	
+					$investimento = array(
+						'forma' => $data['forma'][$i], 
+						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
+						'parcelas' => $data['parcelas'][$i], 
 						'valor_parcela' => $this->parserlib->unformatMoney($data['valor_parcela'][$i]), 
 						'dia_vencimento' => $data['dia_vencimento'][$i], 
 						'idturma' => $idturma
 					);
 				}
 
-				if ($data['forma'][$i] == 3) {	
+				if ($data['forma'][$i] == 4) {	
 					$investimento = array(
 						'forma' => $data['forma'][$i], 
 						'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
