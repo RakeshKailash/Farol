@@ -21,9 +21,17 @@ class Test extends CI_Controller {
 		// echo "<pre>";
 		// var_dump($test);
 		// echo "</pre>";
-		$str = "éden silveira";
-		echo $this->parserlib->mb_ucfirst("KakKAKAKAmaMAMAlalaL tesTE, tesTANdo O");
+
+
+		echo "<pre>";
+		var_dump($this->m_eventos->getAgenda());
+		echo "</pre>";
 		
+	}
+
+	function td()
+	{
+		echo $this->parserlib->dtExtractDate($this->parserlib->unformatDatetime("28/09/2018, 15:35h"));
 	}
 
 	function orderResults($results=array())

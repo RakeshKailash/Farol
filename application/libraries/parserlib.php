@@ -278,6 +278,77 @@ class Parserlib
 		return $format ? $this->formatTime($clear) : $clear;
 	}
 
+	public function dtGetPortion($port="", $data=null)
+	{
+		if (!$data || $port == "") {
+			return null;
+		}
+
+		$selector = "~^(\d{2})/(\d{2})/(\d{4}), (\d{2}):(\d{2})h$~";
+
+		if (!preg_match($selector, $data)) {
+			return null;
+		}
+
+		switch ($port) {
+			case "d":
+			return preg_replace($selector, '\1', $data);
+			break;
+			case "m":
+			return preg_replace($selector, '\2', $data);
+			break;
+			case "y":
+			return preg_replace($selector, '\3', $data);
+			break;
+			case "h":
+			return preg_replace($selector, '\4', $data);
+			break;
+			case "i":
+			return preg_replace($selector, '\5', $data);
+			break;
+			default:
+			return null;
+			break;
+		}
+
+		// if (preg_match($selector, $data)) {
+		// 	$clear = preg_replace($selector, '\1', $data);
+		// 	return $format ? $this->formatDate($clear) : $clear;
+		// }
+
+		// $clear = preg_replace("~[^\d]~", "", $data);
+		// $clear = preg_replace("~^(\d{4})(\d{2})(\d{2})(\d{2}\d{2}\d{2})$~", '\1-\2-\3', $clear);
+
+		// return $format ? $this->formatDate($clear) : $clear;
+	}
+
+	function getMonthFromNum($num=null)
+	{
+		if (!$num) {
+			return null;
+		}
+
+		$num = (int) $num;
+		$num--;
+
+		$months = array(
+			'Janeiro', 
+			'Fevereiro', 
+			'Março', 
+			'Abril', 
+			'Maio', 
+			'Junho', 
+			'Julho', 
+			'Agosto',
+			'Setembro',
+			'Outubro',
+			'Novembro',
+			'Dezembro'
+		);
+
+		return $months[$num];
+	}
+
 	function resume($text=null, $start=0, $end=50)
 	{
 		if (!$text) {

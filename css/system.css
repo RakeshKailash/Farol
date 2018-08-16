@@ -117,6 +117,13 @@ input, textarea {
 	color: #fff;
 }
 
+#alunos_visualizar_table.has_sub_head thead {
+	background-color: transparent;
+	color: #5c478c;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
 #alunos_visualizar_table td,
 #alunos_visualizar_table th {
 	padding: 15px;
@@ -125,6 +132,10 @@ input, textarea {
 
 .menu_lateral_sistema li:not(:first-child):hover {
 	background-color: #f2eaf7;
+}
+
+#alunos_visualizar_table.has_sub_head tbody tr {
+	border: none !important;
 }
 
 #alunos_visualizar_table tbody tr {
@@ -145,6 +156,20 @@ input, textarea {
 	border-color: transparent;
 }
 
+#alunos_visualizar_table tbody tr.linha_mes_agenda {
+	background-color: #5c478c;
+	color: #fff;
+	font-size: 14pt;
+	font-weight: 400;
+}
+
+#alunos_visualizar_table tbody tr.linha_espaco {
+	height: 30px;
+	background: transparent;
+	border: none !important;
+	cursor: default;
+}
+
 .linha_cadastro_visualizar a:hover {
 	text-decoration: underline;
 }
@@ -160,8 +185,14 @@ input, textarea {
 	text-decoration: none;
 }
 
-.form_group {
-
+.btn_year.curyear,
+.btn_year.curyear:hover {
+	color: #7e57c2;
+	background: transparent;
+	border: 1px solid #7e57c2;
+	font-weight: 600;
+	box-shadow: none;
+	cursor: default;
 }
 
 .linha_pagamento_turma, .linha_aula_turma, .dias_aulas_linha {
@@ -241,8 +272,8 @@ i.exclui_item_linha {
 
 .check_title_container label span {
 	text-align: center;
-    padding-left: 18px !important;
-    margin-right: 10px;
+	padding-left: 18px !important;
+	margin-right: 10px;
 }
 
 .check_title_container .page_minor_title {

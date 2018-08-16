@@ -9,7 +9,7 @@ class M_aulas extends CI_Model {
 	function getAulas($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
+		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, eventos.`prazo_inscricao`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
 		$where = null;
 		$cond = null;
 

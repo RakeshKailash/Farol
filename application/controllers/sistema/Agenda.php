@@ -20,16 +20,10 @@ class Agenda extends CI_Controller {
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$users = isset($id) && $id != null ? $this->m_professores->getProfessores($id) : $this->m_professores->getProfessores();
-
-		// foreach ($users as &$value) {
-		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
-		// }
-
-		$infoB['professores'] = $users;
+		$infoB['agenda'] = $this->m_eventos->getAgenda();
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
-		$this->load->view("sistema/professores/listar.php", $infoB);
+		$this->load->view("sistema/agenda/listar.php", $infoB);
 		$this->load->view("sistema/common/fim.php");
 	}
 
