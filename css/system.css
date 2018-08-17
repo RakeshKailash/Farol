@@ -2,6 +2,18 @@ body {
 	background-color: #E6DBEC;
 }
 
+b, strong {
+	font-weight: bold !important;
+}
+
+.spaced_p {
+	line-height: 150%;
+	word-spacing: 2px;
+	font-size: 12pt;
+	text-align: justify;
+	margin-bottom: 15px;
+}
+
 .cabecalho {
 	/*background-color: #69439A;*/
 	background-color: #5C478C;
@@ -9,7 +21,7 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 50;
 	width: 100%;
 }
 
@@ -179,12 +191,21 @@ input, textarea {
 	color: #5c478c;
 }
 
-.row.row_matricula_agenda {
+.row.row_matricula_agenda,
+.row.row_descricao_agenda {
 	margin-bottom: 0;
 }
 
 .linha_cadastro_visualizar a:hover {
 	text-decoration: underline;
+}
+
+#alunos_visualizar_table tbody tr.linha_info_agenda {
+	cursor: default;
+}
+
+.linha_info_agenda p {
+	color: #5c478c;
 }
 
 .btn {

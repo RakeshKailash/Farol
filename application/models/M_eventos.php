@@ -201,6 +201,7 @@ class M_eventos extends CI_Model {
 			}
 
 			$status = null;
+			$evento->aceitar_matriculas = 0;
 			
 			if ($this->isFirstClass($evento->idevento) == false) {
 				if ($evento->status_turma == 1) {
@@ -223,7 +224,8 @@ class M_eventos extends CI_Model {
 					$status = "Em curso";
 				} else {
 					$status = $this->parserlib->formatDate($evento->data_limite_inscricao);
-					$evento->nome = "<b>".$evento->nome."</b>";
+					// $evento->nome = "<b>".$evento->nome."</b>";
+					$evento->aceitar_matriculas = 1;
 				}
 			}
 

@@ -233,6 +233,30 @@ $(".dias_aula").on("click", ".exclui_item_linha", function (e) {
 });
 
 $(document).ready(function () {
+	$(".t_editor").trumbowyg({
+		lang: 'pt_br',
+		removeformatPasted: true,
+		btns: [
+        ['undo', 'redo'], // Only supported in Blink browsers
+        ['formatting'],
+        ['strong', 'em', 'underline'],
+        ['superscript', 'subscript'],
+        ['link'],
+        ['insertImage'],
+        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['unorderedList', 'orderedList'],
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen']
+        ]
+    });
+
+	$("p", $(".linha_info_agenda")).each(function() {
+		if ($(this).html() != "") {
+			$(this).addClass("spaced_p");
+		}
+	});
+
 	$.each($('.select_tipo_investimento'), function () {
 		handleFormaPagamento($(this));
 	});

@@ -36,12 +36,14 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
 						</tr>
 						<tr class="linha_info_agenda hide" data-id="<?=$evento->idevento?>">
 							<td colspan="4">
-								<div class="row"><div class="col s12"><?=$evento->descricao?></div></div>
-								<div class="row row_matricula_agenda">
-									<div class="col s12">
-										<a href="<?=base_url('sistema')?>" class="btn btn_table_action">Matricule-se</a>
+								<div class="row row_descricao_agenda"><div class="col s12"><?=$evento->descricao?></div></div>
+								<?php if (!!$evento->aceitar_matriculas): ?>
+									<div class="row row_matricula_agenda">
+										<div class="col s12">
+											<a href="<?=base_url('sistema')?>" class="btn btn_table_action">Matricule-se</a>
+										</div>
 									</div>
-								</div>
+								<?php endif ?>
 							</td>
 						</tr>
 					<?php endforeach ?>

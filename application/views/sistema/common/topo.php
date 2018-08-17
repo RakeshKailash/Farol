@@ -7,6 +7,7 @@
 		var RAIZ = "<?=RAIZ?>";
 	</script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="<?=RAIZ.'plugins/trumbowyg/dist/ui/trumbowyg.min.css'?>">
 	<?=$loads?>
 	<script type="text/javascript" src="<?=RAIZ.'js/custom.js'?>"></script>
 </head>
