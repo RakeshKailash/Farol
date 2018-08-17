@@ -9,7 +9,7 @@ class M_eventos extends CI_Model {
 	function getEventos($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, eventos.`prazo_inscricao`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
+		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, eventos.`tipo`, turmas.`data_limite_inscricao`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma, turmas.`status` AS status_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
 		$where = null;
 		$cond = null;
 
@@ -134,13 +134,48 @@ class M_eventos extends CI_Model {
 		return $result->result();
 	}
 
+	function getDescricaoAula($idturma=null)
+	{
+		if (!$idturma) {
+			return false;
+		}
+
+		$this->db->where('idturma', $idturma);
+		$result = $this->db->get("turmas");
+
+		if (!$result) {
+			return false;
+		}
+
+		$turma = $result->result()[0];
+		$this->db->where('idcurso', $turma->idcurso);
+		$result = $this->db->get("cursos");
+
+		if (!$result) {
+			return false;
+		}
+
+		$curso = $result->result()[0];
+		$descricao = "";
+
+		if ($turma->identificacao != null) {
+			return $curso->nome . " - Turma " . $turma->identificacao;
+		}
+
+		return $curso->nome;
+	}
+
 	function getAgenda($opts=array())
 	{
 		$eventos = $this->getEventos();
+		if (!sizeof($eventos)) {
+			return $eventos;
+		}
 		$eventos = $this->orderAgenda($eventos);
 		$agenda = array();
 
-		foreach ($eventos as $evento) {
+
+		foreach ($eventos as &$evento) {
 			if (isset($evento->dias[0])) {
 				$ano = $this->parserlib->dtGetPortion("y", $evento->dias[0]->inicio);
 				$mes = $this->parserlib->dtGetPortion("m", $evento->dias[0]->inicio);
@@ -154,6 +189,50 @@ class M_eventos extends CI_Model {
 				
 				$agenda[$ano][$mes][] = $evento;
 			}
+
+			if ($evento->tipo == 1) {
+				$descricao = $this->getDescricaoAula($evento->idturma);
+
+				if ($evento->nome != null) {
+					$descricao .= " | ".$evento->nome;
+				}
+
+				$evento->nome = $descricao;
+			}
+
+			$status = null;
+			
+			if ($this->isFirstClass($evento->idevento) == false) {
+				if ($evento->status_turma == 1) {
+					$status = " ";
+				}
+
+				if ($evento->status_turma == 2 && date('Y-m-d') > $evento->data_limite_inscricao) {
+					$status = "Em curso";
+				} else {
+					$status = " ";
+				}
+			}
+
+			if ($evento->status_turma == 1 && $status == null) {
+				$status = "Aguarde";
+			}
+
+			if ($evento->status_turma == 2 && $status == null) {
+				if (date('Y-m-d') > $evento->data_limite_inscricao) {
+					$status = "Em curso";
+				} else {
+					$status = $this->parserlib->formatDate($evento->data_limite_inscricao);
+					$evento->nome = "<b>".$evento->nome."</b>";
+				}
+			}
+
+			if ($evento->status_turma == 3 && $status == "") {
+				$status = "Encerrado";
+			}
+
+			$evento->inscricao_status = $status;
+
 		}
 
 
@@ -187,6 +266,21 @@ class M_eventos extends CI_Model {
 		});
 
 		return $eventos;
+	}
+
+	function isFirstClass($idevento=null)
+	{
+		if (!$idevento) {
+			return false;
+		}
+
+		$aula = $this->getEventos(array('id' => $idevento))[0];
+		$primeira_aula = $this->getEventos(array('cwhere' => "eventos.`idturma` = {$aula->idturma}", 'orderby' => 'idevento ASC', 'limit' => 1))[0];
+		if ($aula->idevento == $primeira_aula->idevento) {
+			return true;
+		}
+
+		return false;
 	}
 
 	function insertEvento($data)

@@ -61,7 +61,9 @@ class Turmas extends CI_Controller {
 			'identificacao' => $data['identificacao'],
 			'vagas' => $data['vagas'],
 			'taxa_inscricao' => $data['taxa_inscricao'],
-			'data_limite_inscricao' => $data['data_limite_inscricao']
+			'data_limite_inscricao' => $data['data_limite_inscricao'],
+			'aula_unica' => isset($data['aula_unica']) ? $data['aula_unica'] : 0,
+			'status' => $data['status']
 		);
 		$investimento = array();
 

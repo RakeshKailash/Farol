@@ -31,7 +31,15 @@ class Test extends CI_Controller {
 
 	function td()
 	{
-		echo $this->parserlib->dtExtractDate($this->parserlib->unformatDatetime("28/09/2018, 15:35h"));
+		$idevento = 19;
+		$aula = $this->m_eventos->getEventos(array('id' => $idevento))[0];
+		$primeira_aula = $this->m_eventos->getEventos(array('cwhere' => "eventos.`idturma` = {$aula->idturma}", 'orderby' => 'idevento ASC', 'limit' => 1))[0];
+		if ($aula->idevento == $primeira_aula->idevento) {
+			echo 1;
+			return;
+		}
+
+		echo 0;
 	}
 
 	function orderResults($results=array())

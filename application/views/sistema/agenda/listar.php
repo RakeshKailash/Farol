@@ -8,7 +8,7 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
 	<a href="<?=base_url('sistema/Agenda?curyear='.$num)?>" class="btn btn_table_action btn_year <?=$num == $curyear ? 'curyear' : ''?>"><?=$num?></a>
 <?php endforeach ?>
 <div class="row">
-	<table id="alunos_visualizar_table" class="has_sub_head">
+	<table id="alunos_visualizar_table" class="has_sub_head has_info_lines">
 		<thead>
 			<th class="col s3">Data</th>
 			<th class="col s4">Evento</th>
@@ -21,7 +21,7 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
 				<?php foreach ($ano as $key => $meses) : ?>
 					<tr class="linha_mes_agenda"><td colspan="4"><?=$this->parserlib->getMonthFromNum($key)?></td></tr>
 					<?php foreach ($meses as $evento) : ?>
-						<tr class="linha_agenda_expandir">
+						<tr class="linha_agenda_expandir" data-id="<?=$evento->idevento?>">
 							<input type="hidden" class="id_hidden" name="idevento" value="<?=$evento->idevento?>">
 							<td class="col s3">
 								<?php if (isset($evento->dias)): ?>
@@ -32,7 +32,17 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
 							</td>
 							<td class="col s4"><?=$evento->nome?></td>
 							<td class="col s3"><a href="<?=base_url('sistema/Professores/'.$evento->idprofessor)?>"><?=$evento->nome_professor?></a></td>
-							<td class="col s2"><?=$evento->prazo_inscricao?></td>
+							<td class="col s2"><?=$evento->inscricao_status?></td>
+						</tr>
+						<tr class="linha_info_agenda hide" data-id="<?=$evento->idevento?>">
+							<td colspan="4">
+								<div class="row"><div class="col s12"><?=$evento->descricao?></div></div>
+								<div class="row row_matricula_agenda">
+									<div class="col s12">
+										<a href="<?=base_url('sistema')?>" class="btn btn_table_action">Matricule-se</a>
+									</div>
+								</div>
+							</td>
 						</tr>
 					<?php endforeach ?>
 					<tr class="linha_espaco"><td colspan="4"></td></tr>

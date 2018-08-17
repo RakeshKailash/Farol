@@ -11,19 +11,29 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 <?php endif ?>
 <form method="post" action="<?=RAIZ.'sistema/turmas/inserir'?>"><a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
 	<div class="row">
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>Turma</label>
 			<div class="input-field">
 				<input type="text" name="identificacao" value="<?=isset($userdata['identificacao']) ? $userdata['identificacao'] : ''?>">
 			</div>
 		</div>
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>Curso</label>
 			<div class="input-field">
 				<select name="idcurso">
 					<?php foreach ($cursos as $curso): ?>
 						<option <?=isset($userdata['idcurso']) && $userdata['idcurso'] == $curso->idcurso ? "selected" : ''?> value="<?=$curso->idcurso?>"><?=$curso->nome?></option>
 					<?php endforeach ?>
+				</select>
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Status</label>
+			<div class="input-field">
+				<select name="status">
+						<option <?=isset($userdata['status']) && $userdata['status'] == 1 ? "selected" : ''?> value="1">Aguarde</option>
+						<option <?=isset($userdata['status']) && $userdata['status'] == 2 ? "selected" : ''?> value="2">Ativa</option>
+						<option <?=isset($userdata['status']) && $userdata['status'] == 3 ? "selected" : ''?> value="3">Encerrada</option>
 				</select>
 			</div>
 		</div>

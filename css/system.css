@@ -156,11 +156,16 @@ input, textarea {
 	border-color: transparent;
 }
 
+#alunos_visualizar_table.has_info_lines tbody tr td {
+	min-height: 60px;
+}
+
 #alunos_visualizar_table tbody tr.linha_mes_agenda {
 	background-color: #5c478c;
 	color: #fff;
 	font-size: 14pt;
 	font-weight: 400;
+	cursor: default;
 }
 
 #alunos_visualizar_table tbody tr.linha_espaco {
@@ -168,6 +173,14 @@ input, textarea {
 	background: transparent;
 	border: none !important;
 	cursor: default;
+}
+
+#alunos_visualizar_table tbody tr.linha_agenda_expandir b {
+	color: #5c478c;
+}
+
+.row.row_matricula_agenda {
+	margin-bottom: 0;
 }
 
 .linha_cadastro_visualizar a:hover {
