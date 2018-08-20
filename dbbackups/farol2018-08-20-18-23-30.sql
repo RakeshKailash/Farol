@@ -55,7 +55,7 @@ CREATE TABLE `cursos` (
   `descricao` text COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `cursos` (
 
 LOCK TABLES `cursos` WRITE;
 /*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
-INSERT INTO `cursos` VALUES (1,'Reiki I e II Intensivo','Aqui vai a descrição do curso, muitas palavras.',1),(2,'Terapeuta Holístico','Abraçando a saúde, de ponta a ponta',1),(3,'Mesa Radiônica Quântica Rosa','Lorem ipsum dolor sit amet',1),(4,'Acupuntura','Prática milenar da MTC',1);
+INSERT INTO `cursos` VALUES (1,'Reiki I e II Intensivo','Aqui vai a descrição do curso, muitas palavras.',1),(2,'Terapeuta Holístico','Abraçando a saúde, de ponta a ponta',1),(3,'Mesa Radiônica Quântica Rosa','Lorem ipsum dolor sit amet',1),(4,'Acupuntura','Prática milenar da MTC',1),(5,'Barras de Access','É uma técnica de barras de access',1);
 /*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,9 +107,8 @@ CREATE TABLE `dias_eventos` (
   `fim` datetime NOT NULL,
   `almoco_inicio` datetime DEFAULT NULL,
   `almoco_fim` datetime DEFAULT NULL,
-  `obs` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +117,7 @@ CREATE TABLE `dias_eventos` (
 
 LOCK TABLES `dias_eventos` WRITE;
 /*!40000 ALTER TABLE `dias_eventos` DISABLE KEYS */;
-INSERT INTO `dias_eventos` VALUES (1,1,'2018-08-08 10:00:00','2018-08-08 18:00:00',NULL,NULL,NULL),(2,1,'2018-08-09 10:00:00','2018-08-09 12:00:00',NULL,NULL,NULL),(3,2,'2018-08-15 22:09:46','2018-08-16 22:09:57',NULL,NULL,'Reforço'),(4,3,'2018-08-25 09:00:00','2018-08-25 18:30:00',NULL,NULL,NULL),(5,4,'2018-08-20 18:30:00','2018-08-20 22:00:00',NULL,NULL,NULL),(6,6,'2018-08-28 17:30:00','2018-08-28 18:41:00',NULL,NULL,NULL),(7,7,'2018-08-21 18:00:00','2018-08-22 18:30:00',NULL,NULL,NULL),(8,8,'2018-08-19 20:00:00','2018-08-19 21:00:00',NULL,NULL,NULL),(9,8,'2018-08-20 21:00:00','2018-08-20 22:00:00',NULL,NULL,NULL),(10,9,'2018-08-12 09:00:00','2018-08-12 18:30:00',NULL,NULL,NULL),(11,10,'2018-08-26 09:00:00','2018-08-26 18:30:00','2018-08-26 12:30:00','2018-08-26 14:00:00',NULL),(12,11,'2018-08-18 09:00:00','2018-08-18 18:30:00','2018-08-18 12:30:00','2018-08-18 14:00:00',NULL),(13,11,'2018-08-19 09:00:00','2018-08-19 13:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(14,12,'2018-08-18 09:00:00','2018-08-18 18:30:00','2018-08-18 12:30:00','2018-08-18 14:00:00',NULL),(15,12,'2018-08-25 09:00:00','2018-08-25 13:00:00',NULL,'0000-00-00 00:00:00',NULL),(16,13,'2018-08-18 09:00:00','2018-08-18 18:30:00','2018-08-18 12:30:00','2018-08-18 14:00:00',NULL),(17,13,'2018-08-19 09:00:00','2018-08-19 13:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(18,14,'2018-08-18 09:00:00','2018-08-18 18:30:00','2018-08-18 12:30:00','2018-08-18 14:00:00',NULL),(19,14,'2018-08-19 09:00:00','2018-08-19 13:00:00',NULL,NULL,NULL);
+INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL);
 /*!40000 ALTER TABLE `dias_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +139,7 @@ CREATE TABLE `eventos` (
   `prazo_inscricao` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelado; 1 = Agendado;',
   PRIMARY KEY (`idevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +148,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
-INSERT INTO `eventos` VALUES (1,1,NULL,2,'Palestra sobre Palestras','Uma palestra pra te explicar o que são palestras',120.00,'2018-10-08 00:00:00',1),(2,1,2,1,'Teste 1','Testando 1',0.00,NULL,1);
+INSERT INTO `eventos` VALUES (18,3,22,1,'Aula Inaugural','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(21,2,15,1,'Aula 1/1','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +162,7 @@ DROP TABLE IF EXISTS `forma_investimento`;
 CREATE TABLE `forma_investimento` (
   `idinvestimento` int(11) NOT NULL AUTO_INCREMENT,
   `idturma` int(11) NOT NULL,
-  `forma` int(11) NOT NULL DEFAULT '1' COMMENT '1 = À vista; 2 = Parcelado Farol; 3 = Cartão;',
+  `forma` int(11) NOT NULL DEFAULT '1' COMMENT '1 = À vista; 2 = Parcelado Farol; 3 = Mensalidade; 4 = Cartão;',
   `parcelas` int(11) DEFAULT '1',
   `valor_parcela` decimal(13,2) DEFAULT NULL,
   `total` decimal(13,2) NOT NULL,
@@ -171,7 +170,7 @@ CREATE TABLE `forma_investimento` (
   `data_vencimento` date DEFAULT NULL,
   `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Matrícula; 2 = Mensalidade;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,8 +179,37 @@ CREATE TABLE `forma_investimento` (
 
 LOCK TABLES `forma_investimento` WRITE;
 /*!40000 ALTER TABLE `forma_investimento` DISABLE KEYS */;
-INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,2,2,100.00,200.00,10,NULL,1),(3,11,2,20,330.00,6600.00,2,NULL,1),(4,12,2,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,2,3,70.00,210.00,7,NULL,1);
+INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,3,2,100.00,200.00,10,NULL,1),(3,11,3,20,330.00,6600.00,2,NULL,1),(4,12,3,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,3,3,70.00,210.00,7,NULL,1),(8,15,1,1,NULL,400.00,NULL,'2018-09-10',1),(9,15,3,3,140.00,420.00,5,NULL,1),(12,17,1,1,NULL,180.00,NULL,'2018-09-10',1),(13,17,3,3,70.00,210.00,10,NULL,1),(14,18,1,1,NULL,180.00,NULL,'2018-09-10',1),(15,18,3,3,70.00,210.00,10,NULL,1),(16,21,1,1,NULL,180.00,NULL,'2018-09-10',1),(17,21,2,3,70.00,210.00,NULL,NULL,1),(18,22,3,18,450.00,8100.00,10,NULL,1),(19,22,1,1,NULL,8100.00,NULL,'2018-09-10',1),(20,22,4,1,NULL,8100.00,NULL,NULL,1);
 /*!40000 ALTER TABLE `forma_investimento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inscricoes`
+--
+
+DROP TABLE IF EXISTS `inscricoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inscricoes` (
+  `idinscricao` int(11) NOT NULL AUTO_INCREMENT,
+  `idevento` int(11) DEFAULT NULL,
+  `idturma` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `data_ingresso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `opcao` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
+  PRIMARY KEY (`idinscricao`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inscricoes`
+--
+
+LOCK TABLES `inscricoes` WRITE;
+/*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
+INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1);
+/*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -210,32 +238,6 @@ INSERT INTO `loadfiles` VALUES (1,'https://code.jquery.com/jquery-3.3.1.min.js',
 UNLOCK TABLES;
 
 --
--- Table structure for table `matricula`
---
-
-DROP TABLE IF EXISTS `matricula`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `matricula` (
-  `idmatricula` int(11) NOT NULL AUTO_INCREMENT,
-  `idturma` int(11) NOT NULL,
-  `idaluno` int(11) NOT NULL,
-  `data_ingresso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idmatricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `matricula`
---
-
-LOCK TABLES `matricula` WRITE;
-/*!40000 ALTER TABLE `matricula` DISABLE KEYS */;
-INSERT INTO `matricula` VALUES (1,1,1,'2018-08-06 10:19:43');
-/*!40000 ALTER TABLE `matricula` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `professores`
 --
 
@@ -245,11 +247,13 @@ DROP TABLE IF EXISTS `professores`;
 CREATE TABLE `professores` (
   `idprofessor` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `sobrenome` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `atividade` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fone_1` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `fone_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idprofessor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +262,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (1,'Beltrano','das Plantas','Frentista de Tesla','fulano@ervateiro.com.br'),(2,'Fulano','de Teste','Testador','fulano@tester.com.br'),(3,'Lu','Albuquerque','Terapeuta Holística','contato@farolterapeutico.com.br'),(4,'Professor','de Alunos','Professor','professor@dealunos.com.br');
+INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','beltrano@ervateiro.com.br','53991171142','53991171142','53991171142','53991171142'),(2,'Fulano de Teste','fulano@tester.com.br','5332715749',NULL,NULL,'53984382243'),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','5332264156',NULL,NULL,'53984481526'),(4,'Professor de Alunos','professor@dealunos.com.br','5332272830',NULL,NULL,'53981253269'),(5,'Outro Professor de Testes','outro@teste.com.br','53984382243',NULL,NULL,'53991171142');
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,10 +302,11 @@ CREATE TABLE `turmas` (
   `identificacao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `vagas` int(11) NOT NULL,
   `taxa_inscricao` decimal(13,2) NOT NULL DEFAULT '0.00',
-  `data_limite_inscricao` date NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Andamento; 3 = Encerrada;',
+  `data_limite_inscricao` date DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Ativa; 3 = Encerrada;',
+  `aula_unica` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idturma`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +315,7 @@ CREATE TABLE `turmas` (
 
 LOCK TABLES `turmas` WRITE;
 /*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
-INSERT INTO `turmas` VALUES (1,1,'Turma 1',0,0.00,'0000-00-00',1),(2,2,'Turma 133',0,0.00,'0000-00-00',1),(3,4,'Turma 1',0,0.00,'0000-00-00',1),(4,1,'Turma 2',0,0.00,'0000-00-00',1),(5,1,'Turma 2',0,0.00,'0000-00-00',1),(6,1,'Turma 3',0,0.00,'0000-00-00',1),(7,1,'Turma 4',0,0.00,'0000-00-00',1),(8,3,'Turma 1',0,0.00,'0000-00-00',1),(9,4,'Turma A1',30,150.00,'0000-00-00',1),(10,4,'Turma A2',28,120.00,'2018-09-10',1),(11,1,'Turma A3',30,130.00,'2018-09-10',1),(12,4,'Turma B1',30,120.00,'2018-08-10',1),(13,3,'Turma 10',10,0.00,'2018-09-07',1),(14,3,'Turma 10',10,0.00,'2018-09-10',1);
+INSERT INTO `turmas` VALUES (1,1,'Turma 1',25,0.00,NULL,1,0),(2,2,'TER03',20,0.00,'2018-08-31',2,0),(3,4,'Turma 1',10,0.00,NULL,1,0),(4,1,'Turma 2',10,0.00,NULL,1,0),(5,1,'Turma 2',30,0.00,NULL,1,0),(6,1,'Turma 3',20,0.00,NULL,1,0),(7,1,'Turma 4',20,0.00,NULL,1,0),(8,3,'Turma 1',10,0.00,NULL,1,0),(9,4,'Turma A1',30,150.00,NULL,1,0),(10,4,'Turma A2',28,120.00,'2018-07-18',2,0),(11,1,'Turma A3',30,130.00,'2018-09-10',1,0),(12,4,'Turma B1',30,120.00,'2018-08-10',1,0),(13,3,'Turma 10',10,0.00,'2018-09-07',2,0),(14,3,'Turma 10',10,0.00,'2018-09-10',2,0),(15,5,'BA01',10,120.00,'2018-09-10',2,0),(17,3,'MRQ01',10,0.00,'2018-09-10',2,0),(18,3,'MRQ Rosa 02',10,0.00,'2018-09-10',2,0),(19,1,'Caridade',10,80.00,'2018-09-10',2,0),(20,1,'Caridade',10,80.00,'2018-09-10',2,0),(21,3,'MRQ Rosa 03',10,0.00,'2018-08-15',2,0),(22,4,'A01',30,120.00,'2018-08-18',2,0);
 /*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,28 +329,27 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `idusuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `sobrenome` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `login` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = Inativo; 1 = Ativo',
   `senha` varchar(70) COLLATE utf8_unicode_ci NOT NULL,
   `cpf` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rg` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `ocupacao` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `atividade` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cep` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uf` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `cidade` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `bairro` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rua` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone_1` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `fone_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `acesso` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Usuário; 2 = Aluno; 3 = Funcionário; 4 = Administrador; 5 = Desenvolvedor;',
+  `acesso` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Usuário; 2 = Aluno; 3 = Equipe; 4 = Administrador; 5 = Desenvolvedor;',
   PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +358,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Marcelo','Boemeke da Silveira','dev','marcelo.boemeke@hotmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','040.592.420-80','1123434531','1998-10-03','Desenvolvedor Web','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9911-71142','(53)9844-81526','(53)3271-5749','(53)9911-71142',5),(3,'Marcelo','Boemeke da Silveira','','marcelo.boemeke@gmail.com',1,'','04059242080','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,'53991171142','53984382243','5332715749','',1),(4,'Isamar','Boemeke da Silveira','minhamae','isamar@gmail.com',1,'$2y$10$F3GtMkpfDq3yjpmlbp/7w.3RDUCkhzmtHZ05nJ.r8wx1DATjJDkvm','','','1957-08-24','Dona de casa','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9844-81526','(53)3271-5749','','',1),(5,'Fulano','dos Testes','fulano','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','000.000.000-00','0000000000','1998-10-03','Desocupado','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9911-71142','','','',2),(6,'Usuário','de Testes','tester','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','040.592.420-80','1123434531','1957-08-24','Tester','96090-340','RS','Pelotas','Laranjal','Hulha Negra',1894,'(53)9911-71142','','','(53)9911-71142',2);
+INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984481526','5332715749','53991171142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','04059242083','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984382243','5332715749',NULL,3),(4,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$F3GtMkpfDq3yjpmlbp/7w.3RDUCkhzmtHZ05nJ.r8wx1DATjJDkvm','03000000002','','1957-08-24','Dona de Casa','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53984481526','5332715749',NULL,NULL,1),(5,'Fulano dos Testes','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','00000000002','0000000000','1998-10-03','Desocupado','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,NULL,2),(6,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','04059242081','1123434531','1957-08-24','Tester','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,'53991171142',2),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','00000000040','0000000000','2010-10-10','Dona Proprietária','96090000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'5332000000',NULL,NULL,'53991000000',4),(8,'João da Silva','joaodasilva@gmail.com',1,'$2y$10$9p8aPIDQnIkkD9jMstHu4u/VRfaLzXUR0LavphmvGDMbJ.VwsRunK','00011122233','1123434532','1998-10-03','Frentista de Tesla','00112233','AC','Cidade do Estado','Bairro','Rua Avenida',18,'Kakkakakamamaamalalal teste, testando o','53991171142',NULL,NULL,'53991171142',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-13  9:49:52
+-- Dump completed on 2018-08-20 18:23:30

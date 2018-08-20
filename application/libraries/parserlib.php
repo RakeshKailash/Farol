@@ -48,6 +48,28 @@ class Parserlib
 		}
 	}
 
+	public function inscStatusParse($insc_status=null)
+	{
+		if($insc_status == null) {
+			return false;
+		}
+		
+		switch ($insc_status) {
+			case 1:
+			return "Aguardando";
+			break;
+			case 2:
+			return "Confirmada";
+			break;
+			case 3:
+			return "Cancelada";
+			break;
+			default:
+			return null;
+			break;
+		}
+	}
+
 	public function aulaStatusParse($status=null)
 	{
 		if($status == null) {

@@ -236,5 +236,17 @@ $config = array(
                         'label' => 'Hora do fim',
                         'rules' => 'required'
                 ),
-        )
+        ),
+        'cadastro_inscricoes' => array(
+                array(
+                        'field' => 'idturma',
+                        'label' => 'Turma',
+                        'rules' => 'required'
+                ),
+                array(
+                        'field' => 'idusuario',
+                        'label' => 'Usuário',
+                        'rules' => 'required'
+                )
+        ),
 );

@@ -297,6 +297,27 @@ $(".check_aula_unica").change(function () {
 	$(".container_aula_unica").toggleClass("hide");
 })
 
+$("#form_sistema_inscricao").on("change", "#select_curso_inscricao", function () {
+	var idcurso = $(this).val();
+	
+	if (!idcurso) {
+		if ($("#select_turma_inscricao").prop("disabled") == false) {
+			$("#select_turma_inscricao").attr("disabled","disabled");
+			$("#select_turma_inscricao").formSelect();
+		}
+	}
+
+	$(".opcao_turma_inscricao").removeAttr("disabled");
+	$(".opcao_turma_inscricao[data-idcurso!='"+idcurso+"']").attr("disabled","disabled");
+	
+	if ($("#select_turma_inscricao").prop("disabled") != false) {
+		$("#select_turma_inscricao").removeAttr("disabled");
+	}
+
+	$("#select_turma_inscricao").formSelect();
+	$("#select_turma_inscricao").parent(".select-wrapper").find("li.disabled").addClass("hide");
+});
+
 function handleFormaPagamento(e)
 {
 	var select_tipo = $(e);

@@ -9,18 +9,12 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<?=$errors;?>
 	</div>
 <?php endif ?>
-<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/aulas/atualizar'?>">
+<form method="post" action="<?=RAIZ.'sistema/aulas/atualizar'?>">
 	<div class="row">
-		<div class="form_group col s12 l6">
+		<div class="form_group col s12 l12">
 			<label>Título</label>
 			<div class="input-field">
 				<input type="text" name="nome" value="<?=isset($userdata->nome) ? $userdata->nome : ''?>">
-			</div>
-		</div>
-		<div class="form_group col s12 l6">
-			<label>Descrição</label>
-			<div class="input-field">
-				<input type="text" name="descricao" value="<?=isset($userdata->descricao) ? $userdata->descricao : ''?>">
 			</div>
 		</div>
 	</div>
@@ -43,6 +37,14 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						<option <?=isset($userdata->idprofessor) && $userdata->idprofessor == $professor->idprofessor ? "selected" : ''?> value="<?=$professor->idprofessor?>"><?=$professor->nome?></option>
 					<?php endforeach ?>
 				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group col s12 l12">
+			<label>Descrição</label>
+			<div class="input-field">
+				<textarea name="descricao" class="t_editor"><?=isset($userdata->descricao) ? $userdata->descricao : ''?></textarea>
 			</div>
 		</div>
 	</div>
@@ -101,8 +103,8 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<?php endforeach ?>
 		</div>
 	<?php endif ?>
-	<!-- <div class="row"><a href="javascript:void(0)" class="btn btn_table_action btn_novo_dia_evento"><i class="material-icons">add</i>Dia</a></div>
+	<div class="row"><a href="javascript:void(0)" class="btn btn_table_action btn_novo_dia_evento"><i class="material-icons">add</i>Dia</a></div>
 	<input type="hidden" class="cad_hidden" value="Aulas">
 	<input type="submit" class="btn" value="Salvar">
-	<input type="reset" class="btn" value="Limpar"> -->
+	<input type="reset" class="btn" value="Limpar">
 </form>

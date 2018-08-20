@@ -65,5 +65,7 @@ $route['sistema/Aulas'] = "sistema/Aulas/visualizar";
 $route['sistema/Aulas/(:num)'] = "sistema/Aulas/editar/$1";
 $route['sistema/Agenda'] = "sistema/Agenda/visualizar";
 $route['sistema/Agenda/(:num)'] = "sistema/Agenda/editar/$1";
+$route['sistema/Inscricoes'] = "sistema/Inscricoes/visualizar";
+$route['sistema/Inscricoes/(:num)'] = "sistema/Inscricoes/editar/$1";
 
 $route['sistema/Logout'] = "sistema/Login/logout";
