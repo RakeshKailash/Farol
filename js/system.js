@@ -9,6 +9,169 @@ Number.prototype.format = function(c, d, t){
 	return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
+function getHtmlInvestimento(investimento) {
+
+	if (investimento == null) {
+		investimento = {
+			forma: 1,
+			parcelas: "",
+			valor_parcela: "",
+			total: "",
+			dia_vencimento: "",
+			data_vencimento: ""
+		};
+	}
+
+	var selected = ["", "", "", ""];
+	selected[(investimento.forma-1)] = "selected";
+
+	var investimento_html = "<div class='form_group col s12 linha_pagamento_turma'>";
+	investimento_html += "<div class='col s3 col_tipo'>";
+	investimento_html += "<label>Forma</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<select name='forma[]' class='select_tipo_investimento'>";
+	investimento_html += "<option "+selected[0]+" value='1'>À vista</option>";
+	investimento_html += "<option "+selected[1]+" value='2'>Parcelas</option>";
+	investimento_html += "<option "+selected[2]+" value='3'>Mensalidade</option>";
+	investimento_html += "<option "+selected[3]+" value='4'>Cartão</option>";
+	investimento_html += "</select>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s4 col_total'>";
+	investimento_html += "<label>Total</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<input type='text' class='money_mask' name='total[]' value='"+investimento.total+"'>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s1 col_parcelas hide'>";
+	investimento_html += "<label>Parcelas</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<input type='text' name='parcelas[]' value='"+investimento.parcelas+"'>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s2 col_val_parcelas hide'>";
+	investimento_html += "<label>Valor das parcelas</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<input type='text' class='money_mask' name='valor_parcela[]' value='"+investimento.valor_parcela+"'>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s2 col_dia_vencimento hide'>";
+	investimento_html += "<label>Dia de vencimento</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<input type='text' name='dia_vencimento[]' value='"+investimento.dia_vencimento+"'>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s4 col_vencimento'>";
+	investimento_html += "<label>Vencimento</label>";
+	investimento_html += "<div class='input-field'>";
+	investimento_html += "<input type='text' placeholder='00/00/0000' class='date_mask' name='data_vencimento[]' value='"+investimento.data_vencimento+"'>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+	investimento_html += "<div class='col s1'>";
+	investimento_html += "<i class='material-icons exclui_item_linha'>close</i>";
+	investimento_html += "</div>";
+	investimento_html += "</div>";
+
+	return investimento_html;
+}
+
+function getHtmlDias() {
+	var dias_html = "<div class='row dias_aulas_linha'>";
+	dias_html += "<div class='form_group col s12'>";
+	dias_html += "<div class='col s5'>";
+	dias_html += "<p>Início</p>";
+	dias_html += "<div class='col s6'>";
+	dias_html += "<label>Dia</label>";
+	dias_html += "<div class='input-field'>";
+	dias_html += "<input type='text' name='data_inicio[]' class='datepicker'>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "<div class='col s6'>";
+	dias_html += "<label>Início</label>";
+	dias_html += "<div class='input-field'>";
+	dias_html += "<input type='text' name='hora_inicio[]' class='timepicker'>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "<div class='col s4'>";
+	dias_html += "<p>Pausa (opcional)</p>";
+	dias_html += "<div class='col s6'>";
+	dias_html += "<label>Das</label>";
+	dias_html += "<div class='input-field'>";
+	dias_html += "<input type='text' name='almoco_inicio[]' class='timepicker'>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "<div class='col s6'>";
+	dias_html += "<label>Até as</label>";
+	dias_html += "<div class='input-field'>";
+	dias_html += "<input type='text' name='almoco_fim[]' class='timepicker'>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "<div class='col s3'>";
+	dias_html += "<p>Término</p>";
+	dias_html += "<div class='col s6'>";
+	dias_html += "<label>Hora</label>";
+	dias_html += "<div class='input-field'>";
+	dias_html += "<input type='text' name='hora_fim[]' class='timepicker'>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "<div class='col s1'>";
+	dias_html += "<i class='material-icons exclui_item_linha'>close</i>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+	dias_html += "</div>";
+
+	return dias_html;
+}
+
+function handleInvestimentos() {
+	$.each($('.select_tipo_investimento'), function () {
+		handleFormaPagamento($(this));
+	});
+}
+
+function setInvestimentosSelectOnly() {
+	$(".linha_pagamento_turma").find("input, select").prop("disabled", "disabled");
+	$(".linha_pagamento_turma").addClass("select-only");
+	$(".linha_pagamento_turma").find(".exclui_item_linha").parent(".col.s1").addClass("select_investimento");
+}
+
+function getInvestimentoOpcoes(investimento) {
+	// if (!investimento) {
+	// 	return null;
+	// }
+
+	var texto_investimento = "";
+	var html_investimento = "";
+
+	if (investimento.forma == 1) {
+		texto_investimento = "À vista: <b>R$"+investimento.total+"</b> (pagamento até o dia "+investimento.data_vencimento+")";
+	}
+
+	if (investimento.forma == 2) {
+		texto_investimento = "Parcelado: <b>R$"+investimento.total+"</b> em até "+investimento.parcelas+"x de R$"+investimento.valor_parcela;
+	}
+
+	if (investimento.forma == 3) {
+		texto_investimento = "Mensalidades: <b>R$"+investimento.total+"</b> em "+investimento.parcelas+"x de R$"+investimento.valor_parcela+" (vencimento todo dia "+investimento.dia_vencimento+")";
+	}
+
+	if (investimento.forma == 4) {
+		texto_investimento = "Cartões: <b>R$"+investimento.total+"</b> em até 12x nos principais cartões (PagSeguro)";
+	}
+
+	// html_investimento = "<div class='linha_pagamento_turma linha_pagamento_inscricao'>";
+	html_investimento = "<p><label>";
+	html_investimento += "<input class='with-gap' name='forma_investimento' type='radio' value='"+investimento.forma+"' />";
+	html_investimento += "<span>"+texto_investimento+"</span>";
+	html_investimento += "</label></p>";
+
+	return html_investimento;
+
+}
+
 $(".linha_cadastro_visualizar").click(function () {
 	var id = $(this).find(".id_hidden").val();
 	var cadtype = $(this).parents("table").find(".cad_hidden").val();
@@ -41,104 +204,14 @@ $("#btn_excluir_cadastro").click(function () {
 });
 
 $(".btn_novo_investimento").click(function () {
-	var pagamento_html = "<div class='form_group col s12 linha_pagamento_turma'>";
-	pagamento_html += "<div class='col s3 col_tipo'>";
-	pagamento_html += "<label>Forma</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<select name='forma[]' class='select_tipo_investimento'>";
-	pagamento_html += "<option value='1'>À vista</option>";
-	pagamento_html += "<option value='2'>Parcelas</option>";
-	pagamento_html += "<option value='3'>Mensalidade</option>";
-	pagamento_html += "<option value='4'>Cartão</option>";
-	pagamento_html += "</select>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s4 col_total'>";
-	pagamento_html += "<label>Total</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<input type='text' class='money_mask' name='total[]'>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s1 col_parcelas hide'>";
-	pagamento_html += "<label>Parcelas</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<input type='text' name='parcelas[]'>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s2 col_val_parcelas hide'>";
-	pagamento_html += "<label>Valor das parcelas</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<input type='text' class='money_mask' name='valor_parcela[]'>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s2 col_dia_vencimento hide'>";
-	pagamento_html += "<label>Dia de vencimento</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<input type='text' name='dia_vencimento[]'>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s4 col_vencimento'>";
-	pagamento_html += "<label>Vencimento</label>";
-	pagamento_html += "<div class='input-field'>";
-	pagamento_html += "<input type='text' placeholder='00/00/0000' class='date_mask' name='data_vencimento[]'>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
-	pagamento_html += "<div class='col s1'>";
-	pagamento_html += "<i class='material-icons exclui_item_linha'>close</i>";
-	pagamento_html += "</div>";
-	pagamento_html += "</div>";
+	var pagamento_html = getHtmlInvestimento();
 	$(".investimentos_turma").append(pagamento_html);
 	$('select').formSelect();
 	initMasks();
 });
 
 $(".btn_novo_dia_evento").click(function () {
-	var dia_html = "<div class='row dias_aulas_linha'>";
-	dia_html += "<div class='form_group col s12'>";
-	dia_html += "<div class='col s5'>";
-	dia_html += "<p>Início</p>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Dia</label>";
-	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='data_inicio[]' class='datepicker'>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Início</label>";
-	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='hora_inicio[]' class='timepicker'>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "<div class='col s4'>";
-	dia_html += "<p>Pausa (opcional)</p>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Das</label>";
-	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='almoco_inicio[]' class='timepicker'>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Até as</label>";
-	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='almoco_fim[]' class='timepicker'>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "<div class='col s3'>";
-	dia_html += "<p>Término</p>";
-	dia_html += "<div class='col s6'>";
-	dia_html += "<label>Hora</label>";
-	dia_html += "<div class='input-field'>";
-	dia_html += "<input type='text' name='hora_fim[]' class='timepicker'>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "<div class='col s1'>";
-	dia_html += "<i class='material-icons exclui_item_linha'>close</i>";
-	dia_html += "</div>";
-	dia_html += "</div>";
-	dia_html += "</div>";
+	var dia_html = getHtmlDias();
 	$(".dias_aula").append(dia_html);
 	initPickers();
 	initMasks();
@@ -242,7 +315,6 @@ $(document).ready(function () {
         ['strong', 'em', 'underline'],
         ['superscript', 'subscript'],
         ['link'],
-        ['insertImage'],
         ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         ['unorderedList', 'orderedList'],
         ['horizontalRule'],
@@ -257,9 +329,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$.each($('.select_tipo_investimento'), function () {
-		handleFormaPagamento($(this));
-	});
+	handleInvestimentos();
 
 	var count_l = 1;
 
@@ -316,6 +386,42 @@ $("#form_sistema_inscricao").on("change", "#select_curso_inscricao", function ()
 
 	$("#select_turma_inscricao").formSelect();
 	$("#select_turma_inscricao").parent(".select-wrapper").find("li.disabled").addClass("hide");
+});
+
+$("#form_sistema_inscricao").on("change", "#select_turma_inscricao", function () {
+	var idturma = $(this).val();
+
+	if (!idturma) {
+		if (!$(".investimentos_turma.hide").length) {
+			$(".investimentos_turma").addClass("hide");
+		}
+	}
+	$(".linhas_investimentos_inscricao").html("");
+
+	$.post(RAIZ+"sistema/Inscricoes/getInvestimento/"+idturma, null, function (data) {
+		var investimentos = JSON.parse(data);
+		var html_linha = "";
+
+
+		for (var i=0;i<investimentos.length;i++) {
+			html_linha = getInvestimentoOpcoes(investimentos[i]);
+			$(".linhas_investimentos_inscricao").append(html_linha);
+		}
+
+		$('.select_tipo_investimento').formSelect();
+		// handleInvestimentos();
+		// setInvestimentosSelectOnly();
+		// initMasks();
+
+		if (!!$(".investimentos_turma.hide").length) {
+			$(".investimentos_turma").removeClass("hide");
+		}
+	})
+
+});
+
+$("#form_sistema_inscricao").on("click", ".select_investimento", function () {
+	
 });
 
 function handleFormaPagamento(e)

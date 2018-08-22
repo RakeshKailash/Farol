@@ -209,6 +209,20 @@ class Parserlib
 		return $clear;
 	}
 
+	public function formatMoney($money=null)
+	{
+		if (!$money) {
+			return null;
+		}
+
+		$money = str_replace(".", ",", $money);
+		$money = str_replace(",", ".", $money);
+
+		$money = (float) $money;
+		$money = number_format($money, 2, ',', '.');
+		return $money;
+	}
+
 	public function unformatMoney($money=null)
 	{
 		if (!$money) {

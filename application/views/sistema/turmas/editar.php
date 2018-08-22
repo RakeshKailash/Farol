@@ -72,7 +72,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 								<option <?=$investimento->forma == "1" ? "selected" : "";?> value="1">À vista</option>
 								<option <?=$investimento->forma == "2" ? "selected" : "";?> value="2">Parcelas</option>
 								<option <?=$investimento->forma == "3" ? "selected" : "";?> value="3">Mensalidade</option>
-								<option <?=$investimento->forma == "4" ? "selected" : "";?> value="3">Cartão</option>
+								<option <?=$investimento->forma == "4" ? "selected" : "";?> value="4">Cartão</option>
 							</select>
 						</div>
 					</div>

@@ -8,6 +8,7 @@ class Test extends CI_Controller {
 		$this->load->model("m_aulas");
 		$this->load->model("m_turmas");
 		$this->load->model("m_eventos");
+		$this->load->model("m_investimentos");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
@@ -24,9 +25,29 @@ class Test extends CI_Controller {
 
 
 		echo "<pre>";
-		var_dump($this->m_eventos->getAgenda());
+		// var_dump($this->->getAgenda());
 		echo "</pre>";
 		
+	}
+
+	function getInvestimento($idturma=null)
+	{
+		if (!$idturma) {
+			echo null;
+			return;
+		}
+
+		$investimentos = $this->m_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
+
+		foreach ($investimentos as &$investimento) {
+			$investimento->total = $this->parserlib->formatMoney($investimento->total);
+			$investimento->valor_parcela = $this->parserlib->formatMoney($investimento->valor_parcela);
+			$investimento->data_vencimento = $this->parserlib->formatDate($investimento->data_vencimento);
+		}
+		echo "<pre>";
+		var_dump($investimentos);
+		echo "</pre>";
+		return true;
 	}
 
 	function td()
@@ -45,15 +66,15 @@ class Test extends CI_Controller {
 	function orderResults($results=array())
 	{
 		uksort($final_array, function($a, $b) use ($final_array) {
-            if ($final_array[$a]['descricao'] > $final_array[$b]['descricao']) {
-                return 1;
-            }
-            if ($final_array[$a]['descricao'] < $final_array[$b]['descricao']) {
-                return -1;
-            }
-            if ($final_array[$a]['descricao'] == $final_array[$b]['descricao']) {
-                return 0;
-            }
-        });
+			if ($final_array[$a]['descricao'] > $final_array[$b]['descricao']) {
+				return 1;
+			}
+			if ($final_array[$a]['descricao'] < $final_array[$b]['descricao']) {
+				return -1;
+			}
+			if ($final_array[$a]['descricao'] == $final_array[$b]['descricao']) {
+				return 0;
+			}
+		});
 	}
 }

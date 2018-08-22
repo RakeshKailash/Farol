@@ -6,6 +6,26 @@ b, strong {
 	font-weight: bold !important;
 }
 
+.select-only .exclui_item_linha {
+	display: none;
+}
+
+.select-only .select_investimento {
+	height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0 !important;
+    width: 40px !important;
+    background-color: #5c478c;
+    border-radius: 0 5px 5px 0;
+    transition: all linear 0.1s;
+}
+
+.select-only .select_investimento:hover {
+	background: #B39DDB;
+}
+
 .spaced_p {
 	line-height: 150%;
 	word-spacing: 2px;
@@ -278,6 +298,10 @@ input, textarea {
 	color: #fff;
 	cursor: pointer;
 	transition: all linear 0.1s;
+}
+
+.linha_pagamento_turma.linha_pagamento_inscricao {
+	padding: 15px !important;
 }
 
 .linha_pagamento_turma i:hover,

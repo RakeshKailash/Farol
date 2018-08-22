@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inscricoes extends CI_Controller {
-	function __construct() {
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model("m_config");
 		$this->load->model("m_usuarios");
@@ -17,7 +18,8 @@ class Inscricoes extends CI_Controller {
 		}
 	}
 
-	function visualizar ($id=null) {
+	function visualizar ($id=null)
+	{
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -39,7 +41,8 @@ class Inscricoes extends CI_Controller {
 		$this->load->view("sistema/common/fim.php");
 	}
 
-	function novo() {
+	function novo()
+	{
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -56,7 +59,8 @@ class Inscricoes extends CI_Controller {
 		$this->load->view("sistema/common/fim.php");
 	}
 
-	function inserir() {
+	function inserir()
+	{
 		$data = $_POST;
 		$inscricao = array(
 			'idevento' => null,
@@ -134,7 +138,8 @@ class Inscricoes extends CI_Controller {
 		return redirect("sistema/Inscricoes");
 	}
 
-	function editar($id=null) {
+	function editar($id=null)
+	{
 		if (!$id) {
 			return redirect("sistema/Inscricoes");
 		}
@@ -155,7 +160,8 @@ class Inscricoes extends CI_Controller {
 		$this->load->view("sistema/common/fim.php");
 	}
 
-	function atualizar() {
+	function atualizar()
+	{
 		$data = $_POST;
 		$idinscricao = $this->input->post("idref");
 		$errors = "";
@@ -174,6 +180,25 @@ class Inscricoes extends CI_Controller {
 		$data = $this->prepareData($data);
 		$this->m_inscricoes->updateInscricao($idinscricao, $data);
 		return redirect("sistema/Inscricoes");
+	}
+
+	function getInvestimento($idturma=null)
+	{
+		if (!$idturma) {
+			echo null;
+			return;
+		}
+
+		$investimentos = $this->m_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
+
+		foreach ($investimentos as &$investimento) {
+			$investimento->total = $this->parserlib->formatMoney($investimento->total);
+			$investimento->valor_parcela = $this->parserlib->formatMoney($investimento->valor_parcela);
+			$investimento->data_vencimento = $this->parserlib->formatDate($investimento->data_vencimento);
+		}
+
+		echo json_encode($investimentos);
+		return true;
 	}
 
 	function prepareData($data=null)
