@@ -426,4 +426,32 @@ class Parserlib
        }//foreach
        return $string;
    }
+
+   function getParcelamento($investimento=null)
+   {
+   		if (!$investimento) {
+   			return null;
+   		}
+
+   		$result = array();
+   		$parcela = array();
+   		$total = $investimento->total;
+   		$val_parcelas = 0;
+   		$val_diferente = 0;
+
+   		for ($i = 2; $i <= $investimento->parcelas; $i++) {
+   			$val_parcelas = $total / $i;
+   			$val_parcelas = number_format($val_parcelas, 2, '.', '');
+   			$val_diferente = $total - ($val_parcelas * ($i-1));
+   			
+   			$parcela['qnt'] = $i;
+   			$parcela['valor_comum'] = $val_parcelas;
+   			$parcela['valor_diferente'] = $val_diferente;
+   			
+   			$result[$i] = (object) $parcela;
+   			$parcela = array();
+   		}
+
+   		return $result;
+   }
 }

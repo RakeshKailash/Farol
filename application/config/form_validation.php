@@ -245,7 +245,7 @@ $config = array(
                 ),
                 array(
                         'field' => 'idusuario',
-                        'label' => 'Usuário',
+                        'label' => 'Aluno',
                         'rules' => 'required'
                 )
         ),

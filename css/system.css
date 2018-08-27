@@ -337,3 +337,19 @@ i.exclui_item_linha {
 .check_title_container .page_minor_title {
 	display: inline-block;
 }
+
+#form_sistema_inscricao label {
+	color: #5c478c;
+}
+
+#form_sistema_inscricao .investimentos_turma label span {
+	font-size: 13pt !important;
+}
+
+.label_formas_investimento:not(:first-child) {
+	margin-top: 15px;
+}
+
+.select_parcelas_investimento {
+	padding-left: 47px !important;
+}

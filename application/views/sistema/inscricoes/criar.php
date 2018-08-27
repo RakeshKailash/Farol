@@ -63,6 +63,6 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<div class="col s12 linhas_investimentos_inscricao"></div>
 	</div>
 	<input type="hidden" class="cad_hidden" value="Inscricoes">
-	<input type="submit" class="btn" value="Salvar">
+	<input type="submit" class="btn btn_continuar_inscricao" disabled value="Continuar">
 	<input type="reset" class="btn" value="Limpar">
 </form>

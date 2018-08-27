@@ -147,19 +147,19 @@ function getInvestimentoOpcoes(investimento) {
 	var html_investimento = "";
 
 	if (investimento.forma == 1) {
-		texto_investimento = "À vista: <b>R$"+investimento.total+"</b> (pagamento até o dia "+investimento.data_vencimento+")";
+		texto_investimento = "À vista: <b>R$"+investimento.total_formatado+"</b> (pagamento até o dia "+investimento.data_vencimento+")";
 	}
 
 	if (investimento.forma == 2) {
-		texto_investimento = "Parcelado: <b>R$"+investimento.total+"</b> em até "+investimento.parcelas+"x de R$"+investimento.valor_parcela;
+		texto_investimento = "Parcelado: <b>R$"+investimento.total_formatado+"</b> em até "+investimento.parcelas+"x de R$"+investimento.valor_parcela;
 	}
 
 	if (investimento.forma == 3) {
-		texto_investimento = "Mensalidades: <b>R$"+investimento.total+"</b> em "+investimento.parcelas+"x de R$"+investimento.valor_parcela+" (vencimento todo dia "+investimento.dia_vencimento+")";
+		texto_investimento = "Mensalidades: <b>R$"+investimento.total_formatado+"</b> em "+investimento.parcelas+"x de R$"+investimento.valor_parcela+" (vencimento todo dia "+investimento.dia_vencimento+")";
 	}
 
 	if (investimento.forma == 4) {
-		texto_investimento = "Cartões: <b>R$"+investimento.total+"</b> em até 12x nos principais cartões (PagSeguro)";
+		texto_investimento = "Cartões: <b>R$"+investimento.total_formatado+"</b> em até 12x nos principais cartões (PagSeguro)";
 	}
 
 	// html_investimento = "<div class='linha_pagamento_turma linha_pagamento_inscricao'>";
@@ -167,6 +167,14 @@ function getInvestimentoOpcoes(investimento) {
 	html_investimento += "<input class='with-gap' name='forma_investimento' type='radio' value='"+investimento.forma+"' />";
 	html_investimento += "<span>"+texto_investimento+"</span>";
 	html_investimento += "</label></p>";
+
+	if (investimento.forma == 2) {
+		html_investimento += "<div class='input-field'><select class='parcelas_select' name='parcelas'>";
+		for (var i=1;i<=investimento.parcelas;i++) {
+			html_investimento += "<option value='"+i+"'>"+i+"x de R$"+(investimento.total/i)+"</option>";
+		}
+		html_investimento += "</select></div>";
+	}
 
 	return html_investimento;
 
@@ -391,37 +399,31 @@ $("#form_sistema_inscricao").on("change", "#select_curso_inscricao", function ()
 $("#form_sistema_inscricao").on("change", "#select_turma_inscricao", function () {
 	var idturma = $(this).val();
 
-	if (!idturma) {
-		if (!$(".investimentos_turma.hide").length) {
-			$(".investimentos_turma").addClass("hide");
+	if (idturma != null) {
+		$(".btn_continuar_inscricao").removeAttr('disabled');
+	} else {
+		if ($(".btn_continuar_inscricao:disabled").length > 0) {
+			$(".btn_continuar_inscricao").attr('disabled', 'disabled');
 		}
 	}
-	$(".linhas_investimentos_inscricao").html("");
-
-	$.post(RAIZ+"sistema/Inscricoes/getInvestimento/"+idturma, null, function (data) {
-		var investimentos = JSON.parse(data);
-		var html_linha = "";
-
-
-		for (var i=0;i<investimentos.length;i++) {
-			html_linha = getInvestimentoOpcoes(investimentos[i]);
-			$(".linhas_investimentos_inscricao").append(html_linha);
-		}
-
-		$('.select_tipo_investimento').formSelect();
-		// handleInvestimentos();
-		// setInvestimentosSelectOnly();
-		// initMasks();
-
-		if (!!$(".investimentos_turma.hide").length) {
-			$(".investimentos_turma").removeClass("hide");
-		}
-	})
 
 });
 
 $("#form_sistema_inscricao").on("click", ".select_investimento", function () {
 	
+});
+
+$("#form_sistema_inscricao").on("change","input[type='radio']", function () {
+	if ($(this).val() == 2) {
+		var invid = $(this).parents(".label_parcelamento_investimento").data('invid');
+		$(".select_parcelas_investimento[data-invid='"+invid+"']").find("select").removeAttr('disabled').formSelect();
+	} else {
+		$(".select_parcelas_investimento").find("select").attr('disabled', 'disabled').formSelect();
+	}
+
+	if ($(".btn_salvar_investimento:disabled").length > 0) {
+		$(".btn_salvar_investimento").removeAttr('disabled');
+	}
 });
 
 function handleFormaPagamento(e)

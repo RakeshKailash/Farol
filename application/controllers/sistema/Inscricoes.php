@@ -79,63 +79,54 @@ class Inscricoes extends CI_Controller {
 		// $inscricao = $this->prepareData($inscricao);
 		$idinscricao = $this->m_inscricoes->insertInscricao($inscricao);
 
-		// if (isset($data['forma'])) {
-		// 	for ($i=0;$i<count($data['forma']);$i++) {
-		// 		if ($data['forma'][$i] == 1) {	
-		// 			$investimento = array(
-		// 				'forma' => $data['forma'][$i], 
-		// 				'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
-		// 				'data_vencimento' => $this->parserlib->unformatDate($data['data_vencimento'][$i]), 
-		// 				'idinscricao' => $idinscricao
-		// 			);
-		// 		}
+		return redirect("sistema/Inscricoes/investimento/".$idinscricao);
+	}
 
-		// 		if ($data['forma'][$i] == 2) {	
-		// 			$investimento = array(
-		// 				'forma' => $data['forma'][$i], 
-		// 				'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
-		// 				'parcelas' => $data['parcelas'][$i], 
-		// 				'valor_parcela' => $this->parserlib->unformatMoney($data['valor_parcela'][$i]),
-		// 				'idinscricao' => $idinscricao
-		// 			);
-		// 		}
+	function investimento($idinscricao=null)
+	{
+		if (!$idinscricao) {
+			return redirect("sistema/Inscricoes");
+		}
 
-		// 		if ($data['forma'][$i] == 3) {	
-		// 			$investimento = array(
-		// 				'forma' => $data['forma'][$i], 
-		// 				'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
-		// 				'parcelas' => $data['parcelas'][$i], 
-		// 				'valor_parcela' => $this->parserlib->unformatMoney($data['valor_parcela'][$i]), 
-		// 				'dia_vencimento' => $data['dia_vencimento'][$i], 
-		// 				'idinscricao' => $idinscricao
-		// 			);
-		// 		}
+		$loads = $this->m_config->getLoads(2);
+		$loads = $this->parserlib->clearr($loads, "src");
+		$infoH['loads'] = $this->sl->setScripts($loads);
+		$inscricao = $this->m_inscricoes->getInscricao(array('id' => $idinscricao))[0];
+		$inscricao->curso = $this->m_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
+		$infoB['inscricao'] = $inscricao;
+		$infoB['formas_investimento'] = $this->getInvestimento($inscricao->idturma);
 
-		// 		if ($data['forma'][$i] == 4) {	
-		// 			$investimento = array(
-		// 				'forma' => $data['forma'][$i], 
-		// 				'total' => $this->parserlib->unformatMoney($data['total'][$i]), 
-		// 				'idinscricao' => $idinscricao
-		// 			);
-		// 		}
+		$this->load->view("sistema/common/topo.php", $infoH);
+		$this->load->view("sistema/inscricoes/investimento.php", $infoB);
+		$this->load->view("sistema/common/fim.php");
+	}
 
-		// 		$this->form_validation->reset_validation();
-		// 		$this->form_validation->set_data($investimento);
-		// 		if ($this->form_validation->run('investimento_'.$data['forma'][$i]) == FALSE) {
-		// 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
-		// 			$this->session->set_flashdata('formdata', $data);
-		// 			return redirect("sistema/Inscricoes/novo");
-		// 		}
+	function inserir_investimento()
+	{
+		if (!isset($_POST['idinscricao'])) {
+			return redirect("sistema/Inscricoes");
+		}
 
-		// 		if (!$this->m_investimentos->insertInvestimento($investimento)) {
-		// 			$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar as formas de investimento.</p>");
-		// 			$this->session->set_flashdata('formdata', $data);
-		// 			return redirect("sistema/Inscricoes/novo");
-		// 		}
-		// 	}
-		// }
+		$data = $_POST;
+		$forma_investimento = $this->getInvestimento(array('cwhere' => "idturma = {$data['idturma']} AND forma = {$data['forma_investimento']}"))[0];
 
-		return redirect("sistema/Inscricoes");
+		$investimento = array(
+			'idinscricao' => $data['idinscricao'],
+			'idusuario' => $data['idusuario'],
+			'idforma' => $forma_investimento->idinvestimento
+		);
+
+		if ($data['forma_investimento'] == 2) {
+			$investimento['parcelas'] = $data['qnt_parcelas'];
+		}
+
+		$idinvestimento = $this->m_investimentos->insertInvestimentoInscricao($investimento);
+
+		if (!!$idinvestimento) {
+			if ($data['forma_investimento'] == 2) {
+				$this->m_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
+			}
+		}
 	}
 
 	function editar($id=null)
@@ -182,23 +173,15 @@ class Inscricoes extends CI_Controller {
 		return redirect("sistema/Inscricoes");
 	}
 
-	function getInvestimento($idturma=null)
+	private function getInvestimento($idturma=null)
 	{
 		if (!$idturma) {
-			echo null;
-			return;
+			return null;
 		}
 
 		$investimentos = $this->m_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
 
-		foreach ($investimentos as &$investimento) {
-			$investimento->total = $this->parserlib->formatMoney($investimento->total);
-			$investimento->valor_parcela = $this->parserlib->formatMoney($investimento->valor_parcela);
-			$investimento->data_vencimento = $this->parserlib->formatDate($investimento->data_vencimento);
-		}
-
-		echo json_encode($investimentos);
-		return true;
+		return $investimentos;
 	}
 
 	function prepareData($data=null)

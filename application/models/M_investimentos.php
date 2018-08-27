@@ -108,4 +108,36 @@ class M_investimentos extends CI_Model {
 
 		return !!$query;
 	}
+
+	function insertInvestimentoInscricao($investimento)
+	{
+		if (!isset($investimento)) {
+			return false;
+		}
+
+		// $investimento = array(
+		// 	'idinscricao' => $data['idinscricao'],
+		// 	'idusuario' => $data['idusuario'],
+		// 	'idforma' => $forma_investimento->idinvestimento
+		// );
+
+		$query = $this->db->insert("invstimentos_inscricoes", $investimento);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
+
+	function insertParcelas($idinvestimento, $qnt_parcelas)
+	{
+		if (!isset($idinvestimento) || !isset($qnt_parcelas)) {
+			return false;
+		}
+
+		$investimento = $this->getInvestimentos(array('id' => $idinvestimento))[0];
+
+		$parcelamento = $this->getParcelamento($investimento);
+	}
 }
