@@ -108,7 +108,7 @@ CREATE TABLE `dias_eventos` (
   `almoco_inicio` datetime DEFAULT NULL,
   `almoco_fim` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `dias_eventos` (
 
 LOCK TABLES `dias_eventos` WRITE;
 /*!40000 ALTER TABLE `dias_eventos` DISABLE KEYS */;
-INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL);
+INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL),(48,22,'2018-09-15 09:00:00','2018-09-15 18:00:00','2018-09-15 12:30:00','2018-09-15 14:00:00'),(49,23,'2018-10-03 09:00:00','2018-10-03 18:30:00',NULL,NULL);
 /*!40000 ALTER TABLE `dias_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `eventos` (
   `prazo_inscricao` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelado; 1 = Agendado;',
   PRIMARY KEY (`idevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
-INSERT INTO `eventos` VALUES (18,3,22,1,'Aula Inaugural','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(21,2,15,1,'Aula 1/1','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1);
+INSERT INTO `eventos` VALUES (18,3,22,1,'Aula Inaugural','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(21,2,15,1,'Aula 1/1','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(22,3,23,1,'',NULL,0.00,NULL,1),(23,1,7,1,'Aula de Teste de Formatação','<p><strong><u>Aula de Teste</u></strong></p>',0.00,NULL,1);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `forma_investimento` (
   `data_vencimento` date DEFAULT NULL,
   `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Matrícula; 2 = Mensalidade;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ CREATE TABLE `forma_investimento` (
 
 LOCK TABLES `forma_investimento` WRITE;
 /*!40000 ALTER TABLE `forma_investimento` DISABLE KEYS */;
-INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,3,2,100.00,200.00,10,NULL,1),(3,11,3,20,330.00,6600.00,2,NULL,1),(4,12,3,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,3,3,70.00,210.00,7,NULL,1),(8,15,1,1,NULL,400.00,NULL,'2018-09-10',1),(9,15,3,3,140.00,420.00,5,NULL,1),(12,17,1,1,NULL,180.00,NULL,'2018-09-10',1),(13,17,3,3,70.00,210.00,10,NULL,1),(14,18,1,1,NULL,180.00,NULL,'2018-09-10',1),(15,18,3,3,70.00,210.00,10,NULL,1),(16,21,1,1,NULL,180.00,NULL,'2018-09-10',1),(17,21,2,3,70.00,210.00,NULL,NULL,1),(18,22,3,18,450.00,8100.00,10,NULL,1),(19,22,1,1,NULL,8100.00,NULL,'2018-09-10',1),(20,22,4,1,NULL,8100.00,NULL,NULL,1);
+INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,3,2,100.00,200.00,10,NULL,1),(3,11,3,20,330.00,6600.00,2,NULL,1),(4,12,3,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,3,3,70.00,210.00,7,NULL,1),(8,15,1,1,NULL,400.00,NULL,'2018-09-10',1),(9,15,3,3,140.00,420.00,5,NULL,1),(12,17,1,1,NULL,180.00,NULL,'2018-09-10',1),(13,17,3,3,70.00,210.00,10,NULL,1),(14,18,1,1,NULL,180.00,NULL,'2018-09-10',1),(15,18,3,3,70.00,210.00,10,NULL,1),(16,21,1,1,NULL,180.00,NULL,'2018-09-10',1),(17,21,2,3,70.00,210.00,NULL,NULL,1),(18,22,3,18,450.00,8100.00,10,NULL,1),(19,22,1,1,NULL,8100.00,NULL,'2018-09-10',1),(20,22,4,1,NULL,8100.00,NULL,NULL,1),(21,23,1,1,NULL,180.00,NULL,'2018-09-10',1),(22,23,2,6,35.00,100.00,NULL,NULL,1),(23,23,4,1,NULL,120.00,NULL,NULL,1);
 /*!40000 ALTER TABLE `forma_investimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `inscricoes` (
   `opcao` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
   PRIMARY KEY (`idinscricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,8 +208,35 @@ CREATE TABLE `inscricoes` (
 
 LOCK TABLES `inscricoes` WRITE;
 /*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
-INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1);
+INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1),(5,NULL,23,1,'2018-08-23 10:41:44',NULL,1),(6,NULL,23,1,'2018-08-27 09:25:55',NULL,1);
 /*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `investimentos_inscricoes`
+--
+
+DROP TABLE IF EXISTS `investimentos_inscricoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `investimentos_inscricoes` (
+  `idinvestimento` int(11) NOT NULL AUTO_INCREMENT,
+  `idinscricao` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `idforma` int(11) NOT NULL,
+  `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `parcelas` int(11) DEFAULT '1',
+  PRIMARY KEY (`idinvestimento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `investimentos_inscricoes`
+--
+
+LOCK TABLES `investimentos_inscricoes` WRITE;
+/*!40000 ALTER TABLE `investimentos_inscricoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `investimentos_inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -235,6 +262,31 @@ LOCK TABLES `loadfiles` WRITE;
 /*!40000 ALTER TABLE `loadfiles` DISABLE KEYS */;
 INSERT INTO `loadfiles` VALUES (1,'https://code.jquery.com/jquery-3.3.1.min.js','3'),(2,'css/system.css','2'),(3,'css/reset.css','3'),(4,'css/font_loader.css','3'),(5,'js/main.js','3'),(6,'js/materialize.js','3'),(7,'css/materialize.css','3'),(8,'js/jquery.mask.min.js','3');
 /*!40000 ALTER TABLE `loadfiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `parcelas_investimentos`
+--
+
+DROP TABLE IF EXISTS `parcelas_investimentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parcelas_investimentos` (
+  `idparcela` int(11) NOT NULL AUTO_INCREMENT,
+  `idinvestimento` int(11) NOT NULL,
+  `valor` decimal(13,2) NOT NULL DEFAULT '0.00',
+  `vencimento` date DEFAULT NULL,
+  PRIMARY KEY (`idparcela`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parcelas_investimentos`
+--
+
+LOCK TABLES `parcelas_investimentos` WRITE;
+/*!40000 ALTER TABLE `parcelas_investimentos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `parcelas_investimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -306,7 +358,7 @@ CREATE TABLE `turmas` (
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Ativa; 3 = Encerrada;',
   `aula_unica` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idturma`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,7 +367,7 @@ CREATE TABLE `turmas` (
 
 LOCK TABLES `turmas` WRITE;
 /*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
-INSERT INTO `turmas` VALUES (1,1,'Turma 1',25,0.00,NULL,1,0),(2,2,'TER03',20,0.00,'2018-08-31',2,0),(3,4,'Turma 1',10,0.00,NULL,1,0),(4,1,'Turma 2',10,0.00,NULL,1,0),(5,1,'Turma 2',30,0.00,NULL,1,0),(6,1,'Turma 3',20,0.00,NULL,1,0),(7,1,'Turma 4',20,0.00,NULL,1,0),(8,3,'Turma 1',10,0.00,NULL,1,0),(9,4,'Turma A1',30,150.00,NULL,1,0),(10,4,'Turma A2',28,120.00,'2018-07-18',2,0),(11,1,'Turma A3',30,130.00,'2018-09-10',1,0),(12,4,'Turma B1',30,120.00,'2018-08-10',1,0),(13,3,'Turma 10',10,0.00,'2018-09-07',2,0),(14,3,'Turma 10',10,0.00,'2018-09-10',2,0),(15,5,'BA01',10,120.00,'2018-09-10',2,0),(17,3,'MRQ01',10,0.00,'2018-09-10',2,0),(18,3,'MRQ Rosa 02',10,0.00,'2018-09-10',2,0),(19,1,'Caridade',10,80.00,'2018-09-10',2,0),(20,1,'Caridade',10,80.00,'2018-09-10',2,0),(21,3,'MRQ Rosa 03',10,0.00,'2018-08-15',2,0),(22,4,'A01',30,120.00,'2018-08-18',2,0);
+INSERT INTO `turmas` VALUES (1,1,'Turma 1',25,0.00,NULL,1,0),(2,2,'TER03',20,0.00,'2018-08-31',2,0),(3,4,'Turma 1',10,0.00,NULL,1,0),(4,1,'Turma 2',10,0.00,NULL,1,0),(5,1,'Turma 2',30,0.00,NULL,1,0),(6,1,'Turma 3',20,0.00,NULL,1,0),(7,1,'Turma 4',20,0.00,NULL,1,0),(8,3,'Turma 1',10,0.00,NULL,1,0),(9,4,'Turma A1',30,150.00,NULL,1,0),(10,4,'Turma A2',28,120.00,'2018-07-18',2,0),(11,1,'Turma A3',30,130.00,'2018-09-10',1,0),(12,4,'Turma B1',30,120.00,'2018-08-10',1,0),(13,3,'Turma 10',10,0.00,'2018-09-07',2,0),(14,3,'Turma 10',10,0.00,'2018-09-10',2,0),(15,5,'BA01',10,120.00,'2018-09-10',2,0),(17,3,'MRQ01',10,0.00,'2018-09-10',2,0),(18,3,'MRQ Rosa 02',10,0.00,'2018-09-10',2,0),(19,1,'Caridade',10,80.00,'2018-09-10',2,0),(20,1,'Caridade',10,80.00,'2018-09-10',2,0),(21,3,'MRQ Rosa 03',10,0.00,'2018-08-15',2,0),(22,4,'A01',30,120.00,'2018-08-18',2,0),(23,3,'Teste de Investimentos',10,0.00,'2018-09-10',2,1);
 /*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-20 18:23:30
+-- Dump completed on 2018-08-27 14:45:38
