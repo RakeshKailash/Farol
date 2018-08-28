@@ -108,7 +108,7 @@ class Inscricoes extends CI_Controller {
 		}
 
 		$data = $_POST;
-		$forma_investimento = $this->getInvestimento(array('cwhere' => "idturma = {$data['idturma']} AND forma = {$data['forma_investimento']}"))[0];
+		$forma_investimento = $this->m_investimentos->getInvestimento(array('cwhere' => "idturma = {$data['idturma']} AND forma = {$data['forma_investimento']}"))[0];
 
 		$investimento = array(
 			'idinscricao' => $data['idinscricao'],
@@ -124,7 +124,11 @@ class Inscricoes extends CI_Controller {
 
 		if (!!$idinvestimento) {
 			if ($data['forma_investimento'] == 2) {
-				$this->m_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
+				$result = $this->m_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
+				if (!$result) {
+					$this->session->set_flashdata('errors', "<p class='error'>Erro ao cadastrar as parcelas do investimento.</p>");
+					return redirect("sistema/Inscricoes");
+				}
 			}
 		}
 	}

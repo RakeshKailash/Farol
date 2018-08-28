@@ -14,19 +14,8 @@ class Test extends CI_Controller {
 	}
 
 	function index() {
-		// $test = $this->m_eventos->getEventos();
-
-		// foreach ($test as &$rec) {
-		// 	$rec->dias = $this->m_dias_eventos->getDiasEventos
-		// }
-		// echo "<pre>";
-		// var_dump($test);
-		// echo "</pre>";
-
-
-		echo "<pre>";
-		// var_dump($this->->getAgenda());
-		echo "</pre>";
+		$investimento = $this->getInvestimento(array('id' => 21))[0];
+		$this->parserlib->getParcelamento($investimento)
 		
 	}
 

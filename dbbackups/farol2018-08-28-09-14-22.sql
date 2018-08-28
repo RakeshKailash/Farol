@@ -199,7 +199,7 @@ CREATE TABLE `inscricoes` (
   `opcao` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
   PRIMARY KEY (`idinscricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `inscricoes` (
 
 LOCK TABLES `inscricoes` WRITE;
 /*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
-INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1),(5,NULL,23,1,'2018-08-23 10:41:44',NULL,1),(6,NULL,23,1,'2018-08-27 09:25:55',NULL,1);
+INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1),(5,NULL,23,1,'2018-08-23 10:41:44',NULL,1),(6,NULL,23,1,'2018-08-27 09:25:55',NULL,1),(7,NULL,23,3,'2018-08-28 08:29:50',NULL,1),(8,NULL,23,1,'2018-08-28 09:00:26',NULL,1),(9,NULL,23,5,'2018-08-28 09:10:13',NULL,1);
 /*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `investimentos_inscricoes` (
   `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `parcelas` int(11) DEFAULT '1',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,6 +236,7 @@ CREATE TABLE `investimentos_inscricoes` (
 
 LOCK TABLES `investimentos_inscricoes` WRITE;
 /*!40000 ALTER TABLE `investimentos_inscricoes` DISABLE KEYS */;
+INSERT INTO `investimentos_inscricoes` VALUES (1,7,3,22,'2018-08-28 08:54:03',5),(2,7,3,22,'2018-08-28 08:55:11',5),(3,7,3,22,'2018-08-28 08:55:56',5),(4,7,3,22,'2018-08-28 08:56:17',5),(5,7,3,22,'2018-08-28 08:56:27',5),(6,7,3,22,'2018-08-28 08:56:48',5),(7,7,3,22,'2018-08-28 08:57:03',5),(8,7,3,22,'2018-08-28 08:57:25',5),(9,7,3,22,'2018-08-28 08:57:38',5),(10,7,3,22,'2018-08-28 08:58:01',5),(11,7,3,22,'2018-08-28 08:58:17',5),(12,7,3,22,'2018-08-28 08:58:29',5),(13,7,3,22,'2018-08-28 08:58:36',5),(14,7,3,22,'2018-08-28 08:58:50',5),(15,7,3,22,'2018-08-28 08:59:13',5),(16,7,3,22,'2018-08-28 08:59:36',5),(17,7,3,22,'2018-08-28 08:59:46',5),(18,7,3,22,'2018-08-28 08:59:57',5),(19,7,3,22,'2018-08-28 09:00:14',5),(20,8,1,22,'2018-08-28 09:00:30',5),(21,8,1,22,'2018-08-28 09:00:44',5),(22,8,1,22,'2018-08-28 09:04:10',5),(23,8,1,22,'2018-08-28 09:04:36',5),(24,8,1,22,'2018-08-28 09:04:45',5),(25,9,5,22,'2018-08-28 09:10:46',5),(26,9,5,22,'2018-08-28 09:12:08',5),(27,9,5,22,'2018-08-28 09:12:27',6);
 /*!40000 ALTER TABLE `investimentos_inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,8 +277,9 @@ CREATE TABLE `parcelas_investimentos` (
   `idinvestimento` int(11) NOT NULL,
   `valor` decimal(13,2) NOT NULL DEFAULT '0.00',
   `vencimento` date DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 = A pagar; 1 = Paga;',
   PRIMARY KEY (`idparcela`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,6 +288,7 @@ CREATE TABLE `parcelas_investimentos` (
 
 LOCK TABLES `parcelas_investimentos` WRITE;
 /*!40000 ALTER TABLE `parcelas_investimentos` DISABLE KEYS */;
+INSERT INTO `parcelas_investimentos` VALUES (1,0,20.00,NULL,0),(2,0,20.00,NULL,0),(3,26,20.00,NULL,0),(4,26,20.00,NULL,0),(5,26,20.00,NULL,0),(6,26,20.00,NULL,0),(7,26,20.00,NULL,0),(8,27,16.65,NULL,0),(9,27,16.67,NULL,0),(10,27,16.67,NULL,0),(11,27,16.67,NULL,0),(12,27,16.67,NULL,0),(13,27,16.67,NULL,0);
 /*!40000 ALTER TABLE `parcelas_investimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,4 +461,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-27 14:45:51
+-- Dump completed on 2018-08-28  9:14:22

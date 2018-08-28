@@ -61,6 +61,61 @@ class M_investimentos extends CI_Model {
 		return $result->result();
 	}
 
+	function getInvestimentoInscricao($opts=array())
+	{
+		$query = array();
+		$query[] = "SELECT * FROM investimentos_inscricoes";
+		$where = null;
+		$cond = null;
+
+		if (isset($opts['id'])) {
+			if (gettype($opts['id']) == "array") {
+				$cond = "idinvestimento IN (".implode(",", $opts['id']).")";
+			} else {
+				$cond = "idinvestimento = {$opts['id']}";
+			}
+			$where = "WHERE ".$cond;
+		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "idinvestimento NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "idinvestimento != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
+
+		if (isset($opts['groupby'])) {
+			$query[] = "GROUP BY {$opts['groupby']}";
+		}
+
+		if (isset($opts['orderby'])) {
+			$query[] = "ORDER BY {$opts['orderby']}";
+		}
+
+		if (isset($opts['limit'])) {
+			$query[] = "LIMIT {$opts['limit']}";
+		}
+
+		$query = implode(" ", $query);
+		$result = $this->db->query($query);
+
+		if (!$result) {
+			return false;
+		}
+
+		return $result->result();
+	}
+
 	function insertInvestimento($data)
 	{
 		if (!isset($data) || gettype($data) != "array") {
@@ -121,7 +176,7 @@ class M_investimentos extends CI_Model {
 		// 	'idforma' => $forma_investimento->idinvestimento
 		// );
 
-		$query = $this->db->insert("invstimentos_inscricoes", $investimento);
+		$query = $this->db->insert("investimentos_inscricoes", $investimento);
 
 		if (!$query) {
 			return false;
@@ -136,8 +191,23 @@ class M_investimentos extends CI_Model {
 			return false;
 		}
 
-		$investimento = $this->getInvestimentos(array('id' => $idinvestimento))[0];
+		$info_parcela = array();
+		$investimento = $this->getInvestimentoInscricao(array('id' => $idinvestimento))[0];
+		$forma_investimento = $this->getInvestimento(array('id' => $investimento->idforma))[0];
+		$parcelamento_completo = $this->parserlib->getParcelamento($forma_investimento);
+		$parcelas_inserir = array();
 
-		$parcelamento = $this->getParcelamento($investimento);
+		for($i=0;$i<$qnt_parcelas;$i++) {
+			$parcelas_inserir[] = array(
+				'idinvestimento' => $investimento->idinvestimento,
+				'valor' => $parcelamento_completo[(string)$qnt_parcelas]->valor_comum
+			);
+		}
+
+
+		$parcelas_inserir[0]['valor'] = $parcelamento_completo[(string)$qnt_parcelas]->valor_diferente;
+		$query = $this->db->insert_batch('parcelas_investimentos', $parcelas_inserir);
+
+		return !!$query;
 	}
 }
