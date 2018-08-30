@@ -57,6 +57,13 @@ var datepickeri = {
 $(document).ready(function(){
 	$('.sidenav').sidenav();
 	$('select').formSelect();
+	$('.dropdown-trigger').dropdown();
+	$('.dd_trigger_busca').dropdown({
+		constrainWidth: false,
+		onCloseEnd: function () {
+			$(".search_input").focus();
+		}
+	});
 	
 	initPickers();
 	initMasks();

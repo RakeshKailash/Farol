@@ -49,10 +49,6 @@ class Inscricoes extends CI_Controller {
 		$infoB['turmas'] = $this->m_turmas->getTurma();
 		$infoB['cursos'] = $this->m_cursos->getCurso();
 		$infoB['usuarios'] = $this->m_usuarios->getUsuario(array('cwhere' => 'acesso > 1'));
-		// if (isset($_GET['preid'])) {
-		// 	$preiddata = array('idcurso' => $_GET['preid']);
-		// 	$this->session->set_flashdata('formdata', $preiddata);
-		// }
 
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/inscricoes/criar.php", $infoB);
@@ -131,6 +127,8 @@ class Inscricoes extends CI_Controller {
 				}
 			}
 		}
+
+		return redirect("sistema/Inscricoes");
 	}
 
 	function editar($id=null)
@@ -142,14 +140,11 @@ class Inscricoes extends CI_Controller {
 		$loads = $this->m_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$infoB['cursos'] = $this->m_cursos->getCurso();
+		$inscricao = $this->m_inscricoes->getInscricao(array('id' => "{$id}"))[0];
+		$inscricao->curso = $this->m_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
+		$infoB['userdata'] = $inscricao;
+		$infoB['userdata']->investimento = $this->m_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
 
-		$userdata = $this->m_inscricoes->getInscricao(array('id' => $id))[0];
-
-		$infoB['userdata'] = $userdata;
-
-		$userdata->data_limite_inscricao = $this->parserlib->formatDate($userdata->data_limite_inscricao);
-		
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/inscricoes/editar.php", $infoB);
 		$this->load->view("sistema/common/fim.php");

@@ -113,6 +113,71 @@ class M_investimentos extends CI_Model {
 			return false;
 		}
 
+		$investimentos = $result->result();
+
+		foreach ($investimentos as &$investimento) {
+			$investimento->forma = $this->getInvestimento(array('id' => "{$investimento->idforma}"))[0];
+
+			if ($investimento->forma->forma == 2) {
+				$investimento->forma->parcelas = $this->getParcelas(array('cwhere' => "idinvestimento = {$investimento->idinvestimento}"));
+			}
+		}
+
+		return $investimentos;
+	}
+
+	function getParcelas($opts=array())
+	{
+		$query = array();
+		$query[] = "SELECT * FROM parcelas_investimentos";
+		$where = null;
+		$cond = null;
+
+		if (isset($opts['id'])) {
+			if (gettype($opts['id']) == "array") {
+				$cond = "idparcela IN (".implode(",", $opts['id']).")";
+			} else {
+				$cond = "idparcela = {$opts['id']}";
+			}
+			$where = "WHERE ".$cond;
+		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "idparcela NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "idparcela != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
+
+		if (isset($opts['groupby'])) {
+			$query[] = "GROUP BY {$opts['groupby']}";
+		}
+
+		if (isset($opts['orderby'])) {
+			$query[] = "ORDER BY {$opts['orderby']}";
+		}
+
+		if (isset($opts['limit'])) {
+			$query[] = "LIMIT {$opts['limit']}";
+		}
+
+		$query = implode(" ", $query);
+		$result = $this->db->query($query);
+
+		if (!$result) {
+			return false;
+		}
+
 		return $result->result();
 	}
 

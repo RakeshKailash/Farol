@@ -11,6 +11,7 @@ class Turmas extends CI_Controller {
 		$this->load->model("m_cursos");
 		$this->load->model("m_aulas");
 		$this->load->model("m_investimentos");
+		$this->load->model("m_inscricoes");
 		if (!$this->m_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
@@ -204,9 +205,10 @@ class Turmas extends CI_Controller {
 		$infoB['investimentos'] = $this->m_investimentos->getInvestimento($opts_query);
 
 		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "eventos.`idturma` = {$id}"));
+		
+		$infoB['inscricoes'] = $this->m_inscricoes->getInscricao(array('cwhere' => "inscricoes.`idturma` = {$id} AND inscricoes.`status` = 2"));
 
 		$userdata = $this->m_turmas->getTurma(array('id' => $id))[0];
-
 		$infoB['userdata'] = $userdata;
 
 		$userdata->data_limite_inscricao = $this->parserlib->formatDate($userdata->data_limite_inscricao);

@@ -362,6 +362,25 @@ $(document).ready(function () {
 		$(".linha_info_agenda[data-id='"+data_id+"']").toggleClass("hide");
 	})
 
+	$('#alunos_visualizar_table').on("click", "th", function () {
+		var desc = 0;
+		if ($(this).hasClass('ordering')) {
+			if ($(this).hasClass("asc")) {
+				$(this).removeClass("asc");
+				$(this).addClass("desc");
+				desc = 1;
+			} else {
+				$(this).removeClass("desc");
+				$(this).addClass("asc");
+			}
+		} else {
+			$(this).siblings(".ordering").removeClass("ordering asc desc");
+			$(this).addClass("ordering asc");
+		}
+
+		$("#alunos_visualizar_table").sortTable($(this).index(), desc);
+	});
+
 	$(".form_visualizar").find("input").attr('disabled', 'disabled');
 	$(".form_visualizar").find("textarea").attr('disabled', 'disabled');
 	$(".form_visualizar").find("select").attr('disabled', 'disabled');
@@ -374,6 +393,26 @@ $(".investimentos_turma").on("change", ".select_tipo_investimento", function (e)
 $(".check_aula_unica").change(function () {
 	$(".container_aula_unica").toggleClass("hide");
 })
+
+$("#dropdown_busca").on("click", "li", function() {
+	$(".dd_trigger_busca").html($(this).find("span").html());
+	$("#dropdown_busca").find("li").removeClass("selected_for_search");
+	$(this).addClass("selected_for_search");
+});
+
+$(".search_btn").click(function () {
+	if ($(".selected_for_search").length < 1) {
+		return false;
+	}
+
+	$("#alunos_visualizar_table").filterTable($(".selected_for_search").index(), $(".search_input").val());
+});
+
+$(".search_input").keypress(function(event) {
+	if (event.which == 13) {
+		$(".search_btn").trigger("click");
+	}
+});
 
 $("#form_sistema_inscricao").on("change", "#select_curso_inscricao", function () {
 	var idcurso = $(this).val();

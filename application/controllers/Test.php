@@ -9,13 +9,19 @@ class Test extends CI_Controller {
 		$this->load->model("m_turmas");
 		$this->load->model("m_eventos");
 		$this->load->model("m_investimentos");
+		$this->load->model("m_inscricoes");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
 	function index() {
-		$investimento = $this->getInvestimento(array('id' => 21))[0];
-		$this->parserlib->getParcelamento($investimento)
+		$inscricao = $this->m_inscricoes->getInscricao(array('id' => "11"))[0];
+		$infoB['userdata'] = $inscricao;
+		$infoB['userdata']->investimento = $this->m_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
+		echo "<pre>";
+		var_dump($infoB['userdata']);
+		echo "</pre>";
+		die;
 		
 	}
 

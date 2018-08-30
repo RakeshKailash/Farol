@@ -115,6 +115,32 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<input type="submit" class="btn" value="Salvar">
 	<input type="reset" class="btn" value="Limpar"> -->
 </form>
+<?php if (!!count($inscricoes)): ?>
+<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
+	<div class="row">
+		<div class="col s12"><p class="page_minor_title">Alunos</p></div>
+	</div>
+	<div class="row aulas_turma">
+		<table id="alunos_visualizar_table">
+			<thead>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Data da Inscrição</th>
+			</thead>
+			<tbody>
+				<?php foreach ($inscricoes as $inscricao) : ?>
+					<tr class="linha_cadastro_visualizar">
+						<td><?=$inscricao->idusuario?></td>
+						<td><a href="<?=base_url('sistema/Usuarios/'.$inscricao->idusuario)?>"><?=$inscricao->nome_usuario?></a></td>
+						<td><?=$this->parserlib->formatDatetime($inscricao->data_ingresso);?></td>
+					</tr>
+				<?php endforeach ?>
+			</tbody>
+			<input type="hidden" class="cad_hidden" value="Aulas">
+		</table>
+	</div>
+</form>
+<?php endif ?>
 <?php if (!!count($aulas)): ?>
 <form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
 	<div class="row">
