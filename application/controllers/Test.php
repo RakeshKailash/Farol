@@ -25,6 +25,16 @@ class Test extends CI_Controller {
 		
 	}
 
+	function seleciona()
+	{
+		$resultados = mysqli_query(mysqli_connect("localhost", "root", "", "farolterapeutico"),"SELECT SUM(valor) AS debito, SUM(vlrPago) AS pago, (SUM(valor)-SUM(vlrPago)) AS devedor FROM financeiro2017 WHERE alunoId = 620");
+		while ($row = $resultados->fetch_object()){
+			echo "<pre>";
+			var_dump($row);
+			echo "</pre>";
+		}
+	}
+
 	function getInvestimento($idturma=null)
 	{
 		if (!$idturma) {

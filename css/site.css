@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|Roboto:300,400,500,700,900');
+
+@-webkit-keyframes bg_site {
+	0%{background-position:0% 99%}
+	50%{background-position:100% 2%}
+	100%{background-position:0% 99%}
+}
+@-moz-keyframes bg_site {
+	0%{background-position:0% 99%}
+	50%{background-position:100% 2%}
+	100%{background-position:0% 99%}
+}
+@keyframes bg_site { 
+	0%{background-position:0% 99%}
+	50%{background-position:100% 2%}
+	100%{background-position:0% 99%}
+}
+
+@keyframes bg_site_c { 
+	0%{background-color:#e6dbec}
+	50%{background-color:#69439a}
+	100%{background-color:#e6dbec}
+}
+
+*:focus {
+	outline: none;
+}
+
+html {
+	height: auto;
+	min-height: 100%;
+}
+
+body {
+	/*padding-top: 60px;*/
+	background-color: #fff;
+}
+
+body, html {
+	height: 100%;
+	height: 2500px;
+}
+
+#cabecalho {
+	background-color: #fff;
+	height: 100px;
+	z-index: 50;
+	width: 100%;
+	transition: box-shadow, height linear 0.1s;
+}
+#cabecalho.sticky {
+	position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 1px 17.3px rgba(0,0,0,.25);
+    height: 50px;
+}
+
+#med_header {
+    height: 40px;
+    background-color: #69439A;
+    position: relative;
+    box-shadow: 0 1px 17.3px rgba(0,0,0,.25);
+    z-index: 51;
+}
+
+.icone_menu_cabecalho {
+	font-size: 28pt;
+	color: #fff;
+	display: inline-block;
+	line-height: 60px;
+	vertical-align: middle;
+	padding: 0px 10px;
+	text-align: center;
+}
+
+#logo_home {
+	max-height: 100%;
+	padding: 15px 0;
+	padding-left: 10px;
+}
+
+#cabecalho.sticky #logo_home {
+	padding: 5px 0;
+	padding-left: 10px;
+}
+
+#slider_home {
+	height: 450px;
+	position: relative;
+	background: linear-gradient(to bottom left, #69439A, #2e1e44);
+}
+
+#slider_home #controles {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+#slider_home #controles .controle {
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	background-color: #C1A6FF;
+	margin-right: 3px;
+	box-shadow: 0 1px 17.3px rgba(0,0,0,.25);
+	cursor: pointer;
+	transition: all linear 0.2s;
+}
+
+#slider_home #controles .controle:hover, #slider_home #controles .controle.current {
+	background-color: #fff;
+}
+
+#slider_home #controles .controle:last-child {
+	margin-right: 0;
+}
+
+#container_menu {
+	padding: 0.75rem;
+}
+
+#menu_lateral_site {
+	border-radius: 5px;
+	box-shadow: 0 1px 17.3px rgba(0,0,0,.25);
+	transition: all linear 0.2s;
+}
+
+#menu_lateral_site:hover {
+	box-shadow: 0 5px 30px 3px rgba(0,0,0,.3);
+}
+
+#menu_lateral_site li.item_menu_lateral {
+	background-color: #E6DBEC;
+	border-bottom: 1px solid #e4c9f3;
+	border-top: 1px solid #f1e7f7;
+	transition: all linear 0.1s;
+}
+
+li.item_menu_lateral:first-child {
+	border-radius: 4px 4px 0 0;
+}
+
+li.item_menu_lateral:last-child {
+	border-radius: 0 0 4px 4px;
+}
+
+#menu_lateral_site li.item_menu_lateral a {
+	padding: 10px 15px;
+	font-size: 13pt;
+	display: inline-block;
+	width: 100%;
+	color: #614784;
+	font-family: "Century Gothic";
+	transition: all linear 0.1s;
+}
+
+#menu_lateral_site li.item_menu_lateral:hover {
+	border-color: #b9a3eb;
+}
+
+#menu_lateral_site li.item_menu_lateral a:hover {
+	background-color: #B9A3EB;
+	color: #fff;
+}
+
+#menu_topo {
+	display: inline-block;
+    width: auto;
+    min-width: 741px;
+    height: 40px;
+    /*overflow: hidden;*/
+    position: absolute;
+    left: 130px;
+    top: 0;
+    z-index: 51;
+    font-size: 0;
+}
+
+#menu_topo.sticky {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 50px;
+}
+
+#menu_topo > li {
+	height: 40px;
+	display: inline-block;
+}
+
+#menu_topo.sticky > li {
+	height: 50px;
+}
+
+#menu_topo > li > a {
+	display: inline-block;
+    padding: 0 15px;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+    color: #d9bcff;
+    font-family: Roboto Condensed;
+    font-size: 12pt;
+    font-weight: 100;
+    transition: all linear 0.2s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#menu_topo.sticky > li > a {
+	color: #69439A;
+	height: 50px;
+	line-height: 50px;
+}
+
+#menu_topo > li > a:hover {
+	background: #E6DBEC;
+    color: #69439a;
+}
+
+#dropdown_sobrenos > li > a,
+#dropdown_atividades > li > a {
+	font-family: Roboto Condensed;
+    font-weight: lighter;
+    text-transform: uppercase;
+    font-size: 11pt;
+}
+
+.main_site_container {
+	box-shadow: 0 1px 10px 2px rgba(0,0,0,.3);
+	padding: 30px 20px;
+	background-color: #fff;
+	margin-top: 110px !important;
+	margin-bottom: 50px !important;
+}
+
+.main_section {
+	background-image: url(http://localhost/farol/img/bg_home.jpg);
+	display: inline-block;
+	height: 662px;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.fundo_degrade {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #e6dbec;
+	/*background-position:0% 99%;*/
+	/*background-color: #e6dbec;*/
+	/*transition: all linear 1s;*/
+}
+
+.fundo_animado {
+	/*background: linear-gradient(45deg, #69439a, #e6dbec);*/
+	/*background-size: 400% 400%;*/
+	-webkit-animation: bg_site_c 8s ease infinite;
+	-moz-animation: bg_site_c 8s ease infinite;
+	animation: bg_site_c 8s ease infinite;
+}
+
+.invisible {
+	opacity: 0;
+}
