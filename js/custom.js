@@ -55,7 +55,8 @@ var datepickeri = {
 };
 
 $(document).ready(function(){
-	$('.sidenav').sidenav();
+	$('.sidenav:not(.sidenav_alunos)').sidenav();
+	$('.sidenav_alunos').sidenav({isFixed: true});
 	$('select').formSelect();
 	$('.dropdown-trigger').dropdown();
 	$('.dd_trigger_busca').dropdown({

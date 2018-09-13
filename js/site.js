@@ -2,17 +2,22 @@ var sticky
 ;
 
 $(document).ready(function() {
+	$("body.full_size").css("height", $("html").height()+"px");
+
 	$('.m_dd_trigger').dropdown({
 		constrainWidth: false,
 		coverTrigger: false,
 		hover: true
 	});
 
-	sticky = $("#cabecalho").offset().top + 40;
-	if ($("#caminhodepao").length) {
-		sticky = 200;
+	if ($("#cabecalho").length) {
+		sticky = $("#cabecalho").offset().top + 40;
+		if ($("#caminhodepao").length) {
+			sticky = 200;
+		}
+		
+		handleStickyHeader();
 	}
-	handleStickyHeader();
 
 	var count_l = 1;
 

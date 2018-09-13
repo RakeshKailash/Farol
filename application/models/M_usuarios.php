@@ -115,7 +115,7 @@ class M_usuarios extends CI_Model {
 		return !!$query;
 	}
 
-	function isLogged()
+	function isLoggedSite()
 	{
 		$user_logged = $this->session->userdata();
 		if ((isset($user_logged['cpf']) && $user_logged['cpf'] != null) || (isset($user_logged['email']) && $user_logged['email'] != null) ) {
@@ -125,13 +125,27 @@ class M_usuarios extends CI_Model {
 		return false;
 	}
 
-	function logUser($login=null, $password=null)
+	function isLogged()
+	{
+		$user_logged = $this->session->userdata();
+		if ((isset($user_logged['cpf']) && $user_logged['cpf'] != null && (isset($user_logged['acesso']) && $user_logged['acesso'] > 2 )) || (isset($user_logged['email']) && $user_logged['email'] != null) && (isset($user_logged['acesso']) && $user_logged['acesso'] > 2 )) {
+			return true;
+		}
+
+		if (isset($user_logged['acesso'])) {
+			session_destroy();
+		}
+
+		return false;
+	}
+
+	function logUser($login=null, $password=null, $level=2)
 	{
 		if (!$password || !$login) {
 			return false;
 		}
 
-		$userauth = $this->authUser($login, $password);
+		$userauth = $this->authUser($login, $password, $level);
 
 		if ($userauth == false) {
 			return false;
@@ -142,7 +156,8 @@ class M_usuarios extends CI_Model {
 			'nome' => $userauth->nome,
 			'data_nascimento' => $userauth->data_nascimento,
 			'email' => $userauth->email,
-			'cpf' => $userauth->cpf
+			'cpf' => $userauth->cpf,
+			'acesso' => $userauth->acesso
 		);
 
 		$this->session->set_userdata($userdata);
@@ -154,7 +169,7 @@ class M_usuarios extends CI_Model {
 		session_destroy();
 	}
 
-	private function authUser ($login, $password)
+	private function authUser ($login, $password, $level=0)
 	{
 		if (! $login || !$password)
 		{
@@ -163,7 +178,7 @@ class M_usuarios extends CI_Model {
 
 
 		$query_options = array(
-			'cwhere' => "(cpf = '{$login}' OR email = '{$login}') AND acesso > 2"
+			'cwhere' => "(cpf = '{$login}' OR email = '{$login}') AND acesso > {$level}"
 		);
 
 		$query = $this->getUsuario($query_options);

@@ -127,4 +127,23 @@ class M_inscricoes extends CI_Model {
 
 		return !!$query;
 	}
+
+	function getTurmasInscritas($idaluno=null)
+	{
+		if (!$idaluno) {
+			return null;
+		}
+
+		$lista_ids = array();
+
+		$inscricoes_aluno = $this->getInscricao(array(
+			"cwhere" => "inscricoes.`idusuario` = {$idaluno} AND inscricoes.`status` = 2"
+		));
+
+		foreach ($inscricoes_aluno as $insc) {
+			$lista_ids[] = $insc->idturma;	
+		}
+
+		return $lista_ids;
+	}
 }

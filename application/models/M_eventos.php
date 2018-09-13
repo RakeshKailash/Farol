@@ -9,7 +9,7 @@ class M_eventos extends CI_Model {
 	function getEventos($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, eventos.`tipo`, turmas.`data_limite_inscricao`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma, turmas.`status` AS status_turma FROM eventos JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` JOIN turmas ON turmas.`idturma` = eventos.`idturma`";
+		$query[] = "SELECT eventos.`idevento`, eventos.`idturma`, eventos.`idprofessor`, eventos.`nome`, eventos.`descricao`, eventos.`status`, eventos.`tipo`, turmas.`data_limite_inscricao`, professores.`nome` AS nome_professor, turmas.`identificacao` AS nome_turma, turmas.`status` AS status_turma FROM eventos LEFT JOIN professores ON professores.`idprofessor` = eventos.`idprofessor` LEFT JOIN turmas ON turmas.`idturma` = eventos.`idturma` LEFT JOIN dias_eventos ON (dias_eventos.`idevento` = eventos.`idevento` AND dias_eventos.`inicio`= ( SELECT MIN(inicio) FROM dias_eventos WHERE dias_eventos.`idevento` = eventos.`idevento`))";
 		$where = null;
 		$cond = null;
 
@@ -167,7 +167,7 @@ class M_eventos extends CI_Model {
 
 	function getAgenda($opts=array())
 	{
-		$eventos = $this->getEventos();
+		$eventos = $this->getEventos($opts);
 		if (!sizeof($eventos)) {
 			return $eventos;
 		}
@@ -236,7 +236,6 @@ class M_eventos extends CI_Model {
 			$evento->inscricao_status = $status;
 
 		}
-
 
 		return $agenda;
 	}
