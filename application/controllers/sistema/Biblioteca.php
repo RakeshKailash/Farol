@@ -28,13 +28,13 @@ class Biblioteca extends CI_Controller {
 			$opts_biblio['id'] = $id;
 		}
 
-		$aulas = $this->m_uploads->getUploads($opts_biblio);
+		$materiais = $this->m_uploads->getUploads($opts_biblio);
 
 		// foreach ($users as &$value) {
 		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
 		// }
 
-		$infoB['materiais'] = $aulas;
+		$infoB['materiais'] = $materiais;
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/biblioteca/listar.php", $infoB);
@@ -153,6 +153,25 @@ class Biblioteca extends CI_Controller {
 		$samefiles = $this->m_uploads->getUploads(array('cwhere' => "`hash` = '{$hash}'"));
 
 		echo !count($samefiles);
+		return;
+	}
+
+	function getMateriais($idmaterial=null)
+	{
+		$opts_biblio = array();
+
+		if ($idmaterial) {
+			$opts_biblio['id'] = $idmaterial;
+		}
+
+		$materiais = $this->m_uploads->getUploads($opts_biblio);
+
+		if (!$materiais) {
+			echo false;
+			return;
+		}
+
+		echo json_encode($materiais);
 		return;
 	}
 

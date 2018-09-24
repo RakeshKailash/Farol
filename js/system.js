@@ -403,6 +403,12 @@ $(".search_btn").click(function () {
 		return false;
 	}
 
+	if ($(this).data('target')) {
+		var tabela = $(this).data('target');
+		$(tabela).filterTable($(".selected_for_search").index(), $(".search_input").val());
+		return;
+	}
+
 	$("#alunos_visualizar_table").filterTable($(".selected_for_search").index(), $(".search_input").val());
 });
 
@@ -496,6 +502,50 @@ $(".input_material").change(function () {
 	// $.post("compareInputFile/"+input_name, {data: formdata}, function (unique) {
 		// 
 	// });
+});
+
+$(".btn_novo_material").click(function() {
+	$.post(RAIZ+'sistema/Biblioteca/getMateriais', null, function (result) {
+		var materiais = JSON.parse(result)
+		, structure = "";
+		;
+
+		for (var i=0; i < materiais.length; i++) {
+			structure += "<tr class='linha_cadastro_visualizar' data-id='"+materiais[i].idupload+"'>";
+			structure += "<td>"+materiais[i].idupload+"</td>";
+			structure += "<td>"+materiais[i].titulo+"</td>";
+			structure += "<td>"+materiais[i].autor+"</td>";
+			structure += "<td class='visualizar_material'>";
+			structure += "<a href='"+RAIZ+materiais[i].caminho_arquivo+"' target='_blank'>";
+			structure += "<i class='material-icons view_icon'>remove_red_eye</i>";
+			structure += "</a>";
+			structure += "</td>";
+			structure += "</tr>";
+		}
+		
+		$(".tbody_materais").html(structure);
+		$(".modal_biblioteca").removeClass('hide');
+		$(".overlap").removeClass('hide');
+	});
+});
+
+$(".overlap").click(function() {
+	$(".overlap").addClass('hide');
+	$(".modal_biblioteca").addClass('hide');
+});
+
+$(".tbody_materais").on('click', 'tr', function() {
+	var idturma = $("#input_idturma").val()
+	, idupload = $(this).data('id')
+	;
+
+	$.post(RAIZ+'sistema/Turmas/addMaterial/'+idturma+'/'+idupload, null, function (result) {
+		if (!result) {
+			alert("Erro ao adicionar o material");
+		} else {
+			window.location.reload();
+		}
+	});
 });
 
 function handleFormaPagamento(e)

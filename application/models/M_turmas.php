@@ -108,4 +108,25 @@ class M_turmas extends CI_Model {
 
 		return !!$query;
 	}
+
+	function addMaterial($idturma=null, $idupload=null)
+	{
+		if (!$idturma || !$idupload) {
+			return false;
+		}
+
+		$data = array(
+			'idupload' => $idupload,
+			'idturma' => $idturma,
+			'idusuario' => $this->session->idusuario
+		);
+
+		$query = $this->db->insert("material_turma", $data);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
 }

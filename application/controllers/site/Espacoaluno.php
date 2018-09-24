@@ -23,10 +23,6 @@ class Espacoaluno extends CI_Controller {
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$infoB = array();
 		$hoje = date('Y-m-d', time());
-		// $date = new DateTime($hoje);
-		// $date->add(new DateInterval('P3M'));
-		// $date = (string) $date->format('Y-m-d');
-
 		$ids_turmas = $this->m_inscricoes->getTurmasInscritas($this->session->idusuario);
 
 		if (count($ids_turmas)) {
@@ -72,5 +68,10 @@ class Espacoaluno extends CI_Controller {
 		}
 
 		return redirect("site/espacoaluno");
+	}
+
+	function Cursos()
+	{
+		
 	}
 }

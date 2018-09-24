@@ -176,6 +176,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		</div>
 	</form>
 <?php endif ?>
+<input type="hidden" id="input_idturma" name="idturma" value="<?=$userdata->idturma?>" />
 <div class="row">
 	<a href="<?=base_url('sistema/Aulas/novo?preid='.$userdata->idturma)?>" class="btn btn_table_action btn_nova_aula"><i class="material-icons">add</i>Nova aula</a>
 </div>
@@ -199,7 +200,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						<tr class="linha_cadastro_visualizar">
 							<input type="hidden" class="id_hidden" name="idmaterial" value="<?=$material->idmaterial?>">
 							<td><?=$material->idupload?></td>
-							<td style="text-align: center;"><a href="<?=RAIZ.$material->caminho_arquivo?>" target="_blank" style="position: relative; display: block;"><i class="material-icons view_icon">remove_red_eye</i></a></td>
+							<td class="visualizar_material"><a href="<?=RAIZ.$material->caminho_arquivo?>" target="_blank"><i class="material-icons view_icon">remove_red_eye</i></a></td>
 							<td><?=$material->titulo?></td>
 							<td><?=$material->autor?></td>
 							<td><a href="<?=RAIZ.'sistema/Usuarios/'.$material->idusuario?>"></a><?=explode(" ", $material->nome_usuario)[0]?></td>
@@ -213,7 +214,44 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	</form>
 <?php endif ?>
 <div class="row">
-	<a href="javascript:void(0)" class="btn btn_table_action btn_nova_aula"><i class="material-icons">add</i>Adicionar material</a>
+	<a href="javascript:void(0)" class="btn btn_table_action btn_novo_material"><i class="material-icons">add</i>Adicionar material</a>
 </div>
-<div class="modal_biblioteca"></div>
-<div class="overflow"></div>
+<div class="modal_biblioteca hide">
+	<p class="page_title">Biblioteca</p>
+	<div class="materiais_container_modal">
+		<div class="col s6 right col_busca_topo">
+			<label class="buscar_label">Busca</label>
+			<a class='dropdown-trigger btn dd_trigger_busca' href='#' data-target='dropdown_busca'>Onde?</a>
+			<input type="text" name="buscar" class="search_input browser-default">
+			<a href="javascript:void(0)" data-target=".materiais_tabela" class="btn btn_table_action search_btn"><i class="material-icons">search</i></a>
+			<ul id='dropdown_busca' class='dropdown-content'>
+				<li>
+					<p><label>
+						<span>ID</span>
+					</label></p>
+				</li>
+				<li>
+					<p><label>
+						<span>Título</span>
+					</label></p>
+				</li>
+				<li>
+					<p><label>
+						<span>Autor</span>
+					</label></p>
+				</li>
+			</ul>
+		</div>
+		<table id="alunos_visualizar_table" class="materiais_tabela">
+			<thead>
+				<th style="width: 60px;">ID</th>
+				<th>Título</th>
+				<th>Autor</th>
+				<th style="width: 100px;">Visualizar</th>
+			</thead>
+			<tbody class="tbody_materais">
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="overlap hide"></div>

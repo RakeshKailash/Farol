@@ -253,4 +253,20 @@ class Turmas extends CI_Controller {
 		return $data;
 	}
 
+	function addMaterial($idturma=null, $idupload=null)
+	{
+		if (!$idturma || !$idupload) {
+			echo false;
+			return;
+		}
+
+		if (!$this->m_turmas->addMaterial($idturma, $idupload)) {
+			echo false;
+			return;
+		}
+
+		echo true;
+		return;
+	}
+
 }
