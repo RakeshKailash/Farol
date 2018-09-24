@@ -33,14 +33,13 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
                 <h3>Próximas aulas</h3>
                 <?php if (isset($agenda) && count($agenda)): ?>
                     <?php foreach ($agenda as $num => $ano): ?>
-                        <a href="<?=base_url('sistema/Agenda?curyear='.$num)?>" class="btn btn_table_action btn_year <?=$num == $curyear ? 'curyear' : ''?>"><?=$num?></a>
+                        <a href="<?=base_url('site/Agenda?curyear='.$num)?>" class="btn btn_table_action btn_year <?=$num == $curyear ? 'curyear' : ''?>"><?=$num?></a>
                     <?php endforeach ?>
                     <table id="alunos_visualizar_table" class="has_sub_head has_info_lines">
                         <thead>
-                            <th class="col s3">Data</th>
-                            <th class="col s4">Evento</th>
+                            <th class="col s4">Data</th>
+                            <th class="col s5">Evento</th>
                             <th class="col s3">Facilitador</th>
-                            <th class="col s2">Inscrições até</th>
                         </thead>
                         <?php foreach ($agenda as $num => $ano): ?>
                             <tbody class="ano_tbody <?=$num != $curyear ? 'hide' : '' ?>">
@@ -50,27 +49,19 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
                                     <?php foreach ($meses as $evento) : ?>
                                         <tr class="linha_agenda_expandir" data-id="<?=$evento->idevento?>">
                                             <input type="hidden" class="id_hidden" name="idevento" value="<?=$evento->idevento?>">
-                                            <td class="col s3">
+                                            <td class="col s4">
                                                 <?php if (isset($evento->dias)): ?>
                                                     <?php foreach ($evento->dias as $dia): ?>
                                                         <p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?></p>
                                                     <?php endforeach ?>
                                                 <?php endif ?>
                                             </td>
-                                            <td class="col s4"><?=$evento->nome?></td>
+                                            <td class="col s5"><?=$evento->nome?></td>
                                             <td class="col s3"><a href="<?=base_url('sistema/Professores/'.$evento->idprofessor)?>"><?=$evento->nome_professor?></a></td>
-                                            <td class="col s2"><?=$evento->inscricao_status?></td>
                                         </tr>
                                         <tr class="linha_info_agenda hide" data-id="<?=$evento->idevento?>">
                                             <td colspan="4">
                                                 <div class="row row_descricao_agenda"><div class="col s12"><?=$evento->descricao?></div></div>
-                                                <?php if (!!$evento->aceitar_matriculas): ?>
-                                                    <div class="row row_matricula_agenda">
-                                                        <div class="col s12">
-                                                            <a href="<?=base_url('sistema')?>" class="btn btn_table_action">Matricule-se</a>
-                                                        </div>
-                                                    </div>
-                                                <?php endif ?>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

@@ -249,4 +249,18 @@ $config = array(
                         'rules' => 'required'
                 )
         ),
+        'upload_material' => array(
+                array(
+                        'field' => 'titulo',
+                        'label' => 'Título',
+                        'rules' => 'required'
+                )
+        ),
+        'atualizacao_material' => array(
+                array(
+                        'field' => 'titulo',
+                        'label' => 'Título',
+                        'rules' => 'required'
+                )
+        )
 );

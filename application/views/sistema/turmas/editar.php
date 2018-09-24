@@ -31,9 +31,9 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<label>Status</label>
 			<div class="input-field">
 				<select name="status">
-						<option <?=isset($userdata->status) && $userdata->status == 1 ? "selected" : ''?> value="1">Aguarde</option>
-						<option <?=isset($userdata->status) && $userdata->status == 2 ? "selected" : ''?> value="2">Ativa</option>
-						<option <?=isset($userdata->status) && $userdata->status == 3 ? "selected" : ''?> value="3">Encerrada</option>
+					<option <?=isset($userdata->status) && $userdata->status == 1 ? "selected" : ''?> value="1">Aguarde</option>
+					<option <?=isset($userdata->status) && $userdata->status == 2 ? "selected" : ''?> value="2">Ativa</option>
+					<option <?=isset($userdata->status) && $userdata->status == 3 ? "selected" : ''?> value="3">Encerrada</option>
 				</select>
 			</div>
 		</div>
@@ -116,66 +116,104 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<input type="reset" class="btn" value="Limpar"> -->
 </form>
 <?php if (!!count($inscricoes)): ?>
-<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
-	<div class="row">
-		<div class="col s12"><p class="page_minor_title">Alunos</p></div>
-	</div>
-	<div class="row aulas_turma">
-		<table id="alunos_visualizar_table">
-			<thead>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Data da Inscrição</th>
-			</thead>
-			<tbody>
-				<?php foreach ($inscricoes as $inscricao) : ?>
-					<tr class="linha_cadastro_visualizar">
-						<td><?=$inscricao->idusuario?></td>
-						<td><a href="<?=base_url('sistema/Usuarios/'.$inscricao->idusuario)?>"><?=$inscricao->nome_usuario?></a></td>
-						<td><?=$this->parserlib->formatDatetime($inscricao->data_ingresso);?></td>
-					</tr>
-				<?php endforeach ?>
-			</tbody>
-			<input type="hidden" class="cad_hidden" value="Aulas">
-		</table>
-	</div>
-</form>
+	<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
+		<div class="row">
+			<div class="col s12"><p class="page_minor_title">Alunos</p></div>
+		</div>
+		<div class="row aulas_turma">
+			<table id="alunos_visualizar_table">
+				<thead>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Data da Inscrição</th>
+				</thead>
+				<tbody>
+					<?php foreach ($inscricoes as $inscricao) : ?>
+						<tr class="linha_cadastro_visualizar">
+							<td><?=$inscricao->idusuario?></td>
+							<td><a href="<?=base_url('sistema/Usuarios/'.$inscricao->idusuario)?>"><?=$inscricao->nome_usuario?></a></td>
+							<td><?=$this->parserlib->formatDatetime($inscricao->data_ingresso);?></td>
+						</tr>
+					<?php endforeach ?>
+				</tbody>
+				<input type="hidden" class="cad_hidden" value="Aulas">
+			</table>
+		</div>
+	</form>
 <?php endif ?>
 <?php if (!!count($aulas)): ?>
-<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
-	<div class="row">
-		<div class="col s12"><p class="page_minor_title">Aulas</p></div>
-	</div>
-	<div class="row aulas_turma">
-		<table id="alunos_visualizar_table">
-			<thead>
-				<th>ID</th>
-				<th>Título</th>
-				<th>Professor</th>
-				<th>Data</th>
-				<th>Status</th>
-			</thead>
-			<tbody>
-				<?php foreach ($aulas as $aula) : ?>
-					<tr class="linha_cadastro_visualizar">
-						<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
-						<td><?=$aula->idevento?></td>
-						<td><?=$aula->nome?></td>
-						<td><?=$aula->nome_professor?></td>
-						<td>
-							<?php foreach ($aula->dias as $dia): ?>
-								<p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?></p>
-							<?php endforeach ?>
-						</td>
-						<td><?=$this->parserlib->aulaStatusParse($aula->status);?></td>
-					</tr>
-				<?php endforeach ?>
-			</tbody>
-			<input type="hidden" class="cad_hidden" value="Aulas">
-		</table>
-	</div>
-</form>
+	<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
+		<div class="row">
+			<div class="col s12"><p class="page_minor_title">Aulas</p></div>
+		</div>
+		<div class="row aulas_turma">
+			<table id="alunos_visualizar_table">
+				<thead>
+					<th>ID</th>
+					<th>Título</th>
+					<th>Professor</th>
+					<th>Data</th>
+					<th>Status</th>
+				</thead>
+				<tbody>
+					<?php foreach ($aulas as $aula) : ?>
+						<tr class="linha_cadastro_visualizar">
+							<input type="hidden" class="id_hidden" name="idevento" value="<?=$aula->idevento?>">
+							<td><?=$aula->idevento?></td>
+							<td><?=$aula->nome?></td>
+							<td><?=$aula->nome_professor?></td>
+							<td>
+								<?php foreach ($aula->dias as $dia): ?>
+									<p><?=$this->parserlib->formatDaterange($dia->inicio, $dia->fim);?></p>
+								<?php endforeach ?>
+							</td>
+							<td><?=$this->parserlib->aulaStatusParse($aula->status);?></td>
+						</tr>
+					<?php endforeach ?>
+				</tbody>
+				<input type="hidden" class="cad_hidden" value="Aulas">
+			</table>
+		</div>
+	</form>
 <?php endif ?>
 <div class="row">
 	<a href="<?=base_url('sistema/Aulas/novo?preid='.$userdata->idturma)?>" class="btn btn_table_action btn_nova_aula"><i class="material-icons">add</i>Nova aula</a>
 </div>
+<?php if (!!count($materiais)): ?>
+	<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>">
+		<div class="row">
+			<div class="col s12"><p class="page_minor_title">Material</p></div>
+		</div>
+		<div class="row materiais_turma">
+			<table id="alunos_visualizar_table">
+				<thead>
+					<th style="width: 60px;">ID</th>
+					<th style="width: 100px;">Visualizar</th>
+					<th>Título</th>
+					<th>Autor</th>
+					<th>Adicionado por</th>
+					<th>Data</th>
+				</thead>
+				<tbody>
+					<?php foreach ($materiais as $material) : ?>
+						<tr class="linha_cadastro_visualizar">
+							<input type="hidden" class="id_hidden" name="idmaterial" value="<?=$material->idmaterial?>">
+							<td><?=$material->idupload?></td>
+							<td style="text-align: center;"><a href="<?=RAIZ.$material->caminho_arquivo?>" target="_blank" style="position: relative; display: block;"><i class="material-icons view_icon">remove_red_eye</i></a></td>
+							<td><?=$material->titulo?></td>
+							<td><?=$material->autor?></td>
+							<td><a href="<?=RAIZ.'sistema/Usuarios/'.$material->idusuario?>"></a><?=explode(" ", $material->nome_usuario)[0]?></td>
+							<td><?=$this->parserlib->formatDatetime($material->data)?></td>
+						</tr>
+					<?php endforeach ?>
+				</tbody>
+				<input type="hidden" class="cad_hidden" value="">
+			</table>
+		</div>
+	</form>
+<?php endif ?>
+<div class="row">
+	<a href="javascript:void(0)" class="btn btn_table_action btn_nova_aula"><i class="material-icons">add</i>Adicionar material</a>
+</div>
+<div class="modal_biblioteca"></div>
+<div class="overflow"></div>

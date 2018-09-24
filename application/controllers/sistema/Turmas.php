@@ -7,6 +7,7 @@ class Turmas extends CI_Controller {
 		$this->load->model("m_config");
 		$this->load->model("m_usuarios");
 		$this->load->model("m_turmas");
+		$this->load->model("m_uploads");
 		$this->load->model("m_professores");
 		$this->load->model("m_cursos");
 		$this->load->model("m_aulas");
@@ -207,6 +208,8 @@ class Turmas extends CI_Controller {
 		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "eventos.`idturma` = {$id}"));
 		
 		$infoB['inscricoes'] = $this->m_inscricoes->getInscricao(array('cwhere' => "inscricoes.`idturma` = {$id} AND inscricoes.`status` = 2"));
+
+		$infoB['materiais'] = $this->m_uploads->getMateriais(array('cwhere' => "material_turma.`idturma` = {$id}"));
 
 		$userdata = $this->m_turmas->getTurma(array('id' => $id))[0];
 		$infoB['userdata'] = $userdata;

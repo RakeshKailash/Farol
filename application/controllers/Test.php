@@ -15,13 +15,16 @@ class Test extends CI_Controller {
 	}
 
 	function index() {
-		$inscricao = $this->m_inscricoes->getInscricao(array('id' => "11"))[0];
-		$infoB['userdata'] = $inscricao;
-		$infoB['userdata']->investimento = $this->m_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
-		echo "<pre>";
-		var_dump($infoB['userdata']);
-		echo "</pre>";
-		die;
+		$this->load->view("test/upload");
+	}
+
+	function upload()
+	{	
+		// var_dump($_FILES);
+		// echo "<br>";
+		// echo md5_file($_FILES['pdf']['tmp_name'][0]);
+		// echo "<br>";
+		// echo md5_file(RAIZ.'uploads/material/FarolPsicossomatica.pdf');
 		
 	}
 

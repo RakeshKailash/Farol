@@ -180,14 +180,12 @@ function getInvestimentoOpcoes(investimento) {
 
 }
 
-$(".linha_cadastro_visualizar").click(function () {
+$(".linha_cadastro_visualizar").click(function (e) {
 	var id = $(this).find(".id_hidden").val();
 	var cadtype = $(this).parents("table").find(".cad_hidden").val();
-	if (!id) {
-		return false;
+	if (! $(e.target).closest('a').length && id && cadtype != "") {
+		window.location = RAIZ+"sistema/"+cadtype+"/"+id;
 	}
-
-	window.location = RAIZ+"sistema/"+cadtype+"/"+id;
 });
 
 $("#btn_ativar_cadastro").click(function () {
@@ -463,6 +461,41 @@ $("#form_sistema_inscricao").on("change","input[type='radio']", function () {
 	if ($(".btn_salvar_investimento:disabled").length > 0) {
 		$(".btn_salvar_investimento").removeAttr('disabled');
 	}
+});
+
+$(".input_material").change(function () {
+	var input_name = $(this).attr("name")
+	, formdata = new FormData($("#upload_material_form")[0])
+	;
+
+	$.ajax({
+		type: 'POST',
+		url: "compareInputFile/"+input_name,
+		data: formdata ,
+		processData: false,
+		contentType: false
+	}).done(function (unique) {
+		if (!unique) {
+			if ($(".post_err").length <= 0) {
+				$(".form_messages").append("<p class='post_err error'>O arquivo selecionado já existe em seus uploads</p>");
+			}
+			
+			$(".form_messages").removeClass('hide');
+			$(".btn_salvar").attr('disabled', 'disabled');
+			return false;
+		}
+
+		$(".form_messages").find(".post_err").remove();
+		
+		if (!$(".form_messages").hasClass('hide')) {
+			$(".form_messages").addClass('hide');
+		}
+
+		$(".btn_salvar").removeAttr('disabled');
+	});
+	// $.post("compareInputFile/"+input_name, {data: formdata}, function (unique) {
+		// 
+	// });
 });
 
 function handleFormaPagamento(e)
