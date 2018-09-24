@@ -108,7 +108,7 @@ CREATE TABLE `dias_eventos` (
   `almoco_inicio` datetime DEFAULT NULL,
   `almoco_fim` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `dias_eventos` (
 
 LOCK TABLES `dias_eventos` WRITE;
 /*!40000 ALTER TABLE `dias_eventos` DISABLE KEYS */;
-INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL),(48,22,'2018-09-15 09:00:00','2018-09-15 18:00:00','2018-09-15 12:30:00','2018-09-15 14:00:00'),(49,23,'2018-10-03 09:00:00','2018-10-03 18:30:00',NULL,NULL);
+INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL),(48,22,'2018-09-15 09:00:00','2018-09-15 18:00:00','2018-09-15 12:30:00','2018-09-15 14:00:00'),(49,23,'2018-10-03 09:00:00','2018-10-03 18:30:00',NULL,NULL),(50,24,'2018-10-06 09:00:00','2018-10-06 18:30:00','2018-10-06 12:30:00','2018-10-06 14:00:00'),(51,24,'2018-10-07 09:00:00','2018-10-07 13:00:00',NULL,NULL),(52,25,'2018-11-10 09:00:00','2018-11-10 18:30:00','2018-11-10 12:30:00','2018-11-10 14:00:00'),(53,26,'2018-12-01 09:00:00','2018-12-01 18:30:00','2018-12-01 12:30:00','2018-12-01 14:00:00'),(54,26,'2018-12-02 09:00:00','2018-12-02 13:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `dias_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `eventos` (
   `prazo_inscricao` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelado; 1 = Agendado;',
   PRIMARY KEY (`idevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
-INSERT INTO `eventos` VALUES (18,3,22,1,'Aula Inaugural','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(21,2,15,1,'Aula 1/1','<p><strong>Certificado Internacional de Terapeuta de Facelift Energético Access Consciousness®\r\n</strong></p><p><strong>\r\n</strong></p><p><strong>– Como seria você nutrir seu corpo ao invés de julgá-lo?\r\n</strong></p><p><strong>– Como seria liberar os julgamentos que você tem sobre você e seu corpo?\r\n</strong></p>\r\n<p>Access Facelift Energético® é um dos processos corporais de Access Consciousness™ criado por Gary Douglas. É uma técnica que envolve a ativação de 29 frequências energéticas que desbloqueiam o fluxo energético do corpo, suavizando linhas, rugas e flacidez facial. Usando as mãos como neurotransmissoras, o toque suave é aplicado na face, pescoço e colo, liberando estresse, pontos de vista fixos, julgamentos e conclusões que causam o envelhecimento do nosso corpo. Que crenças você tem sobre envelhecer e como seu corpo vai envelhecer?\r\n</p>\r\n<p>Quando participamos de um curso onde trabalhamos nossos corpos, começamos a receber e reconhecer os talentos, dons e habilidades que possuímos e que nossos corpos possuem. Assim, podemos ter uma relação diferente com nossos corpos e com o mundo. Quando temos muitos pontos de vista fixos, estes causam estagnação deixando \"marcas\" no corpo, o que acaba impedindo o fluxo energético natural e saudável. O Facelift® ajuda a mudar os pontos de vista e julgamentos que estão travados no corpo, desfazendo-os. Com a energia fluindo, os músculos começam a relaxar, recuperando a vitalidade. Ao nos liberarmos de julgamentos, nos tornamos internamente e externamente mais jovens, pois ficamos mais leves e abertos às infinitas possibilidades. O Facelift Energético® é indicado para bruxismo, questões relacionadas a baixa-estima, auto-julgamento, pessoas que sofreram bullying, traumas etc.</p><br><p><strong>Público Alvo:</strong> Terapeutas e pessoas que queiram aplicar a técnica em benefício próprio e de outros.\r\n</p>\r\n<p><strong>Carga Horária e Conteúdo:</strong> O curso é composto de 6 horas com parte teórica e parte prática, onde cada aluno aplica e recebe 2 sessões de Facelift®. Ao final do curso, o aluno recebe o certificado válido em qualquer país onde queira atuar como terapeuta de Facelift Energético Access Consciousness®.\r\n</p>\r\n<p><strong>– Vagas Limitadas –\r\n</strong></p>\r\n<p><strong>Facilitadora\r\n</strong></p><p>Zuleika Escobar (Porto Alegre/RS) – Terapeuta e Facilitadora licenciada de Barras de Access®, Access Facelift Energético® e Processos Corporais Access Consciousness®. Terapeuta ThetaHealing® (DNA3®, Aprofundando no Digging®, Você e o Criador®, Anatomia Intuitiva®). Master Reiki. www.zuescobar.wixsite.com\r\n</p>\r\n<p><strong>Informações\r\n</strong></p><p><strong></strong>e-mail: <strong><u>secretaria@farolterapeutico.com.br\r\n</u></strong></p><p><strong></strong>fones: <u style=\"font-weight: bold;\">53. 3325 0002</u> / <u style=\"font-weight: bold;\">98468 5163</u> (oi/whatsapp) / <u style=\"font-weight: bold;\">99131 9062</u> (claro)</p>',0.00,NULL,1),(22,3,23,1,'',NULL,0.00,NULL,1),(23,1,7,1,'Aula de Teste de Formatação','<p><strong><u>Aula de Teste</u></strong></p>',0.00,NULL,1);
+INSERT INTO `eventos` VALUES (24,3,24,1,'Aula Inaugural','<p>﻿<strong>Certificação:</strong> Formação em Terapias Holísticas Integrativas\r\n</p><p><strong>Atuação:</strong> Terapeuta Holístico\r\n</p>\r\n<p><strong>– 30 vagas –\r\n</strong></p>\r\n<p><strong>Público alvo:</strong> Terapeutas atuantes, profissionais da saúde, pessoas interessadas em práticas holísticas e terapias naturais para autoconhecimento, benefício próprio ou se tornarem profissionais da área.\r\n</p>\r\n<p><strong>Objetivo:</strong> Capacitar os alunos para a atuação profissional, mediante a utilização de terapias integrativas naturais, corporais e vibracionais.\r\n</p>\r\n<p><strong>Pré-requisito:</strong> Ensino Médio.\r\n</p>\r\n<p><strong>Duração:</strong> 18 meses (1º final de semana de cada mês).\r\n</p><p><strong>Sábado:</strong> das 9:00h às 12:30h e das 14:00 às 18:00h.\r\n</p><p><strong>Domingo:</strong> das 9:00h às 13:00h.\r\n</p>\r\n<p><strong><u>Conteúdo Resumido:\r\n</u></strong></p><p>Módulo Fundamentos e Conceitos\r\n</p><p>Introdução ao Paradigma Holístico e Práticas Integrativas;\r\n</p><p>Ética, Postura, Legislação e Registro Profissional;\r\n</p><p>Anatomia e Fisiologia Corporal;\r\n</p><p>Energia, Aura e Chakras;\r\n</p><p>Princípios da MC – Yin/Yang, 5 Movimentos, Meridianos e Diagnóstico;\r\n</p><p>Anamnese, Diagnóstico e Recomendação.\r\n</p><p>Módulo Autoconhecimento\r\n</p><p>Consciência Corporal;\r\n</p><p>Meditação e Respiração;\r\n</p><p>Módulo Terapias Naturais\r\n</p><p>Nutrição humana e terapêutica Ortomolecular;\r\n</p><p>Fitoterapia Brasileira;\r\n</p><p>Auriculoterapia;\r\n</p><p>Moxabustão, Ventosaterapia e Gua Sha;\r\n</p><p>Argiloterapia;\r\n</p><p>Cones Chineses.\r\n</p><p>Módulo Terapias Corporais\r\n</p><p>Cinesiologia;\r\n</p><p>Anmá (Massagem Oriental);\r\n</p><p>Reflexologia Podal.\r\n</p><p>Módulo Terapias Vibracionais\r\n</p><p>Radiestesia e Radiônica;\r\n</p><p>Reiki Usui/Tibetano;\r\n</p><p>Aromaterapia;\r\n</p><p>Cristais;\r\n</p><p>Florais.\r\n</p>\r\n<p><strong>* Curso teórico, vivencial e prático, totalmente apostilado.\r\n</strong></p><p><strong>** Estágio supervisionado, trabalhos para conclusão do curso.\r\n</strong></p>\r\n<p><strong>Instrutores:</strong> Corpo docente do Farol, com profissionais altamente capacitados, constantemente atualizados, especialistas, mestres e doutores.\r\n</p>\r\n<p><strong>Informações:\r\n</strong></p><p><u>e-mail:</u> secretaria@farolterapeutico.com.br\r\n</p><p><u>fones:</u> 53. 3325 0002 / 98468 5163 (oi/whatsapp) / 99131 9062 (claro)</p>',0.00,NULL,1),(25,3,25,1,'',NULL,0.00,NULL,1),(26,3,24,1,'Aula de Revisão 1',NULL,0.00,NULL,1);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `forma_investimento` (
   `data_vencimento` date DEFAULT NULL,
   `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Matrícula; 2 = Mensalidade;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ CREATE TABLE `forma_investimento` (
 
 LOCK TABLES `forma_investimento` WRITE;
 /*!40000 ALTER TABLE `forma_investimento` DISABLE KEYS */;
-INSERT INTO `forma_investimento` VALUES (1,8,1,1,NULL,180.00,NULL,'2018-09-10',1),(2,8,3,2,100.00,200.00,10,NULL,1),(3,11,3,20,330.00,6600.00,2,NULL,1),(4,12,3,20,330.00,6600.00,2,NULL,1),(5,13,1,1,NULL,180.00,NULL,'2018-10-07',1),(6,14,1,1,NULL,180.00,NULL,'2018-10-10',1),(7,14,3,3,70.00,210.00,7,NULL,1),(8,15,1,1,NULL,400.00,NULL,'2018-09-10',1),(9,15,3,3,140.00,420.00,5,NULL,1),(12,17,1,1,NULL,180.00,NULL,'2018-09-10',1),(13,17,3,3,70.00,210.00,10,NULL,1),(14,18,1,1,NULL,180.00,NULL,'2018-09-10',1),(15,18,3,3,70.00,210.00,10,NULL,1),(16,21,1,1,NULL,180.00,NULL,'2018-09-10',1),(17,21,2,3,70.00,210.00,NULL,NULL,1),(18,22,3,18,450.00,8100.00,10,NULL,1),(19,22,1,1,NULL,8100.00,NULL,'2018-09-10',1),(20,22,4,1,NULL,8100.00,NULL,NULL,1),(21,23,1,1,NULL,180.00,NULL,'2018-09-10',1),(22,23,2,6,35.00,100.00,NULL,NULL,1),(23,23,4,1,NULL,120.00,NULL,NULL,1);
+INSERT INTO `forma_investimento` VALUES (24,24,3,18,330.00,5940.00,7,NULL,1),(25,24,1,1,NULL,5940.00,NULL,'2018-09-10',1),(26,25,1,1,NULL,250.00,NULL,'2018-11-05',1),(27,25,2,3,93.33,280.00,NULL,NULL,1);
 /*!40000 ALTER TABLE `forma_investimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `inscricoes` (
   `opcao` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
   PRIMARY KEY (`idinscricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `inscricoes` (
 
 LOCK TABLES `inscricoes` WRITE;
 /*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
-INSERT INTO `inscricoes` VALUES (1,18,1,1,'2018-08-06 10:19:43',NULL,1),(2,NULL,2,5,'2018-08-20 18:21:55',NULL,1),(3,NULL,12,1,'2018-08-20 18:22:06',NULL,1),(4,NULL,18,7,'2018-08-20 18:22:59',NULL,1),(5,NULL,23,1,'2018-08-23 10:41:44',NULL,1),(6,NULL,23,1,'2018-08-27 09:25:55',NULL,1),(7,NULL,23,3,'2018-08-28 08:29:50',NULL,1),(8,NULL,23,1,'2018-08-28 09:00:26',NULL,1),(9,NULL,23,5,'2018-08-28 09:10:13',NULL,1);
+INSERT INTO `inscricoes` VALUES (10,NULL,24,6,'2018-08-28 15:00:04',NULL,2),(11,NULL,25,6,'2018-08-28 17:13:08',NULL,2);
 /*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `investimentos_inscricoes` (
   `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `parcelas` int(11) DEFAULT '1',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ CREATE TABLE `investimentos_inscricoes` (
 
 LOCK TABLES `investimentos_inscricoes` WRITE;
 /*!40000 ALTER TABLE `investimentos_inscricoes` DISABLE KEYS */;
-INSERT INTO `investimentos_inscricoes` VALUES (1,7,3,22,'2018-08-28 08:54:03',5),(2,7,3,22,'2018-08-28 08:55:11',5),(3,7,3,22,'2018-08-28 08:55:56',5),(4,7,3,22,'2018-08-28 08:56:17',5),(5,7,3,22,'2018-08-28 08:56:27',5),(6,7,3,22,'2018-08-28 08:56:48',5),(7,7,3,22,'2018-08-28 08:57:03',5),(8,7,3,22,'2018-08-28 08:57:25',5),(9,7,3,22,'2018-08-28 08:57:38',5),(10,7,3,22,'2018-08-28 08:58:01',5),(11,7,3,22,'2018-08-28 08:58:17',5),(12,7,3,22,'2018-08-28 08:58:29',5),(13,7,3,22,'2018-08-28 08:58:36',5),(14,7,3,22,'2018-08-28 08:58:50',5),(15,7,3,22,'2018-08-28 08:59:13',5),(16,7,3,22,'2018-08-28 08:59:36',5),(17,7,3,22,'2018-08-28 08:59:46',5),(18,7,3,22,'2018-08-28 08:59:57',5),(19,7,3,22,'2018-08-28 09:00:14',5),(20,8,1,22,'2018-08-28 09:00:30',5),(21,8,1,22,'2018-08-28 09:00:44',5),(22,8,1,22,'2018-08-28 09:04:10',5),(23,8,1,22,'2018-08-28 09:04:36',5),(24,8,1,22,'2018-08-28 09:04:45',5),(25,9,5,22,'2018-08-28 09:10:46',5),(26,9,5,22,'2018-08-28 09:12:08',5),(27,9,5,22,'2018-08-28 09:12:27',6);
+INSERT INTO `investimentos_inscricoes` VALUES (28,10,1,24,'2018-08-28 15:01:20',1),(29,11,6,27,'2018-08-28 17:13:17',3);
 /*!40000 ALTER TABLE `investimentos_inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,7 +252,7 @@ CREATE TABLE `loadfiles` (
   `src` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `place` enum('1','2','3') COLLATE utf8_unicode_ci NOT NULL DEFAULT '3' COMMENT '1 Site | 2 Sistema | 3 Common',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,8 +261,65 @@ CREATE TABLE `loadfiles` (
 
 LOCK TABLES `loadfiles` WRITE;
 /*!40000 ALTER TABLE `loadfiles` DISABLE KEYS */;
-INSERT INTO `loadfiles` VALUES (1,'https://code.jquery.com/jquery-3.3.1.min.js','3'),(2,'css/system.css','2'),(3,'css/reset.css','3'),(4,'css/font_loader.css','3'),(5,'js/main.js','3'),(6,'js/materialize.js','3'),(7,'css/materialize.css','3'),(8,'js/jquery.mask.min.js','3');
+INSERT INTO `loadfiles` VALUES (1,'js/jquery-3.3.1.min.js','3'),(2,'css/system.css','2'),(3,'css/reset.css','3'),(4,'css/font_loader.css','3'),(5,'js/main.js','3'),(6,'js/materialize.js','3'),(7,'css/materialize.css','3'),(8,'js/jquery.mask.min.js','3'),(9,'js/table_filter.js','3'),(10,'css/site.css','1'),(11,'js/site.js','1');
 /*!40000 ALTER TABLE `loadfiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `material_turma`
+--
+
+DROP TABLE IF EXISTS `material_turma`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `material_turma` (
+  `idmaterial` int(11) NOT NULL AUTO_INCREMENT,
+  `idupload` int(11) NOT NULL,
+  `idturma` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idmaterial`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `material_turma`
+--
+
+LOCK TABLES `material_turma` WRITE;
+/*!40000 ALTER TABLE `material_turma` DISABLE KEYS */;
+INSERT INTO `material_turma` VALUES (1,1,24,6,'2018-09-18 09:42:50');
+/*!40000 ALTER TABLE `material_turma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `material_upload`
+--
+
+DROP TABLE IF EXISTS `material_upload`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `material_upload` (
+  `idupload` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `autor` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `data_upload` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idusuario` int(11) NOT NULL,
+  `caminho_arquivo` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `tamanho` int(11) DEFAULT '0',
+  `hash` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`idupload`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `material_upload`
+--
+
+LOCK TABLES `material_upload` WRITE;
+/*!40000 ALTER TABLE `material_upload` DISABLE KEYS */;
+INSERT INTO `material_upload` VALUES (1,'Livro 1','Alguém','2018-09-14 10:56:31',1,'uploads/material/40d6c75c73452ed64e4f25c7b305f633.pdf',275,'a0be179234efb5f0f805f5ee6c7a4ae6'),(3,'Meu livro','Eu mesmo','2018-09-14 10:58:22',1,'uploads/material/620df3eb2f857d57fdf00f271b1ecad7.pdf',86,'d10a8aed26448625d7f0091ead840d2a'),(6,'Meu livro','Eu mesmo','2018-09-14 10:58:57',1,'uploads/material/3abebe432d2c33e27ad3021c94d46a64.pdf',111,'1d2684e6b45a3ad0ac71e211d592edf8');
+/*!40000 ALTER TABLE `material_upload` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -279,7 +336,7 @@ CREATE TABLE `parcelas_investimentos` (
   `vencimento` date DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 = A pagar; 1 = Paga;',
   PRIMARY KEY (`idparcela`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +345,7 @@ CREATE TABLE `parcelas_investimentos` (
 
 LOCK TABLES `parcelas_investimentos` WRITE;
 /*!40000 ALTER TABLE `parcelas_investimentos` DISABLE KEYS */;
-INSERT INTO `parcelas_investimentos` VALUES (1,0,20.00,NULL,0),(2,0,20.00,NULL,0),(3,26,20.00,NULL,0),(4,26,20.00,NULL,0),(5,26,20.00,NULL,0),(6,26,20.00,NULL,0),(7,26,20.00,NULL,0),(8,27,16.65,NULL,0),(9,27,16.67,NULL,0),(10,27,16.67,NULL,0),(11,27,16.67,NULL,0),(12,27,16.67,NULL,0),(13,27,16.67,NULL,0);
+INSERT INTO `parcelas_investimentos` VALUES (14,29,93.34,NULL,1),(15,29,93.33,NULL,0),(16,29,93.33,NULL,0);
 /*!40000 ALTER TABLE `parcelas_investimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,7 +418,7 @@ CREATE TABLE `turmas` (
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Ativa; 3 = Encerrada;',
   `aula_unica` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idturma`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,7 +427,7 @@ CREATE TABLE `turmas` (
 
 LOCK TABLES `turmas` WRITE;
 /*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
-INSERT INTO `turmas` VALUES (1,1,'Turma 1',25,0.00,NULL,1,0),(2,2,'TER03',20,0.00,'2018-08-31',2,0),(3,4,'Turma 1',10,0.00,NULL,1,0),(4,1,'Turma 2',10,0.00,NULL,1,0),(5,1,'Turma 2',30,0.00,NULL,1,0),(6,1,'Turma 3',20,0.00,NULL,1,0),(7,1,'Turma 4',20,0.00,NULL,1,0),(8,3,'Turma 1',10,0.00,NULL,1,0),(9,4,'Turma A1',30,150.00,NULL,1,0),(10,4,'Turma A2',28,120.00,'2018-07-18',2,0),(11,1,'Turma A3',30,130.00,'2018-09-10',1,0),(12,4,'Turma B1',30,120.00,'2018-08-10',1,0),(13,3,'Turma 10',10,0.00,'2018-09-07',2,0),(14,3,'Turma 10',10,0.00,'2018-09-10',2,0),(15,5,'BA01',10,120.00,'2018-09-10',2,0),(17,3,'MRQ01',10,0.00,'2018-09-10',2,0),(18,3,'MRQ Rosa 02',10,0.00,'2018-09-10',2,0),(19,1,'Caridade',10,80.00,'2018-09-10',2,0),(20,1,'Caridade',10,80.00,'2018-09-10',2,0),(21,3,'MRQ Rosa 03',10,0.00,'2018-08-15',2,0),(22,4,'A01',30,120.00,'2018-08-18',2,0),(23,3,'Teste de Investimentos',10,0.00,'2018-09-10',2,1);
+INSERT INTO `turmas` VALUES (24,2,'TER01',30,120.00,'2018-09-10',2,0),(25,1,'RI01',10,0.00,'2018-11-05',2,1);
 /*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,7 +470,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984481526','5332715749','53991171142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','04059242083','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984382243','5332715749',NULL,3),(4,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$F3GtMkpfDq3yjpmlbp/7w.3RDUCkhzmtHZ05nJ.r8wx1DATjJDkvm','03000000002','','1957-08-24','Dona de Casa','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53984481526','5332715749',NULL,NULL,1),(5,'Fulano dos Testes','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','00000000002','0000000000','1998-10-03','Desocupado','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,NULL,2),(6,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','04059242081','1123434531','1957-08-24','Tester','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,'53991171142',2),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','00000000040','0000000000','2010-10-10','Dona Proprietária','96090000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'5332000000',NULL,NULL,'53991000000',4),(8,'João da Silva','joaodasilva@gmail.com',1,'$2y$10$9p8aPIDQnIkkD9jMstHu4u/VRfaLzXUR0LavphmvGDMbJ.VwsRunK','00011122233','1123434532','1998-10-03','Frentista de Tesla','00112233','AC','Cidade do Estado','Bairro','Rua Avenida',18,'Kakkakakamamaamalalal teste, testando o','53991171142',NULL,NULL,'53991171142',1);
+INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984481526','5332715749','53991171142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','04059242083','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984382243','5332715749',NULL,3),(4,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','04059242081','1123434531','1957-08-24','Tester','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,'53991171142',2),(5,'Fulano dos Testes','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','00000000002','0000000000','1998-10-03','Desocupado','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,NULL,2),(6,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$JD.aX0o//NPCE2YlTvBwT.coUs7WGWQP3msA8phuQm4/1tX6dwbrO','03000000002','','1957-08-24','Dona de Casa','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53984481526','5332715749',NULL,NULL,1),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','00000000040','0000000000','2010-10-10','Dona Proprietária','96090000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'5332000000',NULL,NULL,'53991000000',4),(8,'João da Silva','joaodasilva@gmail.com',1,'$2y$10$9p8aPIDQnIkkD9jMstHu4u/VRfaLzXUR0LavphmvGDMbJ.VwsRunK','00011122233','1123434532','1998-10-03','Frentista de Tesla','00112233','AC','Cidade do Estado','Bairro','Rua Avenida',18,'Kakkakakamamaamalalal teste, testando o','53991171142',NULL,NULL,'53991171142',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,4 +518,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-28  9:14:23
+-- Dump completed on 2018-09-24  9:22:13
