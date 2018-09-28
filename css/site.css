@@ -42,6 +42,18 @@ body, html {
 	/*height: 2500px;*/
 }
 
+body.sticky {
+	padding-top: 90px;
+}
+
+body.sticky #med_header {
+	z-index: auto;
+}
+
+body.sticky #caminhodepao {
+	/*top: 140px;*/
+}
+
 label {
 	font-size: 1rem !important;
 }
@@ -620,7 +632,7 @@ nav#caminhodepao {
 	color: #69439a;
 }
 
-.conteudo_home_alunos {
+.conteudo_espaco_aluno {
 	width: calc(100% - 300px);
 	height: calc(100% - 60px);
 	max-height: calc(100% - 60px);
@@ -631,7 +643,7 @@ nav#caminhodepao {
 	overflow-x: hidden;
 }
 
-.conteudo_home_alunos h2 {
+.conteudo_espaco_aluno h2 {
 	font-family: Roboto;
 	color: #69439a;
 	font-weight: bold;
@@ -641,7 +653,7 @@ nav#caminhodepao {
 	text-align: center;
 }
 
-.conteudo_home_alunos h3 {
+.conteudo_espaco_aluno h3 {
 	font-family: Roboto;
 	color: #69439a;
 	font-weight: bold;
@@ -651,7 +663,124 @@ nav#caminhodepao {
 	margin-bottom: 10px;
 }
 
-.proximos_cursos {
+.row_espaco_aluno {
 	margin: 0 !important;
 	padding: 20px;
+}
+
+.card {
+	width: 250px;
+	height: 175px;
+	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.4);
+	position: relative;
+	display: inline-block;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	transition: all linear 0.1s;
+}
+
+.card:first-child {
+	margin-left: 0;
+}
+
+.card:hover {
+	box-shadow: 0px 3px 20px 1px rgba(0,0,0,0.4);
+}
+
+
+/* Teste card */
+.card[data-curso="1"] .cover { 
+	background-image: url(../img/capa_reiki.jpg);
+}
+
+.card[data-curso="2"] .cover { 
+	background-image: url(../img/capa_terapeuta.jpg);
+}
+
+.card[data-curso="3"] .cover { 
+	background-image: url(../img/capa_mesa.jpg);
+}
+/* Fim teste card */
+
+
+.cover {
+	width: 250px;
+	height: 70%;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.content {
+	width: 250px;
+	height: 30%;
+	position: relative;
+}
+
+.status_circle {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	position: absolute;
+	left: 10px;
+	bottom: 15%;
+	transform: translateY(+50%);
+}
+
+.status_circle::after {
+	direction: ltr;
+	display: inline-block;
+	font-family: 'Material Icons';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: normal;
+	letter-spacing: normal;
+	line-height: 1;
+	text-transform: none;
+	white-space: nowrap;
+	word-wrap: normal;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.status_circle[data-status="2"]::after {
+	content: "done_all";
+	/*color: #45ca94;*/
+	color: #4CAF50;
+}
+
+.status_circle[data-status="1"]::after {
+	content: "schedule";
+	/*color: #f7ac4c;*/
+	color: #ff9800;
+}
+
+.content p {
+	font-size: 12pt;
+	color: #444;
+	text-align: center;
+	display: inline-block;
+	padding-right: 10px;
+	width: calc(100% - 50px);
+	position: absolute;
+	right: 0;
+	top: 50%;
+	font-family: Roboto Condensed;
+	transform: translateY(-50%);
+}
+
+.legenda {
+	text-align: left;
+    line-height: 130%;
+    margin-bottom: 30px;
+}
+
+.legenda i {
+	vertical-align: middle;
+	padding-right: 5px;
 }

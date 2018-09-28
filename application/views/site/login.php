@@ -28,7 +28,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 						<div class="form_group col s12">
 							<label>CPF ou E-mail</label>
 							<div class="input-field">
-								<input type="text" autocomplete="off" name="login">
+								<input type="text" name="login">
 							</div>
 						</div>
 					</div>

@@ -13,7 +13,7 @@ $(document).ready(function() {
 	if ($("#cabecalho").length) {
 		sticky = $("#cabecalho").offset().top + 40;
 		if ($("#caminhodepao").length) {
-			sticky = 200;
+			sticky = 90;
 		}
 		
 		handleStickyHeader();
@@ -48,7 +48,7 @@ $(document).on("scroll", function() {
 });
 
 function handleStickyHeader() {
-	if ($(document).scrollTop() >= sticky && $("html").height() >= 732) {
+	if ($(document).scrollTop() >= sticky && ($("html").height() - $(window).innerHeight()) >= sticky) {
 		if (!$("#cabecalho").hasClass('sticky')) {
 			$("#cabecalho").addClass("sticky");
 		}
@@ -57,9 +57,14 @@ function handleStickyHeader() {
 			$("#menu_topo").addClass("sticky");
 		}
 
+		if (!$("body").hasClass("sticky")) {
+			$("body").addClass("sticky");
+		}
+
 		return;
 	}
 
 	$("#cabecalho").removeClass("sticky");
 	$("#menu_topo").removeClass("sticky");
+	$("body").removeClass("sticky");
 }
