@@ -118,7 +118,7 @@ class M_investimentos extends CI_Model {
 		foreach ($investimentos as &$investimento) {
 			$investimento->forma = $this->getInvestimento(array('id' => "{$investimento->idforma}"))[0];
 
-			if ($investimento->forma->forma == 2) {
+			if ($investimento->forma->forma == 2 || $investimento->forma->forma == 3) {
 				$investimento->forma->parcelas = $this->getParcelas(array('cwhere' => "idinvestimento = {$investimento->idinvestimento}"));
 			}
 		}
@@ -273,6 +273,26 @@ class M_investimentos extends CI_Model {
 		$parcelas_inserir[0]['valor'] = $parcelamento_completo[(string)$qnt_parcelas]->valor_diferente;
 		$query = $this->db->insert_batch('parcelas_investimentos', $parcelas_inserir);
 
+		return !!$query;
+	}
+	function insertMensalidades($idinvestimento)
+	{
+		if (!isset($idinvestimento)) {
+			return false;
+		}
+
+		$parcelas_inserir = array();
+		$investimento = $this->getInvestimentoInscricao(array('id' => $idinvestimento))[0];
+		$qnt_parcelas = $investimento->forma->parcelas;
+
+		for($i=0;$i<$qnt_parcelas;$i++) {
+			$parcelas_inserir[] = array(
+				'idinvestimento' => $investimento->idinvestimento,
+				'valor' => $investimento->forma->valor_parcela
+			);
+		}
+
+		$query = $this->db->insert_batch('parcelas_investimentos', $parcelas_inserir);
 		return !!$query;
 	}
 }

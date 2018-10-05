@@ -6,7 +6,7 @@
 			<p><i class="material-icons orange-text">schedule</i> Inscrição aguardando confirmação</p>
 		</div>
 		<?php foreach ($cursos as $curso) : ?>
-			<div class="card" data-curso="<?=$curso['curso']->idcurso?>">
+			<div class="card" data-insc="<?=$curso['inscricao']->idinscricao?>" data-curso="<?=$curso['curso']->idcurso?>">
 				<div class="cover"></div>
 				<div class="status_circle" data-status="<?=$curso['inscricao']->status?>"></div>
 				<div class="content"><p><?=$curso['curso']->nome?></p></div>

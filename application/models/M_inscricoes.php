@@ -20,6 +20,7 @@ class M_inscricoes extends CI_Model {
 		eventos.`nome` AS nome_evento,
 		turmas.`identificacao` AS nome_turma,
 		turmas.`idcurso`,
+		cursos.`nome` AS nome_curso,
 		usuarios.`nome` AS nome_usuario 
 		FROM
 		inscricoes 
@@ -28,7 +29,9 @@ class M_inscricoes extends CI_Model {
 		JOIN turmas 
 		ON turmas.`idturma` = inscricoes.`idturma` 
 		JOIN usuarios 
-		ON usuarios.`idusuario` = inscricoes.`idusuario` ";
+		ON usuarios.`idusuario` = inscricoes.`idusuario`
+		JOIN cursos
+		ON cursos.`idcurso` = turmas.`idcurso`";
 		$where = null;
 		$cond = null;
 
@@ -161,4 +164,79 @@ class M_inscricoes extends CI_Model {
 
 		return $inscricoes_aluno;
 	}
+
+	// function getInvestimentoInscricao($opts=array())
+	// {
+	// 	$query = array();
+	// 	$query[] = "SELECT 
+	// 	invin.`idinvestimento`,
+	// 	invin.`idinscricao`,
+	// 	invin.`idusuario`,
+	// 	invin.`idforma`,
+	// 	invin.`data_cadastro`,
+	// 	invin.`parcelas`,
+	// 	forminv.`idturma`,
+	// 	forminv.`total`,
+	// 	forminv.`dia_vencimento`,
+	// 	forminv.`data_vencimento`,
+	// 	forminv.`tipo`
+	// 	FROM investimentos_inscricoes AS invin
+	// 	JOIN forma_investimento AS forminv
+	// 	ON forminv.`idinvestimento` = invin.`idforma`";
+	// 	$where = null;
+	// 	$cond = null;
+
+	// 	if (isset($opts['id'])) {
+	// 		if (gettype($opts['id']) == "array") {
+	// 			$cond = "invin.`idinscricao` IN (".implode(",", $opts['id']).")";
+	// 		} else {
+	// 			$cond = "invin.`idinscricao` = {$opts['id']}";
+	// 		}
+	// 		$where = "WHERE ".$cond;
+	// 	}
+
+	// 	if (isset($opts['!id'])) {
+	// 		if (gettype($opts['!id']) == "array") {
+	// 			$cond = "invin.`idinscricao` NOT IN (".implode(",", $opts['!id']).")";
+	// 		} else {
+	// 			$cond = "invin.`idinscricao` != {$opts['!id']}";
+	// 		}
+
+	// 		$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+	// 	}
+
+	// 	if (isset($opts['cwhere'])) {
+	// 		$cond = $opts['cwhere'];
+	// 		$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+	// 	}
+
+	// 	$query[] = $where;
+
+	// 	if (isset($opts['groupby'])) {
+	// 		$query[] = "GROUP BY {$opts['groupby']}";
+	// 	}
+
+	// 	if (isset($opts['orderby'])) {
+	// 		$query[] = "ORDER BY {$opts['orderby']}";
+	// 	}
+
+	// 	if (isset($opts['limit'])) {
+	// 		$query[] = "LIMIT {$opts['limit']}";
+	// 	}
+
+	// 	$query = implode(" ", $query);
+	// 	$result = $this->db->query($query);
+
+	// 	if (!$result) {
+	// 		return false;
+	// 	}
+
+	// 	$retorno = $result->result();
+
+	// 	foreach ($retorno as $inv) {
+	// 		if ($inv->)
+	// 	}
+
+	// 	return $retorno;
+	// }
 }

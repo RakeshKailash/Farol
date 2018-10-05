@@ -8,6 +8,7 @@ class Espacoaluno extends CI_Controller {
 		$this->load->model("m_eventos");
 		$this->load->model("m_inscricoes");
 		$this->load->model("m_usuarios");
+		$this->load->model("m_investimentos");
 		$this->load->model("m_cursos");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
@@ -78,6 +79,36 @@ class Espacoaluno extends CI_Controller {
 
 		$this->load->view("site/common/topo_aluno.php", $infoH);
 		$this->load->view("site/meus_cursos.php", $infoB);
+		$this->load->view("site/common/fim_aluno.php");
+	}
+
+	function Curso($idinscricao=null)
+	{
+		if (!$this->m_usuarios->isLoggedSite()) {
+			return redirect("site/espacoaluno/login");
+		}
+
+		if (!$idinscricao) {
+			return redirect("site/espacoaluno/cursos");
+		}
+
+		$loads = $this->m_config->getLoads(1);
+		$loads = $this->parserlib->clearr($loads, "src");
+		$infoH['loads'] = $this->sl->setScripts($loads);
+		$infoB = array();
+		$idusuario = $this->session->idusuario;
+		$curso = $this->m_inscricoes->getInscricao(array(
+			'id' => $idinscricao,
+			'cwhere' => "inscricoes.`idusuario` = {$idusuario}"
+		))[0];
+		$investimento = $this->m_investimentos->getInvestimentoInscricao(array(
+			'cwhere' => "idinscricao = {$idinscricao} AND idusuario = {$idusuario}"
+		))[0];
+		$infoB['curso'] = $curso;
+		$infoB['financeiro'] = $investimento;
+
+		$this->load->view("site/common/topo_aluno.php", $infoH);
+		$this->load->view("site/curso_aluno.php", $infoB);
 		$this->load->view("site/common/fim_aluno.php");
 	}
 

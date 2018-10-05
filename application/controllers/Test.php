@@ -15,7 +15,7 @@ class Test extends CI_Controller {
 	}
 
 	function index() {
-		$this->load->view("test/upload");
+		// echo $this->m_investimentos->insertMensalidades()28;
 	}
 
 	function upload()

@@ -112,7 +112,7 @@ class Inscricoes extends CI_Controller {
 			'idforma' => $forma_investimento->idinvestimento
 		);
 
-		if ($data['forma_investimento'] == 2) {
+		if ($data['forma_investimento'] == 2 || $data['forma_investimento'] == 3) {
 			$investimento['parcelas'] = $data['qnt_parcelas'];
 		}
 
@@ -123,6 +123,14 @@ class Inscricoes extends CI_Controller {
 				$result = $this->m_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
 				if (!$result) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao cadastrar as parcelas do investimento.</p>");
+					return redirect("sistema/Inscricoes");
+				}
+			}
+
+			if ($data['forma_investimento'] == 3) {
+				$result = $this->m_investimentos->insertMensalidades($idinvestimento);
+				if (!$result) {
+					$this->session->set_flashdata('errors', "<p class='error'>Erro ao cadastrar as mensalidades do investimento.</p>");
 					return redirect("sistema/Inscricoes");
 				}
 			}
