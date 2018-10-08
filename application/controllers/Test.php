@@ -16,6 +16,26 @@ class Test extends CI_Controller {
 
 	function index() {
 		// echo $this->m_investimentos->insertMensalidades()28;
+		$number = 18;
+
+		if ($number < 6) {
+			echo 1;
+			return;
+		}
+
+		if ($number >= 6 && $number <= 10) {
+			echo 2;
+			return;
+		}
+
+		if ($number > 10 && $number <= 15) {
+			echo 3;
+			return;
+		}
+
+		echo 4; return;
+
+		// echo 18 % 4;
 	}
 
 	function upload()

@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 	$(".tabs_curso").tabs({swipeable: true});
 	$('.material_aluno').tooltip({outDuration: 0, exitDelay: 0});
+	$('.tooltiped[data-tooltip]').tooltip({outDuration: 0, exitDelay: 0, margin: -10});
 
 	if ($("#cabecalho").length) {
 		sticky = $("#cabecalho").offset().top + 40;

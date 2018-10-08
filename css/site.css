@@ -776,8 +776,8 @@ nav#caminhodepao {
 
 .legenda {
 	text-align: left;
-    line-height: 130%;
-    margin-bottom: 30px;
+	line-height: 130%;
+	margin-bottom: 30px;
 }
 
 .legenda i {
@@ -787,57 +787,78 @@ nav#caminhodepao {
 
 .tabs_curso i {
 	vertical-align: middle;
-    padding-right: 5px;
+	padding-right: 5px;
 }
 
 .aviso_aluno:first-child {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .aviso_aluno:nth-child(odd) {
-    background-color: #ededed;
+	background-color: #ededed;
 }
 .aviso_aluno {
-    padding: 15px 10px;
-    margin: 0;
-    display: inline-block;
-    width: 100%;
-    font-family: Roboto;
-    color: #666;
+	padding: 15px 10px;
+	margin: 0;
+	display: inline-block;
+	width: 100%;
+	font-family: Roboto;
+	color: #666;
 }
 
 .material_aluno {
 	display: inline-block;
-    height: auto;
-    width: 120px;
-    text-align: center;
-    margin-right: 10px;
-    margin-top: 10px;
-    cursor: pointer;
+	height: auto;
+	width: 120px;
+	text-align: center;
+	margin-right: 10px;
+	margin-top: 10px;
+	cursor: pointer;
 }
 
 .material_aluno .icone_material {
 	width: 100px;
-    height: 100px;
+	height: 100px;
 }
 
 .material_aluno .titulo_material {
 	color: #666;
 }
 
-#tab_financeiro p.inv_devedor, #tab_financeiro p.inv_pago {
-    font-family: Roboto;
-    font-size: 13pt;
-    padding: 5px 10px;
-    letter-spacing: 0.3px;
-    font-weight: 500;
+#container_financeiro {
+	/*column-count: 4;*/
+	column-fill: balance;
 }
 
-#tab_financeiro p.inv_devedor {
-    /*color: #ff6464;*/
-    color: #666;
+#container_financeiro p{
+	font-family: Roboto;
+	font-size: 13pt;
+	padding: 10px;
+	font-weight: 500;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
 }
 
-#tab_financeiro p.inv_pago {
+#container_financeiro p:nth-child(odd) {
+	background-color: #ededed;
+}
+
+#container_financeiro p.inv_devedor {
+	color: #ff6464;
+}
+
+#container_financeiro p.inv_pago {
 	color: #4CAF50
+}
+
+#container_financeiro p.inv_normal {
+	color: #666;
+}
+
+.venc_parcelas_legenda {
+	display: inline-block;
+    width: 100px;
+    text-align: right;
+    padding-right: 20px;
 }

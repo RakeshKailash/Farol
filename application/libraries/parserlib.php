@@ -454,4 +454,21 @@ class Parserlib
 
    		return $result;
    }
+
+   function getBestLayout($obj_count=0)
+   {
+   		if (!$obj_count || $obj_count < 6) {
+   			return 1;
+   		}
+
+		if ($obj_count >= 6 && $obj_count <= 10) {
+			return 2;
+		}
+
+		if ($obj_count > 10 && $obj_count <= 15) {
+			return 3;
+		}
+
+		return 4;
+   }
 }
