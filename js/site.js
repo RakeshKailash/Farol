@@ -4,6 +4,8 @@ var sticky
 $(document).ready(function() {
 	$("body.full_size").css("height", $("html").height()+"px");
 
+	initSlider();
+
 	$('.m_dd_trigger').dropdown({
 		constrainWidth: false,
 		coverTrigger: false,
@@ -90,6 +92,82 @@ $(document).ready(function() {
 $(document).on("scroll", function() {
 	handleStickyHeader();
 });
+
+function initSlider() {
+	var size = $("#imagens_slider").find("a").length
+	, current = 0
+	, timer
+	, proximo
+	, generica
+	;
+
+	for (var i = 0; i < size; i++) {
+		$("#controles").append("<span class='controle'></span>");
+	}
+
+	$("#imagens_slider").find("a").eq(0).addClass("current");
+	$("#controles").find(".controle").eq(0).addClass("current");
+
+	function troca(num) {
+		current = $("#imagens_slider").find("a.current").index();
+		
+		$("#imagens_slider").find("a").removeClass('current');
+		$("#controles").find(".controle").removeClass("current");
+
+		if (num == "+") {
+			proximo = current + 1;
+			generica = 0;
+		}
+
+		if (num == "-") {
+			proximo = current - 1;
+			generica = size - 1;
+		}
+
+		if (num != "+" && num != "-") {
+			proximo = num;
+			generica = 0;
+		}
+		
+		if ($("#imagens_slider").find("a").eq(proximo).length) {
+			$("#imagens_slider").find("a").eq(proximo).addClass("current");
+			$("#controles").find(".controle").eq(proximo).addClass("current");
+		} else {
+			$("#imagens_slider").find("a").eq(generica).addClass("current");
+			$("#controles").find(".controle").eq(generica).addClass("current");
+		}
+	}
+
+	function ligaSlider() {
+		timer = window.setInterval(function () {
+			troca("+");
+		}, 10000);
+	}
+
+	function resetaSlider() {
+		clearInterval(timer);
+		ligaSlider();
+	}
+
+	$("#proxima_img").click(function () {
+		troca("+");
+		resetaSlider();
+	});
+
+	$("#anterior_img").click(function () {
+		troca("-");
+		resetaSlider();
+	});
+
+	$("#controles > .controle").click(function() {
+		var controle_num = $(this).index();
+		troca(controle_num);
+		resetaSlider();
+	});
+
+	// Inicia tudo
+	ligaSlider();
+}
 
 function getRandomColor() {
 	var letters = '56789ABCD';

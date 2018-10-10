@@ -32,8 +32,8 @@
                 <li><a class="waves-effect" href="#!"><i class="material-icons">attach_money</i>Financeiro</a></li>
                 <li><div class="divider"></div></li>
                 <li><a class="waves-effect" href="#!"><i class="material-icons">account_circle</i>Minha Conta</a></li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a class="waves-effect" href="<?=RAIZ?>site/espacoaluno/logout"><i class="material-icons">power_settings_new</i>Sair</a></li>
                 <li><div class="divider"></div></li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">arrow_back</i>Voltar ao Site</a></li>
+                <li><a class="waves-effect" href="<?=RAIZ?>site"><i class="material-icons">arrow_back</i>Voltar ao Site</a></li>
             </ul>
             <div class="conteudo_espaco_aluno">

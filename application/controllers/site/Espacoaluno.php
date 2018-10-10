@@ -63,6 +63,12 @@ class Espacoaluno extends CI_Controller {
 		return redirect("site/espacoaluno");
 	}
 
+	function logout()
+	{
+		$this->m_usuarios->logout();
+		return redirect('site');
+	}
+
 	function Cursos()
 	{
 		if (!$this->m_usuarios->isLoggedSite()) {

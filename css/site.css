@@ -247,6 +247,46 @@ input, textarea {
 	margin-right: 0;
 }
 
+#slider_home #proxima_img, #slider_home #anterior_img {
+	display: inline-block;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	width: 70px;
+	cursor: pointer;
+}
+
+#slider_home #proxima_img i, #slider_home #anterior_img i {
+	color: #666;
+	font-size: 52pt;
+	position: absolute;
+	top: 50%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#slider_home #proxima_img {
+	right: 0;
+}
+
+#slider_home #proxima_img i {
+	right: 50%;
+	transform: translate(50%,-50%);
+}
+
+#slider_home #anterior_img {
+	left: 0;
+}
+
+#slider_home #anterior_img i {
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
 #container_menu {
 	padding: 0.75rem;
 }
@@ -858,7 +898,11 @@ nav#caminhodepao {
 
 .venc_parcelas_legenda {
 	display: inline-block;
-    width: 100px;
-    text-align: right;
-    padding-right: 20px;
+	width: 100px;
+	text-align: right;
+	padding-right: 20px;
+}
+
+#imagens_slider a:not(.current) {
+	display: none;
 }
