@@ -3,7 +3,7 @@
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">school</i>Editar curso</p><a href="<?=base_url('sistema/Cursos')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<p class="page_title"><i class="material-icons">school</i>Cursos - Editar</p><a href="<?=base_url('sistema/Cursos')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Cursos</a>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>

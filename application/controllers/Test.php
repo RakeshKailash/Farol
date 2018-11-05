@@ -4,38 +4,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Test extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_dias_eventos");
-		$this->load->model("m_aulas");
-		$this->load->model("m_turmas");
-		$this->load->model("m_eventos");
-		$this->load->model("m_investimentos");
-		$this->load->model("m_inscricoes");
+		$this->load->model("M_dias_eventos");
+		$this->load->model("M_aulas");
+		$this->load->model("M_turmas");
+		$this->load->model("M_eventos");
+		$this->load->model("M_investimentos");
+		$this->load->model("M_inscricoes");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
 	function index() {
-		// echo $this->m_investimentos->insertMensalidades()28;
-		$number = 18;
-
-		if ($number < 6) {
-			echo 1;
-			return;
-		}
-
-		if ($number >= 6 && $number <= 10) {
-			echo 2;
-			return;
-		}
-
-		if ($number > 10 && $number <= 15) {
-			echo 3;
-			return;
-		}
-
-		echo 4; return;
-
-		// echo 18 % 4;
+		echo "<pre>";
+		// $this->M_permissoes->setSessionPermissoes();
+		var_dump($_SESSION);
+		echo "</pre>";
+	}
+	function post()
+	{
+		echo "<pre>";
+		var_dump($_POST);
+		echo "</pre>";die;
 	}
 
 	function upload()
@@ -65,7 +54,7 @@ class Test extends CI_Controller {
 			return;
 		}
 
-		$investimentos = $this->m_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
+		$investimentos = $this->M_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
 
 		foreach ($investimentos as &$investimento) {
 			$investimento->total = $this->parserlib->formatMoney($investimento->total);
@@ -81,8 +70,8 @@ class Test extends CI_Controller {
 	function td()
 	{
 		$idevento = 19;
-		$aula = $this->m_eventos->getEventos(array('id' => $idevento))[0];
-		$primeira_aula = $this->m_eventos->getEventos(array('cwhere' => "eventos.`idturma` = {$aula->idturma}", 'orderby' => 'idevento ASC', 'limit' => 1))[0];
+		$aula = $this->M_eventos->getEventos(array('id' => $idevento))[0];
+		$primeira_aula = $this->M_eventos->getEventos(array('cwhere' => "eventos.`idturma` = {$aula->idturma}", 'orderby' => 'idevento ASC', 'limit' => 1))[0];
 		if ($aula->idevento == $primeira_aula->idevento) {
 			echo 1;
 			return;

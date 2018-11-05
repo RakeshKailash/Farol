@@ -3,7 +3,7 @@ $curyear = isset($_GET['curyear']) ? $_GET['curyear'] : date('Y');
 ?>
 
 <p class="page_title"><i class="material-icons">today</i>Agenda</p>
-<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Painel</a>
 <?php foreach ($agenda as $num => $ano): ?>
 	<a href="<?=base_url('sistema/Agenda?curyear='.$num)?>" class="btn btn_table_action btn_year <?=$num == $curyear ? 'curyear' : ''?>"><?=$num?></a>
 <?php endforeach ?>

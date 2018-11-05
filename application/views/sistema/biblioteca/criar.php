@@ -3,7 +3,7 @@ $userdata = isset($this->session->formdata) ? $this->session->formdata : array()
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">school</i>Novo material</p><a href="<?=base_url('sistema/Biblioteca')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<p class="page_title"><i class="material-icons">school</i>Arquivos - Novo</p><a href="<?=base_url('sistema/Biblioteca')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Arquivos</a>
 <div class="form_messages hide">
 	<?=$errors;?>
 </div>

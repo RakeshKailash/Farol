@@ -92,19 +92,14 @@ class M_professores extends CI_Model {
 		return $this->getProfessores(array('id' => $idprofessor));
 	}
 
-	function deleteProfessor($idprofessor, $completeremove=0)
+	function deleteProfessor($idprofessor)
 	{
 		if (!isset($idprofessor)) {
 			return false;
 		}
 
 		$this->db->where('idprofessor', $idprofessor);
-
-		if (!$completeremove) {
-			$query = $this->db->update("professores", array('status' => 0));
-		} else {
-			$query = $this->db->delete("professores");
-		}
+		$query = $this->db->update("professores", array('status' => 0));
 
 		return !!$query;
 	}

@@ -58,6 +58,7 @@ $(document).ready(function(){
 	$('.sidenav:not(.sidenav_alunos)').sidenav();
 	$('.sidenav_alunos').sidenav({isFixed: true});
 	$('select').formSelect();
+	$(".modal").modal();
 	$('.dropdown-trigger').dropdown();
 	$('.dd_trigger_busca').dropdown({
 		constrainWidth: false,
@@ -81,7 +82,7 @@ function initPickers()
 
 function initMasks()
 {
-	$(".phone_mask").mask("(00)0000-00000");
+	$(".phone_mask").mask("(00)00000-0000");
 	$(".date_mask").mask("00/00/0000");
 	$(".cpf_mask").mask("000.000.000-00");
 	$(".cep_mask").mask("00000-000");

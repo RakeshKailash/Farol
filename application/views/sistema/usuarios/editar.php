@@ -3,7 +3,7 @@
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">person</i>Editar usuário</p><a href="<?=base_url('sistema/Usuarios')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<p class="page_title"><i class="material-icons">person</i>Usuários - Editar</p><a href="<?=base_url('sistema/Usuarios')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Usuários</a>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>
@@ -163,9 +163,53 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<a class="btn modal-trigger" href="#modal_permissoes_usuario">Alterar permissões</a>
+	</div>
 	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idusuario?>">
 	<input type="hidden" class="cad_hidden" value="Usuarios">
-	<input type="submit" class="btn" value="Salvar">
-	<input type="reset" class="btn" value="Limpar">
-	<input type="button" class="btn" id="btn_excluir_cadastro" value="Excluir usuário">
+	<input type="submit" class="btn right" value="Salvar">
+	<input type="reset" class="btn right" value="Limpar">
+	<a href="javascript:void(0)" class="btn" id="btn_excluir_cadastro"><i class="material-icons">delete</i> Excluir</a>
 </form>
+
+<div id="modal_excluir" class="modal">
+	<div class="modal-content">
+		<h4>Excluir usuário <?=explode(" ", $userdata->nome)[0]?></h4>
+		<p>Deseja excluir o usuário <?=$userdata->nome?>?</p>
+		<p>Com isso, ele não aparecerá mais na listagem, mas seus registros financeiros e de cursos continuarão em nosso sistema.</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="btn left btn_confirma_exclusao">Sim, excluir</a>
+		<a href="#!" class="modal-close btn left btn_cancela_exclusao">Cancelar</a>
+	</div>
+</div>
+<div id="modal_permissoes_usuario" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h3>Editar Permissões</h3>
+		<div class="col s3 check_mod_acao">
+			<label><input type="checkbox" class="check_all_mod_acao" /><span></span></label>
+			<p style="display: inline-block;">Todas</p>
+		</div>
+		<?php foreach ($lista_permissoes as $modulo): ?>
+			<?php if (sizeof($modulo->mod_acoes) > 0): ?>
+				<div class="row">
+					<div class="col s12">
+						<h5><?=$modulo->descricao?></h4>
+						</div>
+						<?php foreach ($modulo->mod_acoes as $permissao): ?>
+							<div class="col s3 check_mod_acao">
+								<label><input name="mod_acao[]" value="<?=$permissao->idmoduloacao?>" <?=in_array($permissao->idmoduloacao, $permissoes_usuario) ? 'checked' : '';?> type="checkbox" /><span></span></label>
+								<p style="display: inline-block;"><?=$permissao->acao?></p>
+							</div>
+						<?php endforeach ?>
+					</div>
+				<?php endif ?>
+			<?php endforeach ?>
+		</div>
+		<div class="modal-footer">
+			<!-- <input type="hidden" name="idusuario" value=""> -->
+			<a href="#!" class="btn btn_table_action btn_salvar_permissoes">Salvar</a>
+			<a href="#!" class="modal-close btn btn_table_action">Cancelar</a>
+		</div>
+	</div>

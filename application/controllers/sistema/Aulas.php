@@ -4,19 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Aulas extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_aulas");
-		$this->load->model("m_turmas");
-		$this->load->model("m_cursos");
-		$this->load->model("m_professores");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_aulas");
+		$this->load->model("M_turmas");
+		$this->load->model("M_cursos");
+		$this->load->model("M_professores");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
 	function visualizar ($id=null) {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$opts_aula = array(
@@ -27,7 +27,7 @@ class Aulas extends CI_Controller {
 			$opts_aula['id'] = $id;
 		}
 
-		$aulas = $this->m_aulas->getAulas($opts_aula);
+		$aulas = $this->M_aulas->getAulas($opts_aula);
 
 		// foreach ($users as &$value) {
 		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
@@ -41,12 +41,12 @@ class Aulas extends CI_Controller {
 	}
 
 	function novo() {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$infoB['professores'] = $this->m_professores->getProfessores();
+		$infoB['professores'] = $this->M_professores->getProfessores();
 		$opts_turmas = array('cwhere' => "turmas.status != 3");
-		$infoB['turmas'] = $this->m_turmas->getTurma($opts_turmas);
+		$infoB['turmas'] = $this->M_turmas->getTurma($opts_turmas);
 		if (isset($_GET['preid'])) {
 			$preiddata = array('idturma' => $_GET['preid']);
 			$this->session->set_flashdata('formdata', $preiddata);
@@ -54,7 +54,7 @@ class Aulas extends CI_Controller {
 
 		foreach ($infoB['turmas'] as &$turma) {
 			$idcurso = $turma->idcurso;
-			$curso = $this->m_cursos->getCurso(array('id' => $idcurso))[0];
+			$curso = $this->M_cursos->getCurso(array('id' => $idcurso))[0];
 			$turma->nome_curso = $curso->nome;
 		}
 
@@ -81,7 +81,7 @@ class Aulas extends CI_Controller {
 		}
 		
 		$aula = $this->prepareData($aula);
-		$idaula = $this->m_aulas->insertAula($aula);
+		$idaula = $this->M_aulas->insertAula($aula);
 
 		if (isset($data['data_inicio'])) {
 			for ($i=0;$i<count($data['data_inicio']);$i++) {
@@ -106,7 +106,7 @@ class Aulas extends CI_Controller {
 					return redirect("sistema/Aulas/novo");
 				}
 
-				if (!$this->m_aulas->insertDiasAulas($diasAulas)) {
+				if (!$this->M_aulas->insertDiasAulas($diasAulas)) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar os dias da aula.</p>");
 					$this->session->set_flashdata('formdata', $aula);
 					return redirect("sistema/Aulas/novo");
@@ -122,21 +122,21 @@ class Aulas extends CI_Controller {
 			return redirect("sistema/Aulas");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$userdata = $this->m_aulas->getAulas(array('id' => $id))[0];
+		$userdata = $this->M_aulas->getAulas(array('id' => $id))[0];
 
 		$infoB['userdata'] = $userdata;
-		$infoB['professores'] = $this->m_professores->getProfessores();
+		$infoB['professores'] = $this->M_professores->getProfessores();
 		$opts_turmas = array('cwhere' => "turmas.status != 3");
-		// $infoB['dias_aulas'] = $this->m_aulas->getAulas($opts_turmas);
-		$infoB['turmas'] = $this->m_turmas->getTurma($opts_turmas);
+		// $infoB['dias_aulas'] = $this->M_aulas->getAulas($opts_turmas);
+		$infoB['turmas'] = $this->M_turmas->getTurma($opts_turmas);
 
 		foreach ($infoB['turmas'] as &$turma) {
 			$idcurso = $turma->idcurso;
-			$curso = $this->m_cursos->getCurso(array('id' => $idcurso))[0];
+			$curso = $this->M_cursos->getCurso(array('id' => $idcurso))[0];
 			$turma->nome_curso = $curso->nome;
 		}
 		
@@ -159,7 +159,7 @@ class Aulas extends CI_Controller {
 			'cwhere' => "email = '{$data['email']}'"
 		);
 
-		$email_result = $this->m_aulas->getAulas($query_options);
+		$email_result = $this->M_aulas->getAulas($query_options);
 
 		if (sizeof($email_result) > 0) {
 			$errors .= "<p class='error'>O campo E-mail já existe, ele deve ser único.</p>";
@@ -173,13 +173,13 @@ class Aulas extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
-		$this->m_aulas->updateAula($idaula, $data);
+		$this->M_aulas->updateAula($idaula, $data);
 		return redirect("sistema/Aulas");
 	}
 
 	function get_datas()
 	{
-		$datas = $this->m_aulas->getDatas();
+		$datas = $this->M_aulas->getDatas();
 		echo json_encode($datas);
 		return;
 	}

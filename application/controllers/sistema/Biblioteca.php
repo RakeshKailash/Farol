@@ -2,22 +2,29 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Biblioteca extends CI_Controller {
-	function __construct() {
+	function __construct()
+	{
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		// $this->load->model("m_aulas");
-		$this->load->model("m_turmas");
-		$this->load->model("m_cursos");
-		// $this->load->model("m_professores");
-		$this->load->model("m_uploads");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		// $this->load->model("M_aulas");
+		$this->load->model("M_turmas");
+		$this->load->model("M_cursos");
+		// $this->load->model("M_professores");
+		$this->load->model("M_uploads");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
-	function visualizar ($id=null) {
-		$loads = $this->m_config->getLoads(2);
+	function visualizar ($id=null)
+	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar arquivos.</p>");
+			return redirect("sistema");
+		}
+
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$opts_biblio = array(
@@ -28,7 +35,7 @@ class Biblioteca extends CI_Controller {
 			$opts_biblio['id'] = $id;
 		}
 
-		$materiais = $this->m_uploads->getUploads($opts_biblio);
+		$materiais = $this->M_uploads->getUploads($opts_biblio);
 
 		// foreach ($users as &$value) {
 		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
@@ -41,8 +48,14 @@ class Biblioteca extends CI_Controller {
 		$this->load->view("sistema/common/fim.php");
 	}
 
-	function novo() {
-		$loads = $this->m_config->getLoads(2);
+	function novo()
+	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar arquivos.</p>");
+			return redirect("sistema");
+		}
+
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -53,6 +66,11 @@ class Biblioteca extends CI_Controller {
 
 	function upload($field=null)
 	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$field || !isset($_POST)) {
 			return redirect("sistema/Turmas");
 		}
@@ -71,7 +89,7 @@ class Biblioteca extends CI_Controller {
 			'autor' => $data['autor']
 		);
 
-		$subir = $this->m_uploads->uploadFile($field, "material", $material_info);
+		$subir = $this->M_uploads->uploadFile($field, "material", $material_info);
 
 		if (!$subir) {
 			$this->session->set_flashdata('errors', "<p class='error'>Erro ao carregar o arquivo selecionado</p>");
@@ -82,16 +100,22 @@ class Biblioteca extends CI_Controller {
 		return redirect("sistema/Biblioteca");
 	}
 
-	function editar($id=null) {
+	function editar($id=null)
+	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Biblioteca");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$userdata = $this->m_uploads->getUploads(array('id' => $id))[0];
+		$userdata = $this->M_uploads->getUploads(array('id' => $id))[0];
 
 		$infoB['userdata'] = $userdata;
 		
@@ -100,7 +124,13 @@ class Biblioteca extends CI_Controller {
 		$this->load->view("sistema/common/fim.php");
 	}
 
-	function atualizar() {
+	function atualizar()
+	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		$idup = $this->input->post("idref");
 		$errors = "";
@@ -115,16 +145,21 @@ class Biblioteca extends CI_Controller {
 			'titulo' => $data['titulo']
 		);
 
-		$this->m_uploads->updateUpload($idup, $insert_data);
+		$this->M_uploads->updateUpload($idup, $insert_data);
 		return redirect("sistema/Biblioteca");
 	}
 
 	function download($idup=null) {
+		if (!$this->M_permissoes->checkPermission("arquivos", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$idup) {
 			return redirect("sistema/Biblioteca");
 		}
 
-		$userdata = $this->m_uploads->getUploads(array('id' => $idup))[0];
+		$userdata = $this->M_uploads->getUploads(array('id' => $idup))[0];
 		if (!$userdata) {
 			$this->session->set_flashdata('errors', "<p class='error'>Erro ao localizar o arquivo para download</p>");
 			return redirect("sistema/Biblioteca/".$idup);
@@ -150,7 +185,7 @@ class Biblioteca extends CI_Controller {
 		$upload = $_FILES[$field]['tmp_name'];
 		$hash = md5_file($upload);
 
-		$samefiles = $this->m_uploads->getUploads(array('cwhere' => "`hash` = '{$hash}'"));
+		$samefiles = $this->M_uploads->getUploads(array('cwhere' => "`hash` = '{$hash}'"));
 
 		echo !count($samefiles);
 		return;
@@ -158,13 +193,18 @@ class Biblioteca extends CI_Controller {
 
 	function getMateriais($idmaterial=null)
 	{
+		if (!$this->M_permissoes->checkPermission("arquivos", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		$opts_biblio = array();
 
 		if ($idmaterial) {
 			$opts_biblio['id'] = $idmaterial;
 		}
 
-		$materiais = $this->m_uploads->getUploads($opts_biblio);
+		$materiais = $this->M_uploads->getUploads($opts_biblio);
 
 		if (!$materiais) {
 			echo false;

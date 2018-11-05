@@ -5,16 +5,16 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		// $this->load->library("Authhandler", "auth");
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
 	}
 
 	function index()
 	{
-		if ($this->m_usuarios->isLogged()) {
+		if ($this->M_usuarios->isLogged()) {
 			return redirect("sistema");
 		}
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -25,7 +25,7 @@ class Login extends CI_Controller {
 
 	function login()
 	{
-		if ($this->m_usuarios->isLogged()) {
+		if ($this->M_usuarios->isLogged()) {
 			return redirect("sistema");
 		}
 
@@ -34,8 +34,13 @@ class Login extends CI_Controller {
 			return redirect("sistema/login");
 		}
 
-		if (!$this->m_usuarios->logUser($_POST['login'], $_POST['senha'])) {
+		if (!$this->M_usuarios->logUser($_POST['login'], $_POST['senha'])) {
 			$this->session->set_flashdata("errors", "<p class='error'>E-mail/CPF ou Senha incorretos.</p>");
+			return redirect("sistema/login");
+		}
+
+		if (!$this->M_permissoes->setSessionPermissoes()) {
+			$this->session->set_flashdata("errors", "<p class='error'>Erro ao resgatar as permissões do usuário.</p>");
 			return redirect("sistema/login");
 		}
 
@@ -44,7 +49,7 @@ class Login extends CI_Controller {
 
 	function logout()
 	{
-		$this->m_usuarios->logout();
+		$this->M_usuarios->logout();
 		return redirect("sistema/login");
 	}
 

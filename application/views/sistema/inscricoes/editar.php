@@ -4,7 +4,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 $investimento = $userdata->investimento->forma;
 ?>
 
-<p class="page_title"><i class="material-icons">assignment_ind</i>Inscrição <?=$userdata->idinscricao?></p><a href="<?=base_url('sistema/Inscricoes')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<p class="page_title"><i class="material-icons">assignment_ind</i>Inscrição <?=$userdata->idinscricao?> - Editar</p><a href="<?=base_url('sistema/Inscricoes')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Inscrições</a>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>

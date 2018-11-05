@@ -98,19 +98,14 @@ class M_usuarios extends CI_Model {
 		return $this->getUsuario(array('id' => $idusuario));
 	}
 
-	function deleteUsuario($idusuario, $completeremove=0)
+	function deleteUsuario($idusuario)
 	{
 		if (!isset($idusuario)) {
 			return false;
 		}
 
 		$this->db->where('idusuario', $idusuario);
-
-		if (!$completeremove) {
-			$query = $this->db->update("usuarios", array('status' => 0));
-		} else {
-			$query = $this->db->delete("usuarios");
-		}
+		$query = $this->db->update("usuarios", array('status' => 0));
 
 		return !!$query;
 	}

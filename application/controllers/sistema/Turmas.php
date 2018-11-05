@@ -4,30 +4,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Turmas extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_turmas");
-		$this->load->model("m_uploads");
-		$this->load->model("m_professores");
-		$this->load->model("m_cursos");
-		$this->load->model("m_aulas");
-		$this->load->model("m_investimentos");
-		$this->load->model("m_inscricoes");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_turmas");
+		$this->load->model("M_uploads");
+		$this->load->model("M_professores");
+		$this->load->model("M_cursos");
+		$this->load->model("M_aulas");
+		$this->load->model("M_investimentos");
+		$this->load->model("M_inscricoes");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
 	function visualizar ($id=null) {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$turmas = isset($id) && $id != null ? $this->m_turmas->getTurma($id) : $this->m_turmas->getTurma();
+		$turmas = isset($id) && $id != null ? $this->M_turmas->getTurma($id) : $this->M_turmas->getTurma();
 
 		foreach ($turmas as $turma) {
 			$curso_opts = array('id' => $turma->idcurso);
-			$curso = $this->m_cursos->getCurso($curso_opts);
+			$curso = $this->M_cursos->getCurso($curso_opts);
 			if ($curso != null) {
 				$turma->curso = $curso[0]->nome;
 			}
@@ -41,11 +41,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function novo() {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$infoB['professores'] = $this->m_professores->getProfessores();
-		$infoB['cursos'] = $this->m_cursos->getCurso();
+		$infoB['professores'] = $this->M_professores->getProfessores();
+		$infoB['cursos'] = $this->M_cursos->getCurso();
 		if (isset($_GET['preid'])) {
 			$preiddata = array('idcurso' => $_GET['preid']);
 			$this->session->set_flashdata('formdata', $preiddata);
@@ -77,7 +77,7 @@ class Turmas extends CI_Controller {
 		}
 		
 		$turma = $this->prepareData($turma);
-		$idturma = $this->m_turmas->insertTurma($turma);
+		$idturma = $this->M_turmas->insertTurma($turma);
 
 		if (isset($data['forma'])) {
 			for ($i=0;$i<count($data['forma']);$i++) {
@@ -127,7 +127,7 @@ class Turmas extends CI_Controller {
 					return redirect("sistema/Turmas/novo");
 				}
 
-				if (!$this->m_investimentos->insertInvestimento($investimento)) {
+				if (!$this->M_investimentos->insertInvestimento($investimento)) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar as formas de investimento.</p>");
 					$this->session->set_flashdata('formdata', $data);
 					return redirect("sistema/Turmas/novo");
@@ -155,7 +155,7 @@ class Turmas extends CI_Controller {
 			}
 
 			$data_aula['nome'] = $this->parserlib->titleCase($data_aula['nome']);
-			$idaula = $this->m_aulas->insertAula($data_aula);
+			$idaula = $this->M_aulas->insertAula($data_aula);
 
 			if (isset($data['data_inicio'])) {
 				for ($i=0;$i<count($data['data_inicio']);$i++) {
@@ -180,7 +180,7 @@ class Turmas extends CI_Controller {
 						return redirect("sistema/Turmas/novo");
 					}
 
-					if (!$this->m_aulas->insertDiasAulas($diasAulas)) {
+					if (!$this->M_aulas->insertDiasAulas($diasAulas)) {
 						$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar os dias da aula.</p>");
 						$this->session->set_flashdata('formdata', $data);
 						return redirect("sistema/Turmas/novo");
@@ -197,22 +197,26 @@ class Turmas extends CI_Controller {
 			return redirect("sistema/Turmas");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$infoB['cursos'] = $this->m_cursos->getCurso();
+		$infoB['cursos'] = $this->M_cursos->getCurso();
 
 		$opts_query = array('cwhere' => "forma_investimento.`idturma` = {$id}");
-		$infoB['investimentos'] = $this->m_investimentos->getInvestimento($opts_query);
+		$infoB['investimentos'] = $this->M_investimentos->getInvestimento($opts_query);
 
-		$infoB['aulas'] = $this->m_aulas->getAulas(array('cwhere' => "eventos.`idturma` = {$id}"));
+		$infoB['aulas'] = $this->M_aulas->getAulas(array('cwhere' => "eventos.`idturma` = {$id}"));
 		
-		$infoB['inscricoes'] = $this->m_inscricoes->getInscricao(array('cwhere' => "inscricoes.`idturma` = {$id} AND inscricoes.`status` = 2"));
+		$infoB['inscricoes'] = $this->M_inscricoes->getInscricao(array('cwhere' => "inscricoes.`idturma` = {$id} AND inscricoes.`status` = 2"));
 
-		$infoB['materiais'] = $this->m_uploads->getMateriais(array('cwhere' => "material_turma.`idturma` = {$id}"));
+		$infoB['materiais'] = $this->M_uploads->getMateriais(array('cwhere' => "material_turma.`idturma` = {$id}"));
 
-		$userdata = $this->m_turmas->getTurma(array('id' => $id))[0];
+		$userdata = $this->M_turmas->getTurma(array('id' => $id))[0];
 		$infoB['userdata'] = $userdata;
+
+		if (!$userdata->status_reg) {
+			return redirect("sistema/Turmas");
+		}
 
 		$userdata->data_limite_inscricao = $this->parserlib->formatDate($userdata->data_limite_inscricao);
 		
@@ -238,7 +242,25 @@ class Turmas extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
-		$this->m_turmas->updateTurma($idturma, $data);
+		$this->M_turmas->updateTurma($idturma, $data);
+		return redirect("sistema/Turmas");
+	}
+
+	function excluir($id=null)
+	{
+		if (!$id) {
+			return redirect("sistema/Turmas");
+		}
+
+		$this->M_turmas->deleteTurma($id);
+		$aulas = $this->M_aulas->getAulas(array(
+			'cwhere' => "eventos.`idturma` = {$id}"
+		));
+
+		foreach ($aulas as $aula) {
+			$this->M_aulas->deleteAula($aula->idevento);
+		}
+
 		return redirect("sistema/Turmas");
 	}
 
@@ -260,7 +282,7 @@ class Turmas extends CI_Controller {
 			return;
 		}
 
-		if (!$this->m_turmas->addMaterial($idturma, $idupload)) {
+		if (!$this->M_turmas->addMaterial($idturma, $idupload)) {
 			echo false;
 			return;
 		}

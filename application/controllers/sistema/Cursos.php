@@ -4,25 +4,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cursos extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_cursos");
-		$this->load->model("m_turmas");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_cursos");
+		$this->load->model("M_turmas");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
 	function visualizar ($id=null) {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$cursos = isset($id) && $id != null ? $this->m_cursos->getCurso($id) : $this->m_cursos->getCurso();
+		$cursos = isset($id) && $id != null ? $this->M_cursos->getCurso($id) : $this->M_cursos->getCurso();
 
 		foreach ($cursos as $curso) {
 			$turmas_opts = array('cwhere' => "idcurso = {$curso->idcurso}", 'orderby' => 'idturma DESC');
-			$turma = $this->m_turmas->getTurma($turmas_opts);
+			$turma = $this->M_turmas->getTurma($turmas_opts);
 
 			$curso->turma_recente = $turma != null ? $turma[0]->identificacao : "";
 			$curso->idturma = $turma != null ? $turma[0]->idturma : "";
@@ -36,7 +36,7 @@ class Cursos extends CI_Controller {
 	}
 
 	function novo() {
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -54,7 +54,7 @@ class Cursos extends CI_Controller {
 		}
 		
 		$data = $this->prepareData($data);
-		$this->m_cursos->insertCurso($data);
+		$this->M_cursos->insertCurso($data);
 		return redirect("sistema/Cursos");
 	}
 
@@ -63,11 +63,11 @@ class Cursos extends CI_Controller {
 			return redirect("sistema/Cursos");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$userdata = $this->m_cursos->getCurso(array('id' => $id))[0];
+		$userdata = $this->M_cursos->getCurso(array('id' => $id))[0];
 
 		$infoB['userdata'] = $userdata;
 		
@@ -93,7 +93,7 @@ class Cursos extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
-		$this->m_cursos->updateCurso($idcurso, $data);
+		$this->M_cursos->updateCurso($idcurso, $data);
 		return redirect("sistema/Cursos");
 	}
 

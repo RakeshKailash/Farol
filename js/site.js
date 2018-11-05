@@ -15,6 +15,8 @@ $(document).ready(function() {
 	$(".tabs_curso").tabs({swipeable: true});
 	$('.material_aluno').tooltip({outDuration: 0, exitDelay: 0});
 	$('.tooltiped[data-tooltip]').tooltip({outDuration: 0, exitDelay: 0, margin: -10});
+	$(".modal").modal();
+	$('select').formSelect();
 
 	if ($("#cabecalho").length) {
 		sticky = $("#cabecalho").offset().top + 40;
@@ -80,12 +82,78 @@ $(document).ready(function() {
 	});
 
 	$(".row_espaco_aluno").on("click", ".card", function () {
-		console.log("foi");
 		var idinscricao = $(this).data("insc");
 
 		if (idinscricao) {
 			window.location = RAIZ+"site/espacoaluno/curso/"+idinscricao;
 		}
+	});
+
+	$("#modal_inscricao_site").on("change","input[type='radio']", function () {
+		if ($(this).val() == 2) {
+			var invid = $(this).parents(".label_parcelamento_investimento").data('invid');
+			$(".select_parcelas_investimento[data-invid='"+invid+"']").find("select").removeAttr('disabled').formSelect();
+		} else {
+			$(".select_parcelas_investimento").find("select").attr('disabled', 'disabled').formSelect();
+		}
+
+		if (!!$(".btn_continuar_inscricao").attr("disabled")) {
+			$(".btn_continuar_inscricao").removeAttr('disabled');
+		}
+	});
+
+	$("#alunos_visualizar_table").on("click", ".btn_matricula_site", function () {
+		// #modal_inscricao_site
+		var idturma = $(this).data('turma');
+		$(".conteudo_login_inscricao").not('.hide').addClass('hide');
+		$(".conteudo_inscricao_site").not('.hide').addClass('hide');
+
+		$.post(RAIZ+'site/agenda/getTurmaPost/'+idturma, null, function (retorno) {
+			// console.log(JSON.parse(retorno));
+			retorno = JSON.parse(retorno);
+
+			$(".curso_inscricao_site").html(retorno.curso.nome);
+			$(".turma_inscricao_site").html(retorno.turma.identificacao);
+			$(".input_id_turma").val(retorno.turma.idturma);
+			// $(".curso_inscricao_site").html(retorno.curso.nome);
+			$("#modal_inscricao_site").find(".investimentos_inscricao_site").html(retorno.html);
+			$("#modal_inscricao_site").find('select').formSelect();
+			
+			$.post(RAIZ+'site/agenda/checkLogin/', null, function (logged) {
+				if (logged == true) {
+					$(".conteudo_inscricao_site.hide").removeClass('hide');
+				} else {
+					$(".conteudo_login_inscricao.hide").removeClass('hide');
+				}
+
+				$("#modal_inscricao_site").modal("open");
+			});
+
+		});
+	});
+
+	$(".btn_login_inscricao").click(function () {
+		$.post(RAIZ+'site/espacoaluno/logarLocal/', $(".login_inscricao").serialize(), function (retorno) {
+			retorno = JSON.parse(retorno);
+
+			if (retorno.status == 1) {
+				$(".conteudo_login_inscricao").addClass('hide');
+				$(".conteudo_inscricao_site.hide").removeClass('hide');
+			}
+		});
+	});
+
+	$(".btn_continuar_inscricao").click(function () {
+		var data = $(".form_inscricao_site").serialize();
+
+		$.post(RAIZ+'site/Agenda/inscrever', data, function (retorno) {
+			retorno = JSON.parse(retorno);
+
+			if (retorno.status == 1) {
+				alert(retorno.msg);
+				$("#modal_inscricao_site").modal("close");
+			}
+		});
 	});
 });
 

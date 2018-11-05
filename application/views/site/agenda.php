@@ -12,7 +12,7 @@
 	?>
 
 	<p class="page_title"><i class="material-icons">today</i>Agenda</p>
-	<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+	<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Painel</a>
 	<?php foreach ($agenda as $num => $ano): ?>
 		<a href="<?=base_url('sistema/Agenda?curyear='.$num)?>" class="btn btn_table_action btn_year <?=$num == $curyear ? 'curyear' : ''?>"><?=$num?></a>
 	<?php endforeach ?>
@@ -49,7 +49,7 @@
 									<?php if (!!$evento->aceitar_matriculas): ?>
 										<div class="row row_matricula_agenda">
 											<div class="col s12">
-												<a href="<?=base_url('sistema')?>" class="btn btn_table_action">Matricule-se</a>
+												<a href="javascript:void(0)" data-turma="<?=$evento->idturma?>" class="btn btn_table_action btn_matricula_site">Matricule-se</a>
 											</div>
 										</div>
 									<?php endif ?>
@@ -61,5 +61,75 @@
 				</tbody>
 			<?php endforeach ?>
 		</table>
+	</div>
+</div>
+<div id="modal_inscricao_site" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<div class="conteudo_login_inscricao hide row">
+			<form class="col s7 login_inscricao" method="post" action="javascript:void(0)">
+					<div class="row">
+						<div class="form_group col s12">
+							<label>CPF ou E-mail</label>
+							<div class="input-field">
+								<input type="text" name="login">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form_group col s12">
+							<label>Senha</label>
+							<div class="input-field">
+								<input type="password" name="senha">
+							</div>
+						</div>
+					</div>
+					<div class="row row_botoes_login">
+						<div class="col s12">
+							<input type="button" class="btn btn_login_site btn_login_inscricao" value="Entrar">
+							<input type="reset" class="btn btn_login_site" value="Limpar">
+						</div>
+					</div>
+					<div class="row link_recupera_senha">
+						<div class="col s12">
+							<a href="javascript:void(0)">esqueceu sua senha?</a>
+						</div>
+					</div>
+				</form>
+		</div>
+		<div class="conteudo_inscricao_site hide">
+			<form class="form_inscricao_site" action="javascript:void(0)" method="post">
+			<div class="row">
+				<div class="form_group col s6">
+					<label>Curso</label>
+					<div class="input-field">
+						<p class="curso_inscricao_site"></p>
+					</div>
+				</div>
+				<div class="form_group col s6">
+					<label>Turma</label>
+					<div class="input-field">
+						<input type="hidden" name="idturma" class="input_id_turma">
+						<p class="turma_inscricao_site"></p>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="row">
+				<div class="form_group col s6">
+					<label>Opção</label>
+					<div class="input-field">
+						<select name="opcao" disabled>
+							<option disabled selected>Selecione uma opção</option>
+						</select>
+					</div>
+				</div>
+			</div> -->
+			<div class="investimentos_inscricao_site"></div>
+		</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<input type="hidden" name="idturma" value="">
+		<a href="#!" class="btn btn_table_action btn_continuar_inscricao" disabled>Continuar</a>
+		<a href="#!" class="btn btn_table_action btn_cancelar_inscricao">Cancelar</a>
 	</div>
 </div>

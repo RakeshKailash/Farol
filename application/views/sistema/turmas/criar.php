@@ -3,13 +3,13 @@ $userdata = isset($this->session->formdata) ? $this->session->formdata : array()
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">school</i>Nova turma</p>
+<p class="page_title"><i class="material-icons">school</i>Turmas - Nova</p>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>
 	</div>
 <?php endif ?>
-<form method="post" action="<?=RAIZ.'sistema/turmas/inserir'?>"><a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<form method="post" action="<?=RAIZ.'sistema/turmas/inserir'?>"><a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Turmas</a>
 	<div class="row">
 		<div class="form_group col s4">
 			<label>Turma</label>

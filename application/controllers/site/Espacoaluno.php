@@ -4,23 +4,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Espacoaluno extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_eventos");
-		$this->load->model("m_inscricoes");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_investimentos");
-		$this->load->model("m_cursos");
+		$this->load->model("M_config");
+		$this->load->model("M_eventos");
+		$this->load->model("M_inscricoes");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_investimentos");
+		$this->load->model("M_cursos");
 		$this->load->library("Parserlib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
 	function index()
 	{
-		if (!$this->m_usuarios->isLoggedSite()) {
+		if (!$this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno/login");
 		}
 
-		$loads = $this->m_config->getLoads(1);
+		$loads = $this->M_config->getLoads(1);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -31,11 +31,11 @@ class Espacoaluno extends CI_Controller {
 
 	function login()
 	{
-		if ($this->m_usuarios->isLoggedSite()) {
+		if ($this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno");
 		}
 
-		$loads = $this->m_config->getLoads(1);
+		$loads = $this->M_config->getLoads(1);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -46,7 +46,7 @@ class Espacoaluno extends CI_Controller {
 
 	function logar()
 	{
-		if ($this->m_usuarios->isLoggedSite()) {
+		if ($this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno");
 		}
 
@@ -55,7 +55,7 @@ class Espacoaluno extends CI_Controller {
 			return redirect("site/espacoaluno/login");
 		}
 
-		if (!$this->m_usuarios->logUser($_POST['login'], $_POST['senha'], 0)) {
+		if (!$this->M_usuarios->logUser($_POST['login'], $_POST['senha'], 0)) {
 			$this->session->set_flashdata("errors", "<p class='error'>E-mail/CPF ou Senha incorretos.</p>");
 			return redirect("site/espacoaluno/login");
 		}
@@ -63,19 +63,50 @@ class Espacoaluno extends CI_Controller {
 		return redirect("site/espacoaluno");
 	}
 
+	function logarLocal()
+	{
+		$retorno = array();
+
+		if ($this->M_usuarios->isLoggedSite()) {
+			$retorno['status'] = 2;
+			$retorno['msg'] = "Você já está logado";
+			echo json_encode($retorno);
+			return;
+		}
+
+		if (!isset($_POST['login']) || !isset($_POST['senha'])) {
+			$retorno['status'] = 0;
+			$retorno['msg'] = "Preencha CPF/E-mail e Senha para acessar o Espaço Aluno";
+			echo json_encode($retorno);
+			return;
+		}
+
+		if (!$this->M_usuarios->logUser($_POST['login'], $_POST['senha'], 0)) {
+			$retorno['status'] = 0;
+			$retorno['msg'] = "E-mail/CPF ou Senha incorretos";
+			echo json_encode($retorno);
+			return;
+		}
+
+		$retorno['status'] = 1;
+		$retorno['msg'] = "Logado com sucesso";
+		echo json_encode($retorno);
+		return;
+	}
+
 	function logout()
 	{
-		$this->m_usuarios->logout();
+		$this->M_usuarios->logout();
 		return redirect('site');
 	}
 
 	function Cursos()
 	{
-		if (!$this->m_usuarios->isLoggedSite()) {
+		if (!$this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno/login");
 		}
 
-		$loads = $this->m_config->getLoads(1);
+		$loads = $this->M_config->getLoads(1);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$infoB = array();
@@ -90,7 +121,7 @@ class Espacoaluno extends CI_Controller {
 
 	function Curso($idinscricao=null)
 	{
-		if (!$this->m_usuarios->isLoggedSite()) {
+		if (!$this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno/login");
 		}
 
@@ -98,16 +129,16 @@ class Espacoaluno extends CI_Controller {
 			return redirect("site/espacoaluno/cursos");
 		}
 
-		$loads = $this->m_config->getLoads(1);
+		$loads = $this->M_config->getLoads(1);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$infoB = array();
 		$idusuario = $this->session->idusuario;
-		$curso = $this->m_inscricoes->getInscricao(array(
+		$curso = $this->M_inscricoes->getInscricao(array(
 			'id' => $idinscricao,
 			'cwhere' => "inscricoes.`idusuario` = {$idusuario}"
 		))[0];
-		$investimento = $this->m_investimentos->getInvestimentoInscricao(array(
+		$investimento = $this->M_investimentos->getInvestimentoInscricao(array(
 			'cwhere' => "idinscricao = {$idinscricao} AND idusuario = {$idusuario}"
 		))[0];
 		$infoB['curso'] = $curso;
@@ -120,19 +151,19 @@ class Espacoaluno extends CI_Controller {
 
 	function Agenda()
 	{
-		if (!$this->m_usuarios->isLoggedSite()) {
+		if (!$this->M_usuarios->isLoggedSite()) {
 			return redirect("site/espacoaluno/login");
 		}
 
-		$loads = $this->m_config->getLoads(1);
+		$loads = $this->M_config->getLoads(1);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 		$infoB = array();
 		$hoje = date('Y-m-d', time());
-		$ids_turmas = $this->m_inscricoes->getTurmasInscritas($this->session->idusuario);
+		$ids_turmas = $this->M_inscricoes->getTurmasInscritas($this->session->idusuario);
 
 		if (count($ids_turmas)) {
-			$infoB['agenda'] = $this->m_eventos->getAgenda(array(
+			$infoB['agenda'] = $this->M_eventos->getAgenda(array(
 				"cwhere" => "eventos.`idturma` IN (".implode("," ,$ids_turmas).") AND dias_eventos.`inicio` >= '{$hoje}'"
 			));
 		}
@@ -148,12 +179,12 @@ class Espacoaluno extends CI_Controller {
 			return null;
 		}
 
-		$lista_turmas = $this->m_inscricoes->getTurmasAluno($idaluno);
+		$lista_turmas = $this->M_inscricoes->getTurmasAluno($idaluno);
 		$cursos = array();
 
 		foreach ($lista_turmas as $turma) {
 			$cursos[] = array(
-				'curso' => $this->m_cursos->getCurso(array('id' => $turma->idcurso))[0],
+				'curso' => $this->M_cursos->getCurso(array('id' => $turma->idcurso))[0],
 				'inscricao' => $turma
 			);
 		}

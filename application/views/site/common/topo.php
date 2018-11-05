@@ -11,7 +11,9 @@
 </head>
 <body>
 	<header id="cabecalho">
-		<img id="logo_home" src="<?=RAIZ?>img/logo_antigo.png">
+		<div class="container big_header_container">
+			<img id="logo_home" src="<?=RAIZ?>img/logo_antigo.png">
+		</div>
 	</header>
 	<div id="med_header">
 		<ul id="menu_topo">

@@ -3,7 +3,7 @@
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">face</i>Editar professor</p><a href="<?=base_url('sistema/Professores')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<p class="page_title"><i class="material-icons">face</i>Professores - Editar</p><a href="<?=base_url('sistema/Professores')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Professores</a>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>
@@ -52,7 +52,19 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	</div>
 	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idprofessor?>">
 	<input type="hidden" class="cad_hidden" value="Professores">
-	<input type="submit" class="btn" value="Salvar">
-	<input type="reset" class="btn" value="Limpar">
-	<input type="button" class="btn" id="btn_excluir_cadastro" value="Excluir professor">
+	<input type="submit" class="btn right" value="Salvar">
+	<input type="reset" class="btn right" value="Limpar">
+	<a href="javascript:void(0)" class="btn" id="btn_excluir_cadastro"><i class="material-icons">delete</i> Excluir</a>
 </form>
+
+<div id="modal_excluir" class="modal">
+	<div class="modal-content">
+		<h4>Excluir professor <?=explode(" ", $userdata->nome)[0]?></h4>
+		<p>Deseja excluir o professor <?=$userdata->nome?>?</p>
+		<p>Com isso, ele não aparecerá mais na listagem nem poderá realizar acessos, mas suas associações com cursos e avisos continuarão em nosso sistema.</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="btn left btn_confirma_exclusao">Sim, excluir</a>
+		<a href="#!" class="modal-close btn left btn_cancela_exclusao">Cancelar</a>
+	</div>
+</div>

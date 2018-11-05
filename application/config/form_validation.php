@@ -262,5 +262,12 @@ $config = array(
                         'label' => 'Título',
                         'rules' => 'required'
                 )
+        ),
+        'inscricoes_site' => array(
+                array(
+                        'field' => 'idturma',
+                        'label' => 'Turma',
+                        'rules' => 'required'
+                )
         )
 );

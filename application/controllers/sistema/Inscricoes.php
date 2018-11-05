@@ -5,30 +5,30 @@ class Inscricoes extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_inscricoes");
-		$this->load->model("m_professores");
-		$this->load->model("m_cursos");
-		$this->load->model("m_turmas");
-		$this->load->model("m_aulas");
-		$this->load->model("m_investimentos");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_inscricoes");
+		$this->load->model("M_professores");
+		$this->load->model("M_cursos");
+		$this->load->model("M_turmas");
+		$this->load->model("M_aulas");
+		$this->load->model("M_investimentos");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
 	function visualizar ($id=null)
 	{
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$inscricoes = isset($id) && $id != null ? $this->m_inscricoes->getInscricao($id) : $this->m_inscricoes->getInscricao();
+		$inscricoes = isset($id) && $id != null ? $this->M_inscricoes->getInscricao($id) : $this->M_inscricoes->getInscricao();
 
 		foreach ($inscricoes as $inscricao) {
 			$curso_opts = array('id' => $inscricao->idcurso);
-			$curso = $this->m_cursos->getCurso($curso_opts);
+			$curso = $this->M_cursos->getCurso($curso_opts);
 			if ($curso != null) {
 				$inscricao->nome_curso = $curso[0]->nome;
 			}
@@ -43,12 +43,12 @@ class Inscricoes extends CI_Controller {
 
 	function novo()
 	{
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$infoB['turmas'] = $this->m_turmas->getTurma();
-		$infoB['cursos'] = $this->m_cursos->getCurso();
-		$infoB['usuarios'] = $this->m_usuarios->getUsuario(array('cwhere' => 'acesso > 1'));
+		$infoB['turmas'] = $this->M_turmas->getTurma();
+		$infoB['cursos'] = $this->M_cursos->getCurso();
+		$infoB['usuarios'] = $this->M_usuarios->getUsuario(array('cwhere' => 'acesso > 1'));
 
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/inscricoes/criar.php", $infoB);
@@ -73,7 +73,7 @@ class Inscricoes extends CI_Controller {
 		}
 		
 		// $inscricao = $this->prepareData($inscricao);
-		$idinscricao = $this->m_inscricoes->insertInscricao($inscricao);
+		$idinscricao = $this->M_inscricoes->insertInscricao($inscricao);
 
 		return redirect("sistema/Inscricoes/investimento/".$idinscricao);
 	}
@@ -84,11 +84,11 @@ class Inscricoes extends CI_Controller {
 			return redirect("sistema/Inscricoes");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$inscricao = $this->m_inscricoes->getInscricao(array('id' => $idinscricao))[0];
-		$inscricao->curso = $this->m_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
+		$inscricao = $this->M_inscricoes->getInscricao(array('id' => $idinscricao))[0];
+		$inscricao->curso = $this->M_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
 		$infoB['inscricao'] = $inscricao;
 		$infoB['formas_investimento'] = $this->getInvestimento($inscricao->idturma);
 
@@ -104,7 +104,7 @@ class Inscricoes extends CI_Controller {
 		}
 
 		$data = $_POST;
-		$forma_investimento = $this->m_investimentos->getInvestimento(array('cwhere' => "idturma = {$data['idturma']} AND forma = {$data['forma_investimento']}"))[0];
+		$forma_investimento = $this->M_investimentos->getInvestimento(array('cwhere' => "idturma = {$data['idturma']} AND forma = {$data['forma_investimento']}"))[0];
 
 		$investimento = array(
 			'idinscricao' => $data['idinscricao'],
@@ -116,11 +116,11 @@ class Inscricoes extends CI_Controller {
 			$investimento['parcelas'] = $data['qnt_parcelas'];
 		}
 
-		$idinvestimento = $this->m_investimentos->insertInvestimentoInscricao($investimento);
+		$idinvestimento = $this->M_investimentos->insertInvestimentoInscricao($investimento);
 
 		if (!!$idinvestimento) {
 			if ($data['forma_investimento'] == 2) {
-				$result = $this->m_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
+				$result = $this->M_investimentos->insertParcelas($idinvestimento, $data['qnt_parcelas']);
 				if (!$result) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao cadastrar as parcelas do investimento.</p>");
 					return redirect("sistema/Inscricoes");
@@ -128,7 +128,7 @@ class Inscricoes extends CI_Controller {
 			}
 
 			if ($data['forma_investimento'] == 3) {
-				$result = $this->m_investimentos->insertMensalidades($idinvestimento);
+				$result = $this->M_investimentos->insertMensalidades($idinvestimento);
 				if (!$result) {
 					$this->session->set_flashdata('errors', "<p class='error'>Erro ao cadastrar as mensalidades do investimento.</p>");
 					return redirect("sistema/Inscricoes");
@@ -145,13 +145,13 @@ class Inscricoes extends CI_Controller {
 			return redirect("sistema/Inscricoes");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
-		$inscricao = $this->m_inscricoes->getInscricao(array('id' => "{$id}"))[0];
-		$inscricao->curso = $this->m_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
+		$inscricao = $this->M_inscricoes->getInscricao(array('id' => "{$id}"))[0];
+		$inscricao->curso = $this->M_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
 		$infoB['userdata'] = $inscricao;
-		$infoB['userdata']->investimento = $this->m_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
+		$infoB['userdata']->investimento = $this->M_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
 
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/inscricoes/editar.php", $infoB);
@@ -176,7 +176,7 @@ class Inscricoes extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
-		$this->m_inscricoes->updateInscricao($idinscricao, $data);
+		$this->M_inscricoes->updateInscricao($idinscricao, $data);
 		return redirect("sistema/Inscricoes");
 	}
 
@@ -186,7 +186,7 @@ class Inscricoes extends CI_Controller {
 			return null;
 		}
 
-		$investimentos = $this->m_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
+		$investimentos = $this->M_investimentos->getInvestimento(array('cwhere' => "forma_investimento.`idturma` = {$idturma}"));
 
 		return $investimentos;
 	}

@@ -92,19 +92,14 @@ class M_turmas extends CI_Model {
 		return $this->getTurmas(array('id' => $idturma));
 	}
 
-	function deleteTurma($idturma, $completeremove=0)
+	function deleteTurma($idturma)
 	{
 		if (!isset($idturma)) {
 			return false;
 		}
 
 		$this->db->where('idturma', $idturma);
-
-		if (!$completeremove) {
-			$query = $this->db->update("turmas", array('status' => 0));
-		} else {
-			$query = $this->db->delete("turmas");
-		}
+		$query = $this->db->update("turmas", array('status_reg' => 0));
 
 		return !!$query;
 	}

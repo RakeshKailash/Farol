@@ -91,8 +91,12 @@ b, strong {
 	margin-right: 10px;
 }
 
-.btn.btn_table_action i {
+.btn i {
 	vertical-align: bottom;
+	padding-right: 5px;
+}
+
+.btn.btn_table_action i {
 	padding-right: 10px;
 }
 
@@ -523,4 +527,29 @@ i.view_icon:hover {
 .visualizar_material a {
 	position: relative;
 	display: block;
+}
+
+.btn_confirma_exclusao
+, .btn_cancela_exclusao {
+	margin-left: 18px !important;
+}
+
+.btn_confirma_exclusao {
+	background-color: #d84848 !important
+}
+
+.btn_confirma_exclusao:hover {
+	background-color: #ff6464 !important;
+}
+
+.check_mod_acao > label {
+	display: inline-block;
+    width: 25px;
+    vertical-align: middle;
+}
+
+.check_mod_acao > p {
+	display: inline-block;
+    font-size: 13pt;
+    vertical-align: baseline;
 }

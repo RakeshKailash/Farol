@@ -203,19 +203,14 @@ class M_aulas extends CI_Model {
 		return $this->getAulas(array('id' => $idaula));
 	}
 
-	function deleteAula($idaula, $completeremove=0)
+	function deleteAula($idaula)
 	{
 		if (!isset($idaula)) {
 			return false;
 		}
 
 		$this->db->where('eventos.`idevento`', $idaula);
-
-		if (!$completeremove) {
-			$query = $this->db->update("eventos", array('status' => 0));
-		} else {
-			$query = $this->db->delete("eventos");
-		}
+		$query = $this->db->update("eventos", array('status' => 0));
 
 		return !!$query;
 	}

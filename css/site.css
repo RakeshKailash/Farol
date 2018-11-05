@@ -212,8 +212,14 @@ input, textarea {
 	padding-left: 10px;
 }
 
+#cabecalho.sticky .big_header_container {
+	/*width: 100%;*/
+	height: 50px;
+}
+
 #slider_home {
-	height: 450px;
+	height: 316px;
+	width: 100%;
 	position: relative;
 	background: linear-gradient(to bottom left, #69439A, #2e1e44);
 }
@@ -342,7 +348,7 @@ li.item_menu_lateral:last-child {
 	height: 40px;
 	/*overflow: hidden;*/
 	position: absolute;
-	left: 130px;
+	left: 15%;
 	top: 0;
 	z-index: 51;
 	font-size: 0;
@@ -350,8 +356,8 @@ li.item_menu_lateral:last-child {
 
 #menu_topo.sticky {
 	position: fixed;
-	left: 50%;
-	transform: translateX(-50%);
+	left: calc(15% + 200px);
+	/*transform: translateX(-50%);*/
 	height: 50px;
 	text-align: center;
 }
@@ -903,6 +909,36 @@ nav#caminhodepao {
 	padding-right: 20px;
 }
 
+#imagens_slider img {
+	height: 316px;
+	width: 100%;
+}
+
 #imagens_slider a:not(.current) {
 	display: none;
+}
+
+.big_header_container {
+	height: 100px;
+}
+
+#caminhodepao .nav-wrapper {
+	position: absolute;
+    left: 15%;
+    height: 30px;
+}
+
+.label_formas_investimento:not(:first-child) {
+	margin-top: 15px;
+}
+
+.select_parcelas_investimento {
+	padding-left: 47px !important;
+}
+
+.login_inscricao {
+	position: absolute;
+    left: 50% !important;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }

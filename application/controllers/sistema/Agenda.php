@@ -4,23 +4,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Agenda extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model("m_config");
-		$this->load->model("m_usuarios");
-		$this->load->model("m_professores");
-		$this->load->model("m_cursos");
-		$this->load->model("m_aulas");
-		$this->load->model("m_eventos");
-		if (!$this->m_usuarios->isLogged()) {
+		$this->load->model("M_config");
+		$this->load->model("M_usuarios");
+		$this->load->model("M_professores");
+		$this->load->model("M_cursos");
+		$this->load->model("M_aulas");
+		$this->load->model("M_eventos");
+		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
 	function visualizar ($id=null) {
-		$loads = $this->m_config->getLoads(2);
+		if (!$this->M_permissoes->checkPermission("agenda", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar eventos.</p>");
+			return redirect("sistema");
+		}
+
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$infoB['agenda'] = $this->m_eventos->getAgenda();
+		$infoB['agenda'] = $this->M_eventos->getAgenda();
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/agenda/listar.php", $infoB);
@@ -28,7 +33,12 @@ class Agenda extends CI_Controller {
 	}
 
 	function novo() {
-		$loads = $this->m_config->getLoads(2);
+		if (!$this->M_permissoes->checkPermission("agenda", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar eventos.</p>");
+			return redirect("sistema");
+		}
+
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
@@ -38,6 +48,11 @@ class Agenda extends CI_Controller {
 	}
 
 	function inserir() {
+		if (!$this->M_permissoes->checkPermission("agenda", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar eventos.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		if ($this->form_validation->run('cadastro_professores') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
@@ -45,20 +60,25 @@ class Agenda extends CI_Controller {
 			return redirect("sistema/Professores/novo");
 		}
 		
-		$this->m_professores->insertProfessor($data);
+		$this->M_professores->insertProfessor($data);
 		return redirect("sistema/Professores");
 	}
 
 	function editar($id=null) {
+		if (!$this->M_permissoes->checkPermission("agenda", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar eventos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Professores");
 		}
 
-		$loads = $this->m_config->getLoads(2);
+		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$userdata = $this->m_professores->getProfessores(array('id' => $id))[0];
+		$userdata = $this->M_professores->getProfessores(array('id' => $id))[0];
 
 		$infoB['userdata'] = $userdata;
 		
@@ -68,6 +88,11 @@ class Agenda extends CI_Controller {
 	}
 
 	function atualizar() {
+		if (!$this->M_permissoes->checkPermission("agenda", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar eventos.</p>");
+			return redirect("sistema");
+		}
+		
 		$data = $_POST;
 		$idprofessor = $this->input->post("idref");
 		$errors = "";
@@ -81,7 +106,7 @@ class Agenda extends CI_Controller {
 			'cwhere' => "email = '{$data['email']}'"
 		);
 
-		$email_result = $this->m_professores->getProfessores($query_options);
+		$email_result = $this->M_professores->getProfessores($query_options);
 
 		if (sizeof($email_result) > 0) {
 			$errors .= "<p class='error'>O campo E-mail já existe, ele deve ser único.</p>";
@@ -94,7 +119,7 @@ class Agenda extends CI_Controller {
 		}
 
 		unset($data['idref']);
-		$this->m_professores->updateProfessor($idprofessor, $data);
+		$this->M_professores->updateProfessor($idprofessor, $data);
 		return redirect("sistema/Professores");
 	}
 

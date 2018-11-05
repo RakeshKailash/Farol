@@ -202,11 +202,21 @@ $("#btn_desativar_cadastro").click(function () {
 	window.location = RAIZ+"sistema/"+cadtype+"/desativar/"+id;
 });
 
-$("#btn_excluir_cadastro").click(function () {
-	var id = $(this).parent("form").find(".id_form").val();
-	var cadtype = $(this).parent("form").find(".cad_hidden").val();
+// $(".btn_confirma_exclusão").click(function() {
+// 	var id = $("#btn_excluir_cadastro").parent("form").find(".id_form").val();
+// 	var cadtype = $("#btn_excluir_cadastro").parent("form").find(".cad_hidden").val();
 
-	window.location = RAIZ+"sistema/"+cadtype+"/excluir/"+id;
+// 	window.location = RAIZ+"sistema/"+cadtype+"/excluir/"+id;
+// });
+
+$("#btn_excluir_cadastro").click(function () {
+	$("#modal_excluir").modal("open");
+	$("#modal_excluir").on("click", ".btn_confirma_exclusao", function () {
+		var id = $("#btn_excluir_cadastro").parent("form").find(".id_form").val();
+		var cadtype = $("#btn_excluir_cadastro").parent("form").find(".cad_hidden").val();
+
+		window.location = RAIZ+"sistema/"+cadtype+"/excluir/"+id;
+	});
 });
 
 $(".btn_novo_investimento").click(function () {
@@ -464,7 +474,7 @@ $("#form_sistema_inscricao").on("change","input[type='radio']", function () {
 		$(".select_parcelas_investimento").find("select").attr('disabled', 'disabled').formSelect();
 	}
 
-	if ($(".btn_salvar_investimento:disabled").length > 0) {
+	if (!!$(".btn_salvar_investimento").attr("disabled")) {
 		$(".btn_salvar_investimento").removeAttr('disabled');
 	}
 });
@@ -546,6 +556,44 @@ $(".tbody_materais").on('click', 'tr', function() {
 			window.location.reload();
 		}
 	});
+});
+$(".btn_salvar_permissoes").click(function () {	
+	var dados = {
+		'permitidos' : [],
+		'negados' : []
+	}
+	, idusuario = $(".id_form").val()
+	;
+
+	$.each($("input[name='mod_acao[]']"), function () {
+
+		if ($(this).is(":checked")) {
+			dados.permitidos.push($(this).val());
+		} else {
+			dados.negados.push($(this).val());
+		}
+
+	});
+
+	console.log(dados);
+	
+	$.post(RAIZ+"sistema/Usuarios/setPermissoes/"+idusuario, dados, function (retorno) {
+		if (retorno) {
+			alert("Permissões registradas com sucesso!");
+		} else {
+			alert("Erro ao registrar permissões");
+		}
+		
+		$("#modal_permissoes_usuario").modal("close");
+	});
+});
+
+$(".check_all_mod_acao").change(function () {
+	if ($(this).is(":checked")) {
+		$("input[name='mod_acao[]']").attr("checked", "checked");
+	} else {
+		$("input[name='mod_acao[]']").removeAttr("checked");
+	}
 });
 
 function handleFormaPagamento(e)

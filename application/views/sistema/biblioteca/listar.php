@@ -1,5 +1,5 @@
-<p class="page_title"><i class="material-icons">add</i><i class="material-icons">book</i>Biblioteca</p>
-<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a><a href="<?=base_url('sistema/Biblioteca/novo')?>" class="btn btn_table_action">Novo</a>
+<p class="page_title"><i class="material-icons">add</i><i class="material-icons">book</i>Arquivos</p>
+<a href="<?=base_url('sistema')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Painel</a><a href="<?=base_url('sistema/Biblioteca/novo')?>" class="btn btn_table_action">Novo</a>
 <div class="col s6 right col_busca_topo">
 	<label class="buscar_label">Busca</label>
 	<a class='dropdown-trigger btn dd_trigger_busca' href='#' data-target='dropdown_busca'>Onde?</a>

@@ -3,13 +3,13 @@
 $errors = isset($this->session->errors) ? $this->session->errors : null;
 ?>
 
-<p class="page_title"><i class="material-icons">school</i><?=$userdata->identificacao?></p>
+<p class="page_title"><i class="material-icons">school</i>Turma <?=$userdata->identificacao?> - Editar</p>
 <?php if ($errors): ?>
 	<div class="form_messages">
 		<?=$errors;?>
 	</div>
 <?php endif ?>
-<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>"><a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Voltar</a>
+<form method="post" class="form_visualizar" action="<?=RAIZ.'sistema/turmas/atualizar'?>"><a href="<?=base_url('sistema/Turmas')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Turmas</a>
 	<div class="row">
 		<div class="form_group col s4">
 			<label>Turma</label>
@@ -111,7 +111,6 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		</div>
 	<?php endif ?>
 	<!-- <div class="row"><a href="javascript:void(0)" class="btn btn_table_action btn_novo_investimento"><i class="material-icons">add</i>Forma de investimento</a></div>
-	<input type="hidden" class="cad_hidden" value="Turmas">
 	<input type="submit" class="btn" value="Salvar">
 	<input type="reset" class="btn" value="Limpar"> -->
 </form>
@@ -255,3 +254,21 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	</div>
 </div>
 <div class="overlap hide"></div>
+<div class="divider"></div>
+<form action="javascript:void(0)" method="post">
+	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idturma?>">
+	<input type="hidden" class="cad_hidden" value="Turmas">
+	<a href="javascript:void(0)" class="btn" id="btn_excluir_cadastro"><i class="material-icons">delete</i> Excluir</a>
+</form>
+
+<div id="modal_excluir" class="modal">
+	<div class="modal-content">
+		<h4>Excluir turma <?=explode(" ", $userdata->identificacao)[0]?></h4>
+		<p>Deseja excluir a turma <?=$userdata->identificacao?>?</p>
+		<p>Com isso, ela não aparecerá mais na listagem, mas seus dados de financeiro, certificados e os materiais continuarão em nosso sistema. Da mesma forma, ela ainda será visível no Espaço Aluno.</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="btn left btn_confirma_exclusao">Sim, excluir</a>
+		<a href="#!" class="modal-close btn left btn_cancela_exclusao">Cancelar</a>
+	</div>
+</div>
