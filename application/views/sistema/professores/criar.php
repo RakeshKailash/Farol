@@ -50,6 +50,28 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="form_group col s3">
+			<div class="switch">
+				<label>
+					Equipe?
+					<input type="checkbox">
+					<span class="lever"></span>
+				</label>
+			</div>
+		</div>
+		<div class="form_group col s9">
+			<div class="file-field input-field">
+				<div class="btn">
+					<span>Imagem</span>
+					<input type="file">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+	</div>
 	<input type="hidden" class="cad_hidden" value="Professores">
 	<input type="submit" class="btn" value="Salvar">
 	<input type="reset" class="btn" value="Limpar">

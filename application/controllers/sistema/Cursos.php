@@ -14,6 +14,11 @@ class Cursos extends CI_Controller {
 	}
 
 	function visualizar ($id=null) {
+		if (!$this->M_permissoes->checkPermission("cursos", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar cursos.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -36,6 +41,11 @@ class Cursos extends CI_Controller {
 	}
 
 	function novo() {
+		if (!$this->M_permissoes->checkPermission("cursos", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar cursos.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -46,6 +56,11 @@ class Cursos extends CI_Controller {
 	}
 
 	function inserir() {
+		if (!$this->M_permissoes->checkPermission("cursos", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar cursos.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		if ($this->form_validation->run('cadastro_cursos') == FALSE) {
 			$this->session->set_flashdata('errors', validation_errors("<p class='error'>", "</p>"));
@@ -59,6 +74,11 @@ class Cursos extends CI_Controller {
 	}
 
 	function editar($id=null) {
+		if (!$this->M_permissoes->checkPermission("cursos", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar cursos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Cursos");
 		}
@@ -77,6 +97,11 @@ class Cursos extends CI_Controller {
 	}
 
 	function atualizar() {
+		if (!$this->M_permissoes->checkPermission("cursos", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar cursos.</p>");
+			return redirect("sistema");
+		}
+		
 		$data = $_POST;
 		$idcurso = $this->input->post("idref");
 		$errors = "";

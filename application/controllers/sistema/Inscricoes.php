@@ -20,6 +20,11 @@ class Inscricoes extends CI_Controller {
 
 	function visualizar ($id=null)
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -43,6 +48,11 @@ class Inscricoes extends CI_Controller {
 
 	function novo()
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -57,6 +67,11 @@ class Inscricoes extends CI_Controller {
 
 	function inserir()
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		$inscricao = array(
 			'idevento' => null,
@@ -80,6 +95,11 @@ class Inscricoes extends CI_Controller {
 
 	function investimento($idinscricao=null)
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$idinscricao) {
 			return redirect("sistema/Inscricoes");
 		}
@@ -99,6 +119,11 @@ class Inscricoes extends CI_Controller {
 
 	function inserir_investimento()
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		if (!isset($_POST['idinscricao'])) {
 			return redirect("sistema/Inscricoes");
 		}
@@ -141,6 +166,11 @@ class Inscricoes extends CI_Controller {
 
 	function editar($id=null)
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Inscricoes");
 		}
@@ -160,6 +190,11 @@ class Inscricoes extends CI_Controller {
 
 	function atualizar()
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		$idinscricao = $this->input->post("idref");
 		$errors = "";
@@ -182,6 +217,11 @@ class Inscricoes extends CI_Controller {
 
 	private function getInvestimento($idturma=null)
 	{
+		if (!$this->M_permissoes->checkPermission("inscricoes", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar inscrições.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$idturma) {
 			return null;
 		}

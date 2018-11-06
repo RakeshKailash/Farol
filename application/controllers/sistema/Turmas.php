@@ -19,6 +19,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function visualizar ($id=null) {
+		if (!$this->M_permissoes->checkPermission("turmas", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar turmas.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -41,6 +46,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function novo() {
+		if (!$this->M_permissoes->checkPermission("turmas", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar turmas.</p>");
+			return redirect("sistema");
+		}
+
 		$loads = $this->M_config->getLoads(2);
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
@@ -57,6 +67,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function inserir() {
+		if (!$this->M_permissoes->checkPermission("turmas", "criar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para criar turmas.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		$turma = array(
 			'idcurso' => $data['idcurso'], 
@@ -193,6 +208,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function editar($id=null) {
+		if (!$this->M_permissoes->checkPermission("turmas", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar turmas.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Turmas");
 		}
@@ -226,6 +246,11 @@ class Turmas extends CI_Controller {
 	}
 
 	function atualizar() {
+		if (!$this->M_permissoes->checkPermission("turmas", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar turmas.</p>");
+			return redirect("sistema");
+		}
+
 		$data = $_POST;
 		$idturma = $this->input->post("idref");
 		$errors = "";
@@ -248,6 +273,11 @@ class Turmas extends CI_Controller {
 
 	function excluir($id=null)
 	{
+		if (!$this->M_permissoes->checkPermission("turmas", "excluir")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para excluir turmas.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$id) {
 			return redirect("sistema/Turmas");
 		}
@@ -277,6 +307,16 @@ class Turmas extends CI_Controller {
 
 	function addMaterial($idturma=null, $idupload=null)
 	{
+		if (!$this->M_permissoes->checkPermission("turmas", "editar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para editar turmas.</p>");
+			return redirect("sistema");
+		}
+
+		if (!$this->M_permissoes->checkPermission("arquivos", "visualizar")) {
+			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar arquivos.</p>");
+			return redirect("sistema");
+		}
+
 		if (!$idturma || !$idupload) {
 			echo false;
 			return;

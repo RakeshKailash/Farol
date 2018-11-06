@@ -368,6 +368,9 @@ class M_permissoes extends CI_Model {
 
 	function checkPermission($modulo=null, $acao=null)
 	{
+		if ($_SESSION['acesso'] > 4) {
+			return true;
+		}
 		if (!$modulo || !$acao) {
 			return false;
 		}
