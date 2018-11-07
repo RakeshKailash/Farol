@@ -63,7 +63,7 @@ class Professores extends CI_Controller {
 		$data = $this->prepareData($data);
 		$idprofessor = $this->M_professores->insertProfessor($data);
 
-		if (! empty($_FILES) && !!$idprofessor) {
+		if (!!strlen($_FILES["imagem_professor"]["name"]) && !!$idprofessor) {
 			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor)) {
 				$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar a imagem.</p>");
 				return redirect("sistema/Professores");
@@ -129,10 +129,13 @@ class Professores extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
+		if (!isset($data['equipe']) || $data['equipe'] == null) {
+			$data['equipe'] = 0;
+		}
 		unset($data['imagem_professor']);
 		$this->M_professores->updateProfessor($idprofessor, $data);
 
-		if (! empty($_FILES) && !!$idprofessor) {
+		if (!!strlen($_FILES["imagem_professor"]["name"]) && !!$idprofessor) {
 			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor, 1)) {
 				$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar a imagem.</p>");
 				return redirect("sistema/Professores");

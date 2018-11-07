@@ -15,7 +15,10 @@ class Test extends CI_Controller {
 	}
 
 	function index() {
-		echo file_exists(str_replace('\\', DIRECTORY_SEPARATOR, FCPATH)."uploads/equipe/teacher_icon_m.png");
+		echo "<pre>";
+		// $this->M_permissoes->setSessionPermissoes();
+		var_dump($_FILES);
+		echo "</pre>";
 	}
 	function post()
 	{

@@ -25,7 +25,7 @@
 			<li class="item_menu_topo"><a href="<?=RAIZ?>site/espacoaluno">Espaço Aluno</a></li>
 		</ul>
 		<ul class='dropdown-content' id="dropdown_sobrenos">
-			<li><a href="javascript:void(0)">Equipe</a></li>
+			<li><a href="<?=RAIZ?>site/sobrenos/equipe">Equipe</a></li>
 			<li><a href="<?=RAIZ?>site/sobrenos/missao">Missão</a></li>
 			<li><a href="javascript:void(0)">Galeria de Imagens</a></li>
 			<li><a href="javascript:void(0)">Depoimentos</a></li>
