@@ -942,3 +942,16 @@ nav#caminhodepao {
     top: 50%;
     transform: translate(-50%,-50%);
 }
+
+.professor_equipe_site p {
+	font-family: Roboto;
+    font-weight: bold;
+    font-size: 2em;
+    color: #69439A;
+    font-size: 17pt;
+    padding-bottom: 10px;
+}
+
+.professor_equipe_site {
+	margin-bottom: 40px;
+}

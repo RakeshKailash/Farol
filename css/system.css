@@ -483,13 +483,13 @@ a.btn.btn_table_action.search_btn i {
 }
 
 i.view_icon {
-    color: #7e57c2;
-    transition: all linear 0.1s;
-    font-size: 24px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+	color: #7e57c2;
+	transition: all linear 0.1s;
+	font-size: 24px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 
 i.view_icon:hover {
@@ -544,14 +544,14 @@ i.view_icon:hover {
 
 .check_mod_acao > label {
 	display: inline-block;
-    width: 25px;
-    vertical-align: middle;
+	width: 25px;
+	vertical-align: middle;
 }
 
 .check_mod_acao > p {
 	display: inline-block;
-    font-size: 13pt;
-    vertical-align: baseline;
+	font-size: 13pt;
+	vertical-align: baseline;
 }
 
 .img_atual_professor img {

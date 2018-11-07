@@ -11,7 +11,7 @@
 	<div class="row">
 		<?php foreach ($equipe as $professor): ?>
 			<div class="professor_equipe_site col s4 center">
-				<h5><?=$professor->nome?></h5>
+				<p><?=$professor->nome?></p>
 				<div class="container_img_professor_site">
 					<img src="<?=RAIZ.$professor->imagem_professor?>">
 				</div>
