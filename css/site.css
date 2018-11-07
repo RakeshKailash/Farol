@@ -955,3 +955,8 @@ nav#caminhodepao {
 .professor_equipe_site {
 	margin-bottom: 40px;
 }
+
+.professor_equipe_site .container_img_professor_site img {
+	border-radius: 50%;
+	max-width: 225px;
+}
