@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.32-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: farol
 -- ------------------------------------------------------
--- Server version	10.1.32-MariaDB
+-- Server version	10.1.36-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,30 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acoes`
+--
+
+DROP TABLE IF EXISTS `acoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acoes` (
+  `idacao` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`idacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acoes`
+--
+
+LOCK TABLES `acoes` WRITE;
+/*!40000 ALTER TABLE `acoes` DISABLE KEYS */;
+INSERT INTO `acoes` VALUES (1,'Criar'),(2,'Editar'),(3,'Excluir'),(4,'Visualizar');
+/*!40000 ALTER TABLE `acoes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `aulas`
@@ -40,6 +64,31 @@ LOCK TABLES `aulas` WRITE;
 /*!40000 ALTER TABLE `aulas` DISABLE KEYS */;
 INSERT INTO `aulas` VALUES (1,8,1,'Aula de teste',1),(2,8,2,'Aula de reforço',1),(3,4,2,'Aula de Revisão T2',1),(4,3,2,'Aula de Avaliação',1),(5,7,1,'Teste',1),(6,7,1,'Teste',1),(7,6,1,'Teste 2',1),(8,12,1,'Teste Testoso',1),(9,14,3,'Aula 1/1',1),(10,12,3,'Teste de Agulhas',1),(11,1,3,'Reiki I e II',1),(12,1,3,'Reiki I e II (Segunda chamada)',1),(13,1,3,'Reiki I e II (Terceira chamada)',1),(14,1,3,'Reiki I e II (Quarta chamada)',1);
 /*!40000 ALTER TABLE `aulas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `capa_curso`
+--
+
+DROP TABLE IF EXISTS `capa_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `capa_curso` (
+  `idcapa` int(11) NOT NULL AUTO_INCREMENT,
+  `idcurso` int(11) NOT NULL,
+  `caminho_arquivo` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `data` datetime DEFAULT NULL,
+  PRIMARY KEY (`idcapa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `capa_curso`
+--
+
+LOCK TABLES `capa_curso` WRITE;
+/*!40000 ALTER TABLE `capa_curso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `capa_curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -108,7 +157,7 @@ CREATE TABLE `dias_eventos` (
   `almoco_inicio` datetime DEFAULT NULL,
   `almoco_fim` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +166,7 @@ CREATE TABLE `dias_eventos` (
 
 LOCK TABLES `dias_eventos` WRITE;
 /*!40000 ALTER TABLE `dias_eventos` DISABLE KEYS */;
-INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL),(48,22,'2018-09-15 09:00:00','2018-09-15 18:00:00','2018-09-15 12:30:00','2018-09-15 14:00:00'),(49,23,'2018-10-03 09:00:00','2018-10-03 18:30:00',NULL,NULL),(50,24,'2018-10-06 09:00:00','2018-10-06 18:30:00','2018-10-06 12:30:00','2018-10-06 14:00:00'),(51,24,'2018-10-07 09:00:00','2018-10-07 13:00:00',NULL,NULL),(52,25,'2018-11-10 09:00:00','2018-11-10 18:30:00','2018-11-10 12:30:00','2018-11-10 14:00:00'),(53,26,'2018-12-01 09:00:00','2018-12-01 18:30:00','2018-12-01 12:30:00','2018-12-01 14:00:00'),(54,26,'2018-12-02 09:00:00','2018-12-02 13:00:00',NULL,NULL),(55,27,'2018-10-20 09:00:00','2018-10-20 18:30:00','2018-10-20 12:30:00','2018-10-20 14:00:00');
+INSERT INTO `dias_eventos` VALUES (46,18,'2018-10-13 09:00:00','2018-10-13 18:00:00',NULL,NULL),(47,21,'2018-09-17 09:00:00','2018-09-17 18:30:00',NULL,NULL),(48,22,'2018-09-15 09:00:00','2018-09-15 18:00:00','2018-09-15 12:30:00','2018-09-15 14:00:00'),(49,23,'2018-10-03 09:00:00','2018-10-03 18:30:00',NULL,NULL),(50,24,'2018-10-06 09:00:00','2018-10-06 18:30:00','2018-10-06 12:30:00','2018-10-06 14:00:00'),(51,24,'2018-10-07 09:00:00','2018-10-07 13:00:00',NULL,NULL),(52,25,'2018-11-10 09:00:00','2018-11-10 18:30:00','2018-11-10 12:30:00','2018-11-10 14:00:00'),(53,26,'2018-12-01 09:00:00','2018-12-01 18:30:00','2018-12-01 12:30:00','2018-12-01 14:00:00'),(54,26,'2018-12-02 09:00:00','2018-12-02 13:00:00',NULL,NULL),(55,27,'2018-12-20 09:00:00','2018-12-20 18:30:00','2018-12-20 12:30:00','2018-12-20 14:00:00'),(56,28,'2018-12-15 09:00:00','2018-12-15 18:30:00','2018-12-15 12:30:00','2018-12-15 14:00:00');
 /*!40000 ALTER TABLE `dias_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +188,7 @@ CREATE TABLE `eventos` (
   `prazo_inscricao` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Cancelado; 1 = Agendado;',
   PRIMARY KEY (`idevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +197,7 @@ CREATE TABLE `eventos` (
 
 LOCK TABLES `eventos` WRITE;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
-INSERT INTO `eventos` VALUES (24,3,24,1,'Aula Inaugural','<p>﻿<strong>Certificação:</strong> Formação em Terapias Holísticas Integrativas\r\n</p><p><strong>Atuação:</strong> Terapeuta Holístico\r\n</p>\r\n<p><strong>– 30 vagas –\r\n</strong></p>\r\n<p><strong>Público alvo:</strong> Terapeutas atuantes, profissionais da saúde, pessoas interessadas em práticas holísticas e terapias naturais para autoconhecimento, benefício próprio ou se tornarem profissionais da área.\r\n</p>\r\n<p><strong>Objetivo:</strong> Capacitar os alunos para a atuação profissional, mediante a utilização de terapias integrativas naturais, corporais e vibracionais.\r\n</p>\r\n<p><strong>Pré-requisito:</strong> Ensino Médio.\r\n</p>\r\n<p><strong>Duração:</strong> 18 meses (1º final de semana de cada mês).\r\n</p><p><strong>Sábado:</strong> das 9:00h às 12:30h e das 14:00 às 18:00h.\r\n</p><p><strong>Domingo:</strong> das 9:00h às 13:00h.\r\n</p>\r\n<p><strong><u>Conteúdo Resumido:\r\n</u></strong></p><p>Módulo Fundamentos e Conceitos\r\n</p><p>Introdução ao Paradigma Holístico e Práticas Integrativas;\r\n</p><p>Ética, Postura, Legislação e Registro Profissional;\r\n</p><p>Anatomia e Fisiologia Corporal;\r\n</p><p>Energia, Aura e Chakras;\r\n</p><p>Princípios da MC – Yin/Yang, 5 Movimentos, Meridianos e Diagnóstico;\r\n</p><p>Anamnese, Diagnóstico e Recomendação.\r\n</p><p>Módulo Autoconhecimento\r\n</p><p>Consciência Corporal;\r\n</p><p>Meditação e Respiração;\r\n</p><p>Módulo Terapias Naturais\r\n</p><p>Nutrição humana e terapêutica Ortomolecular;\r\n</p><p>Fitoterapia Brasileira;\r\n</p><p>Auriculoterapia;\r\n</p><p>Moxabustão, Ventosaterapia e Gua Sha;\r\n</p><p>Argiloterapia;\r\n</p><p>Cones Chineses.\r\n</p><p>Módulo Terapias Corporais\r\n</p><p>Cinesiologia;\r\n</p><p>Anmá (Massagem Oriental);\r\n</p><p>Reflexologia Podal.\r\n</p><p>Módulo Terapias Vibracionais\r\n</p><p>Radiestesia e Radiônica;\r\n</p><p>Reiki Usui/Tibetano;\r\n</p><p>Aromaterapia;\r\n</p><p>Cristais;\r\n</p><p>Florais.\r\n</p>\r\n<p><strong>* Curso teórico, vivencial e prático, totalmente apostilado.\r\n</strong></p><p><strong>** Estágio supervisionado, trabalhos para conclusão do curso.\r\n</strong></p>\r\n<p><strong>Instrutores:</strong> Corpo docente do Farol, com profissionais altamente capacitados, constantemente atualizados, especialistas, mestres e doutores.\r\n</p>\r\n<p><strong>Informações:\r\n</strong></p><p><u>e-mail:</u> secretaria@farolterapeutico.com.br\r\n</p><p><u>fones:</u> 53. 3325 0002 / 98468 5163 (oi/whatsapp) / 99131 9062 (claro)</p>',0.00,NULL,1),(25,3,25,1,'',NULL,0.00,NULL,1),(26,3,24,1,'Aula de Revisão 1',NULL,0.00,NULL,1),(27,3,26,1,'Mrq-01 Aula',NULL,0.00,NULL,1);
+INSERT INTO `eventos` VALUES (24,3,24,1,'Aula Inaugural','<p>﻿<strong>Certificação:</strong> Formação em Terapias Holísticas Integrativas\r\n</p><p><strong>Atuação:</strong> Terapeuta Holístico\r\n</p>\r\n<p><strong>– 30 vagas –\r\n</strong></p>\r\n<p><strong>Público alvo:</strong> Terapeutas atuantes, profissionais da saúde, pessoas interessadas em práticas holísticas e terapias naturais para autoconhecimento, benefício próprio ou se tornarem profissionais da área.\r\n</p>\r\n<p><strong>Objetivo:</strong> Capacitar os alunos para a atuação profissional, mediante a utilização de terapias integrativas naturais, corporais e vibracionais.\r\n</p>\r\n<p><strong>Pré-requisito:</strong> Ensino Médio.\r\n</p>\r\n<p><strong>Duração:</strong> 18 meses (1º final de semana de cada mês).\r\n</p><p><strong>Sábado:</strong> das 9:00h às 12:30h e das 14:00 às 18:00h.\r\n</p><p><strong>Domingo:</strong> das 9:00h às 13:00h.\r\n</p>\r\n<p><strong><u>Conteúdo Resumido:\r\n</u></strong></p><p>Módulo Fundamentos e Conceitos\r\n</p><p>Introdução ao Paradigma Holístico e Práticas Integrativas;\r\n</p><p>Ética, Postura, Legislação e Registro Profissional;\r\n</p><p>Anatomia e Fisiologia Corporal;\r\n</p><p>Energia, Aura e Chakras;\r\n</p><p>Princípios da MC – Yin/Yang, 5 Movimentos, Meridianos e Diagnóstico;\r\n</p><p>Anamnese, Diagnóstico e Recomendação.\r\n</p><p>Módulo Autoconhecimento\r\n</p><p>Consciência Corporal;\r\n</p><p>Meditação e Respiração;\r\n</p><p>Módulo Terapias Naturais\r\n</p><p>Nutrição humana e terapêutica Ortomolecular;\r\n</p><p>Fitoterapia Brasileira;\r\n</p><p>Auriculoterapia;\r\n</p><p>Moxabustão, Ventosaterapia e Gua Sha;\r\n</p><p>Argiloterapia;\r\n</p><p>Cones Chineses.\r\n</p><p>Módulo Terapias Corporais\r\n</p><p>Cinesiologia;\r\n</p><p>Anmá (Massagem Oriental);\r\n</p><p>Reflexologia Podal.\r\n</p><p>Módulo Terapias Vibracionais\r\n</p><p>Radiestesia e Radiônica;\r\n</p><p>Reiki Usui/Tibetano;\r\n</p><p>Aromaterapia;\r\n</p><p>Cristais;\r\n</p><p>Florais.\r\n</p>\r\n<p><strong>* Curso teórico, vivencial e prático, totalmente apostilado.\r\n</strong></p><p><strong>** Estágio supervisionado, trabalhos para conclusão do curso.\r\n</strong></p>\r\n<p><strong>Instrutores:</strong> Corpo docente do Farol, com profissionais altamente capacitados, constantemente atualizados, especialistas, mestres e doutores.\r\n</p>\r\n<p><strong>Informações:\r\n</strong></p><p><u>e-mail:</u> secretaria@farolterapeutico.com.br\r\n</p><p><u>fones:</u> 53. 3325 0002 / 98468 5163 (oi/whatsapp) / 99131 9062 (claro)</p>',0.00,NULL,1),(25,3,25,1,'',NULL,0.00,NULL,1),(26,3,24,1,'Aula de Revisão 1',NULL,0.00,NULL,1),(27,3,26,1,'Mrq-01 Aula',NULL,0.00,NULL,1),(28,3,27,1,'Barras',NULL,0.00,NULL,0);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +219,7 @@ CREATE TABLE `forma_investimento` (
   `data_vencimento` date DEFAULT NULL,
   `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Matrícula; 2 = Mensalidade;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,8 +228,33 @@ CREATE TABLE `forma_investimento` (
 
 LOCK TABLES `forma_investimento` WRITE;
 /*!40000 ALTER TABLE `forma_investimento` DISABLE KEYS */;
-INSERT INTO `forma_investimento` VALUES (24,24,3,18,330.00,5940.00,7,NULL,1),(25,24,1,1,NULL,5940.00,NULL,'2018-09-10',1),(26,25,1,1,NULL,250.00,NULL,'2018-11-05',1),(27,25,2,3,93.33,280.00,NULL,NULL,1),(28,26,1,1,NULL,180.00,NULL,'2018-10-15',1),(29,26,2,3,70.00,210.00,NULL,NULL,1),(30,26,4,1,NULL,210.00,NULL,NULL,1);
+INSERT INTO `forma_investimento` VALUES (24,24,3,18,330.00,5940.00,7,NULL,1),(25,24,1,1,NULL,5940.00,NULL,'2018-09-10',1),(26,25,1,1,NULL,250.00,NULL,'2018-11-05',1),(27,25,2,3,93.33,280.00,NULL,NULL,1),(28,26,1,1,NULL,180.00,NULL,'2018-11-15',1),(29,26,2,3,70.00,210.00,NULL,NULL,1),(30,26,4,1,NULL,210.00,NULL,NULL,1),(31,27,1,1,NULL,380.00,NULL,'2018-12-10',1),(32,27,2,3,140.00,420.00,NULL,NULL,1),(33,27,4,1,NULL,420.00,NULL,NULL,1);
 /*!40000 ALTER TABLE `forma_investimento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imagens_professores`
+--
+
+DROP TABLE IF EXISTS `imagens_professores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imagens_professores` (
+  `idimagem` int(11) NOT NULL AUTO_INCREMENT,
+  `idprofessor` int(11) NOT NULL,
+  `caminho_arquivo` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`idimagem`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imagens_professores`
+--
+
+LOCK TABLES `imagens_professores` WRITE;
+/*!40000 ALTER TABLE `imagens_professores` DISABLE KEYS */;
+INSERT INTO `imagens_professores` VALUES (1,19,'uploads/equipe/teacher_icon_m2.png'),(2,6,'uploads/equipe/teacher_icon_m1.png'),(3,1,'uploads/equipe/teacher_icon1.png'),(4,2,'uploads/equipe/teacher_icon_m.png'),(5,3,'uploads/equipe/teacher_icon2.png');
+/*!40000 ALTER TABLE `imagens_professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -199,7 +273,7 @@ CREATE TABLE `inscricoes` (
   `opcao` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
   PRIMARY KEY (`idinscricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +282,7 @@ CREATE TABLE `inscricoes` (
 
 LOCK TABLES `inscricoes` WRITE;
 /*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
-INSERT INTO `inscricoes` VALUES (10,NULL,24,6,'2018-08-28 15:00:04',NULL,2),(11,NULL,25,6,'2018-08-28 17:13:08',NULL,2),(12,NULL,26,6,'2018-09-27 11:07:09',NULL,1);
+INSERT INTO `inscricoes` VALUES (10,NULL,24,6,'2018-08-28 15:00:04',NULL,2),(11,NULL,25,6,'2018-08-28 17:13:08',NULL,2),(12,NULL,26,6,'2018-09-27 11:07:09',NULL,1),(14,NULL,25,6,'2018-10-22 11:44:14',NULL,1),(15,NULL,26,6,'2018-10-22 11:50:01',NULL,1);
 /*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +302,7 @@ CREATE TABLE `investimentos_inscricoes` (
   `parcelas` int(11) DEFAULT '1',
   `status` int(11) DEFAULT '0' COMMENT '0 = Devedor; 1 = Pago;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +311,7 @@ CREATE TABLE `investimentos_inscricoes` (
 
 LOCK TABLES `investimentos_inscricoes` WRITE;
 /*!40000 ALTER TABLE `investimentos_inscricoes` DISABLE KEYS */;
-INSERT INTO `investimentos_inscricoes` VALUES (28,10,6,24,'2018-08-28 15:01:20',18,0),(29,11,6,27,'2018-08-28 17:13:17',3,0),(30,12,6,29,'2018-09-27 11:07:26',2,0);
+INSERT INTO `investimentos_inscricoes` VALUES (28,10,6,24,'2018-08-28 15:01:20',18,0),(29,11,6,27,'2018-08-28 17:13:17',3,0),(30,12,6,29,'2018-09-27 11:07:26',2,0),(32,14,6,27,'2018-10-22 11:44:14',3,0),(33,15,6,28,'2018-10-22 11:50:01',1,0);
 /*!40000 ALTER TABLE `investimentos_inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,6 +398,55 @@ INSERT INTO `material_upload` VALUES (1,'Livro 1','Alguém','2018-09-14 10:56:31
 UNLOCK TABLES;
 
 --
+-- Table structure for table `modulo_acao`
+--
+
+DROP TABLE IF EXISTS `modulo_acao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulo_acao` (
+  `idmoduloacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idmodulo` int(11) NOT NULL,
+  `idacao` int(11) NOT NULL,
+  PRIMARY KEY (`idmoduloacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulo_acao`
+--
+
+LOCK TABLES `modulo_acao` WRITE;
+/*!40000 ALTER TABLE `modulo_acao` DISABLE KEYS */;
+INSERT INTO `modulo_acao` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,2,1),(6,2,2),(7,2,3),(8,2,4),(9,3,1),(10,3,2),(11,3,3),(12,3,4),(13,4,1),(14,4,2),(15,4,3),(16,4,4),(17,5,1),(18,5,2),(19,5,3),(20,5,4),(21,6,1),(22,6,2),(23,6,3),(24,6,4),(25,7,1),(26,7,2),(27,7,3),(28,7,4),(29,8,1),(30,8,2),(31,8,3),(32,8,4);
+/*!40000 ALTER TABLE `modulo_acao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modulos`
+--
+
+DROP TABLE IF EXISTS `modulos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulos` (
+  `idmodulo` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`idmodulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulos`
+--
+
+LOCK TABLES `modulos` WRITE;
+/*!40000 ALTER TABLE `modulos` DISABLE KEYS */;
+INSERT INTO `modulos` VALUES (1,'Cursos'),(2,'Professores'),(3,'Agenda'),(4,'Arquivos'),(5,'Turmas'),(6,'Inscricoes'),(7,'Usuarios'),(8,'Financeiro');
+/*!40000 ALTER TABLE `modulos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `parcelas_investimentos`
 --
 
@@ -337,7 +460,7 @@ CREATE TABLE `parcelas_investimentos` (
   `vencimento` date DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 = A pagar; 1 = Paga;',
   PRIMARY KEY (`idparcela`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,8 +469,33 @@ CREATE TABLE `parcelas_investimentos` (
 
 LOCK TABLES `parcelas_investimentos` WRITE;
 /*!40000 ALTER TABLE `parcelas_investimentos` DISABLE KEYS */;
-INSERT INTO `parcelas_investimentos` VALUES (14,29,93.34,NULL,1),(15,29,93.33,NULL,0),(16,29,93.33,NULL,0),(17,30,105.00,NULL,0),(18,30,105.00,NULL,0),(19,28,330.00,'2018-09-11',0),(20,28,330.00,'2018-10-11',0),(21,28,330.00,'2018-11-11',0),(22,28,330.00,'2018-12-11',0),(23,28,330.00,'2019-01-11',0),(24,28,330.00,'2019-02-11',0),(25,28,330.00,'2019-03-11',0),(26,28,330.00,'2019-04-11',0),(27,28,330.00,'2019-05-11',0),(28,28,330.00,'2019-06-11',0),(29,28,330.00,'2019-07-11',0),(30,28,330.00,'2019-08-11',0),(31,28,330.00,'2019-09-11',0),(32,28,330.00,'2019-10-11',0),(33,28,330.00,'2019-11-11',0),(34,28,330.00,'2019-01-11',0),(35,28,330.00,'2019-12-11',0),(36,28,330.00,NULL,0);
+INSERT INTO `parcelas_investimentos` VALUES (14,29,93.34,NULL,1),(15,29,93.33,NULL,0),(16,29,93.33,NULL,0),(17,30,105.00,NULL,0),(18,30,105.00,NULL,0),(19,28,330.00,'2018-09-11',0),(20,28,330.00,'2018-10-11',0),(21,28,330.00,'2018-11-11',0),(22,28,330.00,'2018-12-11',0),(23,28,330.00,'2019-01-11',0),(24,28,330.00,'2019-02-11',0),(25,28,330.00,'2019-03-11',0),(26,28,330.00,'2019-04-11',0),(27,28,330.00,'2019-05-11',0),(28,28,330.00,'2019-06-11',0),(29,28,330.00,'2019-07-11',0),(30,28,330.00,'2019-08-11',0),(31,28,330.00,'2019-09-11',0),(32,28,330.00,'2019-10-11',0),(33,28,330.00,'2019-11-11',0),(34,28,330.00,'2019-01-11',0),(35,28,330.00,'2019-12-11',0),(36,28,330.00,NULL,0),(40,32,93.34,NULL,0),(41,32,93.33,NULL,0),(42,32,93.33,NULL,0);
 /*!40000 ALTER TABLE `parcelas_investimentos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `permissoes`
+--
+
+DROP TABLE IF EXISTS `permissoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permissoes` (
+  `idpermissao` int(11) NOT NULL AUTO_INCREMENT,
+  `idusuario` int(11) NOT NULL,
+  `idmoduloacao` int(11) NOT NULL,
+  PRIMARY KEY (`idpermissao`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permissoes`
+--
+
+LOCK TABLES `permissoes` WRITE;
+/*!40000 ALTER TABLE `permissoes` DISABLE KEYS */;
+INSERT INTO `permissoes` VALUES (5,2,1),(10,1,8),(17,1,12),(21,1,16),(25,1,20),(29,1,24),(33,1,28),(37,1,32),(40,1,4);
+/*!40000 ALTER TABLE `permissoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -365,8 +513,10 @@ CREATE TABLE `professores` (
   `fone_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `equipe` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idprofessor`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -375,7 +525,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','beltrano@ervateiro.com.br','53991171142','53991171142','53991171142','53991171142'),(2,'Fulano de Teste','fulano@tester.com.br','5332715749',NULL,NULL,'53984382243'),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','5332264156',NULL,NULL,'53984481526'),(4,'Professor de Alunos','professor@dealunos.com.br','5332272830',NULL,NULL,'53981253269'),(5,'Outro Professor de Testes','outro@teste.com.br','53984382243',NULL,NULL,'53991171142');
+INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','beltrano@ervateiro.com.br','53991171142','53991171142','53991171142','53991171142',1,1),(2,'Fulano de Teste','fulano@tester.com.br','5332715749',NULL,NULL,'53984382243',1,0),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','5332264156',NULL,NULL,'53984481526',1,1),(4,'Professor de Alunos','professor@dealunos.com.br','5332272830',NULL,NULL,'53981253269',1,0),(5,'Outro Professor de Testes','outro@teste.com.br','53984382243',NULL,NULL,'53991171142',0,0),(6,'Professor','professor@deteste.com.br','5332715749',NULL,NULL,'53991171142',1,1),(19,'Alguem','alguem@professor.com','00000000000',NULL,NULL,'00000000000',1,1);
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,8 +568,9 @@ CREATE TABLE `turmas` (
   `data_limite_inscricao` date DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguarde; 2 = Ativa; 3 = Encerrada;',
   `aula_unica` tinyint(4) NOT NULL DEFAULT '0',
+  `status_reg` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 = Excluída; 1 = Ativa',
   PRIMARY KEY (`idturma`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -428,7 +579,7 @@ CREATE TABLE `turmas` (
 
 LOCK TABLES `turmas` WRITE;
 /*!40000 ALTER TABLE `turmas` DISABLE KEYS */;
-INSERT INTO `turmas` VALUES (24,2,'TER01',30,120.00,'2018-09-10',2,0),(25,1,'RI01',10,0.00,'2018-11-05',2,1),(26,3,'MRQ-01',10,0.00,'2018-10-15',2,1);
+INSERT INTO `turmas` VALUES (24,2,'TER01',30,120.00,'2018-09-10',2,0,1),(25,1,'RI01',10,0.00,'2018-11-05',2,1,1),(26,3,'MRQ-01',10,0.00,'2018-11-15',2,1,1),(27,5,'BA02',10,120.00,'2018-12-10',2,1,0);
 /*!40000 ALTER TABLE `turmas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,7 +613,7 @@ CREATE TABLE `usuarios` (
   `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `acesso` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Usuário; 2 = Aluno; 3 = Equipe; 4 = Administrador; 5 = Desenvolvedor;',
   PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -471,7 +622,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984481526','5332715749','53991171142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','04059242083','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984382243','5332715749',NULL,3),(4,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','04059242081','1123434531','1957-08-24','Tester','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,'53991171142',2),(5,'Fulano dos Testes','fulano@fulano.com.br',1,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','00000000002','0000000000','1998-10-03','Desocupado','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,NULL,2),(6,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$JD.aX0o//NPCE2YlTvBwT.coUs7WGWQP3msA8phuQm4/1tX6dwbrO','03000000002','','1957-08-24','Dona de Casa','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53984481526','5332715749',NULL,NULL,2),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','00000000040','0000000000','2010-10-10','Dona Proprietária','96090000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'5332000000',NULL,NULL,'53991000000',4),(8,'João da Silva','joaodasilva@gmail.com',1,'$2y$10$9p8aPIDQnIkkD9jMstHu4u/VRfaLzXUR0LavphmvGDMbJ.VwsRunK','00011122233','1123434532','1998-10-03','Frentista de Tesla','00112233','AC','Cidade do Estado','Bairro','Rua Avenida',18,'Kakkakakamamaamalalal teste, testando o','53991171142',NULL,NULL,'53991171142',1);
+INSERT INTO `usuarios` VALUES (1,'Marcelo Boemeke da Silveira','marcelo.boemeke@gmail.com',1,'$2y$10$wqtDAQD2dMFJfN7qTiRXjO/b3L1HSIcp.dhRk3M7p64LIRZmeKW1S','04059242080','1123434531','1998-10-03','Desenvolvedor Web','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984481526','5332715749','53991171142',5),(3,'Marcelo Boemeke da Silveira','marcelo.boemeke@hotmail.com',1,'$2y$10$TxNr9fyxZl.l7A6hjQJqNOUMbZFnVM4EzQSVSwBNr0inHHaAp1KqW','04059242083','1123434531','0000-00-00','Desenvolvedor','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142','53984382243','5332715749',NULL,3),(4,'Usuário de Testes','tester@testes.com.br',1,'$2y$10$lC97dKOvnp7dtewda34/feFYSOdMLEMFg8PsjIRjlcgGDmf6k/QYm','04059242081','1123434531','1957-08-24','Tester','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,'53991171142',2),(5,'Fulano dos Testes','fulano@fulano.com.br',0,'$2y$10$S00MakJwsPpW/nf6EeHDsu6Nfuryrl7auSiWiEPrdZHrI8rt3J9cq','00000000002','0000000000','1998-10-03','Desocupado','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53991171142',NULL,NULL,NULL,2),(6,'Isamar Boemeke da Silveira','isamar@gmail.com',1,'$2y$10$JD.aX0o//NPCE2YlTvBwT.coUs7WGWQP3msA8phuQm4/1tX6dwbrO','03000000002','','1957-08-24','Dona de Casa','96090340','RS','Pelotas','Laranjal','Hulha Negra',1894,NULL,'53984481526','5332715749',NULL,NULL,2),(7,'Dona Proprietária','contato@farolterapeutico.com.br',1,'$2y$10$cODEiMaHgymnEWbri/1Bfeufz4F8qY104SnWPQjf0nCkPtrX58Oqe','00000000040','0000000000','2010-10-10','Dona Proprietária','96090000','RS','Pelotas','Exemplo','Exemplo',1234,NULL,'5332000000',NULL,NULL,'53991000000',4);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,4 +670,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10 12:04:11
+-- Dump completed on 2018-11-07 13:53:08
