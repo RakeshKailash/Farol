@@ -25,10 +25,6 @@ class Professores extends CI_Controller {
 
 		$professores = $this->M_professores->getProfessores();
 
-		// foreach ($users as &$value) {
-		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
-		// }
-
 		$infoB['professores'] = $professores;
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
@@ -133,10 +129,11 @@ class Professores extends CI_Controller {
 
 		unset($data['idref']);
 		$data = $this->prepareData($data);
+		unset($data['imagem_professor']);
 		$this->M_professores->updateProfessor($idprofessor, $data);
 
 		if (! empty($_FILES) && !!$idprofessor) {
-			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor)) {
+			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor, 1)) {
 				$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar a imagem.</p>");
 				return redirect("sistema/Professores");
 			}

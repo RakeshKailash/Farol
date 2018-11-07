@@ -9,7 +9,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<?=$errors;?>
 	</div>
 <?php endif ?>
-<form method="post" action="<?=RAIZ.'sistema/professores/atualizar'?>">
+<form method="post" action="<?=RAIZ.'sistema/professores/atualizar'?>" enctype="multipart/form-data">
 	<div class="row">
 		<div class="form_group col s6">
 			<label>Nome</label>
@@ -63,13 +63,14 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<div class="form_group col s9">
 			<?php if (isset($userdata->imagem_professor)): ?>
 				<label>Imagem</label>
-				<div class="col s12">
+				<div class="col s12 img_atual_professor">
 					<img src="<?=isset($userdata->imagem_professor) ? RAIZ.$userdata->imagem_professor : 'javascript:void(0)'?>">
 				</div>
 			<?php endif ?>
 			<div class="file-field input-field">
 				<div class="btn">
 					<span>Imagem</span>
+					<input type="file" name="imagem_professor">
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">

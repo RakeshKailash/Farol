@@ -36,6 +36,22 @@ class M_uploads extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	public function updateTeacherPicture($id, $data)
+	{
+		if (! $id || !isset($data) || gettype($data) != "array") {
+			return false;
+		}
+
+		$this->db->where('idimagem', $id);
+		$query = $this->db->update("imagens_professores", $data);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->getTeacherPicture(array('id' => $id));
+	}
+
 	public function caminho_pasta () {
 		return str_replace('\\', DIRECTORY_SEPARATOR, FCPATH);
 	}
@@ -185,6 +201,63 @@ class M_uploads extends CI_Model {
 		return $result->result();
 	}
 
+	public function getTeacherPicture($opts=array())
+	{
+		$query = array();
+		$query[] = "SELECT * FROM imagens_professores";
+		$where = null;
+		$cond = null;
+
+		if (isset($opts['id'])) {
+			if (gettype($opts['id']) == "array") {
+				$cond = "idimagem IN (".implode(",", $opts['id']).")";
+			} else {
+				$cond = "idimagem = {$opts['id']}";
+			}
+			$where = "WHERE ".$cond;
+		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "idimagem NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "idimagem != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
+
+		if (isset($opts['groupby'])) {
+			$query[] = "GROUP BY {$opts['groupby']}";
+		}
+
+		if (isset($opts['orderby'])) {
+			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY imagens_professores.`idimagem` ASC";
+		}
+
+		if (isset($opts['limit'])) {
+			$query[] = "LIMIT {$opts['limit']}";
+		}
+
+		$query = implode(" ", $query);
+		$result = $this->db->query($query);
+
+		if (!$result) {
+			return false;
+		}
+
+		return $result->result();
+	}
+
 	public function getMateriais($opts=array())
 	{
 		$query = array();
@@ -273,7 +346,7 @@ class M_uploads extends CI_Model {
 		return $this->getUploads(array('id' => $idup));
 	}
 
-	public function uploadTeacherPicture ($campo=null, $pasta=null, $idprofessor=null)
+	public function uploadTeacherPicture ($campo=null, $pasta=null, $idprofessor=null, $update=0)
 	{
 		if (! $campo || ! $pasta || ! $idprofessor) {
 			return false;
@@ -329,6 +402,28 @@ class M_uploads extends CI_Model {
 			}
 
 			$info_pic = $this->upload->data();
+
+			$imagem_atual = $this->getTeacherPicture(array('cwhere' => "idprofessor = {$idprofessor}"));
+			
+			if (!!$update && !!count($imagem_atual)) {
+				$imagem_atual = $imagem_atual[0];
+
+				$file['caminho_arquivo'] = $path.'/'.$info_pic['file_name'];
+				
+				if (! $this->updateTeacherPicture($imagem_atual->idimagem, $file)) {
+					if (file_exists($this->caminho_pasta().$path.'/'.$info_pic['file_name'])) {
+						unlink($this->caminho_pasta().$path.'/'.$info_pic['file_name']);
+					}
+					return false;
+				}
+
+				if (file_exists($this->caminho_pasta().$imagem_atual->caminho_arquivo)) {
+					unlink($this->caminho_pasta().$imagem_atual->caminho_arquivo);
+				}
+
+				return true;
+				
+			}
 
 			$file['idprofessor'] = $idprofessor;
 			$file['caminho_arquivo'] = $path.'/'.$info_pic['file_name'];

@@ -553,3 +553,7 @@ i.view_icon:hover {
     font-size: 13pt;
     vertical-align: baseline;
 }
+
+.img_atual_professor img {
+	max-width: 100px;
+}
