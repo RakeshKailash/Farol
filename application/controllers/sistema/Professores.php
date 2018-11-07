@@ -7,12 +7,13 @@ class Professores extends CI_Controller {
 		$this->load->model("M_config");
 		$this->load->model("M_usuarios");
 		$this->load->model("M_professores");
+		$this->load->model("M_uploads");
 		if (!$this->M_usuarios->isLogged()) {
 			return redirect("sistema/login");
 		}
 	}
 
-	function visualizar ($id=null) {
+	function visualizar () {
 		if (!$this->M_permissoes->checkPermission("professores", "visualizar")) {
 			$this->session->set_flashdata('errors', "<p>Você não tem permissão para visualizar professores.</p>");
 			return redirect("sistema");
@@ -22,13 +23,13 @@ class Professores extends CI_Controller {
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
-		$users = isset($id) && $id != null ? $this->M_professores->getProfessores($id) : $this->M_professores->getProfessores();
+		$professores = $this->M_professores->getProfessores();
 
 		// foreach ($users as &$value) {
 		// 	$value->data_nascimento = $this->parserlib->formatDate($value->data_nascimento);
 		// }
 
-		$infoB['professores'] = $users;
+		$infoB['professores'] = $professores;
 		
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/professores/listar.php", $infoB);
@@ -64,7 +65,15 @@ class Professores extends CI_Controller {
 		}
 		
 		$data = $this->prepareData($data);
-		$this->M_professores->insertProfessor($data);
+		$idprofessor = $this->M_professores->insertProfessor($data);
+
+		if (! empty($_FILES) && !!$idprofessor) {
+			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor)) {
+				$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar a imagem.</p>");
+				return redirect("sistema/Professores");
+			}
+		}
+
 		return redirect("sistema/Professores");
 	}
 
@@ -125,6 +134,14 @@ class Professores extends CI_Controller {
 		unset($data['idref']);
 		$data = $this->prepareData($data);
 		$this->M_professores->updateProfessor($idprofessor, $data);
+
+		if (! empty($_FILES) && !!$idprofessor) {
+			if (! $this->M_uploads->uploadTeacherPicture("imagem_professor", "equipe", $idprofessor)) {
+				$this->session->set_flashdata('errors', "<p class='error'>Erro ao registrar a imagem.</p>");
+				return redirect("sistema/Professores");
+			}
+		}
+
 		return redirect("sistema/Professores");
 	}
 

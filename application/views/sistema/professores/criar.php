@@ -9,7 +9,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 		<?=$errors;?>
 	</div>
 <?php endif ?>
-<form method="post" action="<?=RAIZ.'sistema/professores/inserir'?>"><a href="<?=base_url('sistema/Professores')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Professores</a>
+<form method="post" action="<?=RAIZ.'sistema/Professores/inserir'?>" enctype="multipart/form-data"><a href="<?=base_url('sistema/Professores')?>" class="btn btn_table_action"><i class="material-icons">arrow_back</i>Professores</a>
 	<div class="row">
 		<div class="form_group col s6">
 			<label>Nome</label>
@@ -55,7 +55,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<div class="switch">
 				<label>
 					Equipe?
-					<input type="checkbox">
+					<input type="checkbox" name="equipe" value="1">
 					<span class="lever"></span>
 				</label>
 			</div>
@@ -64,7 +64,7 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			<div class="file-field input-field">
 				<div class="btn">
 					<span>Imagem</span>
-					<input type="file">
+					<input type="file" name="imagem_professor">
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">

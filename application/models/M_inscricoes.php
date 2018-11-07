@@ -67,6 +67,8 @@ class M_inscricoes extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY inscricoes.`idinscricao` ASC";
 		}
 
 		if (isset($opts['limit'])) {

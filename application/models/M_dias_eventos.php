@@ -45,6 +45,8 @@ class M_dias_eventos extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY dias_eventos.`id` ASC";
 		}
 
 		if (isset($opts['limit'])) {

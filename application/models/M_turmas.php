@@ -45,6 +45,8 @@ class M_turmas extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY turmas.`idturma` ASC";
 		}
 
 		if (isset($opts['limit'])) {

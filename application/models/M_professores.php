@@ -9,24 +9,38 @@ class M_professores extends CI_Model {
 	function getProfessores($opts=array())
 	{
 		$query = array();
-		$query[] = "SELECT * FROM professores";
+		$query[] = "SELECT 
+		professores.`idprofessor`,
+		professores.`nome`,
+		professores.`email`,
+		professores.`fone_1`,
+		professores.`fone_2`,
+		professores.`fone_3`,
+		professores.`whatsapp`,
+		professores.`status`,
+		professores.`equipe`,
+		imagens_professores.`caminho_arquivo` AS imagem_professor 
+		FROM
+		professores 
+		LEFT JOIN imagens_professores 
+		ON imagens_professores.`idprofessor` = professores.`idprofessor`";
 		$where = null;
 		$cond = null;
 
 		if (isset($opts['id'])) {
 			if (gettype($opts['id']) == "array") {
-				$cond = "idprofessor IN (".implode(",", $opts['id']).")";
+				$cond = "professores.`idprofessor` IN (".implode(",", $opts['id']).")";
 			} else {
-				$cond = "idprofessor = {$opts['id']}";
+				$cond = "professores.`idprofessor` = {$opts['id']}";
 			}
 			$where = "WHERE ".$cond;
 		}
 
 		if (isset($opts['!id'])) {
 			if (gettype($opts['!id']) == "array") {
-				$cond = "idprofessor NOT IN (".implode(",", $opts['!id']).")";
+				$cond = "professores.`idprofessor` NOT IN (".implode(",", $opts['!id']).")";
 			} else {
-				$cond = "idprofessor != {$opts['!id']}";
+				$cond = "professores.`idprofessor` != {$opts['!id']}";
 			}
 
 			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
@@ -45,6 +59,8 @@ class M_professores extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY professores.`idprofessor` ASC";
 		}
 
 		if (isset($opts['limit'])) {

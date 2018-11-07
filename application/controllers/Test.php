@@ -17,7 +17,7 @@ class Test extends CI_Controller {
 	function index() {
 		echo "<pre>";
 		// $this->M_permissoes->setSessionPermissoes();
-		var_dump($_SESSION);
+		var_dump($_FILES);
 		echo "</pre>";
 	}
 	function post()

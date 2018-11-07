@@ -21,6 +21,21 @@ class M_uploads extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	public function insertTeacherPicture($data)
+	{
+		if (!isset($data) || gettype($data) != "array") {
+			return false;
+		}
+
+		$query = $this->db->insert("imagens_professores", $data);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
+
 	public function caminho_pasta () {
 		return str_replace('\\', DIRECTORY_SEPARATOR, FCPATH);
 	}
@@ -152,6 +167,8 @@ class M_uploads extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY material_upload.`idupload` ASC";
 		}
 
 		if (isset($opts['limit'])) {
@@ -222,6 +239,8 @@ class M_uploads extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY material_turma.`idmaterial` ASC";
 		}
 
 		if (isset($opts['limit'])) {
@@ -252,6 +271,79 @@ class M_uploads extends CI_Model {
 		}
 
 		return $this->getUploads(array('id' => $idup));
+	}
+
+	public function uploadTeacherPicture ($campo=null, $pasta=null, $idprofessor=null)
+	{
+		if (! $campo || ! $pasta || ! $idprofessor) {
+			return false;
+		}
+
+		$path = "uploads/".$pasta;
+		$idsInsert = array();
+		$insertid = "";
+
+		if (!is_dir($path))
+		{
+			mkdir($path);
+		}
+
+		$config_upload['upload_path'] = $this->caminho_pasta().$path;
+		$config_upload['allowed_types'] = 'jpg|jpeg|png';
+		$config_upload['max_size'] = '0';
+		$config_upload['max_width'] = '0';
+		$config_upload['max_height'] = '0';
+		$config_upload['encrypt_name'] = false;
+
+		$this->load->library('upload', $config_upload);
+
+		if (gettype($_FILES[$campo]['name']) == "array" && gettype($_FILES[$campo]['name']) == "object") {
+			$count = count($_FILES[$campo]['name']);
+		} else {
+			$count = 1;
+		}
+
+
+		if ($count <= 0) {
+			return array("ABC");
+		}
+
+		for ($i = 0; $i < $count; $i++) {
+			if (gettype($_FILES[$campo]['name']) == "array" && gettype($_FILES[$campo]['name']) == "object") {
+				$_FILES['arquivo_up']['name'] = $_FILES[$campo]['name'][$i];
+				$_FILES['arquivo_up']['type'] = $_FILES[$campo]['type'][$i];
+				$_FILES['arquivo_up']['tmp_name'] = $_FILES[$campo]['tmp_name'][$i];
+				$_FILES['arquivo_up']['error'] = $_FILES[$campo]['error'][$i];
+				$_FILES['arquivo_up']['size'] = $_FILES[$campo]['size'][$i];
+			} else {
+				$_FILES['arquivo_up']['name'] = $_FILES[$campo]['name'];
+				$_FILES['arquivo_up']['type'] = $_FILES[$campo]['type'];
+				$_FILES['arquivo_up']['tmp_name'] = $_FILES[$campo]['tmp_name'];
+				$_FILES['arquivo_up']['error'] = $_FILES[$campo]['error'];
+				$_FILES['arquivo_up']['size'] = $_FILES[$campo]['size'];
+			}
+
+			if (! $this->upload->do_upload('arquivo_up')) {
+				throw new Exception($this->upload->display_errors());
+				return false;
+			}
+
+			$info_pic = $this->upload->data();
+
+			$file['idprofessor'] = $idprofessor;
+			$file['caminho_arquivo'] = $path.'/'.$info_pic['file_name'];
+
+			$insertid = $this->insertTeacherPicture($file);
+
+			if (! $insertid)
+			{
+				return false;
+			}
+
+			array_push($idsInsert, $insertid);
+		}
+
+		return $idsInsert;
 	}
 
 }

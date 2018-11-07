@@ -45,6 +45,8 @@ class M_cursos extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY cursos.`idcurso` ASC";
 		}
 
 		if (isset($opts['limit'])) {

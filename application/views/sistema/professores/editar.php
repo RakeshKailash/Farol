@@ -50,6 +50,33 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="form_group col s3">
+			<div class="switch">
+				<label>
+					Equipe?
+					<input type="checkbox" name="equipe" value="1" <?=isset($userdata->equipe) ? ($userdata->equipe == 1 ? "checked" : '') : ''?>>
+					<span class="lever"></span>
+				</label>
+			</div>
+		</div>
+		<div class="form_group col s9">
+			<?php if (isset($userdata->imagem_professor)): ?>
+				<label>Imagem</label>
+				<div class="col s12">
+					<img src="<?=isset($userdata->imagem_professor) ? RAIZ.$userdata->imagem_professor : 'javascript:void(0)'?>">
+				</div>
+			<?php endif ?>
+			<div class="file-field input-field">
+				<div class="btn">
+					<span>Imagem</span>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+	</div>
 	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idprofessor?>">
 	<input type="hidden" class="cad_hidden" value="Professores">
 	<input type="submit" class="btn right" value="Salvar">

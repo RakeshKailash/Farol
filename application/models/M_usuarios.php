@@ -45,6 +45,8 @@ class M_usuarios extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY usuarios.`idusuario` ASC";
 		}
 
 		if (isset($opts['limit'])) {

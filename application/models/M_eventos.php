@@ -45,6 +45,8 @@ class M_eventos extends CI_Model {
 
 		if (isset($opts['orderby'])) {
 			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY eventos.`idevento` ASC";
 		}
 
 		if (isset($opts['limit'])) {
