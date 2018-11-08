@@ -924,8 +924,8 @@ nav#caminhodepao {
 
 #caminhodepao .nav-wrapper {
 	position: absolute;
-    left: 15%;
-    height: 30px;
+	left: 15%;
+	height: 30px;
 }
 
 .label_formas_investimento:not(:first-child) {
@@ -938,18 +938,26 @@ nav#caminhodepao {
 
 .login_inscricao {
 	position: absolute;
-    left: 50% !important;
-    top: 50%;
-    transform: translate(-50%,-50%);
+	left: 50% !important;
+	top: 50%;
+	transform: translate(-50%,-50%);
 }
 
 .professor_equipe_site p {
 	font-family: Roboto;
-    font-weight: bold;
-    font-size: 2em;
-    color: #69439A;
-    font-size: 17pt;
+	font-weight: bold;
+	color: #69439A;
+	font-size: 17pt;
+	padding-bottom: 5px;
+}
+
+.professor_equipe_site span {
+	font-size: 16pt;
+    color: #6943b4;
+    font-family: Roboto Condensed;
     padding-bottom: 10px;
+    display: inline-block;
+    height: 31px;
 }
 
 .professor_equipe_site {

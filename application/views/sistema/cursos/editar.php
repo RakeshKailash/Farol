@@ -29,6 +29,25 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 	<div class="row">
 		<a href="<?=base_url('sistema/Turmas/novo?preid='.$userdata->idcurso)?>" class="btn btn_table_action btn_nova_turma"><i class="material-icons">add</i>Nova turma</a>
 	</div>
+	<table id="alunos_visualizar_table">
+		<thead>
+			<th>ID</th>
+			<th>Turma</th>
+			<th>Status</th>
+		</thead>
+		<tbody>
+			<?php foreach ($userdata->turmas as $turma) : ?>
+				<?php if (!$turma->status_reg)continue; ?>
+				<tr class="linha_cadastro_visualizar">
+					<input type="hidden" class="id_hidden" name="idturmas" value="<?=$turma->idturma?>">
+					<td><?=$turma->idturma?></td>
+					<td><?=$turma->identificacao?></td>
+					<td><?=$turma->status == 1 ? "A iniciar" : ($turma->status == 2 ? "Em andamento" : ($turma->status == 3 ? "Encerrada" : "")) ?></td>
+				</tr>
+			<?php endforeach ?>
+		</tbody>
+		<input type="hidden" class="cad_hidden" value="Turmas">
+	</table>
 	<input type="hidden" class="id_form" name="idref" value="<?=$userdata->idcurso?>">
 	<input type="hidden" class="cad_hidden" value="Cursos">
 	<input type="submit" class="btn" value="Salvar">

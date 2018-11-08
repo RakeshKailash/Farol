@@ -19,6 +19,7 @@ class M_professores extends CI_Model {
 		professores.`whatsapp`,
 		professores.`status`,
 		professores.`equipe`,
+		professores.`formacao`,
 		imagens_professores.`caminho_arquivo` AS imagem_professor 
 		FROM
 		professores 

@@ -11,16 +11,22 @@ $errors = isset($this->session->errors) ? $this->session->errors : null;
 <?php endif ?>
 <form method="post" action="<?=RAIZ.'sistema/professores/atualizar'?>" enctype="multipart/form-data">
 	<div class="row">
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>Nome</label>
 			<div class="input-field">
 				<input type="text" name="nome" value="<?=$userdata->nome?>">
 			</div>
 		</div>
-		<div class="form_group col s6">
+		<div class="form_group col s4">
 			<label>E-mail</label>
 			<div class="input-field">
 				<input type="text" name="email" value="<?=$userdata->email?>">
+			</div>
+		</div>
+		<div class="form_group col s4">
+			<label>Formação</label>
+			<div class="input-field">
+				<input type="text" name="formacao" value="<?=$userdata->formacao?>">
 			</div>
 		</div>
 	</div>

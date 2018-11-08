@@ -87,7 +87,11 @@ class Cursos extends CI_Controller {
 		$loads = $this->parserlib->clearr($loads, "src");
 		$infoH['loads'] = $this->sl->setScripts($loads);
 
+		$turmas_opts = array('cwhere' => "idcurso = {$id}", 'orderby' => 'idturma DESC');
+		$turmas = $this->M_turmas->getTurma($turmas_opts);
+
 		$userdata = $this->M_cursos->getCurso(array('id' => $id))[0];
+		$userdata->turmas = $turmas;
 
 		$infoB['userdata'] = $userdata;
 		
