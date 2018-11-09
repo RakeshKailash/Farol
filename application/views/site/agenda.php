@@ -113,6 +113,10 @@
 					</div>
 				</div>
 			</div>
+			<div class="divider"></div>
+			<div class="row">
+				<h6>Selecione uma forma de investimento:</h6>
+			</div>
 			<!-- <div class="row">
 				<div class="form_group col s6">
 					<label>Opção</label>

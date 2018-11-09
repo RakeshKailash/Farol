@@ -295,4 +295,79 @@ class M_investimentos extends CI_Model {
 		$query = $this->db->insert_batch('parcelas_investimentos', $parcelas_inserir);
 		return !!$query;
 	}
+
+	function getCredenciaisPagseguro($opts=array())
+	{
+		$query = array();
+		$query[] = "SELECT * FROM credenciais_pagseguro";
+		$where = null;
+		$cond = null;
+
+		if (isset($opts['id'])) {
+			if (gettype($opts['id']) == "array") {
+				$cond = "idcredencial IN (".implode(",", $opts['id']).")";
+			} else {
+				$cond = "idcredencial = {$opts['id']}";
+			}
+			$where = "WHERE ".$cond;
+		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "idcredencial NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "idcredencial != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
+
+		if (isset($opts['groupby'])) {
+			$query[] = "GROUP BY {$opts['groupby']}";
+		}
+
+		if (isset($opts['orderby'])) {
+			$query[] = "ORDER BY {$opts['orderby']}";
+		}
+
+		if (isset($opts['limit'])) {
+			$query[] = "LIMIT {$opts['limit']}";
+		}
+
+		$query = implode(" ", $query);
+		$result = $this->db->query($query);
+
+		if (!$result) {
+			return false;
+		}
+
+		return $result->result();
+	}
+
+	function insertSolicitacaoPagseguro($idinvestimento=null, $codigo=null)
+	{
+		if (!$idinvestimento || !$codigo) {
+			return false;
+		}
+
+		$solicitacao = array(
+			'idinvestimento' => $idinvestimento,
+			'codigo_retorno' => $codigo
+		);
+
+		$query = $this->db->insert("solicitacoes_pagseguro", $solicitacao);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
 }

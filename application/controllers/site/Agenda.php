@@ -12,6 +12,7 @@ class Agenda extends CI_Controller {
 		$this->load->model("M_investimentos");
 		$this->load->model("M_inscricoes");
 		$this->load->library("Parserlib");
+		$this->load->library("Pagseguro");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
@@ -109,6 +110,38 @@ class Agenda extends CI_Controller {
 				if (!$result) {
 					$retorno['status'] = 0;
 					$retorno['msg'] = "Erro ao cadastrar as mensalidades do investimento";
+					echo json_encode($retorno);
+					return;
+				}
+			}
+
+			if ($data['forma_investimento'] == 4) {
+				$investimento = $this->M_investimentos->getInvestimentoInscricao(array('id' => $idinvestimento))[0];
+				$forma_investimento = $this->M_investimentos->getInvestimento(array('id' => $investimento->idforma))[0];
+				$turma = $this->M_turmas->getTurma(array('id' => $forma_investimento->idturma))[0];
+				$curso = $this->M_cursos->getCurso(array('id' => $turma->idcurso))[0];
+				
+				$credenciais = $this->M_investimentos->getCredenciaisPagseguro(array('cwhere' => 'ativo = 1'))[0];
+
+				$pagamento = new stdClass();
+
+				$pagamento->investimento = $investimento;
+				$pagamento->forma_investimento = $forma_investimento;
+				$pagamento->turma = $turma;
+				$pagamento->curso = $curso;
+
+				$codigo = $this->pagseguro->submitPayment($pagamento, $credenciais);
+
+				if (!$codigo) {
+					$retorno['status'] = 0;
+					$retorno['msg'] = "Erro ao comunicar com o PagSeguro";
+					echo json_encode($retorno);
+					return;
+				}
+
+				if (!$this->M_investimentos->insertSolicitacaoPagseguro($idinvestimento, $codigo)) {
+					$retorno['status'] = 0;
+					$retorno['msg'] = "Erro ao registrar a solicitação";
 					echo json_encode($retorno);
 					return;
 				}

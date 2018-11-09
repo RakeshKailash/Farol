@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.32-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: farol
 -- ------------------------------------------------------
--- Server version	10.1.32-MariaDB
+-- Server version	10.1.36-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -89,6 +89,32 @@ CREATE TABLE `capa_curso` (
 LOCK TABLES `capa_curso` WRITE;
 /*!40000 ALTER TABLE `capa_curso` DISABLE KEYS */;
 /*!40000 ALTER TABLE `capa_curso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `credenciais_pagseguro`
+--
+
+DROP TABLE IF EXISTS `credenciais_pagseguro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `credenciais_pagseguro` (
+  `idcredencial` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `ativo` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idcredencial`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `credenciais_pagseguro`
+--
+
+LOCK TABLES `credenciais_pagseguro` WRITE;
+/*!40000 ALTER TABLE `credenciais_pagseguro` DISABLE KEYS */;
+INSERT INTO `credenciais_pagseguro` VALUES (1,'marcelo.boemeke@gmail.com','3A53E4A6ABB246DFA4832F31051EB511',1);
+/*!40000 ALTER TABLE `credenciais_pagseguro` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,6 +259,31 @@ INSERT INTO `forma_investimento` VALUES (24,24,3,18,330.00,5940.00,7,NULL,1),(25
 UNLOCK TABLES;
 
 --
+-- Table structure for table `imagens_professores`
+--
+
+DROP TABLE IF EXISTS `imagens_professores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imagens_professores` (
+  `idimagem` int(11) NOT NULL AUTO_INCREMENT,
+  `idprofessor` int(11) NOT NULL,
+  `caminho_arquivo` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`idimagem`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imagens_professores`
+--
+
+LOCK TABLES `imagens_professores` WRITE;
+/*!40000 ALTER TABLE `imagens_professores` DISABLE KEYS */;
+INSERT INTO `imagens_professores` VALUES (1,19,'uploads/equipe/teacher_icon_m2.png'),(2,6,'uploads/equipe/teacher_icon_m1.png'),(3,1,'uploads/equipe/teacher_icon1.png'),(4,2,'uploads/equipe/teacher_icon_m.png'),(5,3,'uploads/equipe/teacher_icon2.png');
+/*!40000 ALTER TABLE `imagens_professores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `inscricoes`
 --
 
@@ -248,7 +299,7 @@ CREATE TABLE `inscricoes` (
   `opcao` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 = Aguardando; 2 = Confirmada; 3 = Cancelada;',
   PRIMARY KEY (`idinscricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +308,7 @@ CREATE TABLE `inscricoes` (
 
 LOCK TABLES `inscricoes` WRITE;
 /*!40000 ALTER TABLE `inscricoes` DISABLE KEYS */;
-INSERT INTO `inscricoes` VALUES (10,NULL,24,6,'2018-08-28 15:00:04',NULL,2),(11,NULL,25,6,'2018-08-28 17:13:08',NULL,2),(12,NULL,26,6,'2018-09-27 11:07:09',NULL,1),(14,NULL,25,6,'2018-10-22 11:44:14',NULL,1),(15,NULL,26,6,'2018-10-22 11:50:01',NULL,1);
+INSERT INTO `inscricoes` VALUES (10,NULL,24,6,'2018-08-28 15:00:04',NULL,2),(11,NULL,25,6,'2018-08-28 17:13:08',NULL,2),(12,NULL,26,6,'2018-09-27 11:07:09',NULL,1),(14,NULL,25,6,'2018-10-22 11:44:14',NULL,1),(15,NULL,26,6,'2018-10-22 11:50:01',NULL,1),(16,NULL,27,6,'2018-11-09 09:21:14',NULL,1),(17,NULL,27,6,'2018-11-09 12:11:21',NULL,1),(18,NULL,27,6,'2018-11-09 12:12:53',NULL,1),(19,NULL,27,6,'2018-11-09 12:13:35',NULL,1),(20,NULL,27,6,'2018-11-09 12:14:39',NULL,1),(21,NULL,27,6,'2018-11-09 12:15:02',NULL,1),(22,NULL,27,6,'2018-11-09 12:15:28',NULL,1),(23,NULL,27,6,'2018-11-09 12:15:41',NULL,1),(24,NULL,27,6,'2018-11-09 12:18:12',NULL,1);
 /*!40000 ALTER TABLE `inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +328,7 @@ CREATE TABLE `investimentos_inscricoes` (
   `parcelas` int(11) DEFAULT '1',
   `status` int(11) DEFAULT '0' COMMENT '0 = Devedor; 1 = Pago;',
   PRIMARY KEY (`idinvestimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +337,7 @@ CREATE TABLE `investimentos_inscricoes` (
 
 LOCK TABLES `investimentos_inscricoes` WRITE;
 /*!40000 ALTER TABLE `investimentos_inscricoes` DISABLE KEYS */;
-INSERT INTO `investimentos_inscricoes` VALUES (28,10,6,24,'2018-08-28 15:01:20',18,0),(29,11,6,27,'2018-08-28 17:13:17',3,0),(30,12,6,29,'2018-09-27 11:07:26',2,0),(32,14,6,27,'2018-10-22 11:44:14',3,0),(33,15,6,28,'2018-10-22 11:50:01',1,0);
+INSERT INTO `investimentos_inscricoes` VALUES (28,10,6,24,'2018-08-28 15:01:20',18,0),(29,11,6,27,'2018-08-28 17:13:17',3,0),(30,12,6,29,'2018-09-27 11:07:26',2,0),(32,14,6,27,'2018-10-22 11:44:14',3,0),(33,15,6,28,'2018-10-22 11:50:01',1,0),(34,16,6,33,'2018-11-09 09:21:14',1,0),(35,17,6,33,'2018-11-09 12:11:21',1,0),(36,18,6,33,'2018-11-09 12:12:53',1,0),(37,19,6,33,'2018-11-09 12:13:35',1,0),(38,20,6,33,'2018-11-09 12:14:40',1,0),(39,21,6,33,'2018-11-09 12:15:02',1,0),(40,22,6,33,'2018-11-09 12:15:28',1,0),(41,23,6,33,'2018-11-09 12:15:41',1,0),(42,24,6,33,'2018-11-09 12:18:12',1,0);
 /*!40000 ALTER TABLE `investimentos_inscricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,6 +473,32 @@ INSERT INTO `modulos` VALUES (1,'Cursos'),(2,'Professores'),(3,'Agenda'),(4,'Arq
 UNLOCK TABLES;
 
 --
+-- Table structure for table `notificacoes_pagseguro`
+--
+
+DROP TABLE IF EXISTS `notificacoes_pagseguro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notificacoes_pagseguro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notification_code` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `notification_type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `data_recebimento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notificacoes_pagseguro`
+--
+
+LOCK TABLES `notificacoes_pagseguro` WRITE;
+/*!40000 ALTER TABLE `notificacoes_pagseguro` DISABLE KEYS */;
+INSERT INTO `notificacoes_pagseguro` VALUES (1,'teste','teste','2018-11-09 09:47:31'),(2,'teste','teste','2018-11-09 09:48:57');
+/*!40000 ALTER TABLE `notificacoes_pagseguro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `parcelas_investimentos`
 --
 
@@ -489,8 +566,10 @@ CREATE TABLE `professores` (
   `fone_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `whatsapp` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
+  `equipe` tinyint(4) NOT NULL DEFAULT '0',
+  `formacao` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idprofessor`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -499,8 +578,34 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','beltrano@ervateiro.com.br','53991171142','53991171142','53991171142','53991171142',1),(2,'Fulano de Teste','fulano@tester.com.br','5332715749',NULL,NULL,'53984382243',1),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','5332264156',NULL,NULL,'53984481526',1),(4,'Professor de Alunos','professor@dealunos.com.br','5332272830',NULL,NULL,'53981253269',1),(5,'Outro Professor de Testes','outro@teste.com.br','53984382243',NULL,NULL,'53991171142',0);
+INSERT INTO `professores` VALUES (1,'Beltrano das Plantas','beltrano@ervateiro.com.br','53991171142','53991171142','53991171142','53991171142',1,1,'Ervateiro'),(2,'Fulano de Teste','fulano@tester.com.br','5332715749',NULL,NULL,'53984382243',1,0,'Testador'),(3,'Lu Albuquerque','contato@farolterapeutico.com.br','5332264156',NULL,NULL,'53984481526',1,1,'Terapeuta Holística'),(4,'Professor de Alunos','professor@dealunos.com.br','5332272830',NULL,NULL,'53981253269',1,0,'Professor'),(5,'Outro Professor de Testes','outro@teste.com.br','53984382243',NULL,NULL,'53991171142',0,0,NULL),(6,'Professor','professor@deteste.com.br','5332715749',NULL,NULL,'53991171142',1,1,'Professor'),(19,'Alguem','alguem@professor.com','00000000000',NULL,NULL,'00000000000',1,1,'Humano');
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solicitacoes_pagseguro`
+--
+
+DROP TABLE IF EXISTS `solicitacoes_pagseguro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `solicitacoes_pagseguro` (
+  `idsolicitacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idinvestimento` int(11) NOT NULL,
+  `codigo_retorno` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `data` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idsolicitacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitacoes_pagseguro`
+--
+
+LOCK TABLES `solicitacoes_pagseguro` WRITE;
+/*!40000 ALTER TABLE `solicitacoes_pagseguro` DISABLE KEYS */;
+INSERT INTO `solicitacoes_pagseguro` VALUES (1,42,'656F5DCA8A8A87C004E53FA138DD24EF','2018-11-09 12:18:13');
+/*!40000 ALTER TABLE `solicitacoes_pagseguro` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -644,4 +749,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-05 20:38:20
+-- Dump completed on 2018-11-09 12:19:32
