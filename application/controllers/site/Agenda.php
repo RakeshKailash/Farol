@@ -145,6 +145,9 @@ class Agenda extends CI_Controller {
 					echo json_encode($retorno);
 					return;
 				}
+
+				$retorno['token'] = $codigo;
+				$retorno['forma'] = $forma_investimento->forma;
 			}
 		}
 

@@ -150,8 +150,24 @@ $(document).ready(function() {
 			retorno = JSON.parse(retorno);
 
 			if (retorno.status == 1) {
-				alert(retorno.msg);
-				$("#modal_inscricao_site").modal("close");
+				if (typeof retorno.forma != "undefined" && typeof retorno.token != "undefined" && retorno.forma == 4 && retorno.token[0].length > 0) {
+					PagSeguroLightbox({
+						code : retorno.token[0]
+					},
+					{
+						success : function () {
+							alert("Aê");
+							$("#modal_inscricao_site").modal("close");
+						},
+						abort : function () {
+							alert("Você não concluiu o pagamento!");
+						}
+					});
+				} else {
+					alert(retorno.msg);
+					$("#modal_inscricao_site").modal("close");
+				}
+
 			}
 		});
 	});
