@@ -144,6 +144,7 @@ $(document).ready(function() {
 	});
 
 	$(".btn_continuar_inscricao").click(function () {
+		$(".btn_continuar_inscricao").addClass("disabled");
 		var data = $(".form_inscricao_site").serialize();
 
 		$.post(RAIZ+'site/Agenda/inscrever', data, function (retorno) {
@@ -156,19 +157,58 @@ $(document).ready(function() {
 					},
 					{
 						success : function () {
-							alert("Aê");
+							swal({
+								title: 'Parabéns',
+								text: 'Sua inscrição foi realizada com sucesso. Assim que o pagamento for confirmado, seu acesso ao curso será liberado.',
+								type: 'success',
+								confirmButtonText: 'Ok'
+							});
+
 							$("#modal_inscricao_site").modal("close");
 						},
 						abort : function () {
-							alert("Você não concluiu o pagamento!");
+							swal({
+								title: 'Atenção',
+								text: 'Sua inscrição foi registrada, mas você não concluiu o pagamento. Para que seu acesso ao curso seja liberado, é preciso concluí-lo',
+								type: 'warning',
+								showCancelButton: true,
+								confirmButtonText: 'Reabrir janela de pagamento',
+								cancelButtonText: 'Fechar'
+							}).then((result) => {
+								if (result.value) {
+									PagSeguroLightbox({
+										code : retorno.token[0]
+									},
+									{
+										success : function () {
+											swal({
+												title: 'Parabéns',
+												text: 'Sua inscrição foi realizada com sucesso. Assim que o pagamento for confirmado, seu acesso ao curso será liberado.',
+												type: 'success',
+												confirmButtonText: 'Ok'
+											});
+
+											$("#modal_inscricao_site").modal("close");
+										}
+									});
+								}
+							});
 						}
 					});
 				} else {
-					alert(retorno.msg);
+					swal({
+						title: 'Parabéns',
+						text: 'Sua inscrição foi realizada com sucesso. Assim que o pagamento for confirmado, seu acesso ao curso será liberado.',
+						type: 'success',
+						confirmButtonText: 'Ok'
+					});
+
 					$("#modal_inscricao_site").modal("close");
 				}
 
 			}
+
+			$(".btn_continuar_inscricao").removeClass("disabled");
 		});
 	});
 });

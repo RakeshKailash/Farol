@@ -10,6 +10,9 @@
 	<?=$loads?>
 	<!-- <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script> --> <!-- Para produção -->
 	<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.0/dist/sweetalert2.all.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
+
 </head>
 <body>
 	<header id="cabecalho">
