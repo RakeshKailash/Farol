@@ -1,10 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
 
 /**
  * summary
  */
-class Pagseguro
+class Pagsegurolib
 {
 	const AGUARDANDO_PAGAMENTO	= 1;
 	const EM_ANALISE		 	= 2;

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_investimentos extends CI_Model {
 	function __construct() {
 		parent::__construct();
+		// $this->load->library("Pagseguro");
 	}
 
 	function getInvestimento($opts=array())
@@ -369,5 +370,31 @@ class M_investimentos extends CI_Model {
 		}
 
 		return $this->db->insert_id();
+	}
+
+	function insertNotificacaoPagseguro($data)
+	{
+		if (!isset($data)) {
+			return false;
+		}
+
+		$this->db->insert("notificacoes_pagseguro", $data);
+		return $this->db->insert_id();
+	}
+
+	function updateInvestimentoInscricao($idinvestimento, $data)
+	{
+		if (!isset($idinvestimento) || !isset($data) || gettype($data) != "array") {
+			return false;
+		}
+
+		$this->db->where('idinvestimento', $idinvestimento);
+		$query = $this->db->update('investimentos_inscricoes', $data);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->getInvestimento(array('id' => $idinvestimento));
 	}
 }

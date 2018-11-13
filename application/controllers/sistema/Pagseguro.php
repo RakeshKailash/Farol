@@ -7,16 +7,67 @@ class Pagseguro extends CI_Controller {
 		parent::__construct();
 		$this->load->model("M_investimentos");
 		$this->load->model("M_inscricoes");
+		$this->load->library("Pagsegurolib");
 	}
 
 	function notificar()
 	{
-		// $this->load->library("pagseguro");
 		$data = array(
 			"notification_code" => isset($_POST['notificationCode']) ? $_POST['notificationCode'] : "erro",
 			"notification_type" => isset($_POST['notificationType']) ? $_POST['notificationType'] : "erro"
 		);
-		$this->db->insert("notificacoes_pagseguro", $data);
+
+		$this->M_investimentos->insertNotificacaoPagseguro($data);
+
+		$credenciais = $this->M_investimentos->getCredenciaisPagseguro(array('cwhere' => 'ativo = 1'))[0];
+		$notificacao = $this->pagsegurolib->getNotificationDetails($_POST['notificationCode'], $credenciais);
+		$idinvestimento	= $notificacao->items->item->id;
+		$investimento = $this->M_investimentos->getInvestimentoInscricao(array('id' => $idinvestimento))[0];
+		$inscricao = $this->M_inscricoes->getInscricao(array('id' => $investimento->idinscricao))[0];
+		$idinscricao = $inscricao->idinscricao;
+		$status = $notificacao->status;
+
+		if ($status == Pagsegurolib::PAGA || $status == Pagsegurolib::DISPONIVEL) {
+			if ($investimento->status == 0) {
+				$this->M_investimentos->updateInvestimentoInscricao($idinvestimento, array('status' => '1'));
+			}
+
+			if ($inscricao->status != 2) {
+				$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '2'));
+			}
+		}
+
+		if ($status != Pagsegurolib::PAGA && $status != Pagsegurolib::DISPONIVEL) {
+			if ($investimento->status == 1) {
+				$this->M_investimentos->updateInvestimentoInscricao($idinvestimento, array('status' => '0'));
+			}
+
+			if ($status == Pagsegurolib::AGUARDANDO_PAGAMENTO
+				|| $status == Pagsegurolib::EM_ANALISE
+				|| $status == Pagsegurolib::EM_DISPUTA
+				|| $status == Pagsegurolib::RETENCAO_TEMPORARIA) {
+
+				if ($inscricao->status != 1) {
+					$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '1'));
+				}
+			}
+		}
+
+		if ($status != Pagsegurolib::PAGA && $status != Pagsegurolib::DISPONIVEL) {
+			if ($investimento->status == 1) {
+				$this->M_investimentos->updateInvestimentoInscricao($idinvestimento, array('status' => '0'));
+			}
+
+			if ($status == Pagsegurolib::DEVOLVIDA
+				|| $status == Pagsegurolib::CANCELADA
+				|| $status == Pagsegurolib::DEBITADA) {
+
+				if ($inscricao->status != 3) {
+					$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '3'));
+				}
+			}
+		}
+		
 		return true;
 	}
 

@@ -19,6 +19,7 @@ class Test extends CI_Controller {
 		$notificacao = $this->pagseguro->getNotificationDetails("C365895C47A147A1DC45544CAFB56486CD17", (object) array("email" => "marcelo.boemeke@gmail.com", "token" => "3A53E4A6ABB246DFA4832F31051EB511"));
 		echo "<pre>";
 		var_dump($notificacao);
+		echo $notificacao->status == Pagseguro::AGUARDANDO_PAGAMENTO;
 		echo "</pre>";
 	}
 	function post()
