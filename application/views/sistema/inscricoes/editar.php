@@ -70,7 +70,7 @@ $investimento = $userdata->investimento->forma;
 				<p class="label_formas_investimento col s12">
 					<label>
 						<!-- <input class='with-gap' name='forma_investimento' type='radio' value='<?=$investimento->forma?>' /> -->
-						<span>Mensalidades: <b>R$<?=$this->parserlib->formatMoney($investimento->total)?></b> em <?=$investimento->parcelas?>x de R$<?=$this->parserlib->formatMoney($investimento->valor_parcela)?> (vencimento todo dia <?=$investimento->dia_vencimento?>)</span>
+						<span>Mensalidades: <b>R$<?=$this->parserlib->formatMoney($investimento->total)?></b> em <?=$userdata->investimento->parcelas?>x de R$<?=$this->parserlib->formatMoney($investimento->valor_parcela)?> (vencimento todo dia <?=$investimento->dia_vencimento?>)</span>
 					</label>
 				</p>
 			<?php endif ?>

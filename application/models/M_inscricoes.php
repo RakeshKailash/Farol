@@ -167,6 +167,21 @@ class M_inscricoes extends CI_Model {
 		return $inscricoes_aluno;
 	}
 
+	function insertHistoricoInscricao($data)
+	{
+		if (!isset($data) || gettype($data) != "array") {
+			return false;
+		}
+
+		$query = $this->db->insert("historico_inscricoes", $data);
+
+		if (!$query) {
+			return false;
+		}
+
+		return $this->db->insert_id();
+	}
+
 	// function getInvestimentoInscricao($opts=array())
 	// {
 	// 	$query = array();

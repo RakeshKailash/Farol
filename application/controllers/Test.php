@@ -11,12 +11,12 @@ class Test extends CI_Controller {
 		$this->load->model("M_investimentos");
 		$this->load->model("M_inscricoes");
 		$this->load->library("Parserlib");
-		$this->load->library("Pagseguro");
+		$this->load->library("Pagsegurolib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
 	function index() {
-		$notificacao = $this->pagseguro->getNotificationDetails("C365895C47A147A1DC45544CAFB56486CD17", (object) array("email" => "marcelo.boemeke@gmail.com", "token" => "3A53E4A6ABB246DFA4832F31051EB511"));
+		$notificacao = $this->pagsegurolib->getNotificationDetails("C365895C47A147A1DC45544CAFB56486CD17", (object) array("email" => "marcelo.boemeke@gmail.com", "token" => "3A53E4A6ABB246DFA4832F31051EB511"));
 		echo "<pre>";
 		var_dump($notificacao);
 		echo $notificacao->status == Pagseguro::AGUARDANDO_PAGAMENTO;

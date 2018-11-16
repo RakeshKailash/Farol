@@ -27,12 +27,15 @@ class Pagseguro extends CI_Controller {
 		$idinscricao = $inscricao->idinscricao;
 		$status = $notificacao->status;
 
+		$status_novo_inscricao = $inscricao->status;
+
 		if ($status == Pagsegurolib::PAGA || $status == Pagsegurolib::DISPONIVEL) {
 			if ($investimento->status == 0) {
 				$this->M_investimentos->updateInvestimentoInscricao($idinvestimento, array('status' => '1'));
 			}
 
 			if ($inscricao->status != 2) {
+				$status_novo_inscricao = 2;
 				$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '2'));
 			}
 		}
@@ -48,6 +51,7 @@ class Pagseguro extends CI_Controller {
 				|| $status == Pagsegurolib::RETENCAO_TEMPORARIA) {
 
 				if ($inscricao->status != 1) {
+					$status_novo_inscricao = 1;
 					$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '1'));
 				}
 			}
@@ -60,18 +64,32 @@ class Pagseguro extends CI_Controller {
 
 			if ($status == Pagsegurolib::DEVOLVIDA
 				|| $status == Pagsegurolib::CANCELADA
-				|| $status == Pagsegurolib::DEBITADA) {
+				|| $status == Pagsegurolib::DEBITADO) {
 
 				if ($inscricao->status != 3) {
+					$status_novo_inscricao = 3;
 					$this->M_inscricoes->updateInscricao($idinscricao, array('status' => '3'));
 				}
 			}
 		}
+
+		if ($status_novo_inscricao != $inscricao->status) {
+			$data_historico = array(
+				'idusuario' => isset($this->session->idusuario) ? $this->session->idusuario : "0",
+				'status_anterior' => $inscricao->status,
+				'status_novo' => $status_novo_inscricao
+			);
+			if (! $this->M_inscricoes->insertHistoricoInscricao($data_historico)) {
+				return false;
+			}
+		}
+
+
 		
 		return true;
 	}
 
-	// $notificacao = $this->pagseguro->getNotificationDetails($_POST['notificationCode'], (object) array("email" => "marcelo.boemeke@gmail.com", "token" => "3A53E4A6ABB246DFA4832F31051EB511"));
+	// $notificacao = $this->pagsegurolib->getNotificationDetails($_POST['notificationCode'], (object) array("email" => "marcelo.boemeke@gmail.com", "token" => "3A53E4A6ABB246DFA4832F31051EB511"));
 		// $data = array(
 		// 	"notification_code" => isset($_POST['notificationCode']) ? $_POST['notificationCode'] : "erro",
 		// 	"notification_type" => isset($_POST['notificationType']) ? $_POST['notificationType'] : "erro"
