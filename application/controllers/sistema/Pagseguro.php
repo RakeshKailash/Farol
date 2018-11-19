@@ -76,6 +76,7 @@ class Pagseguro extends CI_Controller {
 		if ($status_novo_inscricao != $inscricao->status) {
 			$data_historico = array(
 				'idusuario' => isset($this->session->idusuario) ? $this->session->idusuario : "0",
+				'idinscricao' => $idinscricao,
 				'status_anterior' => $inscricao->status,
 				'status_novo' => $status_novo_inscricao
 			);

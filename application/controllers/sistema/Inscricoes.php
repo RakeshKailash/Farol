@@ -182,6 +182,7 @@ class Inscricoes extends CI_Controller {
 		$inscricao->curso = $this->M_cursos->getCurso(array('id' => $inscricao->idcurso))[0];
 		$infoB['userdata'] = $inscricao;
 		$infoB['userdata']->investimento = $this->M_investimentos->getInvestimentoInscricao(array('cwhere' => "idinscricao = {$inscricao->idinscricao}"))[0];
+		$infoB['userdata']->historico = $this->M_inscricoes->getHistorico(array('cwhere' => "historico_inscricoes.`idinscricao` = {$inscricao->idinscricao}"));
 
 		$this->load->view("sistema/common/topo.php", $infoH);
 		$this->load->view("sistema/inscricoes/editar.php", $infoB);

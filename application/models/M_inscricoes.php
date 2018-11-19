@@ -182,6 +182,77 @@ class M_inscricoes extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	function getHistorico($opts=array())
+	{
+		$query = array();
+		$query[] = "SELECT 
+		historico_inscricoes.`idhistorico`,
+		historico_inscricoes.`idinscricao`,
+		historico_inscricoes.`idusuario`,
+		historico_inscricoes.`status_anterior`,
+		historico_inscricoes.`status_novo`,
+		historico_inscricoes.`data`,
+		IF(
+		historico_inscricoes.`idusuario` = 0,
+		'Sistema',
+		usuarios.`nome`
+		) AS nome_usuario
+		FROM historico_inscricoes
+		LEFT JOIN usuarios 
+		ON usuarios.`idusuario` = historico_inscricoes.`idusuario` ";
+		$where = null;
+		$cond = null;
+
+		if (isset($opts['id'])) {
+			if (gettype($opts['id']) == "array") {
+				$cond = "historico_inscricoes.`idhistorico` IN (".implode(",", $opts['id']).")";
+			} else {
+				$cond = "historico_inscricoes.`idhistorico` = {$opts['id']}";
+			}
+			$where = "WHERE ".$cond;
+		}
+
+		if (isset($opts['!id'])) {
+			if (gettype($opts['!id']) == "array") {
+				$cond = "historico_inscricoes.`idhistorico` NOT IN (".implode(",", $opts['!id']).")";
+			} else {
+				$cond = "historico_inscricoes.`idhistorico` != {$opts['!id']}";
+			}
+
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		if (isset($opts['cwhere'])) {
+			$cond = $opts['cwhere'];
+			$where = $where != null ? $where." AND ".$cond : "WHERE ".$cond;
+		}
+
+		$query[] = $where;
+
+		if (isset($opts['groupby'])) {
+			$query[] = "GROUP BY {$opts['groupby']}";
+		}
+
+		if (isset($opts['orderby'])) {
+			$query[] = "ORDER BY {$opts['orderby']}";
+		} else {
+			$query[] = "ORDER BY historico_inscricoes.`idhistorico` ASC";
+		}
+
+		if (isset($opts['limit'])) {
+			$query[] = "LIMIT {$opts['limit']}";
+		}
+
+		$query = implode(" ", $query);
+		$result = $this->db->query($query);
+
+		if (!$result) {
+			return false;
+		}
+
+		return $result->result();
+	}
+
 	// function getInvestimentoInscricao($opts=array())
 	// {
 	// 	$query = array();

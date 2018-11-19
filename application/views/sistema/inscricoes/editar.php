@@ -84,6 +84,9 @@ $investimento = $userdata->investimento->forma;
 			<?php endif ?>
 		</div>
 	</div>
+	<?php foreach ($userdata->historico as $reg_historico): ?>
+		<p><?=$reg_historico->nome_usuario?></p>
+	<?php endforeach ?>
 	<!-- <div class="row investimentos_turma hide">
 		<div class="col s12"><p class="page_minor_title">Forma de Investimento</p></div>
 		<div class="col s12 linhas_investimentos_inscricao"></div>
