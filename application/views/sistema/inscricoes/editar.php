@@ -84,9 +84,31 @@ $investimento = $userdata->investimento->forma;
 			<?php endif ?>
 		</div>
 	</div>
-	<?php foreach ($userdata->historico as $reg_historico): ?>
-		<p><?=$reg_historico->nome_usuario?></p>
-	<?php endforeach ?>
+	<div class="row row_historico_inscricao">
+		<div class="col s12"><p class="page_minor_title">Histórico de status</p></div>
+		<table id="alunos_visualizar_table">
+			<thead>
+				<th>ID</th>
+				<th>Alterado por</th>
+				<th>Status anterior</th>
+				<th>Novo status</th>
+				<th>Quando</th>
+			</thead>
+			<tbody>
+				<?php foreach ($userdata->historico as $reg_historico): ?>
+					<tr class="linha_cadastro_visualizar">
+						<input type="hidden" class="id_hidden" name="idhistorico" value="<?=$reg_historico->idhistorico?>">
+						<td><?=$reg_historico->idhistorico?></td>
+						<td><?=$reg_historico->nome_usuario?></td>
+						<td><?=$this->parserlib->inscStatusParse($reg_historico->status_anterior)?></td>
+						<td><?=$this->parserlib->inscStatusParse($reg_historico->status_novo)?></td>
+						<td><?=$this->parserlib->formatDatetime($reg_historico->data)?></td>
+					</tr>
+				<?php endforeach ?>
+			</tbody>
+			<input type="hidden" class="cad_hidden" value="Historico_inscricoes">
+		</table>
+	</div>
 	<!-- <div class="row investimentos_turma hide">
 		<div class="col s12"><p class="page_minor_title">Forma de Investimento</p></div>
 		<div class="col s12 linhas_investimentos_inscricao"></div>
