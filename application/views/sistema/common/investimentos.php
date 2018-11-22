@@ -20,12 +20,7 @@
 			<div class="input-field col s7 select_parcelas_investimento" data-invid="<?=$investimento->idinvestimento?>">
 				<select class="parcelas_select" disabled name="qnt_parcelas">
 					<?php foreach ($this->parserlib->getParcelamento($investimento) as $parcela) : ?>
-						<?php if ($parcela->valor_comum != $parcela->valor_diferente): ?>
-							<option value='<?=$parcela->qnt?>'><?=$parcela->qnt?>x (1° de R$<?=$this->parserlib->formatMoney($parcela->valor_diferente)?> + <?=$parcela->qnt - 1?>x de R$<?=$this->parserlib->formatMoney($parcela->valor_comum)?>)</option>
-						<?php endif ?>
-						<?php if ($parcela->valor_comum == $parcela->valor_diferente): ?>
-							<option value='<?=$parcela->qnt?>'><?=$parcela->qnt?>x de R$<?=$this->parserlib->formatMoney($parcela->valor_comum)?></option>
-						<?php endif ?>
+							<option value='<?=$parcela->qnt?>'>1 de R$<?=$this->parserlib->formatMoney($parcela->valor_diferente)?> + <?=$parcela->qnt - 1?>x de R$<?=$this->parserlib->formatMoney($parcela->valor_comum)?>)</option>
 					<?php endforeach ?>
 				</select>
 			</div>

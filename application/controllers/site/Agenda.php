@@ -12,7 +12,7 @@ class Agenda extends CI_Controller {
 		$this->load->model("M_investimentos");
 		$this->load->model("M_inscricoes");
 		$this->load->library("Parserlib");
-		$this->load->library("Pagseguro");
+		$this->load->library("Pagsegurolib");
 		$this->load->library("Scripts_loader", "", "sl");
 	}
 
@@ -130,7 +130,7 @@ class Agenda extends CI_Controller {
 				$pagamento->turma = $turma;
 				$pagamento->curso = $curso;
 
-				$codigo = $this->pagseguro->submitPayment($pagamento, $credenciais);
+				$codigo = $this->pagsegurolib->submitPayment($pagamento, $credenciais);
 
 				if (!$codigo) {
 					$retorno['status'] = 0;
